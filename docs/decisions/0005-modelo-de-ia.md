@@ -49,7 +49,7 @@ Con Sonnet para todo y sin caché, el caso peor ronda los 50–70 $/mes para ~2.
 
 ## Alternativas descartadas
 
-- **OpenAI o Google para la extracción:** capacidad comparable y salida estructurada, pero ninguna ventaja decisiva para este caso. Serían la opción si cumplieran un criterio que Anthropic no cumple, como el procesamiento en la UE si IT lo exigiera.
+- **OpenAI o Google para la extracción:** no se han comparado con fuente como Anthropic. Se eligió un proveedor que cumple los requisitos de IT, no el mejor posible, y el diseño hace que cambiar sea barato: el prompt, el esquema, las reglas y la evaluación no dependen del proveedor, y la misma evaluación decidiría con datos. Serían la opción si cumplieran un criterio que Anthropic no cumple, como el procesamiento en la UE si IT lo exigiera.
 - **Un modelo abierto en local (Ollama):** ningún dato sale de la empresa, pero extrae peor de Excels desordenados e hilos reenviados, depende del hardware de cada uno y complica D34.
 - **Usar siempre el modelo más potente:** "más potente" no es automáticamente "más fiable" para extraer datos; eso se mide. Y la métrica crítica la protegen sobre todo las reglas, no solo el modelo.
 
