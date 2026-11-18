@@ -2,7 +2,7 @@
 
 ## Propósito y naturaleza
 
-Este documento es el caso de negocio inicial de un proyecto educativo de portfolio: la entrada automatizada de pedidos B2B que llegan por email a un distribuidor de suministros industriales. Se completa en la fase de discovery (fase 1).
+Este documento es el caso de negocio inicial de un proyecto educativo de portfolio: la entrada automatizada de pedidos B2B que llegan por email a un distribuidor de suministros industriales. Revisado tras el [taller de discovery](02-discovery-workshop.md) (fase 1).
 
 **Caso ficticio y datos sintéticos.** Orvalle Suministros Industriales, S.L., sus clientes, procesos, sistemas y cifras son inventados. No es un cliente real ni un proyecto profesional ya realizado. Las cifras son supuestos del ejercicio, no mediciones ni investigación de mercado.
 
@@ -101,7 +101,7 @@ Se proyectan las horas del equipo con la solución. No es un resultado: es un c�
 
 ### Supuestos de la proyección
 
-**Todos los supuestos de esta tabla son nuevos y están pendientes de revisión.**
+Tras el taller, SN07 pasa a ser dato del escenario y SN10 queda confirmada. El resto sigue siendo supuesto; el [criterio de paso](#criterio-para-pasar-al-diseño) dice dónde se contrasta cada uno.
 
 | ID | Supuesto | Pesimista | Central |
 |---|---|---|---|
@@ -111,10 +111,10 @@ Se proyectan las horas del equipo con la solución. No es un resultado: es un c�
 | SN04 | Tiempo residual por pedido automático (consulta del registro, incidencias puntuales) | 0,5 min | 0,5 min |
 | SN05 | Tiempo por pedido en revisión o con petición de datos. En el pesimista es mayor que el manual medio, porque a revisión van los casos difíciles | 8 min | 4 min |
 | SN06 | Mantenimiento de reglas y equivalencias, y supervisión del flujo | 12 h/mes | 8 h/mes |
-| SN07 | Coste empresa por hora de administración de ventas (rango 20–24 €/h) | 20 €/h | 22 €/h |
+| SN07 | Coste empresa por hora de administración de ventas. Era un rango de 20–24 €/h; el taller lo fija en 22 €/h (dato de RR. HH., sesión 1) | 22 €/h | 22 €/h |
 | SN08 | Coste de implantación en un proyecto real (incluye la integración con el ERP por el partner y la carga de datos maestros) | 12.500 € | 10.000 € |
 | SN09 | Coste de funcionamiento (IA, orquestador y mantenimiento técnico menor) | 150 €/mes | 100 €/mes |
-| SN10 | El equipo está hoy a plena capacidad y el resto de su trabajo también crece con el volumen. No es un supuesto independiente: sale directamente del motivo del escenario (D05), porque crecer un 20 % sin contratar solo es un problema si el equipo ya está a plena capacidad | — | — |
+| SN10 | El equipo está hoy a plena capacidad y el resto de su trabajo también crece con el volumen. No es un supuesto independiente: sale directamente del motivo del escenario (D05), porque crecer un 20 % sin contratar solo es un problema si el equipo ya está a plena capacidad. Confirmada en el taller (sesiones 1 y 2) | — | — |
 
 El SN03 no sale de la demo: el % automático de la prueba no se traslada tal cual, porque la mezcla está enriquecida con casos difíciles y lo automático es lo fácil (D23, D26). En la fase 5 se recalcula con la mezcla del escenario.
 
@@ -131,7 +131,7 @@ El beneficio principal es **absorber el crecimiento del 20 % sin contratar a una
 | **¿Se evita la contratación?** | **No** | **Sí**, con ~15 h de margen |
 | Valor de la contratación evitada (SN07 × 140 h × 12) | — | ~37.000 €/año |
 | Recuperación de la implantación (SN08, SN09) | No se recupera | ~3,5 meses desde que llega el crecimiento |
-| *Equivalencia secundaria: horas liberadas hoy × €/h* | *−90 €/mes* | *~2.300 €/mes* |
+| *Equivalencia secundaria: horas liberadas hoy × €/h* | *~−100 €/mes* | *~2.300 €/mes* |
 
 Cómo se lee:
 
@@ -184,7 +184,9 @@ Antes de construir, un comité preguntaría por qué no comprar. Opciones:
 
 En las tres opciones que cambian el proceso, la Parte A (datos maestros ordenados) es necesaria. Por eso se hace primero.
 
-Las cifras de los proveedores comerciales (precios, % de automatización declarados) se recogen en el discovery y se etiquetan como material de marketing, no como datos (D04).
+La comparación es cualitativa, con cuatro criterios: coste, integración con el ERP, control de las reglas y dependencia del proveedor. El portal B2B se descarta por ahora y queda como recomendación estratégica (O6 en el taller).
+
+Pedir 2 presupuestos de soluciones comerciales es una **acción del proyecto real, fuera del ejercicio**: no se inventan cifras de terceros. Si se usan cifras públicas de proveedores como contexto, se etiquetan como material de marketing, no como datos (D04).
 
 ## KPIs
 
@@ -196,7 +198,7 @@ Las cifras de los proveedores comerciales (precios, % de automatización declara
 | Líneas correctas | Líneas con referencia, cantidad y precio correctos ÷ líneas | Medir en la demo |
 | Revisiones innecesarias | Casos enviados a revisión que podrían haber sido automáticos | Medir en la demo |
 | Tiempo por pedido | Cronómetro manual frente a demo (20 + 20 correos) | 6 min, supuesto; medición de una sola persona |
-| Pedidos en el ERP antes del corte | Pedidos recibidos antes de las 13:00 que entran a tiempo ÷ pedidos recibidos antes de las 13:00 | Sin línea base; se mide en el piloto |
+| Pedidos en el ERP antes del corte | Pedidos recibidos antes de las 13:00 que entran a tiempo ÷ pedidos recibidos antes de las 13:00 | ~10 pedidos/semana lo pierden hoy, estimación sin medir (taller); se mide en el piloto |
 | Coste por correo | Coste de IA y orquestación por correo procesado | Medir en la demo |
 | Errores de carga de datos maestros (A) | Filas rechazadas, avisos y conflictos por fuente | Informe por ejecución |
 
@@ -224,9 +226,20 @@ Las cifras de los proveedores comerciales (precios, % de automatización declara
 
 ## Criterio para pasar al diseño
 
-El caso está listo para el diseño cuando, tras el taller de discovery, estén contrastadas las cifras del escenario y los supuestos SN01–SN10, el AS-IS validado, las oportunidades priorizadas por impacto y viabilidad, y el comprar o construir argumentado. Este documento no declara que la solución funcione ni que genere ahorros.
+Cada supuesto se contrasta donde puede contrastarse:
+
+| Dónde | Qué | Estado |
+|---|---|---|
+| Taller de discovery | SN07 (coste por hora) y SN10 (plena capacidad) | Hecho: 22 €/h y plena capacidad confirmada |
+| Diseño | SN08 (implantación) y SN09 (funcionamiento), con el stack y el proveedor de IA elegidos | Pendiente |
+| Evaluación y piloto | SN03 (% automático), SN04 y SN05 (tiempos) | Pendiente: los decide el cronómetro y el piloto |
+| Sin contraste previsto | SN01, SN02 y SN06 | Se mantienen como supuestos declarados |
+
+El caso pasa al diseño con el AS-IS validado, las oportunidades priorizadas y el comprar o construir argumentado de forma cualitativa. Todo eso está en el [taller](02-discovery-workshop.md). Este documento no declara que la solución funcione ni que genere ahorros.
 
 ## Preguntas para el taller de discovery simulado
+
+Respondidas en [02-discovery-workshop.md](02-discovery-workshop.md#respuestas-a-las-preguntas-del-caso-de-negocio).
 
 **Proceso y volumen**
 1. ¿Las cifras de D06 representan un mes típico? ¿Cómo son los picos de los lunes y después de festivos?
@@ -255,4 +268,4 @@ El caso está listo para el diseño cuando, tras el taller de discovery, estén 
 
 ## Siguiente documento
 
-**02-discovery-workshop.md:** el taller de descubrimiento simulado. Cada pregunta anterior se responde como decisión del escenario, con su justificación y las alternativas descartadas, sin presentarlas como respuestas de personas reales. De ahí salen el AS-IS validado, el mapa del proceso, las oportunidades priorizadas y la versión revisada de este caso de negocio.
+**Diseño (fase 2):** TO-BE, reglas con los ajustes del taller, datos mínimos, criterios de aceptación y ADR del stack. Con el stack elegido se contrastan SN08 y SN09.
