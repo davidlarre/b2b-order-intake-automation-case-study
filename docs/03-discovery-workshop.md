@@ -1,8 +1,8 @@
 > **Taller simulado:** los roles, las respuestas y las cifras son ficticios. Sirve para mostrar el método de discovery, no como evidencia.
 
-# 02 · Taller de discovery — Orvalle Suministros Industriales
+# 03 · Taller de discovery — Orvalle Suministros Industriales
 
-Fase 1 del [plan](00-project-plan.md). Contrasta el [caso de negocio](01-business-case.md) y las [decisiones del reencuadre](decisions/0001-reframe.md) con las personas que hacen y deciden el proceso. Las notas son un resumen por rol, no citas.
+Fase 1 del [plan](00-project-plan.md). Contrasta el [caso de negocio](02-business-case.md) y las [decisiones del reencuadre](01-reframe-decisions.md) con las personas que hacen y deciden el proceso. Las notas son un resumen por rol, no citas.
 
 ## Sesiones
 
@@ -152,7 +152,7 @@ El hallazgo más valioso es el del comercial que pacta precios por teléfono sin
 
 ## Decisiones que salen del taller
 
-| Decisión | Enlace con 0001 | Dueño |
+| Decisión | Enlace con 01 | Dueño |
 |---|---|---|
 | Alcance: O1 + O2. O3 en fase 2; O4–O6 fuera | D03, D08, D09 | Dirección de operaciones |
 | **D35** · Equivalencias: las fuentes son las 3 chuletas en Word, una por gestora. Si se contradicen, la equivalencia va a revisión | Modifica D09; aplica D11 y R08 | Responsable de ADV |
@@ -167,12 +167,12 @@ El hallazgo más valioso es el del comercial que pacta precios por teléfono sin
 **Abierto para diseño:**
 
 - **Cómo se detecta un buzón genérico (R02).** Propuesta: lo marca la migración cuando un mismo email es contacto de más de un cliente (D11).
-- **Quién resuelve cada motivo de revisión.** 0001 fija quién confirma cada regla, pero no quién resuelve los casos, y la sesión 7 dice que la revisión de precios sigue siendo de los comerciales. Propuesta a valorar: ADV resuelve toda la cola; en los motivos de precio (R11), la app permite pedir la aprobación del comercial asignado. Una sola cola, con un paso de aprobación.
+- **Quién resuelve cada motivo de revisión.** Las decisiones del reencuadre (01) fijan quién confirma cada regla, pero no quién resuelve los casos, y la sesión 7 dice que la revisión de precios sigue siendo de los comerciales. Propuesta a valorar: ADV resuelve toda la cola; en los motivos de precio (R11), la app permite pedir la aprobación del comercial asignado. Una sola cola, con un paso de aprobación.
 
 ## Impacto en otros documentos
 
-- **0001:** D09 queda modificada por D35. El umbral de R13 deja de estar pendiente.
-- **01-business-case.md** (commit aparte):
+- **01-reframe-decisions.md:** D09 queda modificada por D35. El umbral de R13 deja de estar pendiente.
+- **02-business-case.md** (commit aparte):
   - SN07 pasa a 22 €/h, dato del escenario.
   - SN10 queda confirmada.
   - El criterio de paso separa lo que se contrasta en el taller (SN07, SN10), en la evaluación o el piloto (SN03–SN05) y en el diseño (SN08, SN09).

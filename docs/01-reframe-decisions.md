@@ -1,4 +1,4 @@
-# 0001 · Decisiones del reencuadre (fase 0)
+# 01 · Decisiones del reencuadre (fase 0)
 
 Fecha: 2026-11-18 · Estado: aceptado
 
@@ -126,7 +126,7 @@ Tras una revisión se añadieron D33 y D34 y se ajustaron D24 y D30 (ver el apar
 
 **Alternativas descartadas:** migración completa de ERP; eliminar la Parte A.
 
-**Pendiente o a validar:** modificada por D35 ([02-discovery-workshop.md](../02-discovery-workshop.md)): las equivalencias salen de 3 chuletas en Word, una por gestora.
+**Pendiente o a validar:** modificada por D35 ([03-discovery-workshop.md](03-discovery-workshop.md)): las equivalencias salen de 3 chuletas en Word, una por gestora.
 
 ### D10 · Errores que se plantan
 
@@ -274,7 +274,7 @@ R01–R04 cortan el flujo. R05–R13 se evalúan todas y se acumulan los motivos
 
 **Alternativas descartadas:** R10 con redondeo al alza y aviso al cliente (arriesga devoluciones).
 
-**Pendiente o a validar:** el umbral de 3.000 € lo confirma dirección comercial en el taller (sesión 7), donde también se fijan la tolerancia de R11 y los sustitutos de R09 ([02-discovery-workshop.md](../02-discovery-workshop.md)). Sigue siendo un supuesto que ~3-5 % de los pedidos lo superen.
+**Pendiente o a validar:** el umbral de 3.000 € lo confirma dirección comercial en el taller (sesión 7), donde también se fijan la tolerancia de R11 y los sustitutos de R09 ([03-discovery-workshop.md](03-discovery-workshop.md)). Sigue siendo un supuesto que ~3-5 % de los pedidos lo superen.
 
 ### D19 · Confianza de la IA
 
@@ -538,8 +538,8 @@ El vídeo de 3 minutos enseña el flujo completo con Gmail y n8n; el repositorio
 ## Acciones en el repositorio
 
 - [x] Renombrar el repositorio.
-- [x] Guardar este documento en `docs/decisions/`.
+- [x] Guardar este documento en `docs/` (hoy `01-reframe-decisions.md`).
 - [x] Reescribir `00-project-plan.md` según D29–D31.
-- [x] Reescribir `01-business-case.md` para el nuevo caso.
+- [x] Reescribir el caso de negocio (hoy `02-business-case.md`) para el nuevo caso.
 - [x] Actualizar `README.md`.
-- [ ] Preparar `02-discovery-workshop.md` (fase 1).
+- [x] Preparar el taller de discovery (hoy `03-discovery-workshop.md`, fase 1).

@@ -28,8 +28,8 @@ Fase 1 completada: discovery y caso de negocio revisado. Siguiente: diseño. Pla
 | Documento | Estado |
 |---|---|
 | [00 Plan del proyecto](docs/00-project-plan.md) | Hecho |
-| [0001 Decisiones del reencuadre](docs/decisions/0001-reframe.md) | Hecho |
-| [01 Caso de negocio](docs/01-business-case.md) | Hecho; revisado tras discovery |
-| [02 Taller de discovery](docs/02-discovery-workshop.md) | Hecho |
-| 03 Diseño de la solución | Pendiente |
-| 04 Informe de evaluación | Pendiente |
+| [01 Decisiones del reencuadre](docs/01-reframe-decisions.md) | Hecho |
+| [02 Caso de negocio](docs/02-business-case.md) | Hecho; revisado tras discovery |
+| [03 Taller de discovery](docs/03-discovery-workshop.md) | Hecho |
+| 04 Diseño de la solución | Pendiente |
+| 05 Informe de evaluación | Pendiente |

@@ -1,14 +1,14 @@
-# 01 · Caso de negocio — Orvalle Suministros Industriales
+# 02 · Caso de negocio — Orvalle Suministros Industriales
 
 ## Propósito y naturaleza
 
-Este documento es el caso de negocio inicial de un proyecto educativo de portfolio: la entrada automatizada de pedidos B2B que llegan por email a un distribuidor de suministros industriales. Revisado tras el [taller de discovery](02-discovery-workshop.md) (fase 1).
+Este documento es el caso de negocio inicial de un proyecto educativo de portfolio: la entrada automatizada de pedidos B2B que llegan por email a un distribuidor de suministros industriales. Revisado tras el [taller de discovery](03-discovery-workshop.md) (fase 1).
 
 **Caso ficticio y datos sintéticos.** Orvalle Suministros Industriales, S.L., sus clientes, procesos, sistemas y cifras son inventados. No es un cliente real ni un proyecto profesional ya realizado. Las cifras son supuestos del ejercicio, no mediciones ni investigación de mercado.
 
 Cada cifra lleva su etiqueta:
 
-- **Escenario (D06):** cifra fijada en las decisiones del reencuadre ([0001](decisions/0001-reframe.md)).
+- **Escenario (D06):** cifra fijada en las decisiones del reencuadre ([01](01-reframe-decisions.md)).
 - **Derivado:** cálculo a partir de otras cifras.
 - **Supuesto (SNxx):** cifra añadida en este documento para poder proyectar. Se recogen todos en [Supuestos de la proyección](#supuestos-de-la-proyección).
 
@@ -235,11 +235,11 @@ Cada supuesto se contrasta donde puede contrastarse:
 | Evaluación y piloto | SN03 (% automático), SN04 y SN05 (tiempos) | Pendiente: los decide el cronómetro y el piloto |
 | Sin contraste previsto | SN01, SN02 y SN06 | Se mantienen como supuestos declarados |
 
-El caso pasa al diseño con el AS-IS validado, las oportunidades priorizadas y el comprar o construir argumentado de forma cualitativa. Todo eso está en el [taller](02-discovery-workshop.md). Este documento no declara que la solución funcione ni que genere ahorros.
+El caso pasa al diseño con el AS-IS validado, las oportunidades priorizadas y el comprar o construir argumentado de forma cualitativa. Todo eso está en el [taller](03-discovery-workshop.md). Este documento no declara que la solución funcione ni que genere ahorros.
 
 ## Preguntas para el taller de discovery simulado
 
-Respondidas en [02-discovery-workshop.md](02-discovery-workshop.md#respuestas-a-las-preguntas-del-caso-de-negocio).
+Respondidas en [03-discovery-workshop.md](03-discovery-workshop.md#respuestas-a-las-preguntas-del-caso-de-negocio).
 
 **Proceso y volumen**
 1. ¿Las cifras de D06 representan un mes típico? ¿Cómo son los picos de los lunes y después de festivos?

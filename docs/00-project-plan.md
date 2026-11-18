@@ -9,7 +9,7 @@ Es un único caso integrado. La IA forma parte de la solución desde el diseño,
 - **Parte A, datos maestros:** migración de lo que vive fuera del ERP (direcciones, contactos, tarifas pactadas y equivalencias de referencias) con mapeo, validación, informe de errores y carga repetible. Sin IA.
 - **Parte B, flujo de pedidos:** cada correo que llega a pedidos@ termina como pedido validado en el ERP con confirmación al cliente, como petición concreta de datos al cliente o como excepción para una persona.
 
-Las decisiones de partida están en [decisions/0001-reframe.md](decisions/0001-reframe.md).
+Las decisiones de partida están en [01-reframe-decisions.md](01-reframe-decisions.md).
 
 ## Principios
 
@@ -24,9 +24,11 @@ Las decisiones de partida están en [decisions/0001-reframe.md](decisions/0001-r
 
 Sin calendario fijo: se planifica fase a fase.
 
+Los documentos se numeran por orden de lectura, no por fase (p. ej., la fase 2, diseño, produce 04-solution-design.md).
+
 | # | Fase | Sale | Modelo |
 |---|---|---|---|
-| 0 | Reencuadre | Decisiones (0001), plan y repositorio limpios | Opus (decisiones), Sonnet (redacción) |
+| 0 | Reencuadre | Decisiones del reencuadre (01), plan y repositorio limpios | Opus (decisiones), Sonnet (redacción) |
 | 1 | Discovery | AS-IS, mapa del proceso, oportunidades priorizadas, business case con supuestos | Opus (decisiones), Sonnet (redacción) |
 | 2 | Diseño | TO-BE, reglas, datos mínimos, criterios de aceptación, stack (ADR). Los requisitos van integrados aquí | Opus |
 | 3 | Datos y evaluación | Datos sintéticos y casos etiquetados, antes de construir | Opus (método), Sonnet (generación) |
@@ -70,7 +72,7 @@ Provisional; la ubicación de reglas, prompt y esquema se confirma en la fase de
 ├── README.md
 ├── AI_USAGE.md
 ├── .env.example
-├── docs/            documentos numerados por fase y decisions/ (ADR)
+├── docs/            documentos numerados y decisions/ (ADR desde la fase de diseño)
 ├── data/synthetic/  exportaciones y Excels de la Parte A, correos .eml y casos etiquetados
 ├── supabase/        esquema, funciones SQL de las reglas y datos de arranque (Supabase local)
 ├── extraction/      prompt y esquema JSON, únicos para n8n y para el script
