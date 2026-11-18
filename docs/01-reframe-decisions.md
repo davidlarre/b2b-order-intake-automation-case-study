@@ -6,6 +6,8 @@ Decisiones cerradas al replantear el proyecto desde cero. Sustituyen al plan ant
 
 Tras una revisión se añadieron D33 y D34 y se ajustaron D24 y D30 (ver el apartado [Cambios tras la revisión](#cambios-tras-la-revisión)).
 
+Tras el diseño (fase 2), el campo "Pendiente o a validar" de cada decisión afectada remite a [04-solution-design.md](04-solution-design.md) o al ADR donde se cerró o se modificó.
+
 ## 1. Enfoque y caso
 
 ### D01 · Enfoque del proyecto
@@ -126,7 +128,7 @@ Tras una revisión se añadieron D33 y D34 y se ajustaron D24 y D30 (ver el apar
 
 **Alternativas descartadas:** migración completa de ERP; eliminar la Parte A.
 
-**Pendiente o a validar:** modificada por D35 ([03-discovery-workshop.md](03-discovery-workshop.md)): las equivalencias salen de 3 chuletas en Word, una por gestora.
+**Pendiente o a validar:** modificada por D35 ([03-discovery-workshop.md](03-discovery-workshop.md)): las equivalencias salen de 3 chuletas en Word, una por gestora. Ampliada en el diseño ([04](04-solution-design.md#53-tablas)): se carga también el histórico de pedidos de los últimos 6 meses (cabecera y líneas).
 
 ### D10 · Errores que se plantan
 
@@ -165,7 +167,7 @@ Tras una revisión se añadieron D33 y D34 y se ajustaron D24 y D30 (ver el apar
 
 **Alternativas descartadas:** fusión automática de duplicados; carga de todo o nada.
 
-**Pendiente o a validar:** —
+**Pendiente o a validar:** el orden termina con el histórico de pedidos, sin errores plantados ([04](04-solution-design.md#53-tablas)).
 
 ### D12 · Herramienta de la Parte A
 
@@ -244,7 +246,7 @@ La IA clasifica entre estos tipos; si no está segura, el correo va a revisión,
 
 **Alternativas descartadas:** —
 
-**Pendiente o a validar:** —
+**Pendiente o a validar:** sustituida en el diseño por los estados de [04, sección 2.5](04-solution-design.md#25-estados-del-caso): "automático" pasa a ser una salida, no un estado, y se añade `cerrado` con su resultado.
 
 ## 5. Reglas de decisión
 
@@ -274,7 +276,7 @@ R01–R04 cortan el flujo. R05–R13 se evalúan todas y se acumulan los motivos
 
 **Alternativas descartadas:** R10 con redondeo al alza y aviso al cliente (arriesga devoluciones).
 
-**Pendiente o a validar:** el umbral de 3.000 € lo confirma dirección comercial en el taller (sesión 7), donde también se fijan la tolerancia de R11 y los sustitutos de R09 ([03-discovery-workshop.md](03-discovery-workshop.md)). Sigue siendo un supuesto que ~3-5 % de los pedidos lo superen.
+**Pendiente o a validar:** el umbral de 3.000 € lo confirma dirección comercial en el taller (sesión 7), donde también se fijan la tolerancia de R11 y los sustitutos de R09 ([03-discovery-workshop.md](03-discovery-workshop.md)). Sigue siendo un supuesto que ~3-5 % de los pedidos lo superen. Revisada en el diseño ([04, sección 3](04-solution-design.md#3-reglas)): cambios en R02, R04, R05, R10, R11 y R13, nueva R14 (cantidad anómala), motivos M01–M05 y qué motivos puede forzar ADV.
 
 ### D19 · Confianza de la IA
 
@@ -304,7 +306,7 @@ R01–R04 cortan el flujo. R05–R13 se evalúan todas y se acumulan los motivos
 
 **Alternativas descartadas:** prioridad declarada por el cliente.
 
-**Pendiente o a validar:** —
+**Pendiente o a validar:** la prioridad se calcula al consultar la cola, no se guarda ([04, sección 2.2](04-solution-design.md#22-flujo-paso-a-paso)).
 
 ## 6. Datos mínimos
 
@@ -332,7 +334,7 @@ Correo de "pedir datos":
 
 **Alternativas descartadas:** un correo por cada dato que falta; recordatorios automáticos.
 
-**Pendiente o a validar:** —
+**Pendiente o a validar:** ampliada en el diseño ([04, sección 4](04-solution-design.md#4-datos-mínimos)): unidad, observaciones, respuesta del cliente, opciones cerradas en la petición y "o indíquenos otra".
 
 ## 7. Evaluación
 
@@ -358,7 +360,7 @@ Correo de "pedir datos":
 
 **Alternativas descartadas:** todos generados por IA; todos escritos a mano; generar con el mismo modelo que extrae.
 
-**Pendiente o a validar:** qué modelo genera y cuál extrae se fija junto con la elección del modelo (D27).
+**Pendiente o a validar:** cerrada en el [ADR 0005](decisions/0005-modelo-de-ia.md): extrae Claude y los correos los genera otro proveedor.
 
 ### D25 · Métricas y comparación
 
@@ -383,7 +385,7 @@ Métricas:
 
 **Alternativas descartadas:** medir solo el acierto global.
 
-**Pendiente o a validar:** que el híbrido gane es una hipótesis.
+**Pendiente o a validar:** que el híbrido gane es una hipótesis. En el diseño, las tres configuraciones son dos interruptores sobre las mismas piezas, y una evaluación completa son 420 ejecuciones ([04, sección 7](04-solution-design.md#7-cómo-se-evalúa-este-diseño)).
 
 ### D26 · Presentación del valor
 
@@ -416,7 +418,7 @@ Un 70 % de pedidos automáticos no es un 70 % de tiempo ahorrado: lo automático
 
 **Alternativas descartadas:** API propia programada a mano.
 
-**Pendiente o a validar:** se confirma en la fase de diseño. Quedan por decidir n8n autoalojado o en la nube, y el modelo de IA (sin que su coste condicione el diseño). Ver también D33 y D34.
+**Pendiente o a validar:** confirmado en los ADR [0001](decisions/0001-reglas-en-sql.md)–[0005](decisions/0005-modelo-de-ia.md): n8n autoalojado en Docker con túnel para la demo, Claude como modelo de IA y la app de revisión en local (una app publicada en la web no llegaría al Supabase local).
 
 ### D28 · Piezas añadidas al proyecto
 
@@ -474,7 +476,7 @@ Cada incremento se cierra con su check y un commit. La demo debe poder enseñars
 
 **Alternativas descartadas:** —
 
-**Pendiente o a validar:** —
+**Pendiente o a validar:** el criterio concreto del plan B y lo que se pierde con él están en el [ADR 0003](decisions/0003-n8n-orquestador-plan-b.md).
 
 ### D31 · Principios (actualizados)
 
@@ -510,7 +512,7 @@ Cada incremento se cierra con su check y un commit. La demo debe poder enseñars
 
 **Alternativas descartadas:** reglas dentro de nodos de n8n y reimplementadas en el script; prompt copiado en n8n.
 
-**Pendiente o a validar:** se confirma en la fase de diseño (ADR), junto con dónde vive exactamente el prompt y cómo lo lee n8n.
+**Pendiente o a validar:** confirmada con un cambio en los ADR [0001](decisions/0001-reglas-en-sql.md) y [0002](decisions/0002-prompt-y-esquema-fuente-unica.md): el prompt y el esquema se cargan en una tabla de versiones que leen n8n y el script, y la evaluación no duplica el flujo en un script, sino que entra por una puerta de pruebas del propio flujo de n8n.
 
 ### D34 · Reproducible con tus propias claves
 
@@ -526,7 +528,7 @@ El vídeo de 3 minutos enseña el flujo completo con Gmail y n8n; el repositorio
 
 **Alternativas descartadas:** un repositorio que solo funciona con las cuentas del autor.
 
-**Pendiente o a validar:** el formato exacto de las respuestas guardadas se define en la fase 3.
+**Pendiente o a validar:** el formato exacto de las respuestas guardadas se define en la fase 3. El diseño fija dos niveles de reproducción ([04, sección 7](04-solution-design.md#7-cómo-se-evalúa-este-diseño)).
 
 ## Cambios tras la revisión
 

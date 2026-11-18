@@ -157,7 +157,7 @@ Dos matices:
 - **En el central el margen es estrecho:** se suponen 4 min de revisión frente a un umbral de 4,8 min. Basta un minuto más por pedido revisado para perder la contratación evitada.
 - **El cronómetro lo hace quien ha construido el sistema,** así que su tiempo de revisión es un límite inferior. El equipo real probablemente será más lento al principio.
 
-**Conclusión del caso de negocio:** la viabilidad depende de que la revisión baje de unos 5 min por pedido con el equipo real. Se confirma con un piloto en paralelo de 2–4 semanas antes de comprometer la contratación evitada.
+**Conclusión del caso de negocio:** la viabilidad depende de que la revisión baje de unos 5 min por pedido con el equipo real. Se confirma con un piloto en paralelo de 2–4 semanas antes de comprometer la contratación evitada. El diseño fija dos condiciones para pasar a producción: al menos 300 pedidos automáticos sin error y un esfuerzo medio de revisión por debajo del punto de equilibrio calculado con el % automático medido en el piloto ([04, sección 9.4](04-solution-design.md#94-piloto-listón-para-pasar-a-producción)).
 
 ### Sensibilidad
 
@@ -231,7 +231,7 @@ Cada supuesto se contrasta donde puede contrastarse:
 | Dónde | Qué | Estado |
 |---|---|---|
 | Taller de discovery | SN07 (coste por hora) y SN10 (plena capacidad) | Hecho: 22 €/h y plena capacidad confirmada |
-| Diseño | SN08 (implantación) y SN09 (funcionamiento), con el stack y el proveedor de IA elegidos | Pendiente |
+| Diseño | SN08 (implantación) y SN09 (funcionamiento), con el stack y el proveedor de IA elegidos | Hecho ([04, sección 10](04-solution-design.md#10-contraste-de-sn08-y-sn09)): SN09 se mantiene como rango (55–115 €/mes estimados antes del mantenimiento; el central exige las opciones baratas de cada partida). SN08 sigue como supuesto, con el alcance de la integración acotado |
 | Evaluación y piloto | SN03 (% automático), SN04 y SN05 (tiempos) | Pendiente: los decide el cronómetro y el piloto |
 | Sin contraste previsto | SN01, SN02 y SN06 | Se mantienen como supuestos declarados |
 
@@ -268,4 +268,4 @@ Respondidas en [03-discovery-workshop.md](03-discovery-workshop.md#respuestas-a-
 
 ## Siguiente documento
 
-**Diseño (fase 2):** TO-BE, reglas con los ajustes del taller, datos mínimos, criterios de aceptación y ADR del stack. Con el stack elegido se contrastan SN08 y SN09.
+**Diseño (fase 2):** hecho en [04-solution-design.md](04-solution-design.md) y en los ADR de [decisions/](decisions/). Siguiente: datos sintéticos y casos etiquetados (fase 3).

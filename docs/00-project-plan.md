@@ -39,8 +39,8 @@ Los documentos se numeran por orden de lectura, no por fase (p. ej., la fase 2, 
 
 **Orden de construcción:**
 
-1. Supabase y la carga de datos maestros.
-2. n8n: de Gmail a la extracción con IA en JSON.
+1. Supabase y la carga de datos maestros, con el histórico de pedidos.
+2. n8n: de Gmail a la extracción con IA en JSON. Empieza por la prueba de lectura del `.eml` ([04, sección 12](04-solution-design.md#12-notas-para-la-construcción)).
 3. Reglas y creación del pedido.
 4. Respuestas automáticas y excepciones.
 5. App de revisión.
@@ -51,7 +51,7 @@ Cada incremento se cierra con su check y un commit. La demo debe poder enseñars
 
 **Recortes si falta tiempo, en este orden:** PDF → panel → modificaciones de pedido → correos con varios pedidos → app de revisión (se sustituye por la vista de Supabase). No se recorta la evaluación.
 
-**Plan B del incremento de n8n:** si tras 2 sesiones no funciona, el flujo corre como script de Python con los mismos pasos, las mismas reglas y la misma extracción, y el motivo se documenta en un ADR. n8n es la pieza principal del portfolio.
+**Plan B del incremento de n8n:** si tras 2 sesiones no funciona, el flujo corre como script de Python con los mismos pasos, las mismas reglas y la misma extracción, y el motivo se documenta en un ADR. n8n es la pieza principal del portfolio. El criterio concreto de "no funciona" está en el [ADR 0003](decisions/0003-n8n-orquestador-plan-b.md).
 
 ## Método por fase
 
@@ -66,27 +66,28 @@ Una fase no está cerrada hasta que se pueda explicar en 2 minutos sin mirar.
 
 ## Estructura del repositorio
 
-Provisional; la ubicación de reglas, prompt y esquema se confirma en la fase de diseño (D33).
+Confirmada en la fase de diseño ([04](04-solution-design.md) y ADR 0001–0004).
 
 ```
 ├── README.md
 ├── AI_USAGE.md
 ├── .env.example
-├── docs/            documentos numerados y decisions/ (ADR desde la fase de diseño)
-├── data/synthetic/  exportaciones y Excels de la Parte A, correos .eml y casos etiquetados
-├── supabase/        esquema, funciones SQL de las reglas y datos de arranque (Supabase local)
-├── extraction/      prompt y esquema JSON, únicos para n8n y para el script
-├── n8n/             flujos exportados
-├── src/             migración (Parte A) y script local de procesado
-├── eval/            evaluación, respuestas de la IA guardadas y resultados
-└── tests/
+├── docs/            documentos numerados y decisions/ (ADR)
+├── data/synthetic/  exportaciones y Excels de la Parte A, histórico, correos .eml y casos etiquetados
+├── supabase/        esquemas erp e intake, funciones SQL de las reglas y datos de arranque (Supabase local)
+├── extraction/      prompts, esquema JSON y ejemplos; se cargan en una tabla de versiones
+├── n8n/             flujos exportados y docker-compose de n8n
+├── src/             migración (Parte A), carga de versiones de prompt y flujo de Python del plan B
+├── eval/            script de evaluación, resultados guardados y respuestas de la IA
+└── tests/           pytest: reglas por función y de punta a punta
 ```
 
 **Reproducible con tus propias claves:** Supabase local (CLI + Docker), `.env.example` y la clave de IA de cada uno. Las respuestas de la IA para el conjunto de prueba se guardan en el repositorio, así que la evaluación se reproduce sin clave ni coste (D34).
 
 ## Decisiones abiertas
 
-- Stack definitivo, n8n autoalojado o en la nube, y modelo de IA: fase 2 (D27).
-- Reglas como funciones SQL y una sola fuente para el prompt y el esquema: se confirma en la fase 2 (D33).
-- Modelo que genera los correos sintéticos, distinto del que extrae: con la elección del modelo (D24).
 - Idioma público (README y página del caso): fase 7.
+
+Cerradas en la fase 2: stack, n8n autoalojado y modelo de IA (D27), reglas en SQL y fuente única del prompt (D33) y generador de correos (D24). Ver los ADR 0001–0005.
+
+**Para la fase 4:** cuando el repositorio tenga remoto, una rama por incremento con su pull request, que describe qué se ha construido y cómo se ha probado, y se revisa antes del merge. Se decide al empezar la fase, no a mitad.
