@@ -146,7 +146,7 @@ Tras el diseño (fase 2), el campo "Pendiente o a validar" de cada decisión afe
 
 **Alternativas descartadas:** —
 
-**Pendiente o a validar:** —
+**Pendiente o a validar:** catálogo cerrado en [05](05-synthetic-data-and-evaluation-set.md): 39 tipos, con anclas para la Parte B y controles (filas raras pero válidas).
 
 ### D11 · Cómo se carga
 
@@ -167,7 +167,10 @@ Tras el diseño (fase 2), el campo "Pendiente o a validar" de cada decisión afe
 
 **Alternativas descartadas:** fusión automática de duplicados; carga de todo o nada.
 
-**Pendiente o a validar:** el orden termina con el histórico de pedidos, sin errores plantados ([04](04-solution-design.md#53-tablas)).
+**Pendiente o a validar:** el orden termina con el histórico de pedidos, sin errores plantados ([04](04-solution-design.md#53-tablas)). Corregida en la fase 3 ([05](05-synthetic-data-and-evaluation-set.md)):
+- **Nota en una celda de precio:** la tarifa se carga como `pendiente`, y R11 no la usa hasta que se resuelve la revisión. Cargar el precio sin más era peligroso cuando la nota es una condición ("4,20 si >100 uds").
+- **Vigencia ausente:** se carga hasta la fecha de la migración + 90 días, con aviso. Un precio sin caducidad podría salir en automático cuando ya no vale.
+- Las decisiones de revisión de la demo están en un fichero fijo que hace de ADV.
 
 ### D12 · Herramienta de la Parte A
 
@@ -177,7 +180,7 @@ Tras el diseño (fase 2), el campo "Pendiente o a validar" de cada decisión afe
 
 **Alternativas descartadas:** n8n, Power Query, IA para el mapeo.
 
-**Pendiente o a validar:** —
+**Pendiente o a validar:** una de las chuletas está en prosa. Lo que la migración no interpreta va al informe y se transcribe a mano; sigue sin IA ([05](05-synthetic-data-and-evaluation-set.md)).
 
 ## 4. Parte B: flujo de pedidos
 
@@ -350,7 +353,7 @@ Correo de "pedir datos":
 
 **Alternativas descartadas:** un conjunto único; una mezcla que replique la realidad.
 
-**Pendiente o a validar:** el % automático de la prueba no se traslada tal cual; se recalcula con la mezcla del escenario.
+**Pendiente o a validar:** el % automático de la prueba no se traslada tal cual; se recalcula con la mezcla del escenario. Concretada en [05](05-synthetic-data-and-evaluation-set.md): trampas combinadas en el mismo correo cuando es natural, cuatro tipos de trampa solo en la prueba, respuestas del cliente y una respuesta automática como casos con varios `.eml`, y la prueba congelada con un manifiesto de hashes. Las etiquetas llevan además si la revisión era necesaria y las salidas aceptables.
 
 ### D24 · Quién escribe los correos
 
@@ -360,7 +363,7 @@ Correo de "pedir datos":
 
 **Alternativas descartadas:** todos generados por IA; todos escritos a mano; generar con el mismo modelo que extrae.
 
-**Pendiente o a validar:** cerrada en el [ADR 0005](decisions/0005-modelo-de-ia.md): extrae Claude y los correos los genera otro proveedor.
+**Pendiente o a validar:** cerrada en el [ADR 0005](decisions/0005-modelo-de-ia.md), revisado el 19-11-2026 por el requisito de gratuidad: extrae Gemini y los correos los genera Claude. David escribe ~15: 12 con ficha (incluidos los de catalán) y 3 libres ([05](05-synthetic-data-and-evaluation-set.md)).
 
 ### D25 · Métricas y comparación
 
@@ -385,7 +388,7 @@ Métricas:
 
 **Alternativas descartadas:** medir solo el acierto global.
 
-**Pendiente o a validar:** que el híbrido gane es una hipótesis. En el diseño, las tres configuraciones son dos interruptores sobre las mismas piezas, y una evaluación completa son 420 ejecuciones ([04, sección 7](04-solution-design.md#7-cómo-se-evalúa-este-diseño)).
+**Pendiente o a validar:** que el híbrido gane es una hipótesis. En el diseño, las tres configuraciones son dos interruptores sobre las mismas piezas, y una evaluación completa son 420 ejecuciones ([04, sección 7](04-solution-design.md#7-cómo-se-evalúa-este-diseño)). Las revisiones innecesarias se miden con un campo propio en la etiqueta, y si hay correcciones de etiquetas después de la prueba, las métricas se publican con las dos versiones ([05](05-synthetic-data-and-evaluation-set.md)).
 
 ### D26 · Presentación del valor
 
@@ -418,7 +421,7 @@ Un 70 % de pedidos automáticos no es un 70 % de tiempo ahorrado: lo automático
 
 **Alternativas descartadas:** API propia programada a mano.
 
-**Pendiente o a validar:** confirmado en los ADR [0001](decisions/0001-reglas-en-sql.md)–[0005](decisions/0005-modelo-de-ia.md): n8n autoalojado en Docker con túnel para la demo, Claude como modelo de IA y la app de revisión en local (una app publicada en la web no llegaría al Supabase local).
+**Pendiente o a validar:** confirmado en los ADR [0001](decisions/0001-reglas-en-sql.md)–[0005](decisions/0005-modelo-de-ia.md): n8n autoalojado en Docker con túnel para la demo y la app de revisión en local (una app publicada en la web no llegaría al Supabase local). Revisado el 19-11-2026, **todo el proyecto es gratuito**: Gemini por Google AI Studio en el nivel gratuito como modelo de IA, y la app de revisión hecha con Claude Code, sin Lovable. Nueva consulta SQL: líneas facturadas a un precio que no está en ninguna tarifa cargada ([05](05-synthetic-data-and-evaluation-set.md)).
 
 ### D28 · Piezas añadidas al proyecto
 
@@ -528,7 +531,7 @@ El vídeo de 3 minutos enseña el flujo completo con Gmail y n8n; el repositorio
 
 **Alternativas descartadas:** un repositorio que solo funciona con las cuentas del autor.
 
-**Pendiente o a validar:** el formato exacto de las respuestas guardadas se define en la fase 3. El diseño fija dos niveles de reproducción ([04, sección 7](04-solution-design.md#7-cómo-se-evalúa-este-diseño)).
+**Pendiente o a validar:** el diseño fija dos niveles de reproducción ([04, sección 7](04-solution-design.md#7-cómo-se-evalúa-este-diseño)). Formato cerrado en [05](05-synthetic-data-and-evaluation-set.md): manifiesto, resultados en JSONL por pasada y respuestas del modelo con clave por hash de la entrada. La clave del proveedor de IA es gratuita (Google AI Studio).
 
 ## Cambios tras la revisión
 

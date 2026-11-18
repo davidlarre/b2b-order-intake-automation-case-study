@@ -23,7 +23,7 @@ D33 dejó abierto dónde vive el prompt y cómo lo lee n8n. Si lo que corre en n
 - La configuración (solo reglas, solo IA o híbrido) se elige con un parámetro. Son dos interruptores sobre las mismas piezas: el extractor determinista y la IA.
 - Los casos de la entrada de pruebas dejan sus envíos como `simulado`, que nunca se envían.
 - Cada pasada empieza con la base de datos limpia, y los `.eml` se envían por orden de su cabecera `Date`.
-- **Reproducción en dos niveles** (D34): las métricas se recalculan desde los resultados guardados sin n8n ni clave; opcionalmente, un modo de reproducción lee las respuestas del modelo guardadas en lugar de llamarlo.
+- **Reproducción en dos niveles** (D34): las métricas se recalculan desde los resultados guardados sin n8n ni clave; opcionalmente, un modo de reproducción lee las respuestas del modelo guardadas en lugar de llamarlo. La clave de la respuesta guardada es el hash de la entrada exacta al modelo, del prompt, del modelo y de la repetición, no el identificador del caso ([05](../05-synthetic-data-and-evaluation-set.md)).
 
 **Validación del esquema en dos capas:** la salida estructurada del proveedor y `pg_jsonschema` en la base de datos ([ADR 0001](0001-reglas-en-sql.md)).
 

@@ -9,6 +9,8 @@ Este caso de estudio se hace con asistencia de IA. Este documento explica para q
 - **Revisión cruzada entre ambos.** Lo que sale de una conversación se contrasta con lo que ya está en el repositorio antes de escribirlo. Algunos ejemplos:
   - Claude Code detectó que una decisión nombraba una empresa real, en contra de lo que esa misma decisión pedía.
   - Antes de redactar el taller de discovery, señaló los puntos en los que contradecía el caso de negocio y las decisiones previas: el número de fuentes de equivalencias, una sesión que faltaba con dirección comercial y un criterio de paso imposible de cumplir. Cada choque se resolvió por decisión mía antes de escribir.
+- **Datos sintéticos, con Claude Code.** Claude genera las listas de partida y los correos del conjunto de evaluación, y hace una segunda lectura de una muestra de etiquetas sin ver la ficha de cada correo. Unos 15 correos los escribo yo, y yo etiqueto todos.
+- **IA dentro de la solución: Gemini**, en el nivel gratuito de Google AI Studio, para clasificar y extraer los pedidos. Es otra familia de modelos que la que genera los datos, para que no compartan los mismos sesgos. Por el mismo motivo, Gemini no genera ni etiqueta nada del conjunto de evaluación ([ADR 0005](docs/decisions/0005-modelo-de-ia.md)).
 
 ## Qué es mío
 

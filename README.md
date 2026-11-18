@@ -17,11 +17,11 @@ La calidad se mide sobre un conjunto de correos etiquetados, comparando solo reg
 
 ## Reproducible con tus propias claves
 
-Cuando haya código, el repositorio se podrá ejecutar en local con Supabase local, un `.env.example` y tu propia clave de IA. Las respuestas de la IA para el conjunto de prueba se guardan en el repositorio, así que la evaluación se puede reproducir sin clave ni coste.
+Cuando haya código, el repositorio se podrá ejecutar en local con Supabase local, un `.env.example` y una clave gratuita de Google AI Studio. Todo el proyecto es gratuito. Las respuestas de la IA para el conjunto de prueba se guardan en el repositorio, así que la evaluación se puede reproducir sin clave ni coste.
 
 ## Estado
 
-Fase 1 completada: discovery y caso de negocio revisado. Siguiente: diseño. Plan completo en [docs/00-project-plan.md](docs/00-project-plan.md).
+Fases 2 y 3 completadas: diseño de la solución y diseño de los datos y del conjunto de evaluación. Siguiente: construcción, empezando por un corte vertical mínimo. Plan completo en [docs/00-project-plan.md](docs/00-project-plan.md).
 
 ## Documentación
 
@@ -31,5 +31,6 @@ Fase 1 completada: discovery y caso de negocio revisado. Siguiente: diseño. Pla
 | [01 Decisiones del reencuadre](docs/01-reframe-decisions.md) | Hecho |
 | [02 Caso de negocio](docs/02-business-case.md) | Hecho; revisado tras discovery |
 | [03 Taller de discovery](docs/03-discovery-workshop.md) | Hecho |
-| 04 Diseño de la solución | Pendiente |
-| 05 Informe de evaluación | Pendiente |
+| [04 Diseño de la solución](docs/04-solution-design.md) | Hecho; ADR en [docs/decisions/](docs/decisions/) |
+| [05 Datos sintéticos y conjunto de evaluación](docs/05-synthetic-data-and-evaluation-set.md) | Diseño hecho; los datos se generan en la construcción |
+| 06 Informe de evaluación | Pendiente |

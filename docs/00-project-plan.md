@@ -31,13 +31,13 @@ Los documentos se numeran por orden de lectura, no por fase (p. ej., la fase 2, 
 | 0 | Reencuadre | Decisiones del reencuadre (01), plan y repositorio limpios | Opus (decisiones), Sonnet (redacción) |
 | 1 | Discovery | AS-IS, mapa del proceso, oportunidades priorizadas, business case con supuestos | Opus (decisiones), Sonnet (redacción) |
 | 2 | Diseño | TO-BE, reglas, datos mínimos, criterios de aceptación, stack (ADR). Los requisitos van integrados aquí | Opus |
-| 3 | Datos y evaluación | Datos sintéticos y casos etiquetados, antes de construir | Opus (método), Sonnet (generación) |
+| 3 | Datos y evaluación | Diseño de los datos sintéticos y del conjunto de evaluación ([05](05-synthetic-data-and-evaluation-set.md)). Los datos completos se generan después del corte vertical de la fase 4 | Opus (método), Claude Code (generación) |
 | 4 | Construcción | Ver orden más abajo | Sonnet; Opus en diseño de módulos y depuración difícil |
 | 5 | Evaluación | Comparación de configuraciones, cronómetro, coste por caso | Opus (método), Sonnet (ejecución) |
 | 6 | Adopción y gobierno | Guía, formación, permisos, AI Act | Sonnet |
 | 7 | Portfolio | README, página del caso, vídeo de 3 min | Sonnet |
 
-**Orden de construcción:**
+**Orden de construcción:** empieza con un corte vertical mínimo, de punta a punta y con datos pequeños y limpios. Cuando el flujo funcione, se generan el catálogo completo de errores y el conjunto de evaluación ([05](05-synthetic-data-and-evaluation-set.md)), y se completan los incrementos:
 
 1. Supabase y la carga de datos maestros, con el histórico de pedidos.
 2. n8n: de Gmail a la extracción con IA en JSON. Empieza por la prueba de lectura del `.eml` ([04, sección 12](04-solution-design.md#12-notas-para-la-construcción)).
@@ -82,12 +82,14 @@ Confirmada en la fase de diseño ([04](04-solution-design.md) y ADR 0001–0004)
 └── tests/           pytest: reglas por función y de punta a punta
 ```
 
-**Reproducible con tus propias claves:** Supabase local (CLI + Docker), `.env.example` y la clave de IA de cada uno. Las respuestas de la IA para el conjunto de prueba se guardan en el repositorio, así que la evaluación se reproduce sin clave ni coste (D34).
+**Todo gratuito:** Supabase local, n8n autoalojado, Gemini en el nivel gratuito de Google AI Studio y la app de revisión en local ([ADR 0005](decisions/0005-modelo-de-ia.md)).
+
+**Reproducible con tus propias claves:** Supabase local (CLI + Docker), `.env.example` y una clave gratuita de Google AI Studio. Las respuestas de la IA para el conjunto de prueba se guardan en el repositorio, así que la evaluación se reproduce sin clave ni coste (D34).
 
 ## Decisiones abiertas
 
 - Idioma público (README y página del caso): fase 7.
 
-Cerradas en la fase 2: stack, n8n autoalojado y modelo de IA (D27), reglas en SQL y fuente única del prompt (D33) y generador de correos (D24). Ver los ADR 0001–0005.
+Cerradas en la fase 2: stack, n8n autoalojado y modelo de IA (D27), reglas en SQL y fuente única del prompt (D33) y generador de correos (D24). Ver los ADR 0001–0005. El ADR 0005 se revisó en la fase 3: Gemini gratuito en la demo y Claude como generador.
 
 **Para la fase 4:** cuando el repositorio tenga remoto, una rama por incremento con su pull request, que describe qué se ha construido y cómo se ha probado, y se revisa antes del merge. Se decide al empezar la fase, no a mitad.

@@ -18,6 +18,7 @@ Además, el repositorio tiene que ser reproducible con las propias claves (D34).
 - `docker compose` en el repositorio: se levanta con un comando, junto a Supabase local.
 - **El túnel solo expone las rutas de reanudación** de "send and wait" (`/webhook-waiting/*` y las que use el formulario, posiblemente `/form-waiting/*`; se comprueba al construir y se expone exactamente lo que use). El editor de n8n y la entrada de pruebas no se publican.
 - **Túnel con nombre propio**, no un túnel rápido: un túnel rápido cambia de URL al reiniciarse y los enlaces de aprobación ya enviados dejarían de funcionar. El dominio va en `.env`, nunca en el repositorio.
+- **Sin dominio propio en Cloudflare** (revisión del 19-11-2026, todo gratuito): las aprobaciones se prueban desde el propio Mac, y para la grabación del vídeo se usa un túnel rápido. Es una limitación declarada: con un túnel rápido, los enlaces de aprobación dejan de funcionar si el túnel se reinicia.
 - **`WEBHOOK_URL` apunta al túnel**, para que n8n no genere los enlaces con `localhost`.
 - n8n llega a Supabase local por `host.docker.internal`.
 
@@ -31,5 +32,6 @@ Además, el repositorio tiene que ser reproducible con las propias claves (D34).
 ## Consecuencias
 
 - La demo es gratuita y reproducible, y solo expone a internet lo imprescindible.
+- **Limitación declarada:** sin dominio propio, las aprobaciones desde el móvil solo funcionan mientras dure el túnel rápido.
 - **Limitación declarada:** el Mac tiene que estar encendido durante la demo y mientras haya aprobaciones pendientes. Si se apaga, los enlaces no responden hasta que vuelve. Que las ejecuciones en espera sobrevivan a un reinicio se comprueba al construir.
 - El ADR deja claro qué atajos valen en una demo y cuáles no en producción.
