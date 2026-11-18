@@ -90,7 +90,8 @@ Son roles del escenario ficticio, no personas reales. Cada regla tiene un dueño
 | Carga del proceso | 1.800 × 6 min = 10.800 min ≈ **180 h/mes** | Derivado |
 | Capacidad del equipo | 4 personas × ~140 h = ~560 h/mes | Derivado de SN01 |
 | Peso sobre el equipo | 180 ÷ 560 ≈ **32 %** | Derivado |
-| Carga con +20 % de pedidos y el proceso actual | 2.160 × 6 min ≈ **216 h/mes** (+36 h, ≈ 0,25 personas) | Derivado |
+| Carga de pedidos con +20 % y el proceso actual | 2.160 × 6 min ≈ **216 h/mes** (+36 h) | Derivado |
+| Carga total del equipo con +20 % | 560 × 1,2 = 672 h frente a 560 h disponibles → **+112 h/mes ≈ 0,8 personas**, en la práctica **una contratación** | Derivado de SN10 |
 
 Las 180 h solo cubren los pedidos nuevos (SN02). Cambios, consultas y reclamaciones consumen tiempo aparte que no se proyecta.
 
@@ -108,39 +109,65 @@ Se proyectan las horas del equipo con la solución. No es un resultado: es un c�
 | SN02 | Los 6 min por pedido cubren solo pedidos nuevos (lectura, validación, tecleo y confirmación) | — | — |
 | SN03 | Pedidos que salen automáticos con la mezcla real del escenario | 30 % | 50 % |
 | SN04 | Tiempo residual por pedido automático (consulta del registro, incidencias puntuales) | 0,5 min | 0,5 min |
-| SN05 | Tiempo por pedido en revisión o con petición de datos, con los datos ya extraídos | 6 min | 4 min |
+| SN05 | Tiempo por pedido en revisión o con petición de datos. En el pesimista es mayor que el manual medio, porque a revisión van los casos difíciles | 8 min | 4 min |
 | SN06 | Mantenimiento de reglas y equivalencias, y supervisión del flujo | 12 h/mes | 8 h/mes |
-| SN07 | Coste empresa por hora de administración de ventas | 28 €/h | 28 €/h |
+| SN07 | Coste empresa por hora de administración de ventas (rango 20–24 €/h) | 20 €/h | 22 €/h |
 | SN08 | Coste de implantación en un proyecto real (incluye la integración con el ERP por el partner y la carga de datos maestros) | 12.500 € | 10.000 € |
 | SN09 | Coste de funcionamiento (IA, orquestador y mantenimiento técnico menor) | 150 €/mes | 100 €/mes |
+| SN10 | El equipo está hoy a plena capacidad y el resto de su trabajo también crece con el volumen. No es un supuesto independiente: sale directamente del motivo del escenario (D05), porque crecer un 20 % sin contratar solo es un problema si el equipo ya está a plena capacidad | — | — |
 
 El SN03 no sale de la demo: el % automático de la prueba no se traslada tal cual, porque la mezcla está enriquecida con casos difíciles y lo automático es lo fácil (D23, D26). En la fase 5 se recalcula con la mezcla del escenario.
 
 ### Resultado
 
+El beneficio principal es **absorber el crecimiento del 20 % sin contratar a una persona más** (contratación evitada). Con el volumen de hoy, el valor de las horas liberadas es una equivalencia secundaria: esas horas solo son ahorro si se evita contratar o si se dedican de verdad a seguimiento de clientes.
+
 | | Pesimista | Central |
 |---|---|---|
-| Horas con la solución (1.800 pedidos/mes) | ~143 h | ~76 h |
-| Capacidad liberada | **~38 h/mes** (21 %) | **~105 h/mes** (58 %) |
-| Horas con la solución y +20 % de pedidos | ~169 h | ~89 h |
-| Valor de la capacidad liberada (SN07) | ~1.050 €/mes | ~2.900 €/mes |
-| Valor neto de funcionamiento (SN09) | ~900 €/mes | ~2.800 €/mes |
-| Recuperación de la implantación (SN08) | ~14 meses | ~3,5 meses |
+| Horas de pedidos con la solución (1.800 pedidos/mes) | ~185 h | ~76 h |
+| Capacidad liberada hoy | **−4,5 h/mes** (no ahorra) | **~105 h/mes** (58 %) |
+| Horas de pedidos con la solución y +20 % (2.160 pedidos/mes) | ~219 h (frente a 216 h a mano) | ~89 h (frente a 216 h a mano) |
+| Capacidad liberada con +20 % frente a las 112 h que faltarían | −3 h | ~127 h |
+| **¿Se evita la contratación?** | **No** | **Sí**, con ~15 h de margen |
+| Valor de la contratación evitada (SN07 × 140 h × 12) | — | ~37.000 €/año |
+| Recuperación de la implantación (SN08, SN09) | No se recupera | ~3,5 meses desde que llega el crecimiento |
+| *Equivalencia secundaria: horas liberadas hoy × €/h* | *−90 €/mes* | *~2.300 €/mes* |
 
 Cómo se lee:
 
-- **Incluso en el pesimista, el crecimiento del 20 % se absorbe:** ~169 h frente a las 180 h actuales. Este es el objetivo de la dirección, más que el ahorro en euros.
-- **La capacidad liberada no es dinero ahorrado.** Solo se convierte en euros si se evita una contratación o el tiempo se dedica a seguimiento de clientes. Los euros de la tabla son el valor de esas horas, no una reducción de costes.
+- **En el pesimista, la solución no ahorra y no evita la contratación.** Con el 30 % automático y revisiones de 8 min, lo que se gana en los pedidos automáticos se pierde en las revisiones y el mantenimiento. Se deja así: es un resultado posible y es justo lo que la evaluación tiene que descartar o confirmar.
+- **En el central, se evita la contratación** cuando llega el crecimiento. Hasta entonces, las ~105 h liberadas solo valen algo si se dedican a seguimiento de clientes.
 - **Un 50 % automático no es un 50 % de tiempo ahorrado.** La revisión también cuesta y los casos que van a revisión son los más lentos.
+
+### Punto de equilibrio
+
+Tiempo de revisión por pedido a partir del cual la solución deja de compensar, con 1.800 pedidos/mes (2.160 para la contratación):
+
+| | 30 % automático | 50 % automático |
+|---|---|---|
+| Deja de liberar horas (mantenimiento de 8 h / 12 h) | 8,0 / 7,8 min | 11,0 / 10,7 min |
+| Deja de evitar la contratación con +20 % (mantenimiento de 8 h) | 3,6 min | 4,8 min |
+
+Para liberar horas basta con que la revisión no sea mucho más lenta que el proceso manual. Para evitar la contratación, en cambio, la revisión tiene que ser claramente más rápida: menos de 5 min con el 50 % automático y menos de 4 min con el 30 %.
+
+**El dato que lo decide es el cronómetro de la evaluación** (D25): el tiempo medido por pedido revisado, junto con el % automático recalculado con la mezcla del escenario.
+
+Dos matices:
+
+- **En el central el margen es estrecho:** se suponen 4 min de revisión frente a un umbral de 4,8 min. Basta un minuto más por pedido revisado para perder la contratación evitada.
+- **El cronómetro lo hace quien ha construido el sistema,** así que su tiempo de revisión es un límite inferior. El equipo real probablemente será más lento al principio.
+
+**Conclusión del caso de negocio:** la viabilidad depende de que la revisión baje de unos 5 min por pedido con el equipo real. Se confirma con un piloto en paralelo de 2–4 semanas antes de comprometer la contratación evitada.
 
 ### Sensibilidad
 
-Capacidad liberada (h/mes) con 1.800 pedidos y 8 h de mantenimiento, según el % automático y el tiempo de revisión:
+Capacidad liberada hoy (h/mes), con 1.800 pedidos y 8 h de mantenimiento, según el % automático y el tiempo de revisión:
 
 | % automático → | 30 % | 40 % | 50 % | 60 % |
 |---|---|---|---|---|
 | Revisión de 4 min | 84 | 94 | 105 | 115 |
 | Revisión de 6 min | 42 | 58 | 75 | 91 |
+| Revisión de 8 min | ≈ 0 | 22 | 45 | 67 |
 
 El tiempo de revisión pesa tanto como el % automático: pasar de 6 a 4 min vale más que subir 20 puntos de automático. Por eso la pantalla de revisión, con los datos ya extraídos y el motivo explicado, es parte del valor, no un accesorio.
 
@@ -197,7 +224,7 @@ Las cifras de los proveedores comerciales (precios, % de automatización declara
 
 ## Criterio para pasar al diseño
 
-El caso está listo para el diseño cuando, tras el taller de discovery, estén contrastadas las cifras del escenario y los supuestos SN01–SN09, el AS-IS validado, las oportunidades priorizadas por impacto y viabilidad, y el comprar o construir argumentado. Este documento no declara que la solución funcione ni que genere ahorros.
+El caso está listo para el diseño cuando, tras el taller de discovery, estén contrastadas las cifras del escenario y los supuestos SN01–SN10, el AS-IS validado, las oportunidades priorizadas por impacto y viabilidad, y el comprar o construir argumentado. Este documento no declara que la solución funcione ni que genere ahorros.
 
 ## Preguntas para el taller de discovery simulado
 
@@ -220,9 +247,11 @@ El caso está listo para el diseño cuando, tras el taller de discovery, estén 
 
 **Valor y alternativas**
 
-10. ¿Qué haría la dirección con la capacidad liberada: evitar una contratación o dedicarla a seguimiento de clientes?
-11. ¿Se ha valorado alguna solución comercial o un portal B2B? ¿Con qué resultado?
-12. ¿Qué tendría que pasar en un piloto de 2–4 semanas para decidir seguir adelante?
+10. ¿Cuál es el coste empresa por hora de una gestora de administración de ventas? ¿Está dentro del rango de 20–24 €/h?
+11. ¿El equipo está hoy a plena capacidad? Con un 20 % más de volumen, ¿habría que contratar a una persona?
+12. ¿Qué haría la dirección con la capacidad liberada antes de que llegue el crecimiento: dedicarla a seguimiento de clientes u otra cosa?
+13. ¿Se ha valorado alguna solución comercial o un portal B2B? ¿Con qué resultado?
+14. ¿Qué tendría que pasar en un piloto de 2–4 semanas para decidir seguir adelante?
 
 ## Siguiente documento
 
