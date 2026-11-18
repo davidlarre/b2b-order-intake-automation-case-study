@@ -126,7 +126,7 @@ Tras una revisión se añadieron D33 y D34 y se ajustaron D24 y D30 (ver el apar
 
 **Alternativas descartadas:** migración completa de ERP; eliminar la Parte A.
 
-**Pendiente o a validar:** —
+**Pendiente o a validar:** modificada por D35 ([02-discovery-workshop.md](../02-discovery-workshop.md)): las equivalencias salen de 3 chuletas en Word, una por gestora.
 
 ### D10 · Errores que se plantan
 
@@ -274,7 +274,7 @@ R01–R04 cortan el flujo. R05–R13 se evalúan todas y se acumulan los motivos
 
 **Alternativas descartadas:** R10 con redondeo al alza y aviso al cliente (arriesga devoluciones).
 
-**Pendiente o a validar:** el umbral de 3.000 € es un supuesto (~3-5 % de los pedidos lo superarían).
+**Pendiente o a validar:** el umbral de 3.000 € lo confirma dirección comercial en el taller (sesión 7), donde también se fijan la tolerancia de R11 y los sustitutos de R09 ([02-discovery-workshop.md](../02-discovery-workshop.md)). Sigue siendo un supuesto que ~3-5 % de los pedidos lo superen.
 
 ### D19 · Confianza de la IA
 

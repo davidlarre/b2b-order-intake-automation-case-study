@@ -21,7 +21,7 @@ Cuando haya código, el repositorio se podrá ejecutar en local con Supabase loc
 
 ## Estado
 
-Fase 0 completada: reencuadre. Siguiente: discovery. Plan completo en [docs/00-project-plan.md](docs/00-project-plan.md).
+Fase 1 en curso: taller de discovery hecho; falta actualizar el caso de negocio. Siguiente: diseño. Plan completo en [docs/00-project-plan.md](docs/00-project-plan.md).
 
 ## Documentación
 
@@ -30,6 +30,6 @@ Fase 0 completada: reencuadre. Siguiente: discovery. Plan completo en [docs/00-p
 | [00 Plan del proyecto](docs/00-project-plan.md) | Hecho |
 | [0001 Decisiones del reencuadre](docs/decisions/0001-reframe.md) | Hecho |
 | [01 Caso de negocio](docs/01-business-case.md) | Borrador; se revisa en discovery |
-| 02 Taller de discovery | Pendiente |
+| [02 Taller de discovery](docs/02-discovery-workshop.md) | Hecho |
 | 03 Diseño de la solución | Pendiente |
 | 04 Informe de evaluación | Pendiente |
