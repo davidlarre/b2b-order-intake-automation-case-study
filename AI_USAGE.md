@@ -1,0 +1,24 @@
+# Uso de IA en este proyecto
+
+Este caso de estudio se hace con asistencia de IA. Este documento explica para qué se ha usado, qué es mío y qué no se debe interpretar a partir del resultado.
+
+## Cómo se ha usado
+
+- **Decisiones de diseño, en conversación con Claude (Opus).** El enfoque, el caso, el escenario, las reglas, la evaluación y el plan se han debatido con opciones, alternativas descartadas y recomendaciones. Quedan registradas en [01-reframe-decisions.md](docs/01-reframe-decisions.md).
+- **Redacción, commits y revisión de coherencia, con Claude Code (Sonnet y Opus).** Redacta los documentos a partir de lo decidido, mantiene los enlaces entre documentos y hace los commits que le pido.
+- **Revisión cruzada entre ambos.** Lo que sale de una conversación se contrasta con lo que ya está en el repositorio antes de escribirlo. Algunos ejemplos:
+  - Claude Code detectó que una decisión nombraba una empresa real, en contra de lo que esa misma decisión pedía.
+  - Antes de redactar el taller de discovery, señaló los puntos en los que contradecía el caso de negocio y las decisiones previas: el número de fuentes de equivalencias, una sesión que faltaba con dirección comercial y un criterio de paso imposible de cumplir. Cada choque se resolvió por decisión mía antes de escribir.
+
+## Qué es mío
+
+- Las decisiones finales: en cada punto con opciones, elijo, corrijo o descarto la propuesta.
+- El escenario y los hallazgos del taller, propuestos con Claude y aprobados por mí.
+
+## Qué no se presenta
+
+- No es experiencia de ingeniería en producción. Es una demo con datos sintéticos y una empresa ficticia.
+- Las cifras del escenario son supuestos y el taller de discovery es simulado: muestran un método, no evidencia.
+- El código, cuando lo haya, estará asistido por IA. El objetivo es entender y poder explicar cada pieza, no presentarla como escrita sin ayuda.
+
+El historial de commits refleja la asistencia: los commits hechos con Claude Code llevan la línea `Co-Authored-By`.

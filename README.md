@@ -4,7 +4,7 @@ Caso de estudio educativo y de portfolio sobre cómo se aborda un problema de au
 
 **Caso ficticio.** Orvalle Suministros Industriales, sus clientes, sistemas, datos y cifras son inventados y sintéticos. No es un cliente real ni un proyecto profesional ya realizado. Las cifras del escenario son supuestos, no mediciones.
 
-**Hecho con IA, y se dice.** El proyecto se desarrolla con asistencia de IA, con el objetivo de entender cada decisión y poder explicarla. Detalle en `AI_USAGE.md` (pendiente).
+**Hecho con IA, y se dice.** El proyecto se desarrolla con asistencia de IA, con el objetivo de entender cada decisión y poder explicarla. Detalle en [AI_USAGE.md](AI_USAGE.md).
 
 ## El caso
 
