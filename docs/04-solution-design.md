@@ -542,11 +542,13 @@ Las tres configuraciones de la evaluación (D25) son dos interruptores sobre las
 
 | Configuración | Extractor determinista | IA |
 |---|---|---|
-| Solo reglas | Encendido | Apagada: si el extractor encuentra al menos una línea, el correo se trata como pedido nuevo; si no, va a revisión con M01 ("el extractor determinista no encontró líneas") |
+| Solo reglas | Encendido | Apagada: si el extractor encuentra al menos una línea, el correo se trata como pedido nuevo; si no, va a revisión con M01 |
 | Solo IA | Apagado | Encendida |
 | Híbrido | Encendido | Encendida siempre. Si los dos extractores no coinciden en referencia o cantidad de una línea, va a revisión (R12) |
 
 "Solo reglas" no cuesta nada extra: el híbrido ya necesita el extractor determinista.
+
+**Sin ninguna línea** (prompt de extracción v2, 19-11-2026): en las tres configuraciones, un caso sin líneas va a revisión con M01. En el híbrido, si la IA no lee nada pero el determinista sí, son omisiones de la IA (R12). D22 dice "pedir datos", pero sin clasificación un correo sin líneas puede ser un pedido incompleto o un correo que no es un pedido, y pedirle líneas a quien hacía una consulta sería un error de cara al cliente. **Declarado:** cuando exista la clasificación, un pedido nuevo sin líneas pasará a pedir datos.
 
 ### 6.4 Esquema y versiones
 

@@ -86,7 +86,6 @@ def test_el_precio_de_la_extraccion_llega_exacto(automatizacion, cur, prompt_has
 
 
 @pytest.mark.parametrize("lineas", [
-    [],
     [{"texto": "algo", "cantidad": 5}],                           # sin referencia
     [{"texto": "algo", "referencia": "X", "cantidad": "cinco"}],  # cantidad que no es un número
 ])
