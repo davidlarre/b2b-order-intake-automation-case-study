@@ -6,7 +6,7 @@ def test_devuelve_todos_los_codigos_del_catalogo_y_nada_mas(cur):
     esperados = [c for (c,) in cur.fetchall()]
     cur.execute("set local role service_role")
     cur.execute("select api.codigos_producto()")
-    assert cur.fetchone()[0] == esperados
+    assert cur.fetchone()[0] == {"codigos": esperados}
 
 
 def test_incluye_los_descatalogados(cur):
@@ -14,4 +14,4 @@ def test_incluye_los_descatalogados(cur):
     cur.execute("update erp.productos set activo = false where codigo = 'BRO-HSS-8'")
     cur.execute("set local role service_role")
     cur.execute("select api.codigos_producto()")
-    assert "BRO-HSS-8" in cur.fetchone()[0]
+    assert "BRO-HSS-8" in cur.fetchone()[0]["codigos"]
