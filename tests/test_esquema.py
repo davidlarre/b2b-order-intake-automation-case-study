@@ -2,14 +2,6 @@ import psycopg
 import pytest
 
 
-@pytest.fixture
-def cur(db_url):
-    with psycopg.connect(db_url) as conn:
-        with conn.cursor() as c:
-            yield c
-        conn.rollback()
-
-
 def test_datos_de_arranque(cur):
     cur.execute("select (select count(*) from erp.productos), (select count(*) from erp.clientes),"
                 " (select count(*) from erp.tarifas where estado = 'activa')")

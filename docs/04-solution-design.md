@@ -742,6 +742,7 @@ SN08 sigue siendo un supuesto declarado.
 | Sin precios por tramos de cantidad: una tarifa con condición queda pendiente | [05](05-synthetic-data-and-evaluation-set.md) |
 | Una respuesta automática sin cabeceras estándar se trata como respuesta del cliente y acaba en revisión | 2.2 |
 | R07 por número sin límite de tiempo manda a revisión un pedido nuevo de un cliente que reinicia su numeración | 3.2, [05](05-synthetic-data-and-evaluation-set.md) |
+| Entorno local: en la imagen de Supabase 17.6.1.106, ejecutar una función sin permiso con un rol reservado (`anon`, `service_role`) tumba Postgres en lugar de dar "permission denied" ([supabase/postgres#2124](https://github.com/supabase/postgres/issues/2124), atribuido a `supautils`). La API solo expone funciones con permiso, así que no se da en el uso normal. Reproducción en `tests/test_entorno_supautils.py`; se revisa en la fase 7 | 5.2 |
 | La IA puede clasificar mal una instrucción condicional sin dudar | 4.1 |
 | Los factores de R14 y el número mínimo de pedidos son supuestos | 3.2 |
 | Pedidos en PDF y correos con varios pedidos van a revisión | D08, D16 |
