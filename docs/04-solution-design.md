@@ -746,6 +746,7 @@ SN08 sigue siendo un supuesto declarado.
 | La IA puede clasificar mal una instrucción condicional sin dudar | 4.1 |
 | Los factores de R14 y el número mínimo de pedidos son supuestos | 3.2 |
 | Pedidos en PDF y correos con varios pedidos van a revisión | D08, D16 |
+| Solo se lee Excel `.xlsx` (con `read-excel-file`). Un adjunto `.xls` (formato antiguo), `.csv`, `.ods` o cualquier otro que no sea imagen va a revisión con M02, como el PDF. Las imágenes (logos y firmas) se ignoran. Del Excel solo se lee la primera hoja, y el formato con significado (colores, tachados) no se ve | 6.2 |
 | Con el plan B se pierde "send and wait": ADV vuelve a perseguir al comercial | [ADR 0003](decisions/0003-n8n-orquestador-plan-b.md) |
 
 ## 12. Notas para la construcción

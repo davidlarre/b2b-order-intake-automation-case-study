@@ -1,0 +1,14 @@
+{
+  "name": "orvalle-extractor",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Librerías y código propio del nodo Code de n8n: lectura del .eml (mailparser), preprocesado de adjuntos y extractor determinista (04, secciones 6.2 y 6.3). Se instala en la imagen del task runner con pnpm-lock.yaml y --frozen-lockfile.",
+  "main": "index.js",
+  "scripts": {
+    "test": "node --test"
+  },
+  "dependencies": {
+    "mailparser": "3.14.1",
+    "read-excel-file": "9.3.14"
+  }
+}

@@ -23,7 +23,9 @@ services:
     restart: unless-stopped
 
   runners:
-    build: ./runners
+    build:
+      context: .
+      dockerfile: runners/Dockerfile
     environment:
       - GENERIC_TIMEZONE=Europe/Madrid
       - N8N_RUNNERS_TASK_BROKER_URI=http://n8n:5679
