@@ -32,12 +32,12 @@
     },
     {
       "parameters": {
-        "jsCode": "const { simpleParser } = require('mailparser');\nconst { preprocesarAdjuntos } = require('orvalle-extractor');\n\n// El .eml llega del Webhook como binario en la propiedad \"data\".\nconst buffer = await this.helpers.getBinaryDataBuffer(0, 'data');\nconst correo = await simpleParser(buffer);\n\n// Excel a texto, imágenes ignoradas y el resto \"no soportado\" (04, sección 6.2).\nconst adjuntos = await preprocesarAdjuntos(correo.attachments);\n\nconst autenticacion = correo.headers.get('authentication-results');\n\nreturn [{\n  json: {\n    message_id: correo.messageId ?? null,\n    remitente: correo.from?.value?.[0]?.address?.toLowerCase() ?? null,\n    asunto: correo.subject ?? null,\n    autenticacion: Array.isArray(autenticacion) ? autenticacion.join('; ') : (autenticacion ?? null),\n    hora_recepcion: correo.date ? correo.date.toISOString() : null,\n    // Lo que lee la IA: el cuerpo y, si hay Excel, su texto.\n    texto: [correo.text ?? '', adjuntos.texto].filter(t => t.trim() !== '').join('\\n\\n'),\n    // Las filas de cada Excel, para el extractor determinista (paso 4).\n    excels: adjuntos.excels,\n    // Los adjuntos que no se pueden leer: si hay alguno, el caso irá a M02 (paso 3c.2).\n    no_soportados: adjuntos.noSoportados,\n    adjuntos_ignorados: adjuntos.ignorados,\n  },\n}];"
+        "jsCode": "// La configuración llega como parámetro de la URL: ?configuracion=solo_reglas|solo_ia|hibrido.\n// Sin parámetro, híbrido (la de producción). Un valor desconocido para el flujo aquí, antes de crear el caso.\nconst CONFIGURACIONES = ['solo_reglas', 'solo_ia', 'hibrido'];\nconst configuracion = $('Webhook').first().json.query?.configuracion ?? 'hibrido';\nif (!CONFIGURACIONES.includes(configuracion)) {\n  throw new Error(`Configuración desconocida: ${configuracion}`);\n}\n\nconst { simpleParser } = require('mailparser');\nconst { preprocesarAdjuntos } = require('orvalle-extractor');\n\n// El .eml llega del Webhook como binario en la propiedad \"data\".\nconst buffer = await this.helpers.getBinaryDataBuffer(0, 'data');\nconst correo = await simpleParser(buffer);\n\n// Excel a texto, imágenes ignoradas y el resto \"no soportado\" (04, sección 6.2).\nconst adjuntos = await preprocesarAdjuntos(correo.attachments);\n\nconst autenticacion = correo.headers.get('authentication-results');\n\nreturn [{\n  json: {\n    message_id: correo.messageId ?? null,\n    remitente: correo.from?.value?.[0]?.address?.toLowerCase() ?? null,\n    asunto: correo.subject ?? null,\n    autenticacion: Array.isArray(autenticacion) ? autenticacion.join('; ') : (autenticacion ?? null),\n    hora_recepcion: correo.date ? correo.date.toISOString() : null,\n    configuracion,\n    // El cuerpo solo, sin los Excel: el extractor determinista lee los Excel por sus filas, no por su texto.\n    cuerpo: correo.text ?? '',\n    // Lo que lee la IA: el cuerpo y, si hay Excel, su texto.\n    texto: [correo.text ?? '', adjuntos.texto].filter(t => t.trim() !== '').join('\\n\\n'),\n    // Las filas de cada Excel, para el extractor determinista.\n    excels: adjuntos.excels,\n    // Los adjuntos que no se pueden leer: si hay alguno, el caso irá a M02.\n    no_soportados: adjuntos.noSoportados,\n    adjuntos_ignorados: adjuntos.ignorados,\n  },\n}];"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        224,
+        160,
         0
       ],
       "id": "d57ef520-67f4-46f6-aaed-f5cabc266550",
@@ -66,7 +66,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.5,
       "position": [
-        448,
+        320,
         0
       ],
       "id": "5129f0f4-deab-4b69-912d-2d10e2294990",
@@ -106,7 +106,7 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.4,
       "position": [
-        672,
+        480,
         0
       ],
       "id": "3a07768b-2f7e-4417-a5b3-cf52ff2fd0d7",
@@ -137,8 +137,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.5,
       "position": [
-        1200,
-        -256
+        1616,
+        -496
       ],
       "id": "643308ea-1a93-4cd7-b99b-2c3273e2f5ab",
       "name": "Extraer con Gemini",
@@ -153,13 +153,13 @@
     },
     {
       "parameters": {
-        "jsCode": "const respuesta = $input.first().json;\n\n// Busca la respuesta del modelo por su tipo: antes puede venir un \"thought\" (el razonamiento).\nconst salida = (respuesta.steps ?? []).find(s => s.type === 'model_output');\nconst texto = salida?.content?.find(c => c.type === 'text')?.text;\nif (!texto) {\n  throw new Error('Gemini no devolvió un model_output con texto');\n}\n\nlet extraccion;\ntry {\n  extraccion = JSON.parse(texto);\n} catch (e) {\n  throw new Error('La respuesta de Gemini no es JSON válido: ' + e.message);\n}\n\nconst uso = respuesta.usage ?? {};\n\nreturn [{\n  json: {\n    caso: $('Registrar correo').first().json.caso,\n    extraccion,\n    modelo: respuesta.model,\n    prompt_hash: $('Leer prompt activo').first().json.hash,\n    configuracion: 'solo_ia',\n    tokens_entrada: uso.total_input_tokens ?? null,\n    // El razonamiento también se factura como salida: se suma para que el coste por correo sea real.\n    tokens_salida: (uso.total_output_tokens ?? 0) + (uso.total_thought_tokens ?? 0),\n  },\n}];"
+        "jsCode": "const correo = $('Leer .eml').first().json;\nconst configuracion = correo.configuracion;\n\n// Los nombres son los parámetros de api.registrar_extraccion.\nconst cuerpo = {\n  caso: $('Registrar correo').first().json.caso,\n  configuracion,\n};\n\n// Interruptor de la IA: en \"solo reglas\" Gemini no se ha ejecutado y no hay nada que leer.\nif (configuracion !== 'solo_reglas') {\n  const respuesta = $('Extraer con Gemini').first().json;\n  // Busca la respuesta del modelo por su tipo: antes puede venir un \"thought\" (el razonamiento).\n  const salida = (respuesta.steps ?? []).find(s => s.type === 'model_output');\n  const texto = salida?.content?.find(c => c.type === 'text')?.text;\n  if (!texto) {\n    throw new Error('Gemini no devolvió un model_output con texto');\n  }\n  let extraccion;\n  try {\n    extraccion = JSON.parse(texto);\n  } catch (e) {\n    throw new Error('La respuesta de Gemini no es JSON válido: ' + e.message);\n  }\n  const uso = respuesta.usage ?? {};\n  Object.assign(cuerpo, {\n    extraccion_ia: extraccion,\n    prompt_hash: $('Leer prompt activo').first().json.hash,\n    modelo: respuesta.model,\n    tokens_entrada: uso.total_input_tokens ?? null,\n    // El razonamiento también se factura como salida.\n    tokens_salida: (uso.total_output_tokens ?? 0) + (uso.total_thought_tokens ?? 0),\n  });\n}\n\n// Interruptor del determinista: en \"solo IA\" su lectura no se envía.\nif (configuracion !== 'solo_ia') {\n  const determinista = $('Extractor determinista').first().json;\n  Object.assign(cuerpo, {\n    extraccion_determinista: { lineas: determinista.lineas },\n    version_determinista: determinista.version,\n  });\n}\n\nreturn [{ json: cuerpo }];"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1360,
-        -256
+        1824,
+        -336
       ],
       "id": "4bb48d33-1661-4029-9f05-a2e7cf5eb755",
       "name": "Preparar extracción"
@@ -181,14 +181,14 @@
         },
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{ JSON.stringify({\n  caso: $json.caso,\n  extraccion: $json.extraccion,\n  prompt_hash: $json.prompt_hash,\n  modelo: $json.modelo,\n  configuracion: $json.configuracion,\n  tokens_entrada: $json.tokens_entrada,\n  tokens_salida: $json.tokens_salida\n}) }}",
+        "jsonBody": "={{ JSON.stringify($json) }}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.5,
       "position": [
-        1520,
-        -256
+        2000,
+        -336
       ],
       "id": "971bdefe-09da-4b08-b69e-6025fa145c4e",
       "name": "Registrar extracción y evaluar",
@@ -206,8 +206,8 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.5,
       "position": [
-        1760,
-        -128
+        2176,
+        -144
       ],
       "id": "7fd5530f-b8b8-4f5f-8b8d-75feda45eb10",
       "name": "Responder: resultado"
@@ -219,8 +219,8 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.5,
       "position": [
-        800,
-        176
+        640,
+        192
       ],
       "id": "766523c0-cf45-43eb-93cb-36390900d736",
       "name": "Responder: ya registrado"
@@ -248,8 +248,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.5,
       "position": [
-        1040,
-        -256
+        1440,
+        -496
       ],
       "id": "75b10eac-1eee-48c5-b6fe-eae2b1a1c43e",
       "name": "Leer prompt activo",
@@ -287,8 +287,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.4,
       "position": [
-        800,
-        -144
+        640,
+        -160
       ],
       "id": "74e689ee-1818-4e5d-928e-d7a1e6d83b0a",
       "name": "¿Formato soportado?"
@@ -316,8 +316,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.5,
       "position": [
-        1024,
-        0
+        1184,
+        -144
       ],
       "id": "5a365958-2b9d-48ac-b935-f93dd241eabd",
       "name": "Enviar a revisión (M02)",
@@ -327,6 +327,87 @@
           "name": "Supabase local · automatización"
         }
       }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://host.docker.internal:54321/rest/v1/rpc/codigos_producto",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Profile",
+              "value": "api"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({}) }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.5,
+      "position": [
+        832,
+        -352
+      ],
+      "id": "e8a158a3-66e0-4f56-85e4-d9f37768b3ee",
+      "name": "Leer códigos",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "pPeI6Dvh8SeDo88k",
+          "name": "Supabase local · automatización"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const { extraerDeterminista } = require('orvalle-extractor');\n\nconst correo = $('Leer .eml').first().json;\n\n// Excel por sus filas y texto del cuerpo, solo con códigos del catálogo (04, sección 6.3).\nconst lineas = extraerDeterminista({\n  cuerpo: correo.cuerpo,\n  excels: correo.excels,\n  codigos: $input.first().json.codigos,\n});\n\nreturn [{\n  json: {\n    lineas,\n    // La versión del módulo identifica la extracción del determinista, como el hash identifica la del prompt.\n    version: require('orvalle-extractor').VERSION,\n  },\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1008,
+        -352
+      ],
+      "id": "f8df462f-8b22-410a-9ab9-579c17af77ff",
+      "name": "Extractor determinista"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 4
+          },
+          "conditions": [
+            {
+              "id": "54e03ab5-5964-4861-944e-a9f5448bf341",
+              "leftValue": "={{ $('Leer .eml').item.json.configuracion }}",
+              "rightValue": "solo_reglas",
+              "operator": {
+                "type": "string",
+                "operation": "notEquals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.4,
+      "position": [
+        1184,
+        -352
+      ],
+      "id": "6ba6524b-6cf6-44cd-aa3c-ef6e2c7d9088",
+      "name": "¿Usa IA?"
     }
   ],
   "connections": {
@@ -429,7 +510,7 @@
       "main": [
         [
           {
-            "node": "Leer prompt activo",
+            "node": "Leer códigos",
             "type": "main",
             "index": 0
           }
@@ -448,6 +529,46 @@
         [
           {
             "node": "Responder: resultado",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Leer códigos": {
+      "main": [
+        [
+          {
+            "node": "Extractor determinista",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extractor determinista": {
+      "main": [
+        [
+          {
+            "node": "¿Usa IA?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "¿Usa IA?": {
+      "main": [
+        [
+          {
+            "node": "Leer prompt activo",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Preparar extracción",
             "type": "main",
             "index": 0
           }

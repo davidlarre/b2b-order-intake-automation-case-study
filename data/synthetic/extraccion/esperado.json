@@ -1,4 +1,13 @@
 {
-  "04-excel-xlsx.eml": {"salida": "automatico", "motivos": []},
-  "05-excel-xls.eml": {"salida": "revision", "motivos": ["M02"]}
+  "04-excel-xlsx.eml": {
+    "salida": "automatico", "motivos": [],
+    "lineas": [["GUA-NIT-L", 5], ["GAF-PROT-INC", 10]]
+  },
+  "05-excel-xls.eml": {"salida": "revision", "motivos": ["M02"]},
+  "06-discrepancia.eml": {
+    "nota": "El cliente corrige la cantidad en la misma línea: el pedido correcto es TUE-M8-ZN x1200. Una lectura que se quede con 1000 crea un pedido equivocado. En el híbrido, las dos lecturas no coinciden y R12 lo manda a revisión (CA-16): es segura, pero no hacía falta si la IA leyó bien.",
+    "salida": "automatico", "motivos": [],
+    "lineas": [["TOR-M8X30-ZN", 1000], ["TUE-M8-ZN", 1200]],
+    "aceptables": [{"salida": "revision", "motivos": ["R12"]}]
+  }
 }

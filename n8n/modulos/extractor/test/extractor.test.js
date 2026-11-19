@@ -77,6 +77,10 @@ test('Texto: cantidades que no son enteros limpios no se leen', () => {
   assert.deepEqual(extraerDeTexto('TOR-M8X30-ZN 1.000 uds\nTUE-M8-ZN 2,5\nARA-M8-ZN unos 300', CODIGOS), []);
 });
 
+test('Texto: una multiplicación no es una cantidad limpia', () => {
+  assert.deepEqual(extraerDeTexto('TUE-M8-ZN 2x500 uds\nTOR-M8X30-ZN 3 × 100\nDIS-COR-125 4*25', CODIGOS), []);
+});
+
 test('Texto: las líneas citadas de un mensaje anterior se ignoran', () => {
   assert.deepEqual(extraerDeTexto('> TOR-M8X30-ZN 500 uds\nGracias', CODIGOS), []);
 });

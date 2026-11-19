@@ -59,8 +59,8 @@ function extraerDeExcel(excel, cabeceras = CABECERAS) {
 // La cantidad va justo después del código ("TOR-M8X30-ZN 500 uds", "TUE-M8-ZN: 1000") o al principio de la
 // línea, antes del código ("500 uds de TOR-M8X30-ZN", "- 500 TOR-M8X30-ZN"). Un número suelto antes del código
 // no vale: en "Pedido semana 46 TOR-M8X30-ZN", el 46 no es una cantidad. Tiene que ser un entero que no forme
-// parte de "1.000" ni de "0,10".
-const DESPUES = /^\s*[:\-–x×]?\s*(\d+)(?![\d.,]*\d)(?:\s+([A-Za-zÀ-ÿ.]+))?/;
+// parte de "1.000", de "0,10" ni de una multiplicación como "2x500".
+const DESPUES = /^\s*[:\-–x×]?\s*(\d+)(?![\d.,]*\d)(?!\s*[x×*]\s*\d)(?:\s+([A-Za-zÀ-ÿ.]+))?/;
 const ANTES = /^[\s\-–•*]*(\d+)\s*(?:([A-Za-zÀ-ÿ.]+)\s+)?(?:de\s+|x\s+|×\s+)?$/i;
 const CANDIDATO = /[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9]/g;
 
