@@ -1,3 +1,7 @@
+# Se levanta desde la raíz del repositorio con el .env de la raíz:
+#   docker compose --env-file .env -f n8n/docker-compose.yml up -d --build
+# Las claves de Gemini y de Supabase no van aquí: son credenciales de n8n.
+
 services:
   n8n:
     image: docker.n8n.io/n8nio/n8n:2.48.5
@@ -8,10 +12,24 @@ services:
       - TZ=Europe/Madrid
       - N8N_DIAGNOSTICS_ENABLED=false
       - N8N_PERSONALIZATION_ENABLED=false
+      # El nodo Code corre en el contenedor de runners (modo externo; el interno está desaprobado).
+      - N8N_RUNNERS_MODE=external
+      - N8N_RUNNERS_BROKER_LISTEN_ADDRESS=0.0.0.0
+      - N8N_RUNNERS_AUTH_TOKEN=${N8N_RUNNERS_AUTH_TOKEN:?Falta N8N_RUNNERS_AUTH_TOKEN en .env}
     extra_hosts:
       - "host.docker.internal:host-gateway"
     volumes:
       - n8n_data:/home/node/.n8n
+    restart: unless-stopped
+
+  runners:
+    build: ./runners
+    environment:
+      - GENERIC_TIMEZONE=Europe/Madrid
+      - N8N_RUNNERS_TASK_BROKER_URI=http://n8n:5679
+      - N8N_RUNNERS_AUTH_TOKEN=${N8N_RUNNERS_AUTH_TOKEN:?Falta N8N_RUNNERS_AUTH_TOKEN en .env}
+    depends_on:
+      - n8n
     restart: unless-stopped
 
 volumes:

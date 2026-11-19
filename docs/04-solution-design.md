@@ -766,6 +766,8 @@ Comprobaciones que el diseño da por posibles pero que hay que confirmar al cons
 | El esquema de extracción cabe en el subconjunto de JSON Schema de Gemini sin dar `400` | Incremento de n8n | Aplanar el esquema; lo que Gemini no aplica lo valida `pg_jsonschema` |
 | Cuota real del nivel gratuito por modelo, en la página de AI Studio | Incremento de n8n | Repartir la evaluación en varios días (sección 7) |
 | Cabeceras de respuesta automática que usan los clientes de correo habituales (sección 2.2) | Incremento de respuestas | Solo `Auto-Submitted` |
+| **Pendiente del corte vertical:** el prompt y el esquema de extracción van provisionalmente dentro del nodo de n8n. Pasan a `extraction/` y a `intake.prompt_versiones` ([ADR 0002](decisions/0002-prompt-y-esquema-fuente-unica.md)) | Incremento siguiente al corte vertical, antes de evaluar nada | — |
+| En n8n 2.x el nodo Code corre en un task runner aparte: `mailparser` se instala en la imagen del runner (`n8n/runners/`), no en la de n8n | Corte vertical | La alternativa ya prevista: convertir el `.eml` fuera de n8n |
 | Roles de usuario de Supabase para las comprobaciones de las funciones (sección 5.2) | Incremento de Supabase | — |
 
 **Criterio del plan B** ([ADR 0003](decisions/0003-n8n-orquestador-plan-b.md)): al acabar la segunda sesión del incremento de n8n, se activa si el `.eml` no está resuelto (con `mailparser` o con su alternativa) o si 5 correos de desarrollo no llegan de la entrada de pruebas a `evaluar_caso` con su extracción y su versión guardadas.
