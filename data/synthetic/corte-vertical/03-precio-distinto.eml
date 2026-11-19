@@ -1,0 +1,17 @@
+From: Laia Puig <pedidos@mantenimentsvalles.example>
+To: pedidos@orvalle.example
+Subject: Comanda guants
+Date: Tue, 10 Nov 2026 09:10:00 +0100
+Message-ID: <cv-03@mantenimentsvalles.example>
+Authentication-Results: mx.orvalle.example; spf=pass smtp.mailfrom=mantenimentsvalles.example; dmarc=none header.from=mantenimentsvalles.example
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 8bit
+
+Bon dia,
+
+Us passo comanda:
+GUA-NIT-L  10 caixes a 6,50
+
+Gràcies!
+Laia

@@ -2,7 +2,7 @@
   "id": "41Bq5AeffqKZY3wk",
   "name": "Corte vertical · pedido desde .eml",
   "description": null,
-  "active": false,
+  "active": true,
   "nodes": [
     {
       "parameters": {

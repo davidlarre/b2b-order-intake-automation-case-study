@@ -1,0 +1,20 @@
+From: Ferran Roca <compras@talleresferran.example>
+To: pedidos@orvalle.example
+Subject: Pedido semana 46
+Date: Tue, 10 Nov 2026 08:05:00 +0100
+Message-ID: <cv-01@talleresferran.example>
+Authentication-Results: mx.orvalle.example; spf=pass smtp.mailfrom=talleresferran.example; dkim=pass header.d=talleresferran.example; dmarc=pass header.from=talleresferran.example
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 8bit
+
+Buenos días,
+
+Os paso el pedido de esta semana:
+
+- TORN 8X30: 1000
+- TUE-M8-ZN 1000 uds
+
+Gracias,
+Ferran Roca
+Talleres Ferran, S.L.
