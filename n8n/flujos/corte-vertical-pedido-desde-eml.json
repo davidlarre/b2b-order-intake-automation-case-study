@@ -446,7 +446,8 @@
           "id": "pPeI6Dvh8SeDo88k",
           "name": "Supabase local · automatización"
         }
-      }
+      },
+      "onError": "continueRegularOutput"
     }
   ],
   "connections": {
