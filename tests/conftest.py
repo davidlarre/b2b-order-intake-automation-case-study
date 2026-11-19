@@ -1,5 +1,5 @@
 import json
-import os
+import sys
 from decimal import Decimal
 from functools import partial
 from pathlib import Path
@@ -8,19 +8,16 @@ import psycopg
 import pytest
 from psycopg.types.json import set_json_loads
 
-ENV = Path(__file__).resolve().parent.parent / ".env"
+RAIZ = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(RAIZ / "scripts"))
 
-
-def _leer_env():
-    if not ENV.exists():
-        return {}
-    pares = (l.split("=", 1) for l in ENV.read_text().splitlines() if "=" in l and not l.lstrip().startswith("#"))
-    return {k.strip(): v.strip().strip('"').strip("'") for k, v in pares}
+from cargar_prompts import EXTRACTION, cargar  # noqa: E402
+from entorno import leer_env  # noqa: E402
 
 
 @pytest.fixture(scope="session")
 def db_url():
-    url = os.environ.get("SUPABASE_DB_URL") or _leer_env().get("SUPABASE_DB_URL")
+    url = leer_env().get("SUPABASE_DB_URL")
     if not url:
         pytest.exit("Falta SUPABASE_DB_URL en .env (es el valor DB_URL de `supabase status -o env`).", returncode=2)
     return url
@@ -35,3 +32,9 @@ def cur(db_url):
         with conn.cursor() as c:
             yield c
         conn.rollback()
+
+
+@pytest.fixture
+def prompt_hash(cur):
+    """Carga y activa la versión actual de extraction/extraccion dentro de la transacción del test."""
+    return cargar(cur, EXTRACTION / "extraccion", activar=True)["hash"]

@@ -20,16 +20,10 @@ import urllib.request
 from email.parser import BytesHeaderParser
 from pathlib import Path
 
+from entorno import leer_env
+
 RAIZ = Path(__file__).resolve().parent.parent
 URL_POR_DEFECTO = "http://localhost:5678/webhook/pruebas/eml"
-
-
-def leer_env():
-    ruta = RAIZ / ".env"
-    if not ruta.exists():
-        return {}
-    pares = (l.split("=", 1) for l in ruta.read_text().splitlines() if "=" in l and not l.lstrip().startswith("#"))
-    return {k.strip(): v.strip().strip('"').strip("'") for k, v in pares}
 
 
 def fecha(eml: bytes):
