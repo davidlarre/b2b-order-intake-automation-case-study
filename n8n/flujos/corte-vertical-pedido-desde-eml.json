@@ -32,7 +32,7 @@
     },
     {
       "parameters": {
-        "jsCode": "const { simpleParser } = require('mailparser');\n\n// El .eml llega del Webhook como binario en la propiedad \"data\".\nconst buffer = await this.helpers.getBinaryDataBuffer(0, 'data');\nconst correo = await simpleParser(buffer);\n\nconst autenticacion = correo.headers.get('authentication-results');\n\nreturn [{\n  json: {\n    message_id: correo.messageId ?? null,\n    remitente: correo.from?.value?.[0]?.address?.toLowerCase() ?? null,\n    asunto: correo.subject ?? null,\n    autenticacion: Array.isArray(autenticacion) ? autenticacion.join('; ') : (autenticacion ?? null),\n    hora_recepcion: correo.date ? correo.date.toISOString() : null,\n    texto: correo.text ?? '',\n  },\n}];\n"
+        "jsCode": "const { simpleParser } = require('mailparser');\nconst { preprocesarAdjuntos } = require('orvalle-extractor');\n\n// El .eml llega del Webhook como binario en la propiedad \"data\".\nconst buffer = await this.helpers.getBinaryDataBuffer(0, 'data');\nconst correo = await simpleParser(buffer);\n\n// Excel a texto, imágenes ignoradas y el resto \"no soportado\" (04, sección 6.2).\nconst adjuntos = await preprocesarAdjuntos(correo.attachments);\n\nconst autenticacion = correo.headers.get('authentication-results');\n\nreturn [{\n  json: {\n    message_id: correo.messageId ?? null,\n    remitente: correo.from?.value?.[0]?.address?.toLowerCase() ?? null,\n    asunto: correo.subject ?? null,\n    autenticacion: Array.isArray(autenticacion) ? autenticacion.join('; ') : (autenticacion ?? null),\n    hora_recepcion: correo.date ? correo.date.toISOString() : null,\n    // Lo que lee la IA: el cuerpo y, si hay Excel, su texto.\n    texto: [correo.text ?? '', adjuntos.texto].filter(t => t.trim() !== '').join('\\n\\n'),\n    // Las filas de cada Excel, para el extractor determinista (paso 4).\n    excels: adjuntos.excels,\n    // Los adjuntos que no se pueden leer: si hay alguno, el caso irá a M02 (paso 3c.2).\n    no_soportados: adjuntos.noSoportados,\n    adjuntos_ignorados: adjuntos.ignorados,\n  },\n}];"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -137,8 +137,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.5,
       "position": [
-        896,
-        -96
+        1200,
+        -256
       ],
       "id": "643308ea-1a93-4cd7-b99b-2c3273e2f5ab",
       "name": "Extraer con Gemini",
@@ -158,8 +158,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1120,
-        -96
+        1360,
+        -256
       ],
       "id": "4bb48d33-1661-4029-9f05-a2e7cf5eb755",
       "name": "Preparar extracción"
@@ -187,8 +187,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.5,
       "position": [
-        1344,
-        -96
+        1520,
+        -256
       ],
       "id": "971bdefe-09da-4b08-b69e-6025fa145c4e",
       "name": "Registrar extracción y evaluar",
@@ -206,8 +206,8 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.5,
       "position": [
-        1568,
-        -96
+        1760,
+        -128
       ],
       "id": "7fd5530f-b8b8-4f5f-8b8d-75feda45eb10",
       "name": "Responder: resultado"
@@ -219,8 +219,8 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.5,
       "position": [
-        896,
-        96
+        800,
+        176
       ],
       "id": "766523c0-cf45-43eb-93cb-36390900d736",
       "name": "Responder: ya registrado"
@@ -248,11 +248,79 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.5,
       "position": [
-        768,
-        -224
+        1040,
+        -256
       ],
       "id": "75b10eac-1eee-48c5-b6fe-eae2b1a1c43e",
       "name": "Leer prompt activo",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "pPeI6Dvh8SeDo88k",
+          "name": "Supabase local · automatización"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 4
+          },
+          "conditions": [
+            {
+              "id": "906c4bbf-59b5-40da-8495-fb1d6ac36a2b",
+              "leftValue": "={{ $('Leer .eml').item.json.no_soportados.length }}",
+              "rightValue": 0,
+              "operator": {
+                "type": "number",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.4,
+      "position": [
+        800,
+        -144
+      ],
+      "id": "74e689ee-1818-4e5d-928e-d7a1e6d83b0a",
+      "name": "¿Formato soportado?"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://host.docker.internal:54321/rest/v1/rpc/enviar_a_revision",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Profile",
+              "value": "api"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({\n  caso: $json.caso,\n  codigo: 'M02',\n  detalle: {\n    formatos: $('Leer .eml').item.json.no_soportados.map(a => a.formato),\n    adjuntos: $('Leer .eml').item.json.no_soportados.map(a => a.nombre)\n  }\n}) }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.5,
+      "position": [
+        1024,
+        0
+      ],
+      "id": "5a365958-2b9d-48ac-b935-f93dd241eabd",
+      "name": "Enviar a revisión (M02)",
       "credentials": {
         "httpHeaderAuth": {
           "id": "pPeI6Dvh8SeDo88k",
@@ -299,7 +367,7 @@
       "main": [
         [
           {
-            "node": "Leer prompt activo",
+            "node": "¿Formato soportado?",
             "type": "main",
             "index": 0
           }
@@ -351,6 +419,35 @@
         [
           {
             "node": "Extraer con Gemini",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "¿Formato soportado?": {
+      "main": [
+        [
+          {
+            "node": "Leer prompt activo",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Enviar a revisión (M02)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Enviar a revisión (M02)": {
+      "main": [
+        [
+          {
+            "node": "Responder: resultado",
             "type": "main",
             "index": 0
           }

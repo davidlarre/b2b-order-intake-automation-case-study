@@ -2,8 +2,9 @@
 
 Uso:
     uv run scripts/enviar_eml.py data/synthetic/corte-vertical [--nuevos] [--url URL]
+    uv run scripts/enviar_eml.py data/synthetic/extraccion/04-excel-xlsx.eml --url URL_DE_PRUEBA
 
-- Los envía por orden de su cabecera Date, como la evaluación (04, sección 7).
+- Acepta una carpeta o un solo .eml. Los envía por orden de su cabecera Date, como la evaluación (04, sección 7).
 - Si la carpeta tiene un esperado.json, compara la salida y los motivos con lo esperado.
 - --nuevos añade un sufijo al Message-ID para que n8n los trate como correos nuevos
   (sin él, un segundo envío devuelve "duplicado").
@@ -48,7 +49,7 @@ def enviar(url, token, eml: bytes):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument("carpeta", type=Path)
+    parser.add_argument("ruta", type=Path, help="carpeta con .eml o un solo .eml")
     parser.add_argument("--url", default=URL_POR_DEFECTO)
     parser.add_argument("--nuevos", action="store_true", help="Message-ID nuevo en cada envío")
     args = parser.parse_args()
@@ -57,10 +58,12 @@ def main():
     if not token:
         sys.exit("Falta PRUEBAS_WEBHOOK_TOKEN en .env")
 
-    correos = sorted(((fecha(p.read_bytes()), p) for p in args.carpeta.glob("*.eml")), key=lambda par: par[0])
+    carpeta = args.ruta if args.ruta.is_dir() else args.ruta.parent
+    ficheros = carpeta.glob("*.eml") if args.ruta.is_dir() else [args.ruta]
+    correos = sorted(((fecha(p.read_bytes()), p) for p in ficheros), key=lambda par: par[0])
     if not correos:
-        sys.exit(f"No hay .eml en {args.carpeta}")
-    ruta_esperado = args.carpeta / "esperado.json"
+        sys.exit(f"No hay .eml en {args.ruta}")
+    ruta_esperado = carpeta / "esperado.json"
     esperado = json.loads(ruta_esperado.read_text()) if ruta_esperado.exists() else {}
     sufijo = time.strftime("%Y%m%d%H%M%S")
 

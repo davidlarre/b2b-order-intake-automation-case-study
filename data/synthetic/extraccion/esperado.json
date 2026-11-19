@@ -1,0 +1,4 @@
+{
+  "04-excel-xlsx.eml": {"salida": "automatico", "motivos": []},
+  "05-excel-xls.eml": {"salida": "revision", "motivos": ["M02"]}
+}
