@@ -222,26 +222,26 @@ def test_cada_evaluacion_deja_un_evento_sin_datos_personales(cur):
 
 # ---------------------------------------------------------------- permisos
 
-def test_solo_la_automatizacion_puede_llamar_a_evaluar_caso(cur):
-    caso = crear_caso(cur, CLIENTE_FERRAN, [("TOR-M8X30-ZN", 500, None)])
-    cur.execute("savepoint antes")
-    for rol in ("anon", "authenticated"):
-        cur.execute(f"set local role {rol}")
-        with pytest.raises(psycopg.errors.InsufficientPrivilege):
-            evaluar(cur, caso)
-        cur.execute("rollback to savepoint antes")
-    cur.execute("set local role service_role")
-    assert evaluar(cur, caso)["salida"] == "automatico"
+# Se comprueba en el catálogo y no ejecutando: en Supabase local (imagen 17.6.1.106), ejecutar con un rol
+# reservado una función sin permiso tumba el proceso del servidor (tests/test_entorno_supautils.py).
+
+ROLES_API = ("anon", "authenticated", "service_role")
 
 
-def test_la_automatizacion_no_llega_a_las_reglas_ni_a_las_tablas(cur):
-    # Se comprueba en el catálogo y no ejecutando: en Supabase local (Postgres 17.6), ejecutar como
-    # service_role una función sin permiso tumba el proceso del servidor (segmentation fault).
-    cur.execute("select p.oid::regprocedure::text from pg_proc p join pg_namespace n on n.oid = p.pronamespace"
-                " where n.nspname in ('intake', 'erp')"
-                " and has_function_privilege('service_role', p.oid, 'execute')")
-    assert [f for (f,) in cur.fetchall()] == ["intake.evaluar_caso(bigint)"]
-    cur.execute("select n.nspname || '.' || c.relname from pg_class c join pg_namespace n on n.oid = c.relnamespace"
+def test_ningun_rol_de_la_api_entra_en_intake_ni_en_erp(cur):
+    cur.execute("select r || ' → ' || s from unnest(%s::text[]) r, unnest(array['intake', 'erp']) s"
+                " where has_schema_privilege(r, s, 'usage')", (list(ROLES_API),))
+    assert cur.fetchall() == []
+
+
+def test_ningun_rol_de_la_api_ejecuta_reglas_ni_toca_tablas(cur):
+    cur.execute("select r || ' → ' || p.oid::regprocedure::text from pg_proc p"
+                " join pg_namespace n on n.oid = p.pronamespace, unnest(%s::text[]) r"
+                " where n.nspname in ('intake', 'erp') and has_function_privilege(r, p.oid, 'execute')",
+                (list(ROLES_API),))
+    assert cur.fetchall() == []
+    cur.execute("select r || ' → ' || n.nspname || '.' || c.relname from pg_class c"
+                " join pg_namespace n on n.oid = c.relnamespace, unnest(%s::text[]) r"
                 " where n.nspname in ('intake', 'erp') and c.relkind = 'r'"
-                " and has_table_privilege('service_role', c.oid, 'select, insert, update, delete')")
+                " and has_table_privilege(r, c.oid, 'select, insert, update, delete')", (list(ROLES_API),))
     assert cur.fetchall() == []
