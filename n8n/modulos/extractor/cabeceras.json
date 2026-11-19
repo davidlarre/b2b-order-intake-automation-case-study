@@ -1,0 +1,8 @@
+{
+  "_nota": "Mapeo inicial de cabeceras habituales de los Excel de los clientes (04, sección 6.3), escrito desde la especificación y sin mirar ningún correo concreto. Es configuración que se ajusta: cada cabecera que se añada después tiene que citar el caso de desarrollo que la motiva (05, sección 8). Las cabeceras se comparan normalizadas: minúsculas, sin acentos, sin espacios repetidos y sin ':' final.",
+  "referencia": ["ref", "ref.", "referencia", "codigo", "cod", "cod.", "articulo", "ref. orvalle", "codigo orvalle", "codi"],
+  "cantidad": ["cant", "cant.", "cantidad", "uds", "uds.", "unidades", "quantitat", "qty"],
+  "precio": ["precio", "precio unitario", "precio/ud", "p.u.", "pvp", "preu"],
+  "unidad": ["unidad", "ud", "ud.", "u.m.", "unitat"],
+  "filas_ignoradas": ["total", "subtotal", "suma", "total pedido"]
+}

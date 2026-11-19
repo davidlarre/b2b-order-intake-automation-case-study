@@ -1,5 +1,8 @@
 {
-  "01-automatico.eml": {"salida": "automatico", "motivos": []},
+  "01-automatico.eml": {
+    "salida": "automatico", "motivos": [],
+    "lineas": [["TOR-M8X30-ZN", 1000], ["TUE-M8-ZN", 1000]]
+  },
   "02-remitente-desconocido.eml": {"salida": "revision", "motivos": ["R02"]},
   "03-precio-distinto.eml": {"salida": "revision", "motivos": ["R11"]}
 }

@@ -37,7 +37,7 @@ Los documentos se numeran por orden de lectura, no por fase (p. ej., la fase 2, 
 | 6 | Adopción y gobierno | Guía, formación, permisos, AI Act | Sonnet |
 | 7 | Portfolio | README, página del caso, vídeo de 3 min | Sonnet |
 
-**Orden de construcción:** empieza con un corte vertical mínimo, de punta a punta y con datos pequeños y limpios. Cuando el flujo funcione, se generan el catálogo completo de errores y el conjunto de evaluación ([05](05-synthetic-data-and-evaluation-set.md)), y se completan los incrementos:
+**Orden de construcción:** empieza con un corte vertical mínimo, de punta a punta y con datos pequeños y limpios (hecho el 19-11-2026). Después: extracción completa, app de revisión mínima y los datos y la evaluación en versión reducida ([05](05-synthetic-data-and-evaluation-set.md)). Los incrementos del plan original quedan así repartidos:
 
 1. Supabase y la carga de datos maestros, con el histórico de pedidos.
 2. n8n: de Gmail a la extracción con IA en JSON. Empieza por la prueba de lectura del `.eml` ([04, sección 12](04-solution-design.md#12-notas-para-la-construcción)).

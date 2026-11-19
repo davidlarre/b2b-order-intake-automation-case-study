@@ -15,3 +15,6 @@ __pycache__/
 
 # Notas locales no publicables
 .local/
+
+# Dependencias de Node (módulo del extractor)
+node_modules/

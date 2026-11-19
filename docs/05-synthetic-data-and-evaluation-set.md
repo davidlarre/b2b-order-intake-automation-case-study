@@ -4,6 +4,8 @@ Fase 3 del [plan](00-project-plan.md). Resume lo decidido sobre los datos de la 
 
 **Orden de trabajo.** La fase 4 empieza con un corte vertical mínimo y datos pequeños y limpios. El catálogo completo de errores y el conjunto de evaluación se generan cuando el flujo funcione. Consecuencia declarada: la prueba se congela después de construir el corte vertical, no antes de empezar a construir; el registro de cambios (sección 8) es lo que protege su integridad.
 
+Tras el corte vertical (19-11-2026), el orden es: extracción completa (prompt y esquema versionados, Excel, extractor determinista e interruptores), app de revisión mínima y, después, los datos y la evaluación en versión reducida (sección 9). **La prueba se genera después de construir esos incrementos, y no la contamina:** los 60 casos, su mezcla y sus trampas se diseñaron en la fase 3 desde la especificación de 04, antes de escribir código. Al generarlos se respeta ese diseño, y el manifiesto deja constancia de la fecha de generación y de la versión del sistema en ese momento.
+
 ## 1. Método y oráculo
 
 - Un script de Python con semilla fija y un plan de errores explícito genera los ficheros de la Parte A y el informe esperado (oráculo).
@@ -43,6 +45,7 @@ Fase 3 del [plan](00-project-plan.md). Resume lo decidido sobre los datos de la 
 - 60 de prueba y 20 de desarrollo, con la mezcla de D23. Correos de prueba entre el 02-11 y el 20-11-2026, más 2–3 en enero de 2027 para la tarifa que caduca a los 90 días.
 - Se combinan trampas en el mismo correo cuando es natural, nunca con motivos que cortan el flujo. Las de menos prioridad pasan a desarrollo.
 - Atributos de cabecera superpuestos: `dmarc=none` en un tercio, remitente con gmail y "URGENTE".
+- Las etiquetas describen lo correcto según la especificación, no lo que puede hacer cada configuración. En "solo reglas", un pedido con una línea por equivalencia sale en automático con una línea de menos: cuenta como pedido automático con error, y en el informe (06) se lee como lo que se pierde sin IA, no como un fallo a corregir ([04, sección 7](04-solution-design.md#7-cómo-se-evalúa-este-diseño)).
 - Cuatro tipos de trampa solo en la prueba: dominio parecido, numeración cíclica, instrucciones en el cuerpo y reclamación con pedido.
 - Una respuesta del cliente es un caso con varios `.eml`. Una respuesta automática de fuera de oficina va en el hilo de una petición pendiente y se espera que se ignore. En total, 66 `.eml`.
 
@@ -72,6 +75,7 @@ Fase 3 del [plan](00-project-plan.md). Resume lo decidido sobre los datos de la 
 - Se congela con un manifiesto SHA-256 y un tag de git (`prueba-v1`). El script de evaluación comprueba el hash.
 - Etiquetas: antes de ejecutar la prueba, solo cambian si cambia la especificación. Después, las correcciones van a una fe de erratas, y las métricas se publican con las dos versiones de las etiquetas y la dirección de cada corrección.
 - "Una sola vez" son las 7 pasadas. Una pasada solo se repite por un fallo de infraestructura, y se declara.
+- **Recorte declarado (19-11-2026):** la evaluación se hace en versión reducida: **una pasada por configuración** (3 en lugar de 7), **sin segunda lectura de etiquetas y sin lote a ciegas** de la Parte A. Se pierde la medida de la variación entre ejecuciones de la IA (D25), el control de ambigüedad de la guía de etiquetado y la prueba de generalización de la migración.
 
 ## 9. Resultados guardados (D34)
 
@@ -87,3 +91,4 @@ Fase 3 del [plan](00-project-plan.md). Resume lo decidido sobre los datos de la 
 - 20 casos de desarrollo son pocos para ajustar.
 - La migración no lee el formato con significado (colores, tachados).
 - La evaluación usa Gemini Flash-Lite por la cuota gratuita ([ADR 0005](decisions/0005-modelo-de-ia.md)).
+- Evaluación reducida (sección 8): una pasada por configuración, sin segunda lectura ni lote a ciegas.
