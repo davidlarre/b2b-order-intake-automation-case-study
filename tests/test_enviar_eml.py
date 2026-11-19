@@ -2,7 +2,7 @@
 
 from collections import Counter
 
-from enviar_eml import comparar, con_configuracion, evaluar
+from enviar_eml import comparar, con_configuracion, con_fecha_de_hoy, evaluar, fecha
 
 ESPERADO = {"salida": "automatico", "motivos": [], "lineas": [["TOR-M8X30-ZN", 1000], ["TUE-M8-ZN", 1000]]}
 
@@ -75,3 +75,15 @@ def test_06_hibrido_en_revision_por_r12_es_aceptable():
 def test_una_revision_que_no_esta_entre_las_aceptables_es_fallo():
     r = {"salida": "revision", "motivos": [{"codigo": "R11"}], "pedido": None}
     assert evaluar(r, CASO_06, pedido_con())[0] == "FALLO"
+
+
+def test_con_fecha_de_hoy_cambia_el_dia_y_conserva_la_hora():
+    from datetime import datetime
+    from zoneinfo import ZoneInfo
+
+    eml = b"From: a@b.example\r\nDate: Tue, 10 Nov 2026 08:05:00 +0100\r\nSubject: x\r\n\r\nDate: en el cuerpo no se toca\r\n"
+    nuevo = con_fecha_de_hoy(eml)
+    d = fecha(nuevo)
+    assert d.date() == datetime.now(ZoneInfo("Europe/Madrid")).date()
+    assert (d.hour, d.minute, d.utcoffset().total_seconds()) == (8, 5, 3600)
+    assert nuevo.endswith(b"Date: en el cuerpo no se toca\r\n")

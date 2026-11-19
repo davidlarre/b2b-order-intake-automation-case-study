@@ -32,7 +32,7 @@
     },
     {
       "parameters": {
-        "jsCode": "// La configuración llega como parámetro de la URL: ?configuracion=solo_reglas|solo_ia|hibrido.\n// Sin parámetro, híbrido (la de producción). Un valor desconocido para el flujo aquí, antes de crear el caso.\nconst CONFIGURACIONES = ['solo_reglas', 'solo_ia', 'hibrido'];\nconst configuracion = $('Webhook').first().json.query?.configuracion ?? 'hibrido';\nif (!CONFIGURACIONES.includes(configuracion)) {\n  throw new Error(`Configuración desconocida: ${configuracion}`);\n}\n\nconst { simpleParser } = require('mailparser');\nconst { preprocesarAdjuntos } = require('orvalle-extractor');\n\n// El .eml llega del Webhook como binario en la propiedad \"data\".\nconst buffer = await this.helpers.getBinaryDataBuffer(0, 'data');\nconst correo = await simpleParser(buffer);\n\n// Excel a texto, imágenes ignoradas y el resto \"no soportado\" (04, sección 6.2).\nconst adjuntos = await preprocesarAdjuntos(correo.attachments);\n\nconst autenticacion = correo.headers.get('authentication-results');\n\nreturn [{\n  json: {\n    message_id: correo.messageId ?? null,\n    remitente: correo.from?.value?.[0]?.address?.toLowerCase() ?? null,\n    asunto: correo.subject ?? null,\n    autenticacion: Array.isArray(autenticacion) ? autenticacion.join('; ') : (autenticacion ?? null),\n    hora_recepcion: correo.date ? correo.date.toISOString() : null,\n    configuracion,\n    // El cuerpo solo, sin los Excel: el extractor determinista lee los Excel por sus filas, no por su texto.\n    cuerpo: correo.text ?? '',\n    // Lo que lee la IA: el cuerpo y, si hay Excel, su texto.\n    texto: [correo.text ?? '', adjuntos.texto].filter(t => t.trim() !== '').join('\\n\\n'),\n    // Las filas de cada Excel, para el extractor determinista.\n    excels: adjuntos.excels,\n    // Los adjuntos que no se pueden leer: si hay alguno, el caso irá a M02.\n    no_soportados: adjuntos.noSoportados,\n    adjuntos_ignorados: adjuntos.ignorados,\n  },\n}];"
+        "jsCode": "const CONFIGURACIONES = ['solo_reglas', 'solo_ia', 'hibrido'];\nconst configuracion = $('Webhook').first().json.query?.configuracion ?? 'hibrido';\nif (!CONFIGURACIONES.includes(configuracion)) {\n  throw new Error(`Configuración desconocida: ${configuracion}`);\n}\n\nconst crypto = require('crypto');\nconst { simpleParser } = require('mailparser');\nconst { preprocesarAdjuntos } = require('orvalle-extractor');\n\nconst buffer = await this.helpers.getBinaryDataBuffer(0, 'data');\nconst correo = await simpleParser(buffer);\nconst adjuntos = await preprocesarAdjuntos(correo.attachments);\nconst autenticacion = correo.headers.get('authentication-results');\n\n// Ruta del .eml en Storage: fecha del correo + huella del Message-ID (nada personal en el nombre).\nconst fecha = correo.date ? correo.date.toISOString().slice(0, 10) : 'sin-fecha';\nconst huella = crypto.createHash('sha256').update(correo.messageId ?? buffer).digest('hex');\n\nreturn [{\n  json: {\n    message_id: correo.messageId ?? null,\n    remitente: correo.from?.value?.[0]?.address?.toLowerCase() ?? null,\n    asunto: correo.subject ?? null,\n    autenticacion: Array.isArray(autenticacion) ? autenticacion.join('; ') : (autenticacion ?? null),\n    hora_recepcion: correo.date ? correo.date.toISOString() : null,\n    configuracion,\n    cuerpo: correo.text ?? '',\n    texto: [correo.text ?? '', adjuntos.texto].filter(t => t.trim() !== '').join('\\n\\n'),\n    excels: adjuntos.excels,\n    no_soportados: adjuntos.noSoportados,\n    adjuntos_ignorados: adjuntos.ignorados,\n    ruta_eml: `${fecha}/${huella}.eml`,\n    remitente_nombre: correo.from?.value?.[0]?.name || null,\n    adjuntos: (correo.attachments ?? []).map(a => ({ nombre: a.filename ?? null, tipo: a.contentType ?? null, tamano: a.size ?? null })),\n  },\n  binary: { data: $input.first().binary.data },\n}];"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -46,7 +46,7 @@
     {
       "parameters": {
         "method": "POST",
-        "url": "http://host.docker.internal:54321/rest/v1/rpc/recibir_correo",
+        "url": "=http://host.docker.internal:54321/rest/v1/rpc/recibir_correo",
         "authentication": "genericCredentialType",
         "genericAuthType": "httpHeaderAuth",
         "sendHeaders": true,
@@ -60,13 +60,13 @@
         },
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{ {\n  message_id: $json.message_id,\n  remitente: $json.remitente,\n  asunto: $json.asunto,\n  autenticacion: $json.autenticacion,\n  hora_recepcion: $json.hora_recepcion,\n  origen: 'pruebas'\n} }}",
+        "jsonBody": "={{ JSON.stringify({\n  message_id: $('Leer .eml').item.json.message_id,\n  remitente: $('Leer .eml').item.json.remitente,\n  asunto: $('Leer .eml').item.json.asunto,\n  autenticacion: $('Leer .eml').item.json.autenticacion,\n  hora_recepcion: $('Leer .eml').item.json.hora_recepcion,\n  origen: 'pruebas',\n  ruta_eml: $json.Key ? $('Leer .eml').item.json.ruta_eml : null,\n  remitente_nombre: $('Leer .eml').item.json.remitente_nombre,\n  adjuntos: $('Leer .eml').item.json.adjuntos\n}) }}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.5,
       "position": [
-        320,
+        544,
         0
       ],
       "id": "5129f0f4-deab-4b69-912d-2d10e2294990",
@@ -106,7 +106,7 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.4,
       "position": [
-        480,
+        704,
         0
       ],
       "id": "3a07768b-2f7e-4417-a5b3-cf52ff2fd0d7",
@@ -137,7 +137,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.5,
       "position": [
-        1616,
+        1840,
         -496
       ],
       "id": "643308ea-1a93-4cd7-b99b-2c3273e2f5ab",
@@ -158,7 +158,7 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1824,
+        2048,
         -336
       ],
       "id": "4bb48d33-1661-4029-9f05-a2e7cf5eb755",
@@ -187,7 +187,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.5,
       "position": [
-        2000,
+        2224,
         -336
       ],
       "id": "971bdefe-09da-4b08-b69e-6025fa145c4e",
@@ -206,7 +206,7 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.5,
       "position": [
-        2176,
+        2400,
         -144
       ],
       "id": "7fd5530f-b8b8-4f5f-8b8d-75feda45eb10",
@@ -219,7 +219,7 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.5,
       "position": [
-        640,
+        864,
         192
       ],
       "id": "766523c0-cf45-43eb-93cb-36390900d736",
@@ -248,7 +248,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.5,
       "position": [
-        1440,
+        1664,
         -496
       ],
       "id": "75b10eac-1eee-48c5-b6fe-eae2b1a1c43e",
@@ -287,7 +287,7 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.4,
       "position": [
-        640,
+        864,
         -160
       ],
       "id": "74e689ee-1818-4e5d-928e-d7a1e6d83b0a",
@@ -316,7 +316,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.5,
       "position": [
-        1184,
+        1408,
         -144
       ],
       "id": "5a365958-2b9d-48ac-b935-f93dd241eabd",
@@ -351,7 +351,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.5,
       "position": [
-        832,
+        1056,
         -352
       ],
       "id": "e8a158a3-66e0-4f56-85e4-d9f37768b3ee",
@@ -370,7 +370,7 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1008,
+        1232,
         -352
       ],
       "id": "f8df462f-8b22-410a-9ab9-579c17af77ff",
@@ -403,11 +403,51 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.4,
       "position": [
-        1184,
+        1408,
         -352
       ],
       "id": "6ba6524b-6cf6-44cd-aa3c-ef6e2c7d9088",
       "name": "¿Usa IA?"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=http://host.docker.internal:54321/storage/v1/object/correos/{{ $json.ruta_eml }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "message/rfc822"
+            },
+            {
+              "name": "x-upsert",
+              "value": "true"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "binaryData",
+        "inputDataFieldName": "data",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.5,
+      "position": [
+        384,
+        0
+      ],
+      "id": "a780e180-003a-4a2b-9318-42943f861aad",
+      "name": "Guardar correo original",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "pPeI6Dvh8SeDo88k",
+          "name": "Supabase local · automatización"
+        }
+      },
+      "onError": "continueRegularOutput"
     }
   ],
   "connections": {
@@ -426,7 +466,7 @@
       "main": [
         [
           {
-            "node": "Registrar correo",
+            "node": "Guardar correo original",
             "type": "main",
             "index": 0
           }
@@ -569,6 +609,17 @@
         [
           {
             "node": "Preparar extracción",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Guardar correo original": {
+      "main": [
+        [
+          {
+            "node": "Registrar correo",
             "type": "main",
             "index": 0
           }

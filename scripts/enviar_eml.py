@@ -13,6 +13,7 @@ Uso:
   ACEPTABLE, que cuenta como revisión innecesaria y no como fallo.
 - --nuevos añade un sufijo al Message-ID para que n8n los trate como correos nuevos
   (sin él, un segundo envío devuelve "duplicado").
+- --hoy cambia la fecha de cada correo a hoy, con la misma hora (para la demo: una cola de hoy).
 """
 
 import argparse
@@ -43,6 +44,18 @@ def fecha(eml: bytes):
 def con_message_id_nuevo(eml: bytes, sufijo: str) -> bytes:
     cabeceras, separador, cuerpo = eml.partition(b"\r\n\r\n")
     cabeceras = re.sub(rb"(?im)^(Message-ID:\s*<)([^@>]+)@", rb"\g<1>\g<2>." + sufijo.encode() + rb"@", cabeceras, count=1)
+    return cabeceras + separador + cuerpo
+
+
+def con_fecha_de_hoy(eml: bytes) -> bytes:
+    from datetime import datetime
+    from zoneinfo import ZoneInfo
+
+    original = fecha(eml)
+    hoy = datetime.now(ZoneInfo("Europe/Madrid")).date()
+    nueva = email.utils.format_datetime(original.replace(year=hoy.year, month=hoy.month, day=hoy.day))
+    cabeceras, separador, cuerpo = eml.partition(b"\r\n\r\n")
+    cabeceras = re.sub(rb"(?im)^Date:[^\r\n]*", b"Date: " + nueva.encode(), cabeceras, count=1)
     return cabeceras + separador + cuerpo
 
 
@@ -124,6 +137,7 @@ def main():
     parser.add_argument("--url", default=URL_POR_DEFECTO)
     parser.add_argument("--configuracion", choices=CONFIGURACIONES, help="por defecto, la de n8n (hibrido)")
     parser.add_argument("--nuevos", action="store_true", help="Message-ID nuevo en cada envío")
+    parser.add_argument("--hoy", action="store_true", help="fecha de hoy, con la misma hora")
     args = parser.parse_args()
 
     token = leer_env().get("PRUEBAS_WEBHOOK_TOKEN")
@@ -148,6 +162,8 @@ def main():
         eml = ruta.read_bytes()
         if args.nuevos:
             eml = con_message_id_nuevo(eml, sufijo)
+        if args.hoy:
+            eml = con_fecha_de_hoy(eml)
         try:
             resultado = enviar(url, token, eml)
         except urllib.error.HTTPError as e:
@@ -171,7 +187,7 @@ def main():
             if estado == "OK":
                 linea += "  OK"
             elif estado == "ACEPTABLE":
-                linea += f"  ACEPTABLE (revisión no necesaria; esperado {e['salida']})"
+                linea += f"  ACEPTABLE (salida segura; esperado {e['salida']})"
             else:
                 linea += "  FALLO: " + "; ".join(diferencias)
         print(linea)
