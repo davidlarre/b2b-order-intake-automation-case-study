@@ -556,7 +556,7 @@ La evaluación mide lo que funciona por construcción, no porque un test comprue
 - **Base de datos limpia en cada pasada** (`supabase db reset` y datos de arranque). Si no, en la segunda pasada R07 marcaría todo como duplicado de la primera.
 - **En orden.** Los `.eml` se envían por orden de su cabecera `Date`, porque los duplicados plantados dependen del orden.
 - **Hora de referencia:** la de recepción del correo, nunca la hora actual (sección 3.2).
-- **Pasadas:** una con "solo reglas", que es determinista, y tres con cada configuración con IA (D25): 7 pasadas de 60 correos, 420 ejecuciones.
+- **Pasadas:** una con "solo reglas", que es determinista, y tres con cada configuración con IA (D25): 7 pasadas de 60 correos, 420 ejecuciones. **Recorte declarado en [05](05-synthetic-data-and-evaluation-set.md):** una pasada por configuración, 3 pasadas y 180 ejecuciones.
 - **Cuota gratuita:** las 6 pasadas con IA hacen unas 360 clasificaciones y unas 300 extracciones y respuestas. Con los límites que dan fuentes secundarias (~500 peticiones al día por modelo Flash-Lite y 5–10 por minuto; Google no los publica, [ADR 0005](decisions/0005-modelo-de-ia.md)), caben en **un día** porque la clasificación y la extracción usan modelos distintos, cada uno con su cuota. Cada pasada dura al menos unos 15 min por el límite por minuto. Si la cuota real es menor, la evaluación se reparte en varios días, por pasadas completas, y se declara. Las ejecuciones de desarrollo gastan la misma cuota.
 - **Integridad:** el script comprueba el hash del conjunto de prueba congelado antes de ejecutarlo ([05](05-synthetic-data-and-evaluation-set.md)).
 - **Elección del modelo:** solo con el conjunto de desarrollo. La prueba se ejecuta con el modelo ya elegido (D23).
