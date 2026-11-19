@@ -1,0 +1,17 @@
+From: Marc Serra <nuevo@talleresferran.example>
+To: pedidos@orvalle.example
+Subject: Pedido tornillería
+Date: Tue, 10 Nov 2026 08:40:00 +0100
+Message-ID: <cv-02@talleresferran.example>
+Authentication-Results: mx.orvalle.example; spf=pass smtp.mailfrom=talleresferran.example; dkim=pass header.d=talleresferran.example; dmarc=pass header.from=talleresferran.example
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 8bit
+
+Hola, soy Marc, el nuevo encargado del taller.
+Necesitamos:
+
+TOR-M10X40-ZN  300 uds
+TUE-M10-ZN  300 uds
+
+Marc

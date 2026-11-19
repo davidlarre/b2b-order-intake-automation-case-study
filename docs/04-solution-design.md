@@ -742,6 +742,7 @@ SN08 sigue siendo un supuesto declarado.
 | Sin precios por tramos de cantidad: una tarifa con condición queda pendiente | [05](05-synthetic-data-and-evaluation-set.md) |
 | Una respuesta automática sin cabeceras estándar se trata como respuesta del cliente y acaba en revisión | 2.2 |
 | R07 por número sin límite de tiempo manda a revisión un pedido nuevo de un cliente que reinicia su numeración | 3.2, [05](05-synthetic-data-and-evaluation-set.md) |
+| Entorno local: en la imagen de Supabase 17.6.1.106, ejecutar una función sin permiso con un rol reservado (`anon`, `service_role`) tumba Postgres en lugar de dar "permission denied" ([supabase/postgres#2124](https://github.com/supabase/postgres/issues/2124), atribuido a `supautils`). La API solo expone funciones con permiso, así que no se da en el uso normal. Reproducción en `tests/test_entorno_supautils.py`; se revisa en la fase 7 | 5.2 |
 | La IA puede clasificar mal una instrucción condicional sin dudar | 4.1 |
 | Los factores de R14 y el número mínimo de pedidos son supuestos | 3.2 |
 | Pedidos en PDF y correos con varios pedidos van a revisión | D08, D16 |
@@ -765,6 +766,10 @@ Comprobaciones que el diseño da por posibles pero que hay que confirmar al cons
 | El esquema de extracción cabe en el subconjunto de JSON Schema de Gemini sin dar `400` | Incremento de n8n | Aplanar el esquema; lo que Gemini no aplica lo valida `pg_jsonschema` |
 | Cuota real del nivel gratuito por modelo, en la página de AI Studio | Incremento de n8n | Repartir la evaluación en varios días (sección 7) |
 | Cabeceras de respuesta automática que usan los clientes de correo habituales (sección 2.2) | Incremento de respuestas | Solo `Auto-Submitted` |
+| **Pendiente del corte vertical:** el prompt y el esquema de extracción van provisionalmente dentro del nodo de n8n. Pasan a `extraction/` y a `intake.prompt_versiones` ([ADR 0002](decisions/0002-prompt-y-esquema-fuente-unica.md)) | Incremento siguiente al corte vertical, antes de evaluar nada | — |
+| En n8n 2.x el nodo Code corre en un task runner aparte: `mailparser` se instala en la imagen del runner (`n8n/runners/`), no en la de n8n | Corte vertical | La alternativa ya prevista: convertir el `.eml` fuera de n8n |
+
+**Comprobado el 19-11-2026:** `mailparser` carga en el runner y el nodo "Leer .eml" saca remitente, Message-ID, asunto, autenticación, fecha y texto de un `.eml` recibido por la entrada de pruebas. Se cumple la primera condición del plan B ([ADR 0003](decisions/0003-n8n-orquestador-plan-b.md)). La segunda (5 correos de desarrollo, texto y Excel, de la entrada de pruebas a `evaluar_caso`, con su extracción y su versión guardadas) se cumple para el texto al acabar el corte vertical: 5 correos con su extracción y su versión, con salida automática, revisión por R02 y revisión por R11, uno de ellos en catalán. **Falta el Excel**, que llega con su incremento; el plan B queda descartado cuando pase el primero.
 | Roles de usuario de Supabase para las comprobaciones de las funciones (sección 5.2) | Incremento de Supabase | — |
 
 **Criterio del plan B** ([ADR 0003](decisions/0003-n8n-orquestador-plan-b.md)): al acabar la segunda sesión del incremento de n8n, se activa si el `.eml` no está resuelto (con `mailparser` o con su alternativa) o si 5 correos de desarrollo no llegan de la entrada de pruebas a `evaluar_caso` con su extracción y su versión guardadas.

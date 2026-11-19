@@ -1,0 +1,2 @@
+# Los correos se guardan byte a byte: sin conversión de saltos de línea (CRLF, como en SMTP).
+*.eml -text

@@ -1,0 +1,5 @@
+{
+  "01-automatico.eml": {"salida": "automatico", "motivos": []},
+  "02-remitente-desconocido.eml": {"salida": "revision", "motivos": ["R02"]},
+  "03-precio-distinto.eml": {"salida": "revision", "motivos": ["R11"]}
+}
