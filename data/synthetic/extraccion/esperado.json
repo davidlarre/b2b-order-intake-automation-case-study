@@ -1,13 +1,58 @@
 {
   "04-excel-xlsx.eml": {
-    "salida": "automatico", "motivos": [],
-    "lineas": [["GUA-NIT-L", 5], ["GAF-PROT-INC", 10]]
+    "salida": "automatico",
+    "motivos": [],
+    "lineas": [
+      [
+        "GUA-NIT-L",
+        5
+      ],
+      [
+        "GAF-PROT-INC",
+        10
+      ]
+    ]
   },
-  "05-excel-xls.eml": {"salida": "revision", "motivos": ["M02"]},
+  "05-excel-xls.eml": {
+    "salida": "revision",
+    "motivos": [
+      "M02"
+    ]
+  },
   "06-discrepancia.eml": {
     "nota": "El cliente corrige la cantidad en la misma línea: el pedido correcto es TUE-M8-ZN x1200. Una lectura que se quede con 1000 crea un pedido equivocado. En el híbrido, las dos lecturas no coinciden y R12 lo manda a revisión (CA-16): es segura, pero no hacía falta si la IA leyó bien.",
-    "salida": "automatico", "motivos": [],
-    "lineas": [["TOR-M8X30-ZN", 1000], ["TUE-M8-ZN", 1200]],
-    "aceptables": [{"salida": "revision", "motivos": ["R12"]}]
+    "salida": "automatico",
+    "motivos": [],
+    "lineas": [
+      [
+        "TOR-M8X30-ZN",
+        1000
+      ],
+      [
+        "TUE-M8-ZN",
+        1200
+      ]
+    ],
+    "aceptables": [
+      {
+        "salida": "revision",
+        "motivos": [
+          "R12"
+        ]
+      }
+    ]
+  },
+  "07-adjunto-sin-adjunto.eml": {
+    "nota": "Trampa obligatoria de D23: dice que adjunta el pedido y no adjunta nada. Lo correcto según D22 es pedir datos. Mientras no haya clasificación, el sistema lo manda a revisión con M01: es seguro, pero no es la salida definitiva.",
+    "salida": "pedir_datos",
+    "motivos": [],
+    "aceptables": [
+      {
+        "salida": "revision",
+        "motivos": [
+          "M01"
+        ]
+      }
+    ]
   }
 }

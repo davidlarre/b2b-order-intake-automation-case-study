@@ -64,10 +64,32 @@ def test_solo_reglas_no_llama_a_la_ia_y_guarda_la_version_del_determinista(autom
     assert automatizacion.fetchall() == [("determinista", "0.1.0", "solo_reglas")]
 
 
-def test_solo_reglas_sin_lineas_va_a_revision_con_m01(automatizacion, prompt_hash):
-    caso, r = registrar(automatizacion, prompt_hash, "solo_reglas", det=[])
-    assert r["salida"] == "revision" and r["motivos"][0]["codigo"] == "M01"
-    assert motivos(automatizacion, caso) == [("M01", None, {"tipo": "sin_lineas_determinista"})]
+# ---------------------------------------------------------------- sin líneas (prompt v2)
+# Sin ninguna línea, en las tres configuraciones: revisión con M01 mientras no haya clasificación
+# (eval/registro-de-cambios.md). Antes, minItems: 1 obligaba a la IA a inventarse una línea.
+
+@pytest.mark.parametrize("configuracion, ia, det", [
+    ("solo_reglas", None, []),
+    ("solo_ia", [], None),
+    ("hibrido", [], []),
+])
+def test_sin_lineas_va_a_revision_con_m01(automatizacion, prompt_hash, configuracion, ia, det):
+    caso, r = registrar(automatizacion, prompt_hash, configuracion, ia=ia, det=det)
+    assert r["salida"] == "revision" and r["pedido"] is None
+    assert motivos(automatizacion, caso) == [("M01", None, {"tipo": "sin_lineas", "configuracion": configuracion})]
+
+
+def test_hibrido_sin_lineas_de_la_ia_pero_con_lineas_del_determinista_es_omision(automatizacion, prompt_hash):
+    # No es "sin líneas": la IA se ha saltado una línea legible (R12).
+    caso, r = registrar(automatizacion, prompt_hash, "hibrido", ia=[], det=[linea("TUE-M8-ZN", 1000)])
+    assert r["salida"] == "revision"
+    assert motivos(automatizacion, caso) == [("R12", 1, {"tipo": "omision_ia", "referencia": "TUE-M8-ZN", "cantidad": 1000})]
+
+
+def test_el_esquema_v2_admite_una_lista_de_lineas_vacia(cur, prompt_hash):
+    cur.execute("select extensions.jsonb_matches_schema(esquema::json, '{\"num_pedido_cliente\": null, \"lineas\": []}')"
+                " from intake.prompt_versiones where hash = %s", (prompt_hash,))
+    assert cur.fetchone()[0] is True
 
 
 def test_solo_reglas_con_una_linea_de_menos_sale_automatico(automatizacion, prompt_hash):
