@@ -45,6 +45,7 @@ Tras el corte vertical (19-11-2026), el orden es: extracción completa (prompt y
 - 60 de prueba y 20 de desarrollo, con la mezcla de D23. Correos de prueba entre el 02-11 y el 20-11-2026, más 2–3 en enero de 2027 para la tarifa que caduca a los 90 días.
 - Se combinan trampas en el mismo correo cuando es natural, nunca con motivos que cortan el flujo. Las de menos prioridad pasan a desarrollo.
 - Atributos de cabecera superpuestos: `dmarc=none` en un tercio, remitente con gmail y "URGENTE".
+- Las etiquetas describen lo correcto según la especificación, no lo que puede hacer cada configuración. En "solo reglas", un pedido con una línea por equivalencia sale en automático con una línea de menos: cuenta como pedido automático con error, y en el informe (06) se lee como lo que se pierde sin IA, no como un fallo a corregir ([04, sección 7](04-solution-design.md#7-cómo-se-evalúa-este-diseño)).
 - Cuatro tipos de trampa solo en la prueba: dominio parecido, numeración cíclica, instrucciones en el cuerpo y reclamación con pedido.
 - Una respuesta del cliente es un caso con varios `.eml`. Una respuesta automática de fuera de oficina va en el hilo de una petición pendiente y se espera que se ignore. En total, 66 `.eml`.
 

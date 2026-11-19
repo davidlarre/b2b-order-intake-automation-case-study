@@ -105,7 +105,7 @@ def test_api_expone_solo_sus_funciones_y_solo_a_la_automatizacion(cur):
     cur.execute("select p.oid::regprocedure::text from pg_proc p join pg_namespace n on n.oid = p.pronamespace"
                 " where n.nspname = 'api' order by 1")
     funciones = [f for (f,) in cur.fetchall()]
-    assert [f.split("(")[0] for f in funciones] == ["api.enviar_a_revision", "api.prompt_activo", "api.recibir_correo", "api.registrar_extraccion"]
+    assert [f.split("(")[0] for f in funciones] == ["api.codigos_producto", "api.enviar_a_revision", "api.prompt_activo", "api.recibir_correo", "api.registrar_extraccion"]
     for rol, esperado in (("service_role", True), ("anon", False), ("authenticated", False)):
         cur.execute("select has_schema_privilege(%s, 'api', 'usage')", (rol,))
         assert cur.fetchone()[0] is esperado
