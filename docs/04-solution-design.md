@@ -317,6 +317,13 @@ La confirmación muestra siempre la unidad y su equivalencia, y sirve de control
 - línea presente literalmente en la entrada;
 - en la configuración híbrida, **el extractor determinista y la IA coinciden** en referencia y cantidad cuando los dos leen la línea.
 
+Implementada (19-11-2026) la última señal, con dos tipos en el detalle del motivo, para saber en la evaluación quién falla:
+
+- **`discrepancia`:** los dos leen la línea (emparejada por referencia normalizada o, si no, por el mismo texto) y no coinciden en la cantidad o en la referencia.
+- **`omision_ia`:** el determinista lee una línea (código del catálogo y cantidad entera limpia) que la IA no leyó. **Cambio respecto a lo diseñado**, en la dirección segura: si no fuera motivo, el pedido saldría en automático con una línea de menos. La línea se añade al borrador para que ADV la vea.
+- Las líneas que solo lee la IA (equivalencias, descripciones) no son motivo: el determinista no puede leerlas.
+- Fuera del híbrido, R12 no se aplica. Las demás señales de R12 (código exacto o equivalencia, línea presente literalmente) quedan para el incremento de reglas.
+
 **R13 · Importe**
 
 - Base imponible, sin IVA.
@@ -535,7 +542,7 @@ Las tres configuraciones de la evaluación (D25) son dos interruptores sobre las
 
 | Configuración | Extractor determinista | IA |
 |---|---|---|
-| Solo reglas | Encendido | Apagada: si el extractor encuentra al menos una línea, el correo se trata como pedido nuevo; si no, va a revisión |
+| Solo reglas | Encendido | Apagada: si el extractor encuentra al menos una línea, el correo se trata como pedido nuevo; si no, va a revisión con M01 ("el extractor determinista no encontró líneas") |
 | Solo IA | Apagado | Encendida |
 | Híbrido | Encendido | Encendida siempre. Si los dos extractores no coinciden en referencia o cantidad de una línea, va a revisión (R12) |
 
@@ -747,6 +754,7 @@ SN08 sigue siendo un supuesto declarado.
 | La IA puede clasificar mal una instrucción condicional sin dudar | 4.1 |
 | Los factores de R14 y el número mínimo de pedidos son supuestos | 3.2 |
 | Pedidos en PDF y correos con varios pedidos van a revisión | D08, D16 |
+| El extractor determinista puede leer de más: un código del catálogo con su cantidad que no es parte del pedido, por ejemplo el pedido anterior citado en un reenvío sin `>`. En el híbrido sale como `omision_ia` (revisión, lado seguro); en "solo reglas" entraría en el pedido. La evaluación cuenta cuántas omisiones son reales y cuántas son lecturas de más | 3.2, 6.3 |
 | El extractor determinista solo acepta cantidades enteras y limpias, y en el texto solo códigos que existen en el catálogo. Si se añadieran productos fraccionables (por metros o litros), sus líneas quedarían siempre para la IA: en "solo reglas" no se leerían, y en el híbrido no habría segunda lectura con la que compararlas (R12) | 6.3 |
 | Solo se lee Excel `.xlsx` (con `read-excel-file`). Un adjunto `.xls` (formato antiguo), `.csv`, `.ods` o cualquier otro que no sea imagen va a revisión con M02, como el PDF. Las imágenes (logos y firmas) se ignoran. Del Excel solo se lee la primera hoja, y el formato con significado (colores, tachados) no se ve | 6.2 |
 | Con el plan B se pierde "send and wait": ADV vuelve a perseguir al comercial | [ADR 0003](decisions/0003-n8n-orquestador-plan-b.md) |

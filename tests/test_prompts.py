@@ -79,7 +79,8 @@ LINEA = {"texto": "TOR-M8X30-ZN 500 uds", "referencia": "TOR-M8X30-ZN", "cantida
 def test_la_extraccion_queda_enlazada_a_su_version(cur, prompt_hash):
     cur.execute("set local role service_role")
     caso = _caso(cur)
-    cur.execute("select api.registrar_extraccion(%s, %s, %s, 'gemini-3.5-flash-lite', 'solo_ia')",
+    cur.execute("select api.registrar_extraccion(caso => %s, configuracion => 'solo_ia', extraccion_ia => %s,"
+                " prompt_hash => %s, modelo => 'gemini-3.5-flash-lite')",
                 (caso, Jsonb({"num_pedido_cliente": None, "lineas": [LINEA]}), prompt_hash))
     cur.execute("reset role")
     cur.execute("select v.hash, x.version from intake.extracciones x"
@@ -92,7 +93,8 @@ def test_un_hash_desconocido_se_rechaza(cur, prompt_hash):
     cur.execute("set local role service_role")
     caso = _caso(cur)
     with pytest.raises(psycopg.errors.RaiseException, match="No existe ninguna versión"):
-        cur.execute("select api.registrar_extraccion(%s, %s, %s, 'm', 'solo_ia')",
+        cur.execute("select api.registrar_extraccion(caso => %s, configuracion => 'solo_ia', extraccion_ia => %s,"
+                    " prompt_hash => %s, modelo => 'm')",
                     (caso, Jsonb({"num_pedido_cliente": None, "lineas": [LINEA]}), "0" * 64))
 
 
@@ -105,4 +107,5 @@ def test_pg_jsonschema_rechaza_lo_que_no_cumple_el_esquema(cur, prompt_hash, ext
     cur.execute("set local role service_role")
     caso = _caso(cur)
     with pytest.raises(psycopg.errors.RaiseException, match="no cumple el esquema"):
-        cur.execute("select api.registrar_extraccion(%s, %s, %s, 'm', 'solo_ia')", (caso, Jsonb(extraccion), prompt_hash))
+        cur.execute("select api.registrar_extraccion(caso => %s, configuracion => 'solo_ia', extraccion_ia => %s,"
+                    " prompt_hash => %s, modelo => 'm')", (caso, Jsonb(extraccion), prompt_hash))

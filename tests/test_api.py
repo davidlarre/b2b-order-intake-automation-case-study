@@ -29,7 +29,8 @@ def recibir(cur, message_id, remitente="compras@talleresferran.example", autenti
 
 def registrar(cur, caso, lineas, prompt_hash):
     extraccion = Jsonb({"num_pedido_cliente": None, "lineas": lineas}, dumps=json_exacto)
-    cur.execute("select api.registrar_extraccion(%s, %s, %s, 'modelo-prueba', 'solo_ia', 100, 50)",
+    cur.execute("select api.registrar_extraccion(caso => %s, configuracion => 'solo_ia', extraccion_ia => %s,"
+                " prompt_hash => %s, modelo => 'modelo-prueba', tokens_entrada => 100, tokens_salida => 50)",
                 (caso, extraccion, prompt_hash))
     return cur.fetchone()[0]
 
