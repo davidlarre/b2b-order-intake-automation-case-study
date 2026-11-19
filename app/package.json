@@ -1,0 +1,26 @@
+{
+  "name": "orvalle-revision",
+  "private": true,
+  "version": "0.1.0",
+  "description": "App de revisión mínima de ADV: cola, detalle del caso y decisiones. Solo habla con el esquema adv de Supabase.",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@fontsource/atkinson-hyperlegible-next": "5.3.0",
+    "@supabase/supabase-js": "2.119.0",
+    "postal-mime": "4.2.0",
+    "react": "19.1.10",
+    "react-dom": "19.1.10"
+  },
+  "devDependencies": {
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "@vitejs/plugin-react": "6.2.1",
+    "typescript": "7.0.2",
+    "vite": "8.3.5"
+  }
+}

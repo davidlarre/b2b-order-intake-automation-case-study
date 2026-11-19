@@ -423,7 +423,7 @@ Si la IA duda de en qué grupo va una observación, la trata como condición. La
 | n8n · temporizador | Plazos de 24 h, escalados y reintento en caída general | Cada 15 min |
 | Supabase · `erp` | ERP simulado: datos maestros, histórico y pedidos | Supabase local (CLI + Docker) |
 | Supabase · `intake` | Casos, motivos, aprobaciones, envíos, eventos, versiones de prompt y configuración | Supabase local |
-| Supabase · Storage | Correos originales (`.eml`) | Supabase local |
+| Supabase · Storage | Correos originales (`.eml`), en el bucket privado `correos`: los sube n8n al recibirlos; solo los leen los usuarios con rol de ADV (política por `app_metadata`). Si la subida falla, el pedido se procesa igual, sin copia. Les aplica el plazo de conservación de la sección 8 | Supabase local |
 | Gemini API | Clasificación y extracción ([ADR 0005](decisions/0005-modelo-de-ia.md)) | Clave gratuita de Google AI Studio de cada persona |
 | App de revisión | Cola de ADV y decisiones. Solo escribe en Supabase | En local, hecha con Claude Code; sin servicios de pago. Una app publicada en la web no llegaría al Supabase local, y la API de Supabase no se expone por el túnel |
 | Migración (Parte A) | Carga de datos maestros e histórico con informe de errores | Python (D12) |

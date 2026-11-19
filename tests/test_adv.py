@@ -5,6 +5,7 @@ request.jwt.claims. Así se prueba la comprobación del rol tal como ocurrirá d
 """
 
 import json
+from decimal import Decimal
 
 import psycopg
 import pytest
@@ -91,7 +92,7 @@ def test_la_cola_muestra_los_casos_en_revision(cur, prompt_hash):
     caso, _ = caso_en_revision(cur, prompt_hash, remitente="nuevo@talleresferran.example")
     como_adv(cur)
     fila = next(f for f in llamar(cur, "select adv.cola()") if f["caso"] == caso)
-    assert fila["motivos"] == ["R02"] and fila["prioridad"] == 3  # recibido otro día: ya no llega al corte
+    assert [m["codigo"] for m in fila["motivos"]] == ["R02"] and fila["prioridad"] == 3  # recibido otro día
 
 
 def test_el_detalle_dice_que_se_puede_hacer_con_cada_motivo(cur, prompt_hash):
@@ -249,3 +250,109 @@ def test_los_eventos_de_la_app_no_llevan_texto_libre(cur, prompt_hash):
     cur.execute("reset role")
     cur.execute("select carga from intake.eventos where caso = %s and tipo = 'motivo_forzado'", (caso,))
     assert cur.fetchone()[0] == {"codigo": "R02", "linea": None, "razon": "cliente_confirmado"}
+
+
+# ---------------------------------------------------------------- nombres para la gestora
+
+def test_el_detalle_trae_nombres_y_la_vista_previa_con_el_cliente_propuesto(cur, prompt_hash):
+    # R02 paró el caso: sin cliente confirmado, producto y tarifa se adelantan con el que propone el dominio.
+    caso, _ = caso_en_revision(cur, prompt_hash, remitente="nuevo@talleresferran.example")
+    como_adv(cur)
+    d = llamar(cur, "select adv.detalle_caso(%s)", (caso,))
+    assert d["cliente"] is None and d["cliente_propuesto"] == "C0001"
+    assert d["nombres"]["clientes"]["C0001"]["razon_social"] == "Talleres Ferran, S.L."
+    [linea] = d["lineas"]
+    assert (linea["producto"], linea["producto_propuesto"], linea["precio_propuesto"]) == (None, "TOR-M8X30-ZN", Decimal("0.0820"))
+    assert d["nombres"]["productos"]["TOR-M8X30-ZN"].startswith("Tornillo hexagonal")
+
+
+def test_email_compartido_dice_de_que_clientes_es(cur, prompt_hash):
+    cur.execute("insert into erp.contactos (cliente, email) values ('C0002', 'compras@talleresferran.example')")
+    caso, _ = caso_en_revision(cur, prompt_hash)
+    como_adv(cur)
+    d = llamar(cur, "select adv.detalle_caso(%s)", (caso,))
+    assert sorted(d["clientes_del_remitente"]) == ["C0001", "C0002"] and d["cliente_propuesto"] is None
+    assert set(d["nombres"]["clientes"]) == {"C0001", "C0002"}
+
+
+def test_r11_trae_el_nombre_del_comercial(cur, prompt_hash):
+    caso, _ = caso_en_revision(cur, prompt_hash, lineas=[
+        {"texto": "TOR-M8X30-ZN 500 a 0,20", "referencia": "TOR-M8X30-ZN", "cantidad": 500, "unidad": "uds", "precio": 0.20}])
+    como_adv(cur)
+    d = llamar(cur, "select adv.detalle_caso(%s)", (caso,))
+    assert d["nombres"]["comerciales"] == {"COM-1": "Marta Soler"}
+
+
+def test_la_cola_trae_los_motivos_con_su_detalle_y_el_cliente_propuesto(cur, prompt_hash):
+    caso, _ = caso_en_revision(cur, prompt_hash, remitente="nuevo@talleresferran.example")
+    como_adv(cur)
+    fila = next(f for f in llamar(cur, "select adv.cola()") if f["caso"] == caso)
+    assert fila["cliente_propuesto"] == "Talleres Ferran, S.L."
+    assert fila["motivos"] == [{"codigo": "R02", "linea": None, "detalle": {"tipo": "desconocido", "sugerencia": "C0001"}}]
+
+
+def test_buscar_clientes_por_nombre_o_codigo(cur):
+    como_adv(cur)
+    assert [c["codigo"] for c in llamar(cur, "select adv.buscar_clientes('vallès')")] == ["C0002"]
+    # Ordenados por razón social: Instal·lacions Puig, Manteniments Vallès, Talleres Ferran.
+    assert [c["codigo"] for c in llamar(cur, "select adv.buscar_clientes('C000')")] == ["C0003", "C0002", "C0001"]
+    como(cur)
+    with pytest.raises(psycopg.errors.RaiseException, match="Solo administración de ventas"):
+        llamar(cur, "select adv.buscar_clientes('a')")
+
+
+# ---------------------------------------------------------------- correo original y decisiones
+
+def test_el_correo_guarda_sus_adjuntos_y_el_nombre_del_remitente(cur):
+    cur.execute("set local role service_role")
+    adjuntos = [{"nombre": "pedido.xls", "tipo": "application/vnd.ms-excel", "tamano": 512}]
+    cur.execute("select api.recibir_correo(message_id => '<adj@pruebas.example>', remitente => 'compras@talleresferran.example',"
+                " asunto => 'Pedido adjunto', autenticacion => 'dmarc=pass', hora_recepcion => '2026-11-10 09:05+01',"
+                " origen => 'pruebas', ruta_eml => '2026-11-10/abc.eml', remitente_nombre => 'Ferran Roca', adjuntos => %s)",
+                (Jsonb(adjuntos),))
+    caso = cur.fetchone()[0]["caso"]
+    cur.execute("select api.enviar_a_revision(%s, 'M02', %s)", (caso, Jsonb({"formatos": ["xls"]})))
+    cur.execute("reset role")
+    como_adv(cur)
+    correo = llamar(cur, "select adv.detalle_caso(%s)", (caso,))["correo"]
+    assert (correo["remitente_nombre"], correo["adjuntos"], correo["ruta_eml"]) == ("Ferran Roca", adjuntos, "2026-11-10/abc.eml")
+    fila = next(f for f in llamar(cur, "select adv.cola()") if f["caso"] == caso)
+    assert fila["adjuntos"] == adjuntos and fila["cliente_por_remitente"] is True
+
+
+def test_descartar_exige_una_razon(cur, prompt_hash):
+    caso, _ = caso_en_revision(cur, prompt_hash, remitente="nuevo@talleresferran.example")
+    como_adv(cur)
+    for texto in (None, "   "):
+        cur.execute("savepoint antes")
+        with pytest.raises(psycopg.errors.RaiseException, match="indicar por qué"):
+            llamar(cur, "select adv.cerrar_caso(%s, 'descartado', %s)", (caso, texto))
+        cur.execute("rollback to savepoint antes")
+    assert llamar(cur, "select adv.cerrar_caso(%s, 'procesado a mano')", (caso,))["estado"] == "cerrado"
+
+
+def test_el_detalle_trae_el_numero_del_pedido_creado(cur, prompt_hash):
+    caso, _ = caso_en_revision(cur, prompt_hash, remitente="nuevo@talleresferran.example")
+    como_adv(cur)
+    r = llamar(cur, "select adv.crear_pedido(%s, %s, 'C0001')",
+               (caso, Jsonb([{"codigo": "R02", "linea": None, "razon": "cliente_confirmado"}])))
+    pedido = llamar(cur, "select adv.detalle_caso(%s)", (caso,))["pedido"]
+    assert pedido["id"] == r["pedido"] and pedido["numero"].startswith("PV")
+
+
+@pytest.mark.parametrize("app_metadata, user_metadata, ve", [
+    ({"rol": "adv"}, {}, True),
+    ({"rol": "adv_responsable"}, {}, True),
+    ({}, {"rol": "adv"}, False),          # el rol en user_metadata no sirve
+    ({"rol": "comercial"}, {}, False),
+])
+def test_solo_adv_puede_leer_los_correos_originales(cur, app_metadata, user_metadata, ve):
+    cur.execute("insert into storage.objects (bucket_id, name) values ('correos', 'prueba/test.eml')")
+    como(cur, app_metadata=app_metadata, user_metadata=user_metadata)
+    cur.execute("select count(*) from storage.objects where bucket_id = 'correos' and name = 'prueba/test.eml'")
+    assert (cur.fetchone()[0] == 1) is ve
+
+
+def test_el_bucket_de_correos_es_privado(cur):
+    cur.execute("select public from storage.buckets where id = 'correos'")
+    assert cur.fetchone()[0] is False
