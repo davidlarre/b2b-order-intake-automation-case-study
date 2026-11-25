@@ -3,9 +3,10 @@ import pytest
 
 
 def test_datos_de_arranque(cur):
-    cur.execute("select (select count(*) from erp.productos), (select count(*) from erp.clientes),"
-                " (select count(*) from erp.tarifas where estado = 'activa')")
-    assert cur.fetchone() == (10, 3, 5)
+    # Lo de la v1 (seed.sql); los datos maestros generados se comprueban en test_maestros.py.
+    cur.execute("select (select count(*) from erp.clientes where codigo in ('C0001', 'C0002', 'C0003')),"
+                " (select count(*) from erp.tarifas where origen = 'seed' and estado = 'activa')")
+    assert cur.fetchone() == (3, 5)
 
 
 def test_eventos_solo_admite_inserciones(cur):

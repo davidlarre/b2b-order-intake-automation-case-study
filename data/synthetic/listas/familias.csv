@@ -1,0 +1,78 @@
+codigo;descripcion;medidas;unidad;embalaje;minimo;precio_min;precio_max
+TOR-M{m}-ZN;Tornillo hexagonal DIN 933 M{m} cincado;5X10 5X16 5X20 5X25 5X30 6X12 6X16 6X20 6X25 6X30 6X40 8X16 8X20 8X25 8X30 8X40 8X50 8X60 10X20 10X25 10X30 10X40 10X50 10X60 10X80 12X25 12X30 12X40 12X50 12X60 12X80;ud;100;100;0.03;0.42
+TOR-M{m}-A2;Tornillo hexagonal DIN 933 M{m} inoxidable A2;6X16 6X20 6X25 6X30 6X40 8X16 8X20 8X25 8X30 8X40 8X50 10X25 10X30 10X40 10X50 10X60;ud;100;100;0.09;0.78
+ALL-M{m}-ZN;Tornillo allen DIN 912 8.8 M{m} cincado;5X16 5X20 5X25 6X16 6X20 6X25 6X30 8X20 8X25 8X30 8X40 8X50 10X25 10X30 10X40 10X50 12X30 12X40 12X50 12X60;ud;100;100;0.06;0.55
+AVE-M{m}-ZN;Tornillo avellanado allen DIN 7991 M{m} cincado;5X16 5X20 6X16 6X20 6X25 8X20 8X25 8X30 10X30 10X40;ud;100;100;0.08;0.40
+TUE-M{m}-ZN;Tuerca hexagonal DIN 934 M{m} cincada;4 5 6 8 10 12 14 16 20;ud;100;100;0.01;0.32
+TUE-M{m}-A2;Tuerca hexagonal DIN 934 M{m} inoxidable A2;4 5 6 8 10 12 16 20;ud;100;100;0.03;0.85
+TUA-M{m}-ZN;Tuerca autoblocante DIN 985 M{m} cincada;4 5 6 8 10 12 16;ud;100;100;0.02;0.28
+TUA-M{m}-A2;Tuerca autoblocante DIN 985 M{m} inoxidable A2;5 6 8 10 12;ud;100;100;0.05;0.38
+ARA-M{m}-ZN;Arandela plana DIN 125 M{m} cincada;4 5 6 8 10 12 14 16 20;ud;100;100;0.006;0.09
+ARA-M{m}-A2;Arandela plana DIN 125 M{m} inoxidable A2;5 6 8 10 12 16;ud;100;100;0.02;0.18
+ARG-M{m}-ZN;Arandela grower DIN 127 M{m} cincada;5 6 8 10 12 16;ud;100;100;0.01;0.07
+ARL-M{m}-ZN;Arandela ala ancha DIN 9021 M{m} cincada;5 6 8 10 12;ud;100;100;0.02;0.16
+VAR-M{m}-ZN;Varilla roscada DIN 975 M{m} de 1 m cincada;6 8 10 12 16;ud;10;10;0.75;4.20
+VAR-M{m}-A2;Varilla roscada DIN 975 M{m} de 1 m inoxidable A2;6 8 10 12;ud;10;10;2.30;8.90
+TIR-{m}-ZN;Tirafondo hexagonal DIN 571 {m} cincado;6X40 6X60 8X50 8X60 8X80 10X60 10X80 10X100;ud;50;50;0.09;0.46
+TRC-{m}-ZN;Tornillo rosca chapa DIN 7981 {m} cincado;3.5X13 3.5X16 3.9X16 4.2X19 4.2X25 4.8X25 4.8X32;ud;200;200;0.015;0.05
+TAG-{m}-BI;Tornillo aglomerado {m} bicromatado;3.5X30 3.5X40 4X40 4X50 5X50 5X60 5X80 6X100;ud;200;200;0.012;0.11
+PRI-M{m}-NG;Prisionero allen DIN 913 M{m} negro;5X8 5X10 6X8 6X10 8X10 8X16;ud;100;100;0.04;0.13
+TAC-NY-{m};Taco de nylon {m} mm;5 6 8 10 12;ud;100;100;0.02;0.14
+TAM-M{m};Taco metálico de expansión M{m};6X60 8X75 10X90 12X110 16X140;ud;50;50;0.28;1.60
+REM-AL-{m};Remache de aluminio {m} mm;3.2X8 3.2X10 4X8 4X10 4X12 4.8X10 4.8X12 4.8X16;ud;500;500;0.012;0.04
+ABR-{m};Abrazadera sinfín inoxidable {m} mm;8-12 10-16 12-20 16-27 20-32 25-40 32-50 40-60 50-70;ud;10;10;0.32;0.95
+BRI-{m}-NG;Brida de nylon negra {m} mm (bolsa de 100);2.5X100 3.6X150 3.6X200 4.8X200 4.8X300 7.6X370;bolsa;1;1;1.10;7.40
+GUA-NIT-{m};Guante de nitrilo desechable talla {m};S M L XL;caja;1;1;6.90;6.90
+GUA-PU-{m};Guante de poliuretano gris talla {m};7 8 9 10 11;par;12;12;0.95;0.95
+GUA-CUE-{m};Guante de piel flor vacuno talla {m};8 9 10 11;par;12;12;3.60;3.60
+GUA-COR-{m};Guante anticorte nivel D talla {m};7 8 9 10 11;par;6;6;5.40;5.40
+GAF-PROT-{m};Gafas de protección {m} EN 166;INC=incoloras AHU=ahumadas AMA=amarillas;ud;1;1;3.45;3.95
+GAF-PAN;Gafas panorámicas de protección EN 166;-;ud;1;1;7.80;7.80
+CAS-{m};Casco de obra {m} EN 397;BL=blanco AM=amarillo AZ=azul RO=rojo;ud;1;1;6.20;6.20
+TAP-OID;Tapones de oído desechables (caja de 200 pares);-;caja;1;1;18.50;18.50
+ORE-SNR{m};Orejeras antirruido SNR {m} dB;27 31 35;ud;1;1;9.90;19.50
+MAS-{m};Mascarilla {m} con válvula (caja de 10);FFP2 FFP3;caja;1;1;11.90;19.80
+CHA-AM-{m};Chaleco de alta visibilidad amarillo talla {m};M L XL XXL;ud;1;1;3.20;3.20
+BOT-S3-{m};Bota de seguridad S3 talla {m};38 39 40 41 42 43 44 45 46;par;1;1;42.00;42.00
+ZAP-S1P-{m};Zapato de seguridad S1P talla {m};38 39 40 41 42 43 44 45 46;par;1;1;34.50;34.50
+PAN-MUL-{m};Pantalón multibolsillos gris talla {m};38 40 42 44 46 48 50;ud;1;1;21.90;21.90
+BUZ-AZ-{m};Mono de trabajo azul talla {m};48 50 52 54 56 58;ud;1;1;27.50;27.50
+BRO-HSS-{m};Broca HSS para metal {m} mm;1 1.5 2 2.5 3 3.5 4 4.5 5 5.5 6 6.5 7 8 9 10 11 12 13;ud;10;10;0.45;4.60
+BRO-COB-{m};Broca HSS cobalto 5 % {m} mm;2 3 4 5 6 8 10 12;ud;5;5;1.30;11.40
+BRO-SDS-{m};Broca SDS-Plus para hormigón {m} mm;5X110 6X110 6X160 8X160 8X210 10X160 10X210 12X160 12X210 14X210;ud;1;1;2.10;7.30
+MAC-M{m};Macho de roscar a máquina HSS M{m};3 4 5 6 8 10 12;ud;1;1;5.80;14.90
+COJ-M{m};Cojinete de roscar HSS M{m};4 5 6 8 10 12;ud;1;1;8.40;17.20
+LLC-{m};Llave combinada cromo vanadio {m} mm;8 9 10 11 12 13 14 15 16 17 18 19 22 24;ud;1;1;3.10;11.80
+LAL-{m};Llave allen larga {m} mm;2 2.5 3 4 5 6 8 10;ud;1;1;0.70;3.40
+VAS-12-{m};Vaso hexagonal 1/2" {m} mm;10 11 12 13 14 15 16 17 18 19 21 22 24;ud;1;1;2.40;5.20
+DES-PL-{m};Destornillador plano {m} mm;3X75 4X100 5.5X125 6.5X150 8X175;ud;1;1;2.60;6.40
+DES-PH-{m};Destornillador Phillips PH{m};0 1 2 3;ud;1;1;2.70;5.90
+ALI-{m};Alicate {m};UNI-180=universal 180 mm COR-160=de corte 160 mm PUN-200=de punta 200 mm PIC-250=pico de loro 250 mm;ud;1;1;9.80;17.50
+MAR-{m};Martillo de bola {m} g;300 500 800;ud;1;1;8.20;13.60
+FLE-{m};Flexómetro de {m} m;3 5 8;ud;1;1;3.90;11.20
+SIE-HOJ-{m};Hoja de sierra bimetálica {m} dientes;18 24 32;ud;10;10;1.15;1.15
+LIM-{m};Lima de 10 pulgadas {m};PLA-B=plana bastarda PLA-F=plana fina MED-B=media caña bastarda RED-B=redonda bastarda;ud;1;1;6.70;8.90
+DIS-COR-{m};Disco de corte para metal {m}x1,0 mm;115 125 230;ud;25;25;0.78;2.10
+DIS-DES-{m};Disco de desbaste para metal {m}x6 mm;115 125 230;ud;10;10;1.35;3.60
+DIS-LAM-{m};Disco de láminas 125 mm grano {m};40 60 80 120;ud;10;10;1.75;1.75
+DIS-DIA-{m};Disco de diamante segmentado {m} mm;115 125 230;ud;1;1;9.50;24.00
+LIJ-HOJ-{m};Hoja de lija al agua grano {m};80 120 180 240 400 600;ud;50;50;0.38;0.38
+CIN-{m};Cinta {m};AIS-NG=aislante negra 20 m AME-50=americana plateada 50 m PTF-12=de teflón 12 m EMB-66=de embalar 66 m;rollo;10;10;0.42;4.80
+SIL-{m};Silicona neutra {m} 300 ml;TR=transparente BL=blanca NG=negra GR=gris;ud;12;12;3.60;3.60
+SPR-{m};Spray {m} 400 ml;LUB=lubricante multiusos DES=desengrasante ZIN=galvanizado en frío COR=aceite de corte;ud;12;12;3.20;6.50
+ELE-RUT-{m};Electrodo rutilo {m} mm (paquete);2.0X300 2.5X350 3.2X350 4.0X350;paquete;1;1;11.50;17.90
+ADH-{m};Adhesivo {m};FIJ-243=fijador de roscas medio 50 ml FIJ-270=fijador de roscas fuerte 50 ml CIA-20=cianoacrilato 20 g EPO-25=epoxi bicomponente 25 ml;ud;1;1;3.90;18.60
+TRA-ALG-{m};Trapo de algodón (saco de {m} kg);5 10 25;saco;1;1;8.90;38.00
+TUE-CI-M{m}-ZN;Tuerca ciega DIN 1587 M{m} cincada;5 6 8 10 12;ud;100;100;0.05;0.30
+TUE-MA-M{m}-ZN;Tuerca mariposa DIN 315 M{m} cincada;5 6 8 10 12;ud;50;50;0.07;0.34
+PAS-ALE-{m};Pasador de aletas DIN 94 {m} cincado;2X20 2.5X25 3.2X32 4X40 5X50;ud;100;100;0.012;0.08
+PAS-ELA-{m};Pasador elástico DIN 1481 {m};3X20 4X24 5X30 6X40 8X50;ud;50;50;0.03;0.22
+CIR-EXT-{m};Anillo de seguridad exterior DIN 471 {m} mm;10 12 15 20 25 30 35 40;ud;50;50;0.04;0.28
+CIR-INT-{m};Anillo de seguridad interior DIN 472 {m} mm;22 26 32 35 42 47 52;ud;50;50;0.06;0.36
+ROD-{m}-2RS;Rodamiento rígido de bolas {m} 2RS;6000 6001 6002 6003 6004 6005 6200 6201 6202 6203 6204 6205;ud;1;1;1.60;5.90
+JUN-TOR-{m};Junta tórica NBR {m} mm;10X2 12X2 16X2 20X2 25X3 30X3 40X3;ud;50;50;0.05;0.32
+RAC-LAT-{m};Racor de latón rosca gas {m};1-4=1/4" 3-8=3/8" 1-2=1/2" 3-4=3/4";ud;10;10;0.95;3.40
+MAN-AIR-{m};Enchufe rápido de aire comprimido {m};1-4=1/4" 3-8=3/8" 1-2=1/2";ud;5;5;3.80;8.20
+COR-BIM-{m};Corona perforadora bimetálica {m} mm;20 25 32 40 51 68;ud;1;1;5.60;14.80
+PUN-SDS-{m};Puntero SDS-Plus {m} mm;250 400;ud;1;1;4.20;6.90
+LLA-TX-{m};Llave Torx larga T{m};10 15 20 25 30 40;ud;1;1;1.10;3.20
