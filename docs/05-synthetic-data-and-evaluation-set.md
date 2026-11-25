@@ -86,6 +86,8 @@ Tras el corte vertical (19-11-2026), el orden es: extracción completa (prompt y
 
 ## 10. Limitaciones
 
+- **Se pierde la prueba de punta a punta (25-11-2026).** La Parte B se evalúa cargando directamente el estado correcto de los datos maestros que produce el generador (productos, clientes, contactos, direcciones, tarifas, equivalencias e histórico), no lo que cargue la migración de la Parte A. Los ficheros sucios, el catálogo de errores, el Excel hecho a mano y el fichero de decisiones pasan al incremento de la migración, que se medirá contra ese mismo estado. Consecuencia: la evaluación no muestra cómo un error de migración llega a un pedido.
+- **La prueba se congela en este incremento y se ejecuta después**, cuando existan las reglas que faltan; hasta entonces solo se usa el conjunto de desarrollo.
 - Los correos los escribe una IA, salvo ~15. Un solo etiquetador, con segunda lectura de una muestra.
 - El autor ha visto la prueba, y la prueba se congela después del corte vertical.
 - 20 casos de desarrollo son pocos para ajustar.

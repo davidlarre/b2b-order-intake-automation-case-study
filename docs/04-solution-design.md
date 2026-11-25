@@ -751,6 +751,7 @@ SN08 sigue siendo un supuesto declarado.
 | La demo usa Gemini Flash-Lite por la cuota gratuita, no por calidad; los límites no están garantizados. En producción se repite la evaluación con el modelo elegido | [ADR 0005](decisions/0005-modelo-de-ia.md) |
 | Sin dominio propio, las aprobaciones desde el móvil solo funcionan mientras dure el túnel rápido | [ADR 0004](decisions/0004-n8n-local-o-nube.md) |
 | Sin precios por tramos de cantidad: una tarifa con condición queda pendiente | [05](05-synthetic-data-and-evaluation-set.md) |
+| La Parte B se evalúa sobre el estado correcto de los datos maestros, no sobre lo que carga la migración de la Parte A: no hay prueba de punta a punta | [05](05-synthetic-data-and-evaluation-set.md), sección 10 |
 | Una respuesta automática sin cabeceras estándar se trata como respuesta del cliente y acaba en revisión | 2.2 |
 | R07 por número sin límite de tiempo manda a revisión un pedido nuevo de un cliente que reinicia su numeración | 3.2, [05](05-synthetic-data-and-evaluation-set.md) |
 | Entorno local: en la imagen de Supabase 17.6.1.106, ejecutar una función sin permiso con un rol reservado (`anon`, `service_role`) tumba Postgres en lugar de dar "permission denied" ([supabase/postgres#2124](https://github.com/supabase/postgres/issues/2124), atribuido a `supautils`). La API solo expone funciones con permiso, así que no se da en el uso normal. Reproducción en `tests/test_entorno_supautils.py`; se revisa en la fase 7 | 5.2 |
