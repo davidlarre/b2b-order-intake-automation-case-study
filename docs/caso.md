@@ -6,7 +6,7 @@
 
 Orvalle vende tornillería, guantes y herramienta a talleres y pequeñas fábricas. Recibe unos **1.800 pedidos al mes por correo**, cada uno a su manera: "ponme lo de siempre", un Excel propio, un PDF, medio en catalán.
 
-Cuatro personas leen cada correo, adivinan qué producto es, comprueban el precio que se pactó y lo teclean. Son unos **6 minutos por pedido: 180 horas al mes, un tercio de su tiempo**. La empresa quiere crecer un 20 % sin contratar, y así no llega. *(Son cifras del escenario, no mediciones.)*
+Cuatro personas leen cada correo, adivinan qué producto es, comprueban el precio que se pactó y lo teclean. Son unos **6 minutos por pedido: 180 horas al mes, el 32 % de las 560 horas efectivas del equipo**. La empresa quiere crecer un 20 % sin contratar, y así no llega. *(Son cifras del escenario, no mediciones.)*
 
 Teclear es lo lento, pero lo caro es **equivocarse**: mandar 1.000 tuercas cuando eran 1.200.
 

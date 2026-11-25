@@ -1,5 +1,9 @@
 # Entrada automatizada de pedidos B2B
 
+> **In English.** A portfolio case study that turns B2B customer emails (free text, Excel) into validated ERP orders.<br>
+> It shows how AI extraction, SQL business rules and human review work together, with a small evaluation and its limits stated openly.<br>
+> The company and all data are fictional, and the project was built with AI assistance ([details, in Spanish](AI_USAGE.md)).
+
 **Caso de estudio de portfolio: del correo del cliente al pedido en el ERP, con reglas, IA y revisión humana.**
 
 Un distribuidor recibe unos 1.800 pedidos al mes por correo, en texto libre, Excel o PDF, y alguien los teclea uno a uno en el ERP. El sistema lee cada correo y lo valida con reglas contra los datos maestros. Crea solo los pedidos claros y deja el resto en una cola en la que una persona decide, con el motivo explicado.
