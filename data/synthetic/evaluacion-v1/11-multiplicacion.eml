@@ -1,0 +1,21 @@
+From: Jordi Mas <taller@talleresferran.example>
+To: pedidos@orvalle.example
+Subject: Tornillos M10
+Date: Mon, 16 Nov 2026 10:40:00 +0100
+Message-ID: <ev1-11@talleresferran.example>
+Authentication-Results: mx.orvalle.example; spf=pass
+ smtp.mailfrom=talleresferran.example; dkim=pass
+ header.d=talleresferran.example; dmarc=pass
+ header.from=talleresferran.example
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+MIME-Version: 1.0
+
+Buenas,
+
+Necesito dos bolsas de 500:
+
+TOR-M10X40-ZN 2x500 uds
+ARA-M10-ZN 1000 uds
+
+Jordi

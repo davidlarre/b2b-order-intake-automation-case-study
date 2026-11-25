@@ -1,0 +1,40 @@
+From: Laia Puig <pedidos@mantenimentsvalles.example>
+To: pedidos@orvalle.example
+Subject: Comanda PDF
+Date: Thu, 19 Nov 2026 09:10:00 +0100
+Message-ID: <ev1-19@mantenimentsvalles.example>
+Authentication-Results: mx.orvalle.example; spf=pass
+ smtp.mailfrom=mantenimentsvalles.example; dmarc=none
+ header.from=mantenimentsvalles.example
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="===============7552718539393142438=="
+
+--===============7552718539393142438==
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+
+Bon dia,
+
+Us adjunto la comanda en PDF.
+
+Laia
+
+--===============7552718539393142438==
+Content-Type: application/pdf
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="comanda.pdf"
+MIME-Version: 1.0
+
+JVBERi0xLjQKMSAwIG9iago8PC9UeXBlL0NhdGFsb2cvUGFnZXMgMiAwIFI+PgplbmRvYmoKMiAw
+IG9iago8PC9UeXBlL1BhZ2VzL0tpZHNbMyAwIFJdL0NvdW50IDE+PgplbmRvYmoKMyAwIG9iago8
+PC9UeXBlL1BhZ2UvUGFyZW50IDIgMCBSL01lZGlhQm94WzAgMCA1OTUgODQyXS9Db250ZW50cyA0
+IDAgUi9SZXNvdXJjZXM8PC9Gb250PDwvRjEgNSAwIFI+Pj4+Pj4KZW5kb2JqCjQgMCBvYmoKPDwv
+TGVuZ3RoIDk5Pj4Kc3RyZWFtCkJUIC9GMSAxMiBUZiA2MCA3ODAgVGQgMTYgVEwgKENvbWFuZGEg
+MjIxMSkgVGogVCogKEdVQS1OSVQtTCAgMTApIFRqIFQqIChHQUYtUFJPVC1JTkMgIDIwKSBUaiBU
+KiBFVAplbmRzdHJlYW0KZW5kb2JqCjUgMCBvYmoKPDwvVHlwZS9Gb250L1N1YnR5cGUvVHlwZTEv
+QmFzZUZvbnQvSGVsdmV0aWNhPj4KZW5kb2JqCnhyZWYKMCA2CjAwMDAwMDAwMDAgNjU1MzUgZiAK
+MDAwMDAwMDAwOSAwMDAwMCBuIAowMDAwMDAwMDU0IDAwMDAwIG4gCjAwMDAwMDAxMDUgMDAwMDAg
+biAKMDAwMDAwMDIxNyAwMDAwMCBuIAowMDAwMDAwMzY0IDAwMDAwIG4gCnRyYWlsZXIKPDwvU2l6
+ZSA2L1Jvb3QgMSAwIFI+PgpzdGFydHhyZWYKNDI3CiUlRU9GCg==
+
+--===============7552718539393142438==--

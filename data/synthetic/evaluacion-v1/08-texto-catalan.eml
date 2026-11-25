@@ -1,0 +1,22 @@
+From: =?utf-8?q?N=C3=BAria?= Puig <oficina@instalacionspuig.example>
+To: pedidos@orvalle.example
+Subject: Comanda material
+Date: Mon, 16 Nov 2026 08:05:00 +0100
+Message-ID: <ev1-08@instalacionspuig.example>
+Authentication-Results: mx.orvalle.example; spf=pass
+ smtp.mailfrom=instalacionspuig.example; dmarc=none
+ header.from=instalacionspuig.example
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+MIME-Version: 1.0
+
+Bon dia,
+
+Necessitem per a dimecres:
+
+25 uds de dis-cor-125
+BRO-HSS-8: 20 uds
+
+Gràcies,
+Núria
+Instal·lacions Puig

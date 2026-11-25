@@ -1,0 +1,18 @@
+From: Ferran Roca <compras@talleresferran.example>
+To: pedidos@orvalle.example
+Subject: Pedido recambio
+Date: Thu, 19 Nov 2026 08:25:00 +0100
+Message-ID: <ev1-18@talleresferran.example>
+Authentication-Results: mx.orvalle.example; spf=pass
+ smtp.mailfrom=talleresferran.example; dkim=pass
+ header.d=talleresferran.example; dmarc=pass
+ header.from=talleresferran.example
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+MIME-Version: 1.0
+
+Hola,
+
+Necesito 50 uds de XK-4471.
+
+Ferran

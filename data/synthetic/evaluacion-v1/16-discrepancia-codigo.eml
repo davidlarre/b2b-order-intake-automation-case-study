@@ -1,0 +1,19 @@
+From: Jordi Mas <taller@talleresferran.example>
+To: pedidos@orvalle.example
+Subject: Tuercas
+Date: Wed, 18 Nov 2026 09:05:00 +0100
+Message-ID: <ev1-16@talleresferran.example>
+Authentication-Results: mx.orvalle.example; spf=pass
+ smtp.mailfrom=talleresferran.example; dkim=pass
+ header.d=talleresferran.example; dmarc=pass
+ header.from=talleresferran.example
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+MIME-Version: 1.0
+
+Buenas,
+
+TUE-M8-ZN 400 uds (perdón, es TUE-M10-ZN)
+ARA-M10-ZN 400 uds
+
+Jordi
