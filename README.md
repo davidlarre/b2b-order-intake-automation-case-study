@@ -1,5 +1,7 @@
 # Entrada automatizada de pedidos B2B
 
+### [Ver la página del caso](https://davidlarre.github.io/b2b-order-intake-automation-case-study/)
+
 > **In English.** A portfolio case study that turns B2B customer emails (free text, Excel) into validated ERP orders.<br>
 > It shows how AI extraction, SQL business rules and human review work together, with a small evaluation and its limits stated openly.<br>
 > The company and all data are fictional, and the project was built with AI assistance ([details, in Spanish](AI_USAGE.md)).
@@ -40,7 +42,7 @@ ACEPTABLE es una salida segura que no era la esperada: el caso llega a una perso
 
 - **Sin IA no basta:** un lector de reglas deja líneas fuera y crea el pedido igualmente.
 - **En estos casos, "solo IA" sale algo mejor que el híbrido.** El híbrido paga dos revisiones innecesarias por tener una segunda lectura. Esa red existe para cuando la IA lea mal, y en 20 casos no llegó a hacer falta.
-- **Son pocos casos, y de desarrollo.** Sin prueba congelada ni segunda lectura. Con 0 errores en 9 pedidos automáticos, el error real puede llegar a 3/9, un 33 %.
+- **Son pocos casos, y de desarrollo.** Sin prueba congelada ni revisión humana de las etiquetas. Con 0 errores en 9 pedidos automáticos, el error real puede llegar a 3/9, un 33 %.
 
 Los fallos, uno a uno, y las limitaciones: **[eval/resultados-v1.md](eval/resultados-v1.md)**.
 
@@ -120,6 +122,7 @@ El proyecto se ha desarrollado con Claude, y la solución usa Gemini para leer l
 
 | Documento | Qué es |
 |---|---|
+| [Página del caso](https://davidlarre.github.io/b2b-order-intake-automation-case-study/) | La versión para ver en el navegador ([fuente](site/index.html)) |
 | [El caso en una página](docs/caso.md) | Sin conocimientos técnicos |
 | [Guion del vídeo](docs/guion-video.md) | La demo en 3 minutos |
 | [00 Plan](docs/00-project-plan.md) · [01 Decisiones](docs/01-reframe-decisions.md) | Cómo se ha trabajado |

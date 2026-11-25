@@ -30,7 +30,7 @@ El caso se presenta ya, con lo que está construido. La **v1** incluye:
 - una evaluación pequeña: 20 correos de desarrollo en las tres configuraciones ([resultados](../eval/resultados-v1.md));
 - el README, el caso en una página ([caso.md](caso.md)) y el guion del vídeo ([guion-video.md](guion-video.md)).
 
-La evaluación de la v1 **no sustituye** a la diseñada en [05](05-synthetic-data-and-evaluation-set.md): no hay prueba congelada ni segunda lectura. D30 dice que la evaluación no se recorta; aquí se aplaza, y se declara.
+La evaluación de la v1 **no sustituye** a la diseñada en [05](05-synthetic-data-and-evaluation-set.md): no hay prueba congelada ni segunda lectura humana de las etiquetas. D30 dice que la evaluación no se recorta; aquí se aplaza, y se declara.
 
 ## Siguiente fase
 

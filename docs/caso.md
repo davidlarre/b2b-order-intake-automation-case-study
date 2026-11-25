@@ -40,8 +40,8 @@ Los fallos, uno a uno, en los [resultados](../eval/resultados-v1.md).
 
 ## Los límites
 
-- **Son 20 correos de desarrollo:** 7 sirvieron para construir el sistema y 13 se escribieron conociéndolo. No hay un examen guardado aparte ni una segunda persona que revise las respuestas correctas. Con 0 errores en 9 pedidos automáticos, **el error real podría llegar a 1 de cada 3**. Para confiar harían falta cientos, en un piloto con el equipo.
-- **Los correos los escribió una IA,** no clientes de verdad.
+- **Son 20 correos de desarrollo:** 7 sirvieron para construir el sistema y 13 se escribieron conociéndolo. No hay un examen guardado aparte. Las 13 respuestas correctas nuevas las revisó una segunda instancia de Claude que no las escribió, sin cambios; todavía no hay revisión humana. Con 0 errores en 9 pedidos automáticos, **el error real podría llegar a 1 de cada 3**. Para confiar harían falta cientos, en un piloto con el equipo.
+- **Los 13 correos nuevos los escribió una IA,** y ninguno es de un cliente de verdad.
 - **Faltan piezas:** distinguir un pedido de una consulta, detectar duplicados, comprobar cajas y unidades, leer PDF y enviar respuestas al cliente.
 - **El ahorro no está demostrado.** Depende de cuánto se tarde en revisar cada pedido dudoso, y eso solo lo dice un piloto ([caso de negocio](02-business-case.md)).
 
