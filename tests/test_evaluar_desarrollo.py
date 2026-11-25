@@ -40,6 +40,8 @@ def test_dudoso_es_aceptable_en_una_consulta_y_no_en_una_reclamacion():
 
 def test_m03_va_aparte():
     assert nota(ETIQUETAS["D17"], resultado("revision", "M03"), None, Counter()) == ("M03", "M03", [])
+    # Falla la extracción, con el correo ya clasificado: el tipo se mide igual.
+    assert nota(ETIQUETAS["D01"], resultado("revision", "M03"), "pedido_nuevo", Counter()) == ("OK", "M03", [])
 
 
 def test_sin_codigo_no_compara_motivos():

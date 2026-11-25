@@ -28,15 +28,16 @@ DESARROLLO = RAIZ / "data" / "synthetic" / "evaluacion-v2" / "desarrollo"
 def nota(etiqueta, resultado, tipo, lineas):
     """(nota del tipo, nota de la salida, diferencias). El M03 va aparte: es el servicio, no el sistema."""
     codigos = sorted({m["codigo"] for m in resultado["motivos"]})
-    if "M03" in codigos:
-        return "M03", "M03", []
     if tipo is None:
-        nota_tipo = "-"
+        nota_tipo = "M03" if "M03" in codigos else "-"
     elif tipo == etiqueta["tipo"]:
         nota_tipo = "OK"
     else:
         nota_tipo = "ACEPTABLE" if tipo in etiqueta["tipos_aceptables"] else "FALLO"
 
+    # El fallo puede ser de la extracción, con el tipo ya clasificado.
+    if "M03" in codigos:
+        return nota_tipo, "M03", []
     esperados = sorted({m["codigo"] for m in etiqueta["motivos"] if m["momento"] == "inicial"})
     diferencias = []
     if resultado["salida"] != etiqueta["salida"]["inicial"]:
@@ -94,7 +95,8 @@ def main():
         fuera = f"  [fuera de alcance: {', '.join(etiqueta['depende_de'])}]" if etiqueta["depende_de"] else ""
         print(f"{ruta.stem}  tipo {tipo or '-':22} {n_tipo:9} salida {r['salida']:11} motivos {', '.join(fila['motivos']) or '-':8}"
               f" {n_salida}{': ' + '; '.join(dif) if dif else ''}{fuera}", flush=True)
-        if error and error[0] and "429" in error[0][:10]:
+        # Con un 429, n8n sustituye el error de Gemini por su propio consejo ("Try spacing your requests out...").
+        if error and error[0] and (error[0].startswith("429") or "spacing your requests" in error[0]):
             print("Cuota de Gemini agotada: se para aquí.")
             break
         if [f["nota_salida"] for f in filas[-3:]] == ["M03"] * 3:

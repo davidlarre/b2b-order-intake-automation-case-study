@@ -139,7 +139,9 @@ def test_una_reclamacion_va_la_primera_de_la_cola(automatizacion, cur, hash_clas
     clasificar(automatizacion, caso, hash_clasificacion, "reclamacion")
     como_adv(cur)
     cur.execute("select adv.cola()")
-    assert cur.fetchone()[0][0]["caso"] == caso
+    cola = cur.fetchone()[0]
+    assert next(f for f in cola if f["caso"] == caso)["prioridad"] == 1
+    assert cola[0]["prioridad"] == 1
 
 
 def test_r01_no_se_puede_forzar_ni_reevaluar_hasta_crear_un_pedido_vacio(automatizacion, cur, hash_clasificacion):

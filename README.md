@@ -108,16 +108,16 @@ Tests: `uv run pytest`, y `node --test` en `n8n/modulos/extractor` (tras `npx pn
 
 ## Qué no hace todavía
 
-- **No clasifica el correo.** Una consulta que mencione un código y una cantidad podría acabar en pedido.
-- **Faltan reglas:** R02, R08, R11 y parte de R12 están hechas. Faltan, entre otras, duplicados (R07), unidades y embalajes (R10) e importe máximo (R13).
+- **Clasifica el correo, pero no busca el pedido original** de una modificación ni reenvía las facturas. Un pedido clasificado como "otros" no llegaría a la cola. La medida es de [desarrollo](eval/desarrollo-v2.md), no de prueba.
+- **Faltan reglas:** R01, R02, R08, R11 y parte de R12 están hechas. Faltan, entre otras, duplicados (R07), unidades y embalajes (R10) e importe máximo (R13).
 - **No lee Gmail ni envía correos.** Entra por un webhook de pruebas, y "pedir datos" queda registrado, pero no sale ningún correo.
 - **No aprueba precios por correo** y **no lee PDF** (van a revisión).
 - **Si falla la IA, no reintenta más tarde:** tras tres intentos seguidos, el caso se queda en la cola (M03) para una persona, y una caída general de Gemini no se distingue de un caso raro.
-- **No hay migración de datos maestros** (la Parte A): se arranca con 3 clientes y 10 productos limpios.
+- **No hay migración de datos maestros** (la Parte A): un generador carga directamente su estado correcto (120 clientes, 498 productos y el histórico).
 
 ## Qué viene después
 
-Un conjunto de 80 correos con generador, etiquetado a mano y prueba congelada, las reglas que faltan y la migración de datos maestros. El trabajo empezado está en la rama `datos-evaluacion`. Detalle en el [plan](docs/00-project-plan.md#siguiente-fase).
+Los [80 correos](data/synthetic/evaluacion-v2/README.md) ya están generados y etiquetados, y la prueba está congelada sin ejecutar ([alcance](eval/alcance-prueba-v2.md)). Faltan la revisión humana de las etiquetas, las reglas pendientes, ejecutar la prueba y la migración de datos maestros. Detalle en el [plan](docs/00-project-plan.md#siguiente-fase).
 
 ## Uso de IA
 

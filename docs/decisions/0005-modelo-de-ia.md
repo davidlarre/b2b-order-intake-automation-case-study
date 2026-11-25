@@ -32,6 +32,8 @@ Comprobado el 19-11-2026:
 | Clasificación | `gemini-3.1-flash-lite` | Un error es barato: si duda, el correo va a revisión |
 | Extracción y respuesta del cliente | `gemini-3.5-flash-lite` | El límite diario de `gemini-3.8-flash` (~20 al día) no da para la evaluación: una evaluación completa necesita unas 300 extracciones |
 
+**Cambio del 25-11-2026:** la clasificación usa `gemini-3.5-flash-lite`, porque el 3.1 respondía 503 de forma continuada al construirla ([desarrollo v2](../../eval/desarrollo-v2.md)). Los dos prompts comparten ahora las 500 peticiones diarias que Gemini declara en el 429. Volver al 3.1 es cambiar `extraction/clasificacion/config.json`.
+
 Cada prompt usa un modelo distinto también por la cuota: los límites van por modelo, así que repartir la clasificación y la extracción en dos modelos permite que la evaluación quepa en un día (sección 7 de 04).
 
 **Esto invierte el criterio de la versión anterior**, que usaba el modelo más capaz por defecto y solo bajaba si el pequeño era igual. Ahora el modelo lo condiciona la cuota gratuita, no la calidad, y se declara. `gemini-3.8-flash` se compara en el conjunto de desarrollo (unas 20 extracciones, que caben en su cuota). Si es claramente mejor, se decide entonces si la evaluación se reparte en varias semanas o se reducen las repeticiones, y se declara. El modelo se elige solo con el conjunto de desarrollo; la prueba se ejecuta con el modelo ya elegido (D23).
