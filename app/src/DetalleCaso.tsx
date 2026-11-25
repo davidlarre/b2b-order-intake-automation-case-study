@@ -76,6 +76,8 @@ export function DetalleCaso({ caso, alVolver, alSiguiente }: Props) {
       case 'a_mano':
         return decidir('cerrar_caso', { p_resultado: 'procesado a mano', p_texto: null },
           () => `Pedido nº ${caso} marcado como tecleado a mano en el ERP.`);
+      case 'atendido':
+        return decidir('cerrar_caso', { p_resultado: a.resultado, p_texto: null }, () => `Caso nº ${caso}: ${a.resultado}.`);
       case 'descartar':
         setDescartando(true);
         setTimeout(() => campoRazon.current?.focus(), 0);

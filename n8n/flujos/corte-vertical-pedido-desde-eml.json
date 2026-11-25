@@ -32,7 +32,7 @@
     },
     {
       "parameters": {
-        "jsCode": "const CONFIGURACIONES = ['solo_reglas', 'solo_ia', 'hibrido'];\nconst configuracion = $('Webhook').first().json.query?.configuracion ?? 'hibrido';\nif (!CONFIGURACIONES.includes(configuracion)) {\n  throw new Error(`Configuración desconocida: ${configuracion}`);\n}\n\nconst crypto = require('crypto');\nconst { simpleParser } = require('mailparser');\nconst { preprocesarAdjuntos } = require('orvalle-extractor');\n\nconst buffer = await this.helpers.getBinaryDataBuffer(0, 'data');\nconst correo = await simpleParser(buffer);\nconst adjuntos = await preprocesarAdjuntos(correo.attachments);\nconst autenticacion = correo.headers.get('authentication-results');\n\n// Ruta del .eml en Storage: fecha del correo + huella del Message-ID (nada personal en el nombre).\nconst fecha = correo.date ? correo.date.toISOString().slice(0, 10) : 'sin-fecha';\nconst huella = crypto.createHash('sha256').update(correo.messageId ?? buffer).digest('hex');\n\nreturn [{\n  json: {\n    message_id: correo.messageId ?? null,\n    remitente: correo.from?.value?.[0]?.address?.toLowerCase() ?? null,\n    asunto: correo.subject ?? null,\n    autenticacion: Array.isArray(autenticacion) ? autenticacion.join('; ') : (autenticacion ?? null),\n    hora_recepcion: correo.date ? correo.date.toISOString() : null,\n    configuracion,\n    cuerpo: correo.text ?? '',\n    texto: [correo.text ?? '', adjuntos.texto].filter(t => t.trim() !== '').join('\\n\\n'),\n    excels: adjuntos.excels,\n    no_soportados: adjuntos.noSoportados,\n    adjuntos_ignorados: adjuntos.ignorados,\n    ruta_eml: `${fecha}/${huella}.eml`,\n    remitente_nombre: correo.from?.value?.[0]?.name || null,\n    adjuntos: (correo.attachments ?? []).map(a => ({ nombre: a.filename ?? null, tipo: a.contentType ?? null, tamano: a.size ?? null })),\n  },\n  binary: { data: $input.first().binary.data },\n}];"
+        "jsCode": "const CONFIGURACIONES = ['solo_reglas', 'solo_ia', 'hibrido'];\nconst configuracion = $('Webhook').first().json.query?.configuracion ?? 'hibrido';\nif (!CONFIGURACIONES.includes(configuracion)) {\n  throw new Error(`Configuración desconocida: ${configuracion}`);\n}\n\nconst crypto = require('crypto');\nconst { simpleParser } = require('mailparser');\nconst { preprocesarAdjuntos } = require('orvalle-extractor');\n\nconst buffer = await this.helpers.getBinaryDataBuffer(0, 'data');\nconst correo = await simpleParser(buffer);\nconst adjuntos = await preprocesarAdjuntos(correo.attachments);\nconst autenticacion = correo.headers.get('authentication-results');\n\n// Ruta del .eml en Storage: fecha del correo + huella del Message-ID (nada personal en el nombre).\nconst fecha = correo.date ? correo.date.toISOString().slice(0, 10) : 'sin-fecha';\nconst huella = crypto.createHash('sha256').update(correo.messageId ?? buffer).digest('hex');\n\n// Lo que ve el clasificador: además del texto, el asunto y el nombre de los adjuntos (un pedido en PDF solo se\n// reconoce por ellos). La extracción no los recibe (04, sección 6.2).\nconst texto = [correo.text ?? '', adjuntos.texto].filter(t => t.trim() !== '').join('\\n\\n');\nconst nombres = (correo.attachments ?? []).filter(a => !(a.contentType ?? '').startsWith('image/')).map(a => a.filename ?? 'sin nombre');\nconst paraClasificar = [`Asunto: ${correo.subject ?? ''}`, ...(nombres.length ? [`Adjuntos: ${nombres.join(', ')}`] : []), '', texto].join('\\n');\n\nreturn [{\n  json: {\n    message_id: correo.messageId ?? null,\n    remitente: correo.from?.value?.[0]?.address?.toLowerCase() ?? null,\n    asunto: correo.subject ?? null,\n    autenticacion: Array.isArray(autenticacion) ? autenticacion.join('; ') : (autenticacion ?? null),\n    hora_recepcion: correo.date ? correo.date.toISOString() : null,\n    configuracion,\n    cuerpo: correo.text ?? '',\n    texto,\n    para_clasificar: paraClasificar,\n    excels: adjuntos.excels,\n    no_soportados: adjuntos.noSoportados,\n    adjuntos_ignorados: adjuntos.ignorados,\n    ruta_eml: `${fecha}/${huella}.eml`,\n    remitente_nombre: correo.from?.value?.[0]?.name || null,\n    adjuntos: (correo.attachments ?? []).map(a => ({ nombre: a.filename ?? null, tipo: a.contentType ?? null, tamano: a.size ?? null })),\n  },\n  binary: { data: $input.first().binary.data },\n}];"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -137,7 +137,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.5,
       "position": [
-        1840,
+        2912,
         -496
       ],
       "id": "643308ea-1a93-4cd7-b99b-2c3273e2f5ab",
@@ -159,7 +159,7 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        2048,
+        3120,
         -336
       ],
       "id": "4bb48d33-1661-4029-9f05-a2e7cf5eb755",
@@ -189,7 +189,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.5,
       "position": [
-        2224,
+        3296,
         -336
       ],
       "id": "971bdefe-09da-4b08-b69e-6025fa145c4e",
@@ -208,7 +208,7 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.5,
       "position": [
-        2400,
+        3472,
         -144
       ],
       "id": "7fd5530f-b8b8-4f5f-8b8d-75feda45eb10",
@@ -250,7 +250,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.5,
       "position": [
-        1664,
+        2736,
         -496
       ],
       "id": "75b10eac-1eee-48c5-b6fe-eae2b1a1c43e",
@@ -289,7 +289,7 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.4,
       "position": [
-        864,
+        1936,
         -160
       ],
       "id": "74e689ee-1818-4e5d-928e-d7a1e6d83b0a",
@@ -318,7 +318,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.5,
       "position": [
-        1408,
+        2480,
         -144
       ],
       "id": "5a365958-2b9d-48ac-b935-f93dd241eabd",
@@ -353,7 +353,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.5,
       "position": [
-        1056,
+        2128,
         -352
       ],
       "id": "e8a158a3-66e0-4f56-85e4-d9f37768b3ee",
@@ -372,7 +372,7 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1232,
+        2304,
         -352
       ],
       "id": "f8df462f-8b22-410a-9ab9-579c17af77ff",
@@ -405,7 +405,7 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.4,
       "position": [
-        1408,
+        2480,
         -352
       ],
       "id": "6ba6524b-6cf6-44cd-aa3c-ef6e2c7d9088",
@@ -474,11 +474,237 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.5,
       "position": [
-        2224,
+        3296,
         -560
       ],
       "id": "cbfd6176-11b1-444d-a662-790b6838ae18",
       "name": "Enviar a revisión (M03)",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "pPeI6Dvh8SeDo88k",
+          "name": "Supabase local · automatización"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 4
+          },
+          "conditions": [
+            {
+              "id": "3206c4ae-e33e-517c-8fd6-2f6db970f7a3",
+              "leftValue": "={{ $('Leer .eml').item.json.configuracion }}",
+              "rightValue": "solo_reglas",
+              "operator": {
+                "type": "string",
+                "operation": "notEquals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.4,
+      "position": [
+        864,
+        -160
+      ],
+      "id": "e62e0aa8-0bde-50a7-a927-5bba6eaa7e00",
+      "name": "¿Clasifica?"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://host.docker.internal:54321/rest/v1/rpc/prompt_activo",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Profile",
+              "value": "api"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ prompt: 'clasificacion' }) }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.5,
+      "position": [
+        1040,
+        -300
+      ],
+      "id": "b10024ae-27ea-53e4-b716-f2b1a0e3a7af",
+      "name": "Leer prompt de clasificación",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "pPeI6Dvh8SeDo88k",
+          "name": "Supabase local · automatización"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://generativelanguage.googleapis.com/v1beta/interactions",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Api-Revision",
+              "value": "2026-05-20"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({\n  model: $json.modelo,\n  input: $json.texto.replace('{correo}', () => $('Leer .eml').item.json.para_clasificar),\n  response_format: {\n    type: 'text',\n    mime_type: 'application/json',\n    schema: $json.esquema\n  }\n}) }}\n",
+        "options": {
+          "timeout": 60000
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.5,
+      "position": [
+        1216,
+        -300
+      ],
+      "id": "b331d733-806d-540f-aefd-a99f333080ee",
+      "name": "Clasificar con Gemini",
+      "retryOnFail": true,
+      "waitBetweenTries": 5000,
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "4e6CGP87FzOHxuya",
+          "name": "Gemini · AI Studio (nivel gratuito)"
+        }
+      },
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Los nombres son los parámetros de api.registrar_clasificacion.\nconst prompt = $('Leer prompt de clasificación').first().json;\nconst respuesta = $input.first().json;\nconst salida = (respuesta.steps ?? []).find(s => s.type === 'model_output');\nconst texto = salida?.content?.find(c => c.type === 'text')?.text;\nif (!texto) {\n  throw new Error('Gemini no devolvió un model_output con texto');\n}\nlet clasificacion;\ntry {\n  clasificacion = JSON.parse(texto);\n} catch (e) {\n  throw new Error('La respuesta de Gemini no es JSON válido');\n}\n// El esquema es el del prompt activo. La base de datos lo valida entero; aquí, para que un valor fuera de la lista\n// sea un fallo técnico (M03) y no pare el flujo.\nfor (const campo of prompt.esquema.required) {\n  if (!prompt.esquema.properties[campo].enum.includes(clasificacion[campo])) {\n    throw new Error(`La respuesta de Gemini no cumple el esquema: ${campo}`);\n  }\n}\nconst uso = respuesta.usage ?? {};\nreturn [{\n  json: {\n    caso: $('Registrar correo').first().json.caso,\n    configuracion: $('Leer .eml').first().json.configuracion,\n    clasificacion: { tipo: clasificacion.tipo, destino: clasificacion.destino },\n    prompt_hash: prompt.hash,\n    modelo: respuesta.model,\n    tokens_entrada: uso.total_input_tokens ?? null,\n    // El razonamiento también se factura como salida.\n    tokens_salida: (uso.total_output_tokens ?? 0) + (uso.total_thought_tokens ?? 0),\n  },\n}];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1408,
+        -300
+      ],
+      "id": "90a832b7-fbf1-584c-9360-e504c550a078",
+      "name": "Preparar clasificación",
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://host.docker.internal:54321/rest/v1/rpc/registrar_clasificacion",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Profile",
+              "value": "api"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify($json) }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.5,
+      "position": [
+        1584,
+        -300
+      ],
+      "id": "a7af83be-0d6a-53e9-b5f7-9db469df0894",
+      "name": "Registrar clasificación",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "pPeI6Dvh8SeDo88k",
+          "name": "Supabase local · automatización"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 4
+          },
+          "conditions": [
+            {
+              "id": "93e88faf-932f-59f6-b14b-55e7f8f0fefb",
+              "leftValue": "={{ $json.sigue }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.4,
+      "position": [
+        1760,
+        -300
+      ],
+      "id": "0491a0ce-995e-57ed-bbf6-1dc5a1c2266d",
+      "name": "¿Es un pedido?"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://host.docker.internal:54321/rest/v1/rpc/enviar_a_revision",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Profile",
+              "value": "api"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({\n  caso: $('Registrar correo').first().json.caso,\n  codigo: 'M03',\n  detalle: {\n    paso: 'clasificacion_ia',\n    error: String($json.error?.message ?? $json.error ?? 'sin detalle').slice(0, 200)\n  }\n}) }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.5,
+      "position": [
+        1584,
+        -512
+      ],
+      "id": "402d1fa6-d83b-54e8-9fa0-2d06ec082a5b",
+      "name": "Enviar a revisión (M03, clasificación)",
       "credentials": {
         "httpHeaderAuth": {
           "id": "pPeI6Dvh8SeDo88k",
@@ -525,7 +751,7 @@
       "main": [
         [
           {
-            "node": "¿Formato soportado?",
+            "node": "¿Clasifica?",
             "type": "main",
             "index": 0
           }
@@ -678,6 +904,111 @@
       ]
     },
     "Enviar a revisión (M03)": {
+      "main": [
+        [
+          {
+            "node": "Responder: resultado",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "¿Clasifica?": {
+      "main": [
+        [
+          {
+            "node": "Leer prompt de clasificación",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "¿Formato soportado?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Leer prompt de clasificación": {
+      "main": [
+        [
+          {
+            "node": "Clasificar con Gemini",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Clasificar con Gemini": {
+      "main": [
+        [
+          {
+            "node": "Preparar clasificación",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Enviar a revisión (M03, clasificación)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Preparar clasificación": {
+      "main": [
+        [
+          {
+            "node": "Registrar clasificación",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Enviar a revisión (M03, clasificación)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Registrar clasificación": {
+      "main": [
+        [
+          {
+            "node": "¿Es un pedido?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "¿Es un pedido?": {
+      "main": [
+        [
+          {
+            "node": "¿Formato soportado?",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Responder: resultado",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Enviar a revisión (M03, clasificación)": {
       "main": [
         [
           {
