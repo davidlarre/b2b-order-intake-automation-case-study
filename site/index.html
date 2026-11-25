@@ -29,6 +29,8 @@
   --ok: #0E74A8;
   --aceptable: #C98315;
   --fallo: #B3261E;
+  /* El cero de Atkinson va tachado: las cifras usan la fuente del sistema. */
+  --cifra: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   --margen: clamp(20px, 5vw, 72px);
 }
 * { box-sizing: border-box; }
@@ -44,13 +46,17 @@ img { max-width: 100%; height: auto; display: block; }
 .salto:focus { left: 12px; top: 12px; z-index: 1; background: var(--papel); color: var(--tinta); padding: 8px 14px; }
 
 /* Cabecera: el titular a la izquierda y un pedido real del caso, en papel, a la derecha */
-.portada { background: var(--petroleo); color: #fff; padding: clamp(40px, 7vw, 88px) var(--margen); }
+.portada { background: var(--petroleo); color: #fff; padding: 22px var(--margen) clamp(44px, 6.5vw, 84px); }
 .portada-caja { max-width: 1160px; margin: 0 auto; display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); gap: clamp(36px, 5vw, 72px); align-items: center; }
 h1 { font-size: clamp(2.1rem, 4.6vw, 3.5rem); line-height: 1.08; letter-spacing: -.022em; text-wrap: balance; }
 .subtitulo { margin-top: 22px; font-size: 1.25rem; line-height: 1.5; max-width: 34em; color: #DCE8E9; }
 .aviso { margin-top: 28px; padding-left: 18px; border-left: 4px solid #F0A35E; max-width: 36em; font-size: 1rem; color: #EAF1F1; }
-.boton-video { display: inline-block; margin-top: 28px; padding: 12px 22px; background: #fff; color: var(--petroleo); font-weight: 700; text-decoration: none; }
-.boton-video:hover { background: var(--zinc); }
+.barra { max-width: 1160px; margin: 0 auto clamp(40px, 6vw, 76px); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px 32px; padding-bottom: 22px; border-bottom: 1px solid #3B6570; }
+.barra p { color: #DCE8E9; font-size: 1rem; }
+.botones { display: flex; flex-wrap: wrap; gap: 12px; }
+.boton { display: inline-block; padding: 9px 18px; border: 2px solid #fff; background: #fff; color: var(--petroleo); font-size: 1rem; font-weight: 700; text-decoration: none; }
+.boton:hover { background: var(--zinc); border-color: var(--zinc); color: var(--petroleo); }
+.boton-borde { background: transparent; color: #fff; }
 /* El botón solo aparece cuando VIDEO_URL se sustituye por una dirección http(s). */
 .boton-video:not([href^="http"]) { display: none; }
 
@@ -65,6 +71,7 @@ h1 { font-size: clamp(2.1rem, 4.6vw, 3.5rem); line-height: 1.08; letter-spacing:
 .lecturas > div { padding: 10px 14px 12px; }
 .lecturas > div + div { border-left: 1px solid var(--zinc-linea); }
 .lecturas span { display: block; font-size: .9375rem; color: var(--suave); }
+.lecturas strong, .cifras .num, .resultados td.num, .grafico { font-family: var(--cifra); }
 .lecturas strong { font-size: 1.75rem; line-height: 1.2; font-variant-numeric: tabular-nums; }
 .pedido .veredicto { margin-top: 16px; color: var(--duda); font-weight: 700; }
 
@@ -99,14 +106,18 @@ thead th { color: var(--suave); font-weight: 400; border-bottom: 2px solid var(-
 
 figure + figure { margin-top: 44px; }
 figure img { border: 1px solid var(--zinc-linea); }
-figure .media img { max-width: 860px; width: 100%; }
+figure img { width: 100%; }
+.miniatura { max-width: 520px; }
+.miniatura a { display: block; }
+.miniatura figcaption a { display: inline; }
 figcaption { margin-top: 12px; max-width: 44em; font-size: 1rem; color: var(--suave); }
-.pista { display: none; }
 figcaption strong { color: var(--tinta); }
 .capturas { grid-column: 1 / -1; }
 
 svg { display: block; width: 100%; font-family: Atkinson, system-ui, sans-serif; }
+svg.grafico { font-family: var(--cifra); }
 .arq-estrecha { display: none; max-width: 420px; margin: 0 auto; }
+.rotulo { font-family: Atkinson, system-ui, sans-serif; }
 .grafico { max-width: 720px; }
 .leyenda { display: flex; flex-wrap: wrap; gap: 6px 22px; list-style: none; padding: 0; font-size: 1rem; }
 .leyenda li { margin: 0; display: flex; align-items: center; gap: 8px; }
@@ -132,10 +143,10 @@ footer li span { display: block; color: #DCE8E9; font-size: 1rem; }
   .reparto tbody th { font-size: 1.1875rem; padding-bottom: 4px; }
   .reparto td + td { margin-top: 6px; color: var(--suave); }
   .reparto td + td::before { content: "Queda fuera: "; font-weight: 700; }
-  .captura-ancha { overflow-x: auto; border: 1px solid var(--zinc-linea); }
-  .captura-ancha img { width: 780px; max-width: none; border: 0; }
-  .pista { display: block; margin-bottom: 4px; }
-  .captura-ancha.media img { width: 560px; }
+}
+@media (max-width: 700px) {
+  figure picture { display: block; margin: 0 calc(-1 * var(--margen)); }
+  figure picture img { border-width: 1px 0; }
 }
 @media (max-width: 480px) {
   body { font-size: 1.0625rem; }
@@ -152,13 +163,19 @@ footer li span { display: block; color: #DCE8E9; font-size: 1rem; }
 <a class="salto" href="#problema">Saltar al contenido</a>
 
 <header class="portada">
+  <div class="barra">
+    <p>Caso de David Larré · automatización de procesos con IA</p>
+    <div class="botones">
+      <!-- Vídeo: sustituye VIDEO_URL por la dirección completa (https://…). Hasta entonces el botón no se ve. -->
+      <a class="boton boton-video" href="VIDEO_URL">Ver la demo (3 min)</a>
+      <a class="boton boton-borde" href="https://github.com/davidlarre/b2b-order-intake-automation-case-study">Repositorio</a>
+    </div>
+  </div>
   <div class="portada-caja">
     <div>
       <h1>Los pedidos claros entran solos.<br>Los dudosos los decide una persona.</h1>
       <p class="subtitulo">Cómo automatizar los pedidos que llegan por correo a un distribuidor industrial: una IA los lee, unas reglas los comprueban y el equipo resuelve lo que no está claro.</p>
       <p class="aviso"><strong>Caso ficticio, hecho con IA.</strong> Orvalle Suministros Industriales, sus clientes y todos los datos son inventados. No es un proyecto en producción. El desarrollo se ha hecho con asistencia de IA, <a href="https://github.com/davidlarre/b2b-order-intake-automation-case-study/blob/main/AI_USAGE.md">explicada aquí</a>.</p>
-      <!-- Vídeo: sustituye VIDEO_URL por la dirección completa (https://…). Hasta entonces el botón no se ve. -->
-      <a class="boton-video" href="VIDEO_URL">Ver la demo (3 min)</a>
     </div>
     <div class="pedido" role="group" aria-label="Ejemplo de pedido dudoso">
       <dl>
@@ -293,16 +310,16 @@ footer li span { display: block; color: #DCE8E9; font-size: 1rem; }
     <h2>Cómo se ve</h2>
     <div class="capturas">
       <figure>
-        <div class="captura-ancha" tabindex="0" role="region" aria-label="Captura de la cola de revisión"><img src="img/app-cola.png" width="1800" height="775" loading="lazy" alt="Cola de la app de revisión con cinco pedidos. Cada fila muestra el cliente, el remitente, el asunto y el motivo: por ejemplo, precio distinto del pactado, 6,50 euros frente a 6,20."></div>
-        <figcaption><span class="pista">Desliza la imagen para verla entera.</span><strong>La cola de revisión.</strong> Cada pedido que el sistema no da por bueno llega con su porqué.</figcaption>
+        <picture><source media="(max-width: 700px)" srcset="img/app-cola-movil.png" width="995" height="710"><img src="img/app-cola.png" width="2320" height="901" loading="lazy" alt="Cola de la app de revisión con cinco pedidos y el motivo de cada uno: un correo sin productos, un remitente no registrado, un Excel antiguo que no se puede leer, un precio distinto del pactado (6,50 euros frente a 6,20) y una cantidad dudosa (1000 o 1200 unidades)."></picture>
+        <figcaption><strong>La cola de revisión.</strong> Cada pedido que el sistema no da por bueno llega con su porqué.</figcaption>
       </figure>
       <figure>
-        <div class="captura-ancha media" tabindex="0" role="region" aria-label="Captura de un pedido dudoso"><img src="img/app-discrepancia.png" width="1600" height="1331" loading="lazy" alt="Detalle de un pedido dudoso: el correo dice 1000 unidades, perdón, son 1200. La pantalla ofrece crear el pedido con 1200, teclearlo a mano o descartarlo."></div>
-        <figcaption><span class="pista">Desliza la imagen para verla entera.</span><strong>Un pedido dudoso.</strong> Es el mismo del principio: la persona ve la frase del cliente y elige.</figcaption>
+        <picture><source media="(max-width: 700px)" srcset="img/app-discrepancia-movil.png" width="1170" height="1431"><img src="img/app-discrepancia.png" width="1806" height="576" loading="lazy" alt="Recuadro de decisión de un pedido dudoso: el correo dice 1000 unidades, perdón, son 1200. Los botones permiten crear el pedido con 1200, teclearlo a mano con 1000 o descartarlo."></picture>
+        <figcaption><strong>Un pedido dudoso.</strong> Es el mismo del principio: la persona ve la frase del cliente y elige.</figcaption>
       </figure>
-      <figure>
-        <div class="captura-ancha" tabindex="0" role="region" aria-label="Captura del flujo de n8n"><img src="img/flujo-n8n.png" width="1800" height="588" loading="lazy" alt="Flujo de n8n: recibe el correo, lo guarda, comprueba si es nuevo y si el formato se puede leer, extrae con el lector de reglas y con Gemini, y registra y evalúa el resultado."></div>
-        <figcaption><span class="pista">Desliza la imagen para verla entera.</span><strong>El flujo en n8n.</strong> La evaluación entra por este mismo flujo.</figcaption>
+      <figure class="miniatura">
+        <a href="img/flujo-n8n.png"><img src="img/flujo-n8n.png" width="2540" height="830" loading="lazy" alt="Flujo de n8n, del correo al resultado. Abre la imagen a tamaño completo."></a>
+        <figcaption><strong>El flujo en n8n.</strong> La evaluación entra por este mismo flujo. <a href="img/flujo-n8n.png">Ver a tamaño completo</a></figcaption>
       </figure>
     </div>
   </div>
@@ -319,7 +336,7 @@ footer li span { display: block; color: #DCE8E9; font-size: 1rem; }
       <svg class="grafico" height="246" role="img" aria-labelledby="gt gd">
         <title id="gt">Resultados de los 20 correos por configuración</title>
         <desc id="gd">Solo reglas: 7 OK, 5 ACEPTABLE, 8 FALLO. Solo IA: 18 OK, 1 ACEPTABLE, 1 FALLO. Híbrido: 16 OK, 3 ACEPTABLE, 1 FALLO.</desc>
-        <g font-size="17" font-weight="700" fill="#14272E"><text x="0" y="18">Solo reglas</text><text x="0" y="102">Solo IA</text><text x="0" y="186">Híbrido</text></g>
+        <g font-size="17" font-weight="700" fill="#14272E"><text x="0" y="18" class="rotulo">Solo reglas</text><text x="0" y="102" class="rotulo">Solo IA</text><text x="0" y="186" class="rotulo">Híbrido</text></g>
         <g stroke="#E7ECEB" stroke-width="2">
           <rect x="0" y="28" width="35%" height="36" fill="#0E74A8"/><rect x="35%" y="28" width="25%" height="36" fill="#C98315"/><rect x="60%" y="28" width="40%" height="36" fill="#B3261E"/>
           <rect x="0" y="112" width="90%" height="36" fill="#0E74A8"/><rect x="90%" y="112" width="5%" height="36" fill="#C98315"/><rect x="95%" y="112" width="5%" height="36" fill="#B3261E"/>
@@ -386,7 +403,7 @@ footer li span { display: block; color: #DCE8E9; font-size: 1rem; }
       <li><a href="https://github.com/davidlarre/b2b-order-intake-automation-case-study">Repositorio en GitHub</a><span>Código, diseño y decisiones</span></li>
       <li><a href="https://github.com/davidlarre/b2b-order-intake-automation-case-study/blob/main/eval/resultados-v1.md">Resultados de la evaluación</a><span>Caso a caso</span></li>
       <li><a href="https://github.com/davidlarre/b2b-order-intake-automation-case-study/blob/main/AI_USAGE.md">Uso de IA</a><span>Qué hizo la IA y qué no</span></li>
-      <li><a href="https://www.linkedin.com/in/davidlarre">David Larre en LinkedIn</a><span>Para hablar del caso</span></li>
+      <li><a href="https://www.linkedin.com/in/davidlarre">David Larré en LinkedIn</a><span>Para hablar del caso</span></li>
     </ul>
   </div>
 </footer>
