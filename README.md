@@ -1,7 +1,3 @@
-
-
-https://github.com/user-attachments/assets/822c34dc-cfea-4710-ab3f-1b31e22ba877
-
 # Entrada automatizada de pedidos B2B
 
 ### [Ver la página del caso](https://davidlarre.github.io/b2b-order-intake-automation-case-study/) · [Ver la demo (3 min)](https://davidlarre.github.io/b2b-order-intake-automation-case-study/video/demo-v1.mp4)
@@ -9,6 +5,8 @@ https://github.com/user-attachments/assets/822c34dc-cfea-4710-ab3f-1b31e22ba877
 > **In English.** A portfolio case study that turns B2B customer emails (free text, Excel) into validated ERP orders.<br>
 > It shows how AI extraction, SQL business rules and human review work together, with a small evaluation and its limits stated openly.<br>
 > The company and all data are fictional, and the project was built with AI assistance ([details, in Spanish](AI_USAGE.md)).
+
+https://github.com/user-attachments/assets/822c34dc-cfea-4710-ab3f-1b31e22ba877
 
 **Caso de estudio de portfolio: del correo del cliente al pedido en el ERP, con reglas, IA y revisión humana.**
 
@@ -19,8 +17,6 @@ Un distribuidor recibe unos 1.800 pedidos al mes por correo, en texto libre, Exc
 ¿Solo tienes cinco minutos? Lee [el caso en una página](docs/caso.md), sin tecnicismos.
 
 ## Cómo se ve
-
-[![Ver la demo de 3 minutos](site/img/miniatura-video.png)](https://davidlarre.github.io/b2b-order-intake-automation-case-study/video/demo-v1.mp4)
 
 **La cola de revisión.** Cada pedido que el sistema no da por bueno llega con su porqué.
 
