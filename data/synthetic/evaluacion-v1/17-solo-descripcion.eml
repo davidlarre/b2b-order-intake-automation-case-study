@@ -1,0 +1,20 @@
+From: Laia Puig <pedidos@mantenimentsvalles.example>
+To: pedidos@orvalle.example
+Subject: Comanda guants
+Date: Wed, 18 Nov 2026 10:15:00 +0100
+Message-ID: <ev1-17@mantenimentsvalles.example>
+Authentication-Results: mx.orvalle.example; spf=pass
+ smtp.mailfrom=mantenimentsvalles.example; dmarc=none
+ header.from=mantenimentsvalles.example
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+MIME-Version: 1.0
+
+Bon dia,
+
+Necessitem:
+
+Guante de nitrilo desechable talla L: 10 cajas
+
+Gràcies,
+Laia

@@ -20,9 +20,34 @@ Las decisiones de partida están en [01-reframe-decisions.md](01-reframe-decisio
 5. **Realismo.**
 6. **Una cosa cada vez.**
 
+## Estado: v1 para publicar (25-11-2026)
+
+El caso se presenta ya, con lo que está construido. La **v1** incluye:
+
+- el flujo de punta a punta: correo `.eml` → n8n → extracción (determinista e IA) → reglas en SQL → pedido, petición de datos o revisión;
+- las reglas R02, R08, R11 y R12 y los motivos M01 y M02;
+- la app de revisión mínima de ADV;
+- una evaluación pequeña: 20 correos de desarrollo en las tres configuraciones ([resultados](../eval/resultados-v1.md));
+- el README, el caso en una página ([caso.md](caso.md)) y el guion del vídeo ([guion-video.md](guion-video.md)).
+
+La evaluación de la v1 **no sustituye** a la diseñada en [05](05-synthetic-data-and-evaluation-set.md): no hay prueba congelada ni segunda lectura humana de las etiquetas. D30 dice que la evaluación no se recorta; aquí se aplaza, y se declara.
+
+## Siguiente fase
+
+El incremento de datos y evaluación completa queda **aparcado entero**. Su trabajo empezado (las listas de partida y el ajuste de alcance de 04 y 05) está en la rama `datos-evaluacion`, sin mergear. Incluye:
+
+1. **Generador** de datos sintéticos, con semilla fija y plan de errores.
+2. **80 correos:** 60 de prueba y 20 de desarrollo, con la mezcla de D23.
+3. **Etiquetado** de todos los casos, por David.
+4. **Migración de la Parte A**, con su informe de errores y el histórico.
+5. **Reglas que faltan:** R01, R03–R07, R09, R10, R13, R14 y el resto de las señales de R12.
+6. **Prueba congelada** (manifiesto y tag `prueba-v1`), ejecutada una sola vez cuando existan las reglas.
+
+Quedan también para después, porque no están en la v1: la clasificación del correo, la entrada por Gmail y los envíos, las aprobaciones por correo, el PDF, las consultas SQL y la fase 6 (adopción y gobierno).
+
 ## Fases
 
-Sin calendario fijo: se planifica fase a fase.
+Las fases son las del plan original; lo que entra en la v1 y lo que pasa a la siguiente fase está en las dos secciones anteriores. Sin calendario fijo: se planifica fase a fase.
 
 Los documentos se numeran por orden de lectura, no por fase (p. ej., la fase 2, diseño, produce 04-solution-design.md).
 
@@ -31,13 +56,13 @@ Los documentos se numeran por orden de lectura, no por fase (p. ej., la fase 2, 
 | 0 | Reencuadre | Decisiones del reencuadre (01), plan y repositorio limpios | Opus (decisiones), Sonnet (redacción) |
 | 1 | Discovery | AS-IS, mapa del proceso, oportunidades priorizadas, business case con supuestos | Opus (decisiones), Sonnet (redacción) |
 | 2 | Diseño | TO-BE, reglas, datos mínimos, criterios de aceptación, stack (ADR). Los requisitos van integrados aquí | Opus |
-| 3 | Datos y evaluación | Diseño de los datos sintéticos y del conjunto de evaluación ([05](05-synthetic-data-and-evaluation-set.md)). Los datos completos se generan después del corte vertical de la fase 4 | Opus (método), Claude Code (generación) |
+| 3 | Datos y evaluación | Diseño de los datos sintéticos y del conjunto de evaluación ([05](05-synthetic-data-and-evaluation-set.md)). **Generación y etiquetado: siguiente fase** | Opus (método), Claude Code (generación) |
 | 4 | Construcción | Ver orden más abajo | Sonnet; Opus en diseño de módulos y depuración difícil |
-| 5 | Evaluación | Comparación de configuraciones, cronómetro, coste por caso | Opus (método), Sonnet (ejecución) |
+| 5 | Evaluación | v1: comparación pequeña con 20 casos de desarrollo. **Siguiente fase:** evaluación completa con prueba congelada, cronómetro y coste por caso | Opus (método), Sonnet (ejecución) |
 | 6 | Adopción y gobierno | Guía, formación, permisos, AI Act | Sonnet |
-| 7 | Portfolio | README, página del caso, vídeo de 3 min | Sonnet |
+| 7 | Portfolio | v1: README, página del caso y guion del vídeo de 3 min | Sonnet |
 
-**Orden de construcción:** empieza con un corte vertical mínimo, de punta a punta y con datos pequeños y limpios (hecho el 19-11-2026). Después: extracción completa, app de revisión mínima y los datos y la evaluación en versión reducida ([05](05-synthetic-data-and-evaluation-set.md)). Los incrementos del plan original quedan así repartidos:
+**Orden de construcción:** empieza con un corte vertical mínimo, de punta a punta y con datos pequeños y limpios (hecho el 19-11-2026). Después, la extracción completa y la app de revisión mínima (hechas). **Los datos y la evaluación en versión reducida ([05](05-synthetic-data-and-evaluation-set.md)) pasan a la siguiente fase.** Los incrementos del plan original quedan así repartidos:
 
 1. Supabase y la carga de datos maestros, con el histórico de pedidos.
 2. n8n: de Gmail a la extracción con IA en JSON. Empieza por la prueba de lectura del `.eml` ([04, sección 12](04-solution-design.md#12-notas-para-la-construcción)).
@@ -49,7 +74,7 @@ Los documentos se numeran por orden de lectura, no por fase (p. ej., la fase 2, 
 
 Cada incremento se cierra con su check y un commit. La demo debe poder enseñarse en directo en 3 minutos.
 
-**Recortes si falta tiempo, en este orden:** PDF → panel → modificaciones de pedido → correos con varios pedidos → app de revisión (se sustituye por la vista de Supabase). No se recorta la evaluación.
+**Recortes si falta tiempo, en este orden:** PDF → panel → modificaciones de pedido → correos con varios pedidos → app de revisión (se sustituye por la vista de Supabase). No se recorta la evaluación (en la v1 se aplaza: ver [Siguiente fase](#siguiente-fase)).
 
 **Plan B del incremento de n8n:** si tras 2 sesiones no funciona, el flujo corre como script de Python con los mismos pasos, las mismas reglas y la misma extracción, y el motivo se documenta en un ADR. n8n es la pieza principal del portfolio. El criterio concreto de "no funciona" está en el [ADR 0003](decisions/0003-n8n-orquestador-plan-b.md).
 
@@ -88,7 +113,7 @@ Confirmada en la fase de diseño ([04](04-solution-design.md) y ADR 0001–0004)
 
 ## Decisiones abiertas
 
-- Idioma público (README y página del caso): fase 7.
+- Idioma público (README y página del caso): fase 7. La v1 va en español.
 
 Cerradas en la fase 2: stack, n8n autoalojado y modelo de IA (D27), reglas en SQL y fuente única del prompt (D33) y generador de correos (D24). Ver los ADR 0001–0005. El ADR 0005 se revisó en la fase 3: Gemini gratuito en la demo y Claude como generador.
 

@@ -1,0 +1,411 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pedidos por correo al ERP: caso de automatización B2B</title>
+<meta name="description" content="Caso de portfolio ficticio, hecho con IA: una IA lee los pedidos que llegan por correo, unas reglas deciden y una persona resuelve lo dudoso. Con resultados y límites.">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="es_ES">
+<meta property="og:title" content="Los pedidos claros entran solos. Los dudosos los decide una persona.">
+<meta property="og:description" content="Caso de portfolio ficticio, hecho con IA: del correo del cliente al pedido en el ERP, con reglas, IA y revisión humana.">
+<meta property="og:url" content="https://davidlarre.github.io/b2b-order-intake-automation-case-study/">
+<meta property="og:image" content="https://davidlarre.github.io/b2b-order-intake-automation-case-study/img/app-cola.png">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M9 3h14l7 13-7 13H9L2 16z' fill='%230F3F4C'/%3E%3Ccircle cx='16' cy='16' r='6' fill='%23E7ECEB'/%3E%3C/svg%3E">
+<style>
+@font-face { font-family: Atkinson; font-weight: 400; font-display: swap; src: url(fonts/atkinson-hyperlegible-next-latin-400-normal.woff2) format("woff2"); }
+@font-face { font-family: Atkinson; font-weight: 700; font-display: swap; src: url(fonts/atkinson-hyperlegible-next-latin-700-normal.woff2) format("woff2"); }
+
+:root {
+  color-scheme: light;
+  --tinta: #14272E;
+  --suave: #465A62;
+  --petroleo: #0F3F4C;
+  --zinc: #E7ECEB;
+  --zinc-linea: #BCC8C8;
+  --papel: #FFFFFF;
+  --duda: #A23F06;
+  --duda-fondo: #FFE9D6;
+  --ok: #0E74A8;
+  --aceptable: #C98315;
+  --fallo: #B3261E;
+  /* El cero de Atkinson va tachado: las cifras usan la fuente del sistema. */
+  --cifra: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --margen: clamp(20px, 5vw, 72px);
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { margin: 0; font: 400 1.125rem/1.6 Atkinson, system-ui, sans-serif; color: var(--tinta); background: var(--zinc); }
+h1, h2, h3, p, ul, dl, dd, figure, table { margin: 0; }
+a { color: inherit; text-underline-offset: .18em; text-decoration-thickness: 1px; }
+a:hover { text-decoration-thickness: 3px; }
+:focus-visible { outline: 3px solid #E8590C; outline-offset: 3px; }
+img { max-width: 100%; height: auto; display: block; }
+.salto { position: absolute; left: -9999px; }
+.salto:focus { left: 12px; top: 12px; z-index: 1; background: var(--papel); color: var(--tinta); padding: 8px 14px; }
+
+/* Cabecera: el titular a la izquierda y un pedido real del caso, en papel, a la derecha */
+.portada { background: var(--petroleo); color: #fff; padding: 22px var(--margen) clamp(44px, 6.5vw, 84px); }
+.portada-caja { max-width: 1160px; margin: 0 auto; display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); gap: clamp(36px, 5vw, 72px); align-items: center; }
+h1 { font-size: clamp(2.1rem, 4.6vw, 3.5rem); line-height: 1.08; letter-spacing: -.022em; text-wrap: balance; }
+.subtitulo { margin-top: 22px; font-size: 1.25rem; line-height: 1.5; max-width: 34em; color: #DCE8E9; }
+.aviso { margin-top: 28px; padding-left: 18px; border-left: 4px solid #F0A35E; max-width: 36em; font-size: 1rem; color: #EAF1F1; }
+.barra { max-width: 1160px; margin: 0 auto clamp(40px, 6vw, 76px); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px 32px; padding-bottom: 22px; border-bottom: 1px solid #3B6570; }
+.barra p { color: #DCE8E9; font-size: 1rem; }
+.botones { display: flex; flex-wrap: wrap; gap: 12px; }
+.boton { display: inline-block; padding: 9px 18px; border: 2px solid #fff; background: #fff; color: var(--petroleo); font-size: 1rem; font-weight: 700; text-decoration: none; }
+.boton:hover { background: var(--zinc); border-color: var(--zinc); color: var(--petroleo); }
+.boton-borde { background: transparent; color: #fff; }
+/* El botón solo aparece cuando VIDEO_URL se sustituye por una dirección http(s). */
+.boton-video:not([href^="http"]) { display: none; }
+
+.pedido { background: var(--papel); color: var(--tinta); padding: 26px 28px 28px 54px; position: relative; font-size: 1rem; line-height: 1.5; }
+.pedido::before { content: ""; position: absolute; inset: 0 auto 0 0; width: 34px; border-right: 1px dashed var(--zinc-linea); background: radial-gradient(circle at 17px 17px, var(--petroleo) 0 6px, transparent 6.5px) 0 0 / 34px 34px repeat-y; }
+.pedido dl { display: grid; grid-template-columns: auto 1fr; gap: 2px 14px; padding-bottom: 14px; border-bottom: 1px solid var(--zinc-linea); font-size: .9375rem; }
+.pedido dt { color: var(--suave); }
+.pedido dd { overflow-wrap: anywhere; }
+.pedido .cuerpo { margin-top: 16px; }
+.pedido .linea-dudosa { background: var(--duda-fondo); margin: 4px -8px 0; padding: 2px 8px; font-weight: 700; }
+.lecturas { display: grid; grid-template-columns: 1fr 1fr; margin-top: 20px; border: 1px solid var(--zinc-linea); }
+.lecturas > div { padding: 10px 14px 12px; }
+.lecturas > div + div { border-left: 1px solid var(--zinc-linea); }
+.lecturas span { display: block; font-size: .9375rem; color: var(--suave); }
+.lecturas strong, .cifras .num, .resultados td.num, .grafico { font-family: var(--cifra); }
+.lecturas strong { font-size: 1.75rem; line-height: 1.2; font-variant-numeric: tabular-nums; }
+.pedido .veredicto { margin-top: 16px; color: var(--duda); font-weight: 700; }
+
+/* Secciones: título al margen, contenido a la derecha */
+section { padding: clamp(48px, 6.5vw, 88px) var(--margen); }
+section.papel { background: var(--papel); }
+.caja { max-width: 1160px; margin: 0 auto; display: grid; grid-template-columns: 250px minmax(0, 1fr); gap: 28px clamp(32px, 5vw, 72px); }
+h2 { font-size: 1.75rem; line-height: 1.15; letter-spacing: -.012em; text-wrap: balance; }
+h3 { font-size: 1.1875rem; line-height: 1.3; }
+.texto > * + * { margin-top: 1.1em; }
+.texto p, .texto li { max-width: 40em; }
+.ancho { grid-column: 1 / -1; }
+.nota { color: var(--suave); font-size: 1rem; }
+ul { padding-left: 1.15em; }
+li + li { margin-top: .6em; }
+li::marker { color: var(--ok); }
+
+table { width: 100%; border-collapse: collapse; font-size: 1rem; line-height: 1.45; }
+caption { text-align: left; color: var(--suave); padding-bottom: 10px; }
+th, td { text-align: left; vertical-align: top; padding: 12px 16px 12px 0; border-bottom: 1px solid var(--zinc-linea); }
+thead th { color: var(--suave); font-weight: 400; border-bottom: 2px solid var(--tinta); }
+.num { text-align: right; padding-right: 0; padding-left: 16px; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.cifras th { font-weight: 400; }
+.reparto th:first-child { width: 24%; }
+.reparto td + td { width: 34%; }
+.reparto td + td::first-letter { text-transform: uppercase; }
+.resultados th:not(:first-child) { width: 17%; }
+.resultados thead .num { white-space: normal; vertical-align: bottom; }
+.resultados thead th { vertical-align: bottom; }
+.cifras td.num { font-weight: 700; font-size: 1.25rem; }
+.desliza { overflow-x: auto; }
+
+figure + figure { margin-top: 44px; }
+figure img { border: 1px solid var(--zinc-linea); }
+figure img { width: 100%; }
+.miniatura { max-width: 520px; }
+.miniatura a { display: block; }
+.miniatura figcaption a { display: inline; }
+figcaption { margin-top: 12px; max-width: 44em; font-size: 1rem; color: var(--suave); }
+figcaption strong { color: var(--tinta); }
+.capturas { grid-column: 1 / -1; }
+
+svg { display: block; width: 100%; font-family: Atkinson, system-ui, sans-serif; }
+svg.grafico { font-family: var(--cifra); }
+.arq-estrecha { display: none; max-width: 420px; margin: 0 auto; }
+.rotulo { font-family: Atkinson, system-ui, sans-serif; }
+.grafico { max-width: 720px; }
+.leyenda { display: flex; flex-wrap: wrap; gap: 6px 22px; list-style: none; padding: 0; font-size: 1rem; }
+.leyenda li { margin: 0; display: flex; align-items: center; gap: 8px; }
+.leyenda i { width: 14px; height: 14px; flex: none; }
+
+footer { background: var(--petroleo); color: #fff; padding: clamp(40px, 5vw, 64px) var(--margen); }
+footer .caja { align-items: baseline; }
+footer ul { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 20px 32px; }
+footer li { margin: 0; }
+footer li a { font-weight: 700; }
+footer li span { display: block; color: #DCE8E9; font-size: 1rem; }
+
+@media (max-width: 860px) {
+  .portada-caja, .caja { grid-template-columns: minmax(0, 1fr); }
+  .caja { gap: 20px; }
+  .arq-ancha { display: none; }
+  .arq-estrecha { display: block; }
+  .reparto thead { position: absolute; left: -9999px; }
+  .reparto th:first-child, .reparto td + td { width: auto; }
+  .reparto td + td::first-letter { text-transform: none; }
+  .reparto tr { display: block; padding: 16px 0; border-bottom: 1px solid var(--zinc-linea); }
+  .reparto th, .reparto td { display: block; border: 0; padding: 0; }
+  .reparto tbody th { font-size: 1.1875rem; padding-bottom: 4px; }
+  .reparto td + td { margin-top: 6px; color: var(--suave); }
+  .reparto td + td::before { content: "Queda fuera: "; font-weight: 700; }
+}
+@media (max-width: 700px) {
+  figure picture { display: block; margin: 0 calc(-1 * var(--margen)); }
+  figure picture img { border-width: 1px 0; }
+}
+@media (max-width: 480px) {
+  body { font-size: 1.0625rem; }
+  .pedido { padding: 22px 18px 24px 46px; }
+  .resultados thead th { font-size: .75rem; line-height: 1.3; }
+  .resultados th, .resultados td { padding: 10px 4px 10px 0; }
+  .resultados .num { padding: 10px 0 10px 4px; }
+  .resultados th:not(:first-child) { width: auto; }
+  .resultados thead th:last-child { width: 25%; }
+}
+</style>
+</head>
+<body>
+<a class="salto" href="#problema">Saltar al contenido</a>
+
+<header class="portada">
+  <div class="barra">
+    <p>Caso de David Larré · automatización de procesos con IA</p>
+    <div class="botones">
+      <!-- Vídeo: sustituye VIDEO_URL por la dirección completa (https://…). Hasta entonces el botón no se ve. -->
+      <a class="boton boton-video" href="VIDEO_URL">Ver la demo (3 min)</a>
+      <a class="boton boton-borde" href="https://github.com/davidlarre/b2b-order-intake-automation-case-study">Repositorio</a>
+    </div>
+  </div>
+  <div class="portada-caja">
+    <div>
+      <h1>Los pedidos claros entran solos.<br>Los dudosos los decide una persona.</h1>
+      <p class="subtitulo">Cómo automatizar los pedidos que llegan por correo a un distribuidor industrial: una IA los lee, unas reglas los comprueban y el equipo resuelve lo que no está claro.</p>
+      <p class="aviso"><strong>Caso ficticio, hecho con IA.</strong> Orvalle Suministros Industriales, sus clientes y todos los datos son inventados. No es un proyecto en producción. El desarrollo se ha hecho con asistencia de IA, <a href="https://github.com/davidlarre/b2b-order-intake-automation-case-study/blob/main/AI_USAGE.md">explicada aquí</a>.</p>
+    </div>
+    <div class="pedido" role="group" aria-label="Ejemplo de pedido dudoso">
+      <dl>
+        <dt>De</dt><dd>compras@talleresferran.example</dd>
+        <dt>Asunto</dt><dd>Pedido obra</dd>
+      </dl>
+      <div class="cuerpo">
+        <p>Para la obra de la semana que viene:</p>
+        <p>TOR-M8X30-ZN 1000 uds</p>
+        <p class="linea-dudosa">TUE-M8-ZN 1000 uds (perdón, son 1200)</p>
+      </div>
+      <div class="lecturas">
+        <div><span>La IA lee</span><strong>1200</strong></div>
+        <div><span>El lector de reglas lee</span><strong>1000</strong></div>
+      </div>
+      <p class="veredicto">No coinciden: no se crea el pedido. Decide una persona.</p>
+    </div>
+  </div>
+</header>
+
+<main>
+<section id="problema">
+  <div class="caja">
+    <h2>El problema</h2>
+    <div class="texto">
+      <p>Orvalle vende tornillería, guantes y herramienta a talleres y pequeñas fábricas. Sus clientes piden por correo, cada uno a su manera: texto libre, un Excel propio o un PDF. Cuatro personas leen cada correo, buscan qué producto es, comprueban el precio pactado y lo teclean en el ERP. La empresa quiere crecer sin contratar, y con este proceso no llega.</p>
+      <table class="cifras">
+        <caption>Cifras del escenario: son supuestos, no mediciones.</caption>
+        <tbody>
+          <tr><th scope="row">Pedidos por correo al mes</th><td class="num">1.800</td></tr>
+          <tr><th scope="row">Tiempo para teclear cada uno</th><td class="num">6 min</td></tr>
+          <tr><th scope="row">Horas al mes tecleando pedidos</th><td class="num">180 h</td></tr>
+          <tr><th scope="row">Parte de las 560 horas efectivas del equipo</th><td class="num">32 %</td></tr>
+          <tr><th scope="row">Crecimiento previsto sin contratar</th><td class="num">20 %</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="papel">
+  <div class="caja">
+    <h2>La decisión clave</h2>
+    <div class="texto">
+      <p>Lo fácil sería dárselo todo a una IA. Aquí el trabajo se reparte en tres, y cada parte tiene claro lo que queda fuera.</p>
+      <table class="reparto">
+        <thead><tr><th scope="col">Quién</th><th scope="col">Qué hace</th><th scope="col">Qué queda fuera</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">La IA lee</th><td>Saca de un correo desordenado una lista: qué producto, cuánto y a qué precio.</td><td>identificar al cliente, aceptar un precio o decidir si el pedido sale.</td></tr>
+          <tr><th scope="row">Las reglas deciden</th><td>Comprueban si conocemos a quien escribe, si el producto existe y si el precio es el pactado.</td><td>fiarse de lo segura que diga estar la IA.</td></tr>
+          <tr><th scope="row">Una persona resuelve lo dudoso</th><td>Ve el motivo en una frase, el correo original y los botones que tocan.</td><td>saltarse un precio que tiene que aprobar el comercial.</td></tr>
+        </tbody>
+      </table>
+      <p>Además, un segundo lector, más simple y sin IA, lee lo que puede. Si los dos no coinciden, no se crea el pedido.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="caja">
+    <h2>Cómo está montado</h2>
+    <p class="nota">n8n orquesta, Gemini lee y las reglas viven en la base de datos (Supabase). El ERP es simulado.</p>
+    <div class="ancho">
+      <svg class="arq-ancha" viewBox="0 0 1160 430" role="img" aria-labelledby="arq1t arq1d">
+        <title id="arq1t">Diagrama de arquitectura</title>
+        <desc id="arq1d">El correo entra en n8n, que lo pasa a dos lectores: uno de reglas y Gemini. Las dos lecturas llegan a las reglas en SQL, que consultan los datos maestros. Si todo está claro se crea el pedido en el ERP; si falta un dato, queda pendiente de pedirlo al cliente; si algo es dudoso, va a la app de revisión, donde decide una persona.</desc>
+        <defs><marker id="f1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0L10 5L0 10z" fill="#14272E"/></marker></defs>
+        <g fill="none" stroke="#14272E" stroke-width="1.75" marker-end="url(#f1)">
+          <path d="M126 205H156"/>
+          <path d="M284 190H312V110H340"/><path d="M284 220H312V300H340"/>
+          <path d="M548 110H582V185H610"/><path d="M548 300H582V225H610"/>
+          <path d="M698 344V264"/>
+          <path d="M784 180H816V70H930"/><path d="M784 205H930"/><path d="M784 230H816V345H930"/>
+          <path d="M1124 345H1146V70H1128"/>
+        </g>
+        <g fill="#FFFFFF" stroke="#14272E" stroke-width="1.75">
+          <rect x="4" y="165" width="122" height="80"/><rect x="160" y="165" width="124" height="80"/>
+          <rect x="344" y="68" width="204" height="84"/><rect x="344" y="258" width="204" height="84"/>
+          <rect x="614" y="348" width="168" height="68" fill="#E7ECEB"/>
+          <rect x="934" y="36" width="190" height="68"/><rect x="934" y="171" width="190" height="68" stroke-dasharray="6 5"/>
+        </g>
+        <rect x="614" y="150" width="170" height="110" fill="#0F3F4C"/>
+        <rect x="934" y="305" width="190" height="80" fill="#FFE9D6" stroke="#A23F06" stroke-width="2"/>
+        <g font-size="18" font-weight="700" text-anchor="middle" fill="#14272E">
+          <text x="65" y="211">Correo</text><text x="222" y="201">n8n</text>
+          <text x="446" y="105">Lector de reglas</text><text x="446" y="295">Gemini</text>
+          <text x="699" y="199" fill="#fff">Reglas en SQL</text><text x="698" y="379">Datos maestros</text>
+          <text x="1029" y="76">Pedido en el ERP</text><text x="1029" y="200">Pedir datos</text><text x="1029" y="340">App de revisión</text>
+        </g>
+        <g font-size="15" text-anchor="middle" fill="#465A62">
+          <text x="222" y="224">orquesta</text><text x="446" y="128">Excel y códigos exactos</text><text x="446" y="318">lee y devuelve datos</text>
+          <text x="699" y="223" fill="#DCE8E9">deciden</text><text x="698" y="400">ERP simulado</text>
+          <text x="1029" y="222">registrado, sin enviar</text><text x="1029" y="364" fill="#A23F06">decide una persona</text>
+        </g>
+        <g font-size="15" fill="#14272E"><text x="826" y="62">todo claro</text><text x="826" y="197">falta un dato</text><text x="826" y="337">algo dudoso</text></g>
+      </svg>
+      <svg class="arq-estrecha" viewBox="0 0 360 770" role="img" aria-labelledby="arq2t arq2d">
+        <title id="arq2t">Diagrama de arquitectura</title>
+        <desc id="arq2d">El correo entra en n8n, que lo pasa a dos lectores: uno de reglas y Gemini. Las dos lecturas llegan a las reglas en SQL, que consultan los datos maestros. Si todo está claro se crea el pedido en el ERP; si falta un dato, queda pendiente de pedirlo al cliente; si algo es dudoso, va a la app de revisión, donde decide una persona.</desc>
+        <defs><marker id="f2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#14272E"/></marker></defs>
+        <g fill="none" stroke="#14272E" stroke-width="1.75" marker-end="url(#f2)">
+          <path d="M180 56V80"/><path d="M130 142V162H86V180"/><path d="M230 142V162H274V180"/>
+          <path d="M86 254V276H140V298"/><path d="M274 254V276H220V298"/>
+          <path d="M180 440V392"/>
+          <path d="M60 345H8V557H26"/><path d="M8 557V641H26"/><path d="M8 641V729H26"/><path d="M330 729H350V557H334"/>
+        </g>
+        <g fill="#fff" stroke="#14272E" stroke-width="1.75">
+          <rect x="100" y="6" width="160" height="50"/><rect x="100" y="84" width="160" height="58"/>
+          <rect x="4" y="184" width="164" height="70"/><rect x="192" y="184" width="164" height="70"/>
+          <rect x="100" y="440" width="160" height="60" fill="#E7ECEB"/>
+          <rect x="30" y="526" width="300" height="62"/><rect x="30" y="610" width="300" height="62" stroke-dasharray="6 5"/>
+        </g>
+        <rect x="60" y="302" width="240" height="86" fill="#0F3F4C"/>
+        <rect x="30" y="696" width="300" height="66" fill="#FFE9D6" stroke="#A23F06" stroke-width="2"/>
+        <g font-size="17" font-weight="700" text-anchor="middle" fill="#14272E">
+          <text x="180" y="37">Correo</text><text x="180" y="110">n8n</text><text x="86" y="215">Lector de reglas</text><text x="274" y="215">Gemini</text>
+          <text x="180" y="340" fill="#fff">Reglas en SQL</text><text x="180" y="467">Datos maestros</text>
+          <text x="180" y="553">Pedido en el ERP</text><text x="180" y="637">Pedir datos</text><text x="180" y="725">App de revisión</text>
+        </g>
+        <g font-size="14.5" text-anchor="middle" fill="#465A62">
+          <text x="180" y="130">orquesta</text><text x="86" y="238">Excel y códigos</text><text x="274" y="238">lee y devuelve datos</text>
+          <text x="180" y="364" fill="#DCE8E9">deciden</text><text x="180" y="488">ERP simulado</text>
+          <text x="180" y="575">si todo está claro</text><text x="180" y="659">si falta un dato (registrado, sin enviar)</text><text x="180" y="748" fill="#A23F06">si algo es dudoso: decide una persona</text>
+        </g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<section class="papel">
+  <div class="caja">
+    <h2>Cómo se ve</h2>
+    <div class="capturas">
+      <figure>
+        <picture><source media="(max-width: 700px)" srcset="img/app-cola-movil.png" width="995" height="710"><img src="img/app-cola.png" width="2320" height="901" loading="lazy" alt="Cola de la app de revisión con cinco pedidos y el motivo de cada uno: un correo sin productos, un remitente no registrado, un Excel antiguo que no se puede leer, un precio distinto del pactado (6,50 euros frente a 6,20) y una cantidad dudosa (1000 o 1200 unidades)."></picture>
+        <figcaption><strong>La cola de revisión.</strong> Cada pedido que el sistema no da por bueno llega con su porqué.</figcaption>
+      </figure>
+      <figure>
+        <picture><source media="(max-width: 700px)" srcset="img/app-discrepancia-movil.png" width="1170" height="1431"><img src="img/app-discrepancia.png" width="1806" height="576" loading="lazy" alt="Recuadro de decisión de un pedido dudoso: el correo dice 1000 unidades, perdón, son 1200. Los botones permiten crear el pedido con 1200, teclearlo a mano con 1000 o descartarlo."></picture>
+        <figcaption><strong>Un pedido dudoso.</strong> Es el mismo del principio: la persona ve la frase del cliente y elige.</figcaption>
+      </figure>
+      <figure class="miniatura">
+        <a href="img/flujo-n8n.png"><img src="img/flujo-n8n.png" width="2540" height="830" loading="lazy" alt="Flujo de n8n, del correo al resultado. Abre la imagen a tamaño completo."></a>
+        <figcaption><strong>El flujo en n8n.</strong> La evaluación entra por este mismo flujo. <a href="img/flujo-n8n.png">Ver a tamaño completo</a></figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="caja">
+    <h2>Resultados</h2>
+    <div class="texto">
+      <p>20 correos de desarrollo, una pasada por configuración: solo reglas, solo IA y las dos juntas (híbrido).</p>
+      <ul class="leyenda" aria-hidden="true">
+        <li><i style="background:var(--ok)"></i>OK</li><li><i style="background:var(--aceptable)"></i>ACEPTABLE</li><li><i style="background:var(--fallo)"></i>FALLO</li>
+      </ul>
+      <svg class="grafico" height="246" role="img" aria-labelledby="gt gd">
+        <title id="gt">Resultados de los 20 correos por configuración</title>
+        <desc id="gd">Solo reglas: 7 OK, 5 ACEPTABLE, 8 FALLO. Solo IA: 18 OK, 1 ACEPTABLE, 1 FALLO. Híbrido: 16 OK, 3 ACEPTABLE, 1 FALLO.</desc>
+        <g font-size="17" font-weight="700" fill="#14272E"><text x="0" y="18" class="rotulo">Solo reglas</text><text x="0" y="102" class="rotulo">Solo IA</text><text x="0" y="186" class="rotulo">Híbrido</text></g>
+        <g stroke="#E7ECEB" stroke-width="2">
+          <rect x="0" y="28" width="35%" height="36" fill="#0E74A8"/><rect x="35%" y="28" width="25%" height="36" fill="#C98315"/><rect x="60%" y="28" width="40%" height="36" fill="#B3261E"/>
+          <rect x="0" y="112" width="90%" height="36" fill="#0E74A8"/><rect x="90%" y="112" width="5%" height="36" fill="#C98315"/><rect x="95%" y="112" width="5%" height="36" fill="#B3261E"/>
+          <rect x="0" y="196" width="80%" height="36" fill="#0E74A8"/><rect x="80%" y="196" width="15%" height="36" fill="#C98315"/><rect x="95%" y="196" width="5%" height="36" fill="#B3261E"/>
+        </g>
+        <g font-size="17" font-weight="700" text-anchor="middle">
+          <g fill="#fff"><text x="17.5%" y="52">7</text><text x="80%" y="52">8</text><text x="45%" y="136">18</text><text x="97.5%" y="136">1</text><text x="40%" y="220">16</text><text x="97.5%" y="220">1</text></g>
+          <g fill="#14272E"><text x="47.5%" y="52">5</text><text x="92.5%" y="136">1</text><text x="87.5%" y="220">3</text></g>
+        </g>
+      </svg>
+      <div class="desliza" tabindex="0" role="region" aria-label="Tabla de resultados">
+      <table class="resultados">
+        <thead><tr><th scope="col">Configuración</th><th scope="col" class="num">OK</th><th scope="col" class="num">ACEPTABLE</th><th scope="col" class="num">FALLO</th><th scope="col" class="num">Automáticos erróneos o indebidos</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Solo reglas</th><td class="num">7</td><td class="num">5</td><td class="num">8</td><td class="num">8 de 11</td></tr>
+          <tr><th scope="row">Solo IA</th><td class="num">18</td><td class="num">1</td><td class="num">1</td><td class="num">0 de 11</td></tr>
+          <tr><th scope="row">Híbrido</th><td class="num">16</td><td class="num">3</td><td class="num">1</td><td class="num">0 de 9</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p class="nota">ACEPTABLE es una salida segura que no era la esperada: el caso llega a una persona. La última columna son pedidos creados sin intervención con algún error, o que tenían que ir a revisión.</p>
+      <ul>
+        <li><strong>Las reglas solas no valen.</strong> Dejan líneas fuera y crean el pedido sin avisar.</li>
+        <li><strong>En estos casos, solo IA sale algo mejor que el híbrido.</strong> El segundo lector no evitó ningún pedido equivocado y costó dos revisiones de más. Es el precio de un seguro, y con tan pocos casos no se sabe si compensa.</li>
+        <li><strong>El caso que falló con IA</strong> es un cliente que corrige el código de un producto a mitad de línea. Con el híbrido no se creó ningún pedido equivocado: llegó a una persona.</li>
+      </ul>
+      <p><a href="https://github.com/davidlarre/b2b-order-intake-automation-case-study/blob/main/eval/resultados-v1.md">Todos los fallos, explicados uno a uno</a></p>
+    </div>
+  </div>
+</section>
+
+<section class="papel">
+  <div class="caja">
+    <h2>Los límites</h2>
+    <div class="texto">
+      <ul>
+        <li><strong>Son 20 correos de desarrollo.</strong> 7 sirvieron para construir el sistema y 13 se escribieron conociéndolo. No hay un conjunto de prueba guardado aparte. Con 0 errores en 9 pedidos automáticos, el error real podría llegar a 1 de cada 3.</li>
+        <li><strong>Los 13 correos nuevos y sus etiquetas los escribió una IA (Claude).</strong> Una segunda instancia de Claude, que no las escribió, revisó las 13 etiquetas, sin cambios. Todavía no hay revisión humana.</li>
+        <li><strong>Faltan piezas.</strong> Distinguir un pedido de una consulta, detectar duplicados, comprobar cajas y unidades, leer PDF y enviar respuestas al cliente. Hoy, una consulta con código y cantidad podría acabar en pedido.</li>
+        <li><strong>El ahorro no está demostrado.</strong> Depende de cuánto se tarde en revisar cada pedido dudoso, y eso solo lo dice un piloto con el equipo.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="caja">
+    <h2>Qué viene después</h2>
+    <div class="texto">
+      <ul>
+        <li><strong>Una prueba seria:</strong> 80 correos, etiquetados por una persona, con 60 guardados aparte y ejecutados una sola vez.</li>
+        <li><strong>Las reglas que faltan:</strong> duplicados, unidades y embalajes, e importe máximo, entre otras.</li>
+        <li><strong>La migración de datos maestros:</strong> tarifas pactadas y equivalencias que hoy viven fuera del ERP.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="caja">
+    <h2>Para seguir</h2>
+    <ul>
+      <li><a href="https://github.com/davidlarre/b2b-order-intake-automation-case-study">Repositorio en GitHub</a><span>Código, diseño y decisiones</span></li>
+      <li><a href="https://github.com/davidlarre/b2b-order-intake-automation-case-study/blob/main/eval/resultados-v1.md">Resultados de la evaluación</a><span>Caso a caso</span></li>
+      <li><a href="https://github.com/davidlarre/b2b-order-intake-automation-case-study/blob/main/AI_USAGE.md">Uso de IA</a><span>Qué hizo la IA y qué no</span></li>
+      <li><a href="https://www.linkedin.com/in/davidlarre">David Larré en LinkedIn</a><span>Para hablar del caso</span></li>
+    </ul>
+  </div>
+</footer>
+</body>
+</html>

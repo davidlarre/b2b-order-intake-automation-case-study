@@ -1,0 +1,22 @@
+From: Ferran Roca <compras@talleresferran.example>
+To: pedidos@orvalle.example
+Subject: =?utf-8?q?Reposici=C3=B3n?=
+Date: Mon, 16 Nov 2026 08:30:00 +0100
+Message-ID: <ev1-09@talleresferran.example>
+Authentication-Results: mx.orvalle.example; spf=pass
+ smtp.mailfrom=talleresferran.example; dkim=pass
+ header.d=talleresferran.example; dmarc=pass
+ header.from=talleresferran.example
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+MIME-Version: 1.0
+
+Buenos días,
+
+Para reponer almacén:
+
+torn 8x30 - 500
+arand 8 - 2000
+
+Un saludo,
+Ferran

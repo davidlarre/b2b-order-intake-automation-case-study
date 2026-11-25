@@ -1,0 +1,225 @@
+{
+  "08-texto-catalan.eml": {
+    "nota": "Texto: un código en minúsculas con la cantidad delante y otro con la cantidad detrás. Catalán.",
+    "salida": "automatico",
+    "motivos": [],
+    "lineas": [
+      [
+        "DIS-COR-125",
+        25
+      ],
+      [
+        "BRO-HSS-8",
+        20
+      ]
+    ]
+  },
+  "09-equivalencias.eml": {
+    "nota": "Códigos: las dos líneas usan equivalencias del cliente, en minúsculas. El determinista no las lee: en solo reglas, la revisión M01 es segura pero no hacía falta.",
+    "salida": "automatico",
+    "motivos": [],
+    "lineas": [
+      [
+        "TOR-M8X30-ZN",
+        500
+      ],
+      [
+        "ARA-M8-ZN",
+        2000
+      ]
+    ],
+    "aceptables": [
+      {
+        "salida": "revision",
+        "motivos": [
+          "M01"
+        ]
+      }
+    ]
+  },
+  "10-punto-de-miles.eml": {
+    "nota": "Cantidades: 1.000 son mil unidades, no una.",
+    "salida": "automatico",
+    "motivos": [],
+    "lineas": [
+      [
+        "TOR-M8X30-ZN",
+        1000
+      ],
+      [
+        "TUE-M8-ZN",
+        500
+      ]
+    ]
+  },
+  "11-multiplicacion.eml": {
+    "nota": "Cantidades: 2x500 son 1000 unidades.",
+    "salida": "automatico",
+    "motivos": [],
+    "lineas": [
+      [
+        "TOR-M10X40-ZN",
+        1000
+      ],
+      [
+        "ARA-M10-ZN",
+        1000
+      ]
+    ],
+    "aceptables": [
+      {
+        "salida": "revision",
+        "motivos": [
+          "R12"
+        ]
+      }
+    ]
+  },
+  "12-excel-con-precios.eml": {
+    "nota": "Excel: título antes de la cabecera, cabeceras en catalán, precios iguales a los pactados y fila de total, que no es una línea.",
+    "salida": "automatico",
+    "motivos": [],
+    "lineas": [
+      [
+        "TOR-M8X30-ZN",
+        1500
+      ],
+      [
+        "TUE-M8-ZN",
+        1500
+      ],
+      [
+        "ARA-M8-ZN",
+        3000
+      ]
+    ]
+  },
+  "13-excel-cabeceras-raras.eml": {
+    "nota": "Excel: cabeceras que no están en el mapeo. El determinista no lo lee: en solo reglas, la revisión M01 es segura pero no hacía falta.",
+    "salida": "automatico",
+    "motivos": [],
+    "lineas": [
+      [
+        "GUA-NIT-L",
+        12
+      ],
+      [
+        "GAF-PROT-INC",
+        20
+      ]
+    ],
+    "aceptables": [
+      {
+        "salida": "revision",
+        "motivos": [
+          "M01"
+        ]
+      }
+    ]
+  },
+  "14-excel-unidad-en-celda.eml": {
+    "nota": "Excel y cantidades: una celda trae '200 uds' y la otra 300.",
+    "salida": "automatico",
+    "motivos": [],
+    "lineas": [
+      [
+        "TOR-M8X30-ZN",
+        200
+      ],
+      [
+        "TUE-M8-ZN",
+        300
+      ]
+    ]
+  },
+  "15-discrepancia-excel-cuerpo.eml": {
+    "nota": "Discrepancia: el cuerpo corrige una cantidad del Excel. El pedido correcto es TUE-M8-ZN x800. La revisión por R12 es segura, pero no hacía falta si la IA leyó bien.",
+    "salida": "automatico",
+    "motivos": [],
+    "lineas": [
+      [
+        "TUE-M8-ZN",
+        800
+      ],
+      [
+        "ARA-M8-ZN",
+        500
+      ]
+    ],
+    "aceptables": [
+      {
+        "salida": "revision",
+        "motivos": [
+          "R12"
+        ]
+      }
+    ]
+  },
+  "16-discrepancia-codigo.eml": {
+    "nota": "Discrepancia: el cliente corrige el código en la misma línea. El pedido correcto es TUE-M10-ZN x400.",
+    "salida": "automatico",
+    "motivos": [],
+    "lineas": [
+      [
+        "TUE-M10-ZN",
+        400
+      ],
+      [
+        "ARA-M10-ZN",
+        400
+      ]
+    ],
+    "aceptables": [
+      {
+        "salida": "revision",
+        "motivos": [
+          "R12"
+        ]
+      }
+    ]
+  },
+  "17-solo-descripcion.eml": {
+    "nota": "Códigos: solo descripción (R08, 04 sección 3.2). Se propone un candidato y lo confirma una persona. En solo reglas no hay línea que leer: M01 también es revisión, pero sin el motivo correcto.",
+    "salida": "revision",
+    "motivos": [
+      "R08"
+    ],
+    "aceptables": [
+      {
+        "salida": "revision",
+        "motivos": [
+          "M01"
+        ]
+      }
+    ]
+  },
+  "18-codigo-inexistente.eml": {
+    "nota": "Códigos: referencia que no existe (R08). Se piden datos al cliente. En solo reglas no hay línea que leer: M01 es segura.",
+    "salida": "pedir_datos",
+    "motivos": [
+      "R08"
+    ],
+    "aceptables": [
+      {
+        "salida": "revision",
+        "motivos": [
+          "M01"
+        ]
+      }
+    ]
+  },
+  "19-pdf.eml": {
+    "nota": "Formato no soportado: PDF (D08).",
+    "salida": "revision",
+    "motivos": [
+      "M02"
+    ]
+  },
+  "20-consulta-sin-cantidad.eml": {
+    "nota": "Sin líneas: menciona un código pero pide precio, no un pedido. Sin clasificación, un correo sin líneas va a revisión con M01 (04, sección 6.3). Crear un pedido sería un error.",
+    "salida": "revision",
+    "motivos": [
+      "M01"
+    ]
+  }
+}
