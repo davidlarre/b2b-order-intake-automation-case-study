@@ -356,3 +356,20 @@ def test_solo_adv_puede_leer_los_correos_originales(cur, app_metadata, user_meta
 def test_el_bucket_de_correos_es_privado(cur):
     cur.execute("select public from storage.buckets where id = 'correos'")
     assert cur.fetchone()[0] is False
+
+
+# ---------------------------------------------------------------- fallo técnico (M03)
+
+def test_un_fallo_de_la_ia_se_ve_en_la_cola_y_solo_se_puede_cerrar(cur):
+    cur.execute("set local role service_role")
+    cur.execute("select api.recibir_correo('<m03@pruebas.example>', 'compras@talleresferran.example', 'Pedido',"
+                " 'dmarc=pass', '2026-11-10 09:30+01', 'pruebas')")
+    caso = cur.fetchone()[0]["caso"]
+    cur.execute("select api.enviar_a_revision(%s, 'M03', %s)",
+                (caso, Jsonb({"paso": "extraccion_ia", "error": "timeout"})))
+    cur.execute("reset role")
+    como_adv(cur)
+    fila = next(f for f in llamar(cur, "select adv.cola()") if f["caso"] == caso)
+    assert [m["codigo"] for m in fila["motivos"]] == ["M03"]
+    detalle = llamar(cur, "select adv.detalle_caso(%s)", (caso,))
+    assert [m["accion"] for m in detalle["motivos"]] == ["solo_cerrar"]

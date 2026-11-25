@@ -36,7 +36,7 @@ Se probó con 20 correos, de tres maneras:
 - **La IA leyó muy bien,** tanto que en estos 20 casos el segundo lector no llegó a evitar ningún error y costó dos revisiones de más. Es el precio de un seguro, y con tan pocos casos no se sabe todavía si compensa.
 - **El caso que salió mal** fue un cliente que corrige el *código* de un producto a mitad de línea. La IA no se aclaró. Con las dos juntas no se creó ningún pedido equivocado: acabó en manos de una persona.
 
-Los fallos, uno a uno, en los [resultados](../eval/resultados-v1.md).
+Los fallos, uno a uno, en los [resultados](../eval/resultados-v1.md). Esta página cuenta la v1; la [v1.1](../eval/resultados-v1-1.md) corrige el caso que salió mal.
 
 ## Los límites
 

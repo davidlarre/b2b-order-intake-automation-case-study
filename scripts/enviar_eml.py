@@ -72,7 +72,7 @@ def enviar(url, token, eml: bytes):
         url, data=eml, method="POST",
         headers={"X-Pruebas-Token": token, "Content-Type": "message/rfc822"},
     )
-    with urllib.request.urlopen(peticion, timeout=120) as respuesta:
+    with urllib.request.urlopen(peticion, timeout=240) as respuesta:
         return json.loads(respuesta.read())
 
 

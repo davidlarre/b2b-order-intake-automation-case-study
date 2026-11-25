@@ -195,6 +195,8 @@ Lo que ve la gestora ("esperando al comercial", "bloqueado por Finanzas") es una
 | **Fallo de un caso** | El servicio responde, pero el resultado no vale (por ejemplo, JSON inválido) | 2 reintentos. Si sigue fallando → `en_revision` con el motivo "fallo técnico" (M03), visible en la cola |
 | **Caída general** | 3 errores seguidos del servicio (timeout, 5xx o 429) de la IA o de la API | Los casos se quedan en `recibido` y se avisa a ADV y a IT. El temporizador reintenta el más antiguo; cuando funciona, se retoman los demás |
 
+**Construido en la v1.1:** si falla la extracción con IA (error HTTP, tiempo agotado o respuesta no válida), el caso va a `en_revision` con M03. No distingue todavía la caída general: no hay reintento posterior ni aviso.
+
 Los errores de un caso concreto no cuentan para la caída general: tres correos raros seguidos no paran el sistema.
 
 **Modo manual.** Si se acerca el corte durante una caída, ADV decide si pasa a modo manual:
