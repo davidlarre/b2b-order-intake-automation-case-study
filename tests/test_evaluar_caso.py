@@ -64,9 +64,13 @@ def test_r02_email_compartido_por_dos_clientes(cur):
 @pytest.mark.parametrize("remitente, sugerencia", [
     ("nuevo@talleresferran.example", "C0001"),   # dominio exacto de un cliente → sugerencia
     ("nuevo@ta11eresferran.example", None),      # dominio parecido → nunca
-    ("talleresferran@correo-gratuito.example", None),          # dominio público → nunca
+    ("talleresferran@correo-gratuito.example", None),  # dominio público → nunca
 ])
 def test_r02_remitente_desconocido_y_sugerencia_por_dominio(cur, remitente, sugerencia):
+    # Un dominio público ficticio, y un contacto de un cliente en él: sin la lista, se sugeriría ese cliente.
+    cur.execute("insert into intake.dominios_publicos (dominio) values ('correo-gratuito.example')")
+    cur.execute("insert into erp.contactos (cliente, email, nombre) values "
+                "('C0001', 'otro@correo-gratuito.example', 'Contacto de prueba')")
     caso = crear_caso(cur, remitente, [("TOR-M8X30-ZN", 500, None)])
     assert evaluar(cur, caso)["salida"] == "revision"
     [(codigo, _, _, detalle)] = motivos(cur, caso)
