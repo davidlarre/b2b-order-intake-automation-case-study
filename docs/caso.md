@@ -24,19 +24,20 @@ Además, un segundo lector, más simple y sin IA, lee lo que puede. **Si los dos
 
 ## Los resultados
 
-Se probó con 20 correos, de tres maneras:
+Se probó con 20 correos, de tres maneras (v1.1):
 
 | | Bien | Seguro, pero no lo esperado | Mal | Pedidos automáticos erróneos |
 |---|---|---|---|---|
 | Solo reglas | 7 | 5 | 8 | 8 de 11 |
-| Solo IA | 18 | 1 | 1 | 0 de 11 |
-| **Las dos juntas** | 16 | 3 | 1 | 0 de 9 |
+| Solo IA | 19 | 1 | 0 | 0 de 12 |
+| **Las dos juntas** | 16 | 4 | 0 | 0 de 9 |
 
 - **Las reglas solas no valen:** dejan líneas fuera sin avisar.
-- **La IA leyó muy bien,** tanto que en estos 20 casos el segundo lector no llegó a evitar ningún error y costó dos revisiones de más. Es el precio de un seguro, y con tan pocos casos no se sabe todavía si compensa.
-- **El caso que salió mal** fue un cliente que corrige el *código* de un producto a mitad de línea. La IA no se aclaró. Con las dos juntas no se creó ningún pedido equivocado: acabó en manos de una persona.
+- **La IA leyó muy bien,** tanto que en estos 20 casos el segundo lector no llegó a evitar ningún error y costó tres revisiones de más. Es el precio de un seguro, y con tan pocos casos no se sabe todavía si compensa.
+- **El caso que salió mal en la v1** fue un cliente que corrige el *código* de un producto a mitad de línea: la IA no se aclaró. Con una regla nueva, la IA lo lee bien; con las dos juntas, el segundo lector no, y lo decide una persona.
+- **Si la IA no responde,** el pedido llega a una persona con el motivo. Pasó con 15 casos en dos pruebas con el servicio saturado, y ninguno creó un pedido. El sistema todavía no lo reintenta solo más tarde.
 
-Los fallos, uno a uno, en los [resultados](../eval/resultados-v1.md). Esta página cuenta la v1; la [v1.1](../eval/resultados-v1-1.md) corrige el caso que salió mal.
+El detalle está en los [resultados v1.1](../eval/resultados-v1-1.md), y los fallos de la primera versión, en los [resultados v1](../eval/resultados-v1.md). El vídeo muestra la v1.
 
 ## Los límites
 
