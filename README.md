@@ -1,3 +1,7 @@
+
+
+https://github.com/user-attachments/assets/822c34dc-cfea-4710-ab3f-1b31e22ba877
+
 # Entrada automatizada de pedidos B2B
 
 ### [Ver la página del caso](https://davidlarre.github.io/b2b-order-intake-automation-case-study/) · [Ver la demo (3 min)](https://davidlarre.github.io/b2b-order-intake-automation-case-study/video/demo-v1.mp4)
