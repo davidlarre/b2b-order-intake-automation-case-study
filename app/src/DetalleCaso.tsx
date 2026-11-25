@@ -172,7 +172,7 @@ export function DetalleCaso({ caso, alVolver, alSiguiente }: Props) {
         <h2 id="cliente" className="rotulo">Cliente</h2>
         {cliente.confirmado
           ? <p className="cliente-nombre">{cliente.nombre}</p>
-          : <p className="cliente-nombre en-duda"><Icono nombre="aviso" tamano={22} /> Sin confirmar</p>}
+          : <p className="cliente-nombre en-duda"><Icono nombre="aviso" tamano={22} /> {cliente.titulo ?? 'Sin confirmar'}</p>}
         {cliente.nota && <p className="secundario pequeno">{cliente.nota}</p>}
       </section>
 

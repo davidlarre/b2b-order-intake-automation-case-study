@@ -52,7 +52,7 @@ export function Cola({ alAbrir, aviso }: { alAbrir: (caso: number) => void; avis
               </thead>
               <tbody>
                 {filas.map((f) => {
-                  const cliente = f.razon_social ?? (f.cliente_por_remitente ? f.cliente_propuesto : null);
+                  const cliente = f.razon_social;
                   const prioridad = PRIORIDAD[f.prioridad];
                   return (
                     <tr key={f.caso} tabIndex={0} aria-label={`Abrir el pedido nº ${f.caso}`}

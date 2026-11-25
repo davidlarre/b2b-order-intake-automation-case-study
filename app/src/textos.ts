@@ -105,14 +105,18 @@ export function etiquetaEstado(det: Detalle): string | null {
 
 export type Cliente =
   | { confirmado: true; nombre: string; nota: string | null }
-  | { confirmado: false; nota: string };
+  | { confirmado: false; titulo?: string; nota: string };
 
 export function clienteDe(det: Detalle): Cliente {
   const n = det.nombres;
   if (det.cliente) return { confirmado: true, nombre: nombreCliente(n, det.cliente), nota: null };
-  if (det.cliente_por_remitente && det.cliente_propuesto) {
-    return { confirmado: true, nombre: nombreCliente(n, det.cliente_propuesto),
-             nota: 'Identificado por el remitente, que es un contacto registrado del cliente.' };
+  // Con el cliente sin asignar y ningún R02 abierto, las reglas no han corrido (M01, M02, M03): nada está comprobado.
+  if (det.cliente_por_remitente) {
+    return {
+      confirmado: false,
+      titulo: 'Sin comprobar: el pedido no ha pasado por las reglas',
+      nota: det.cliente_propuesto ? `Propuesto: ${nombreCliente(n, det.cliente_propuesto)} (por el remitente del correo).` : '',
+    };
   }
   const r02 = det.motivos.find((m) => m.estado === 'abierto' && m.codigo === 'R02');
   const d = (r02?.detalle ?? {}) as D;
@@ -292,7 +296,7 @@ export function filaProducto(l: Linea, det: Detalle): FilaProducto {
 }
 
 export function notaPrecios(det: Detalle): string | null {
-  if (det.cliente || det.cliente_por_remitente || !det.cliente_propuesto) {
+  if (det.cliente || !det.cliente_propuesto) {
     return !det.cliente && !det.cliente_propuesto && det.lineas.length > 0
       ? 'Los precios se calcularán al confirmar el cliente.'
       : null;
