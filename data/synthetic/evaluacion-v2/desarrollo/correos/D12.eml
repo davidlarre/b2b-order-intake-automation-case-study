@@ -1,0 +1,28 @@
+From: Albert Casals <albert.casals@orvalle.example>
+To: pedidos@orvalle.example
+Subject: Fwd: pedido
+Date: Tue, 10 Nov 2026 10:02:00 +0100
+Message-ID: <v2-d12@orvalle.example>
+Authentication-Results: mx.orvalle.example; spf=pass smtp.mailfrom=orvalle.example; dkim=pass header.d=orvalle.example; dmarc=pass header.from=orvalle.example
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+MIME-Version: 1.0
+
+Os paso pedido de Roqueta.
+
+Albert
+
+---------- Forwarded message ---------
+De: Núria Molina <oficina@tallersroquetaifills.example>
+Date: mar, 10 nov 2026 a las 9:41
+Subject: pedido
+To: <albert.casals@orvalle.example>
+
+Hola Albert,
+
+Nos hacen falta:
+CAS-AZ 6
+CHA-AM-L 6
+
+Gracias,
+Núria

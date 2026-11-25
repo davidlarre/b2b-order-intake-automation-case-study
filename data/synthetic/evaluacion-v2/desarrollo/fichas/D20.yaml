@@ -1,0 +1,22 @@
+id: D20
+tipo: otros
+formato: pdf
+persona: proveedor de transporte
+cliente: null
+trampas: [factura_de_proveedor]
+correos:
+  - eml: D20.eml
+    de: [Facturación Transportes Olmedilla, facturacion@transportesolmedilla.example]
+    asunto: Factura F26-10877
+    fecha: 2026-11-04T07:50:00+01:00
+    cuerpo: |
+      Estimado cliente:
+
+      Le adjuntamos la factura F26-10877, correspondiente a los portes de octubre. Vencimiento: 4 de diciembre de 2026.
+
+      Departamento de facturación
+      Transportes Olmedilla, S.L.
+    pdf:
+      nombre: F26-10877.pdf
+      lineas: ["Transportes Olmedilla, S.L.", "Factura F26-10877", "Base imponible 1.240,00 EUR", "IVA 21 % 260,40 EUR", "Total 1.500,40 EUR"]
+debe_incluir: ["factura"]

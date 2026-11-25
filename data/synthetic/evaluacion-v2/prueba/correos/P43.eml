@@ -1,0 +1,15 @@
+From: Paco Pujol <pedidos@cerrajeriahermosilla.example>
+To: pedidos@orvalle.example
+Subject: cambio en el 1045
+Date: Mon, 02 Nov 2026 08:40:00 +0100
+Message-ID: <v2-p43@cerrajeriahermosilla.example>
+Authentication-Results: mx.orvalle.example; spf=pass smtp.mailfrom=cerrajeriahermosilla.example; dmarc=none header.from=cerrajeriahermosilla.example
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+MIME-Version: 1.0
+
+Buenas,
+
+Del pedido 1045, los TIR-8X60-ZN que sean 400 y no 200. Lo demás igual.
+
+Paco

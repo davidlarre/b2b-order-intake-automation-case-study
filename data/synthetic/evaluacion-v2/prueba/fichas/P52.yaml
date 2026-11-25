@@ -1,0 +1,18 @@
+id: P52
+tipo: consulta
+formato: texto
+persona: carpintero
+cliente: C0106
+trampas: [frontera_consulta_pedido]
+otros_codigos: [LIJ-HOJ-80, ADH-EPO-25]
+correos:
+  - eml: P52.eml
+    de: [Paco Camps, almacen@carpinteriazurita.example]
+    asunto: "¿tenéis?"
+    fecha: 2026-11-06T09:40:00+01:00
+    dmarc: none
+    cuerpo: |
+      ¿Tenéis en stock LIJ-HOJ-80 (necesito 100) y ADH-EPO-25 (3)? Si es que sí, mandadlos. Si no, no hagáis nada y ya miraré.
+
+      Paco
+debe_incluir: ["mandadlos"]

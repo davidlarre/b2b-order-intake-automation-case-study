@@ -1,0 +1,70 @@
+id: P18
+conjunto: prueba
+origen: generado
+eml:
+- P18a.eml
+- P18b.eml
+- P18c.eml
+tipo: pedido_nuevo
+tipos_aceptables: []
+idioma: es
+cliente: C0111
+trampas:
+- faltan_dos_datos
+- respuesta_automatica
+- respuesta_incompleta
+salida:
+  inicial: pedir_datos
+  final: revision
+  aceptables: []
+motivos:
+- codigo: R05
+  linea: null
+  momento: inicial
+- codigo: R10-EMBALAJE
+  linea: 1
+  momento: inicial
+- codigo: M06
+  linea: null
+  momento: final
+- codigo: R05
+  linea: null
+  momento: final
+revision_necesaria: true
+peticion:
+- campo: direccion
+  linea: null
+  opciones:
+  - 1
+  - 2
+- campo: cantidad
+  linea: 1
+  opciones:
+  - 50
+  - 100
+cabecera:
+  num_pedido_cliente: null
+  direccion: null
+  fecha_prevista: '2026-11-10'
+  observaciones_entrega: null
+  condiciones: []
+lineas:
+- texto: TAM-M10X90   70 uds
+  producto: TAM-M10X90
+  cantidad: 70
+  unidad: ud
+  cantidad_uv: 70
+  precio_pedido: null
+- texto: BRO-SDS-12X160   4
+  producto: BRO-SDS-12X160
+  cantidad: 4
+  unidad: ud
+  cantidad_uv: 4
+  precio_pedido: null
+depende_de:
+- R05
+- R10
+- RESPUESTA
+marcas: []
+nota_marcas: null
+notas: 'P18b es una respuesta automática: se registra y se ignora. P18c solo da la cantidad.'

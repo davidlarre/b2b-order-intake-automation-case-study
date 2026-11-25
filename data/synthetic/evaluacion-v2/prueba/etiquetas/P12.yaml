@@ -1,0 +1,45 @@
+id: P12
+conjunto: prueba
+origen: generado
+eml:
+- P12.eml
+tipo: pedido_nuevo
+tipos_aceptables: []
+idioma: es
+cliente: C0086
+trampas:
+- tarifa_caducada_sin_precio
+salida:
+  inicial: automatico
+  final: automatico
+  aceptables: []
+motivos: []
+revision_necesaria: null
+peticion: []
+cabecera:
+  num_pedido_cliente: null
+  direccion:
+    calle: Carrer de la Forja
+    numero: '80'
+    nave: null
+    cp: 08140
+  fecha_prevista: '2027-01-29'
+  observaciones_entrega: null
+  condiciones: []
+lineas:
+- texto: Hola, mandadnos 4 LLC-17 y 2 LLC-19.
+  producto: LLC-17
+  cantidad: 4
+  unidad: ud
+  cantidad_uv: 4
+  precio_pedido: null
+- texto: Hola, mandadnos 4 LLC-17 y 2 LLC-19.
+  producto: LLC-19
+  cantidad: 2
+  unidad: ud
+  cantidad_uv: 2
+  precio_pedido: null
+depende_de: []
+marcas: []
+nota_marcas: null
+notas: 'La tarifa de LLC-17 caducó el 28-01-2027: precio general.'

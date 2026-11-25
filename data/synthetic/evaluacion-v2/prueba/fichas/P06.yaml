@@ -1,0 +1,23 @@
+id: P06
+tipo: pedido_nuevo
+formato: texto
+persona: compras de cerrajería
+cliente: C0043
+trampas: [unidad_convertible]
+correos:
+  - eml: P06.eml
+    de: [Youssef Costa, compras@cerrajeriaindustrialvaldes.example]
+    asunto: Pedido inox
+    fecha: 2026-11-04T08:25:00+01:00
+    dmarc: none
+    cuerpo: |
+      Buenos días,
+
+      Necesitamos 3 cajas de 100 de TUE-M10-A2 y 2 cajas de 100 de ARA-M10-A2.
+
+      Un saludo,
+      Youssef
+lineas:
+  - {producto: TUE-M10-A2, cantidad: 3, unidad: caja, cantidad_uv: 300, como: codigo}
+  - {producto: ARA-M10-A2, cantidad: 2, unidad: caja, cantidad_uv: 200, como: codigo}
+debe_incluir: ["cajas de 100"]

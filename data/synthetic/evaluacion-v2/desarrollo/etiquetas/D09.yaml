@@ -1,0 +1,55 @@
+id: D09
+conjunto: desarrollo
+origen: generado
+eml:
+- D09.eml
+tipo: pedido_nuevo
+tipos_aceptables: []
+idioma: es
+cliente: C0060
+trampas:
+- descatalogado_sin_sustituto
+salida:
+  inicial: revision
+  final: revision
+  aceptables: []
+motivos:
+- codigo: R09
+  linea: 1
+  momento: inicial
+revision_necesaria: true
+peticion: []
+cabecera:
+  num_pedido_cliente: null
+  direccion:
+    calle: Passeig Fluvial
+    numero: '23'
+    nave: null
+    cp: 08420
+  fecha_prevista: '2026-11-06'
+  observaciones_entrega: null
+  condiciones: []
+lineas:
+- texto: MAR-300 | 3
+  producto: MAR-300
+  cantidad: 3
+  unidad: ud
+  cantidad_uv: 3
+  precio_pedido: null
+- texto: MAR-500 | 3
+  producto: MAR-500
+  cantidad: 3
+  unidad: ud
+  cantidad_uv: 3
+  precio_pedido: null
+- texto: FLE-5 | 4
+  producto: FLE-5
+  cantidad: 4
+  unidad: ud
+  cantidad_uv: 4
+  precio_pedido: null
+depende_de:
+- R09
+marcas: []
+nota_marcas: null
+notas: Descatalogado sin sustituto aprobado.

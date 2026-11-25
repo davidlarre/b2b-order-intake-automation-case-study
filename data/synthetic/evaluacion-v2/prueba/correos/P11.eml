@@ -1,0 +1,16 @@
+From: =?utf-8?q?Gl=C3=B2ria?= Prieto <compras@hidraulicasalcedo.example>
+To: pedidos@orvalle.example
+Subject: Repetir OC-1187
+Date: Thu, 05 Nov 2026 11:30:00 +0100
+Message-ID: <v2-p11@hidraulicasalcedo.example>
+Authentication-Results: mx.orvalle.example; spf=pass smtp.mailfrom=hidraulicasalcedo.example; dkim=pass header.d=hidraulicasalcedo.example; dmarc=pass header.from=hidraulicasalcedo.example
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+MIME-Version: 1.0
+
+Buenos días,
+
+Repetidnos el pedido OC-1187, igual que la otra vez. El nuevo número es OC-1204.
+
+Gracias,
+Glòria

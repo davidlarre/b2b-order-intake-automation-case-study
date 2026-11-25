@@ -1,0 +1,18 @@
+From: Youssef Riera <compras@mecanizadostorrubia.example>
+To: pedidos@orvalle.example
+Subject: Pedido discos 2026-88
+Date: Fri, 06 Nov 2026 10:00:00 +0100
+Message-ID: <v2-p14a@mecanizadostorrubia.example>
+Authentication-Results: mx.orvalle.example; spf=pass smtp.mailfrom=mecanizadostorrubia.example; dkim=pass header.d=mecanizadostorrubia.example; dmarc=pass header.from=mecanizadostorrubia.example
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+MIME-Version: 1.0
+
+Hola,
+
+Pedido 2026-88:
+DIS-DES-125  20
+DIS-COR-125  50
+
+Youssef Riera
+Mecanizados Torrubia, S.A.

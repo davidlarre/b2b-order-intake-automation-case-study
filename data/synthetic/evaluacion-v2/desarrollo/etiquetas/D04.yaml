@@ -1,0 +1,42 @@
+id: D04
+conjunto: desarrollo
+origen: generado
+eml:
+- D04.eml
+tipo: pedido_nuevo
+tipos_aceptables: []
+idioma: es
+cliente: C0097
+trampas:
+- tarifa_caducada_con_precio_viejo
+salida:
+  inicial: revision
+  final: revision
+  aceptables: []
+motivos:
+- codigo: R11
+  linea: 1
+  momento: inicial
+revision_necesaria: true
+peticion: []
+cabecera:
+  num_pedido_cliente: null
+  direccion:
+    calle: Carrer dels Serrallers
+    numero: '47'
+    nave: null
+    cp: 08181
+  fecha_prevista: '2027-01-29'
+  observaciones_entrega: null
+  condiciones: []
+lineas:
+- texto: ¿Nos enviáis 15 cajas de GUA-NIT-M, al precio de siempre (6,10)?
+  producto: GUA-NIT-M
+  cantidad: 15
+  unidad: caja
+  cantidad_uv: 15
+  precio_pedido: 6.1
+depende_de: []
+marcas: []
+nota_marcas: null
+notas: La tarifa de 6,10 caducó el 28-01-2027; rige la general, 6,90.

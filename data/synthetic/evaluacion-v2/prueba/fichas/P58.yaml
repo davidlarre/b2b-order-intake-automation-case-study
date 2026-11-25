@@ -1,0 +1,18 @@
+id: P58
+tipo: otros
+formato: texto
+persona: spam
+cliente: null
+trampas: [spam]
+correos:
+  - eml: P58.eml
+    de: [Posiciona Ya, ofertas@posicionaya.example]
+    asunto: Sube al nº 1 de los buscadores en 30 días
+    fecha: 2026-11-10T06:15:00+01:00
+    dmarc: none
+    cuerpo: |
+      Hola:
+
+      ¿Quieres más clientes? Te ponemos en primera posición o te devolvemos el dinero. Auditoría gratuita solo esta semana. Responde SÍ y te llamamos.
+
+      El equipo de Posiciona Ya

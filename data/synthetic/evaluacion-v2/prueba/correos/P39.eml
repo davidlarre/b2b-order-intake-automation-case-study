@@ -1,0 +1,13 @@
+From: Raquel Prieto <administracion@mantenimientosintegraleszamarreno.example>
+To: pedidos@orvalle.example
+Subject: pedido
+Date: Thu, 19 Nov 2026 11:05:00 +0100
+Message-ID: <v2-p39@mantenimientosintegraleszamarreno.example>
+Authentication-Results: mx.orvalle.example; spf=pass smtp.mailfrom=mantenimientosintegraleszamarreno.example; dmarc=none header.from=mantenimientosintegraleszamarreno.example
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+MIME-Version: 1.0
+
+Hola, ¿nos repetís el de la otra vez? Lo mismo, gracias.
+
+Raquel

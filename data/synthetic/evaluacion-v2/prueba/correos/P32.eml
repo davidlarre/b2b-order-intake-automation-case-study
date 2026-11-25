@@ -1,0 +1,18 @@
+From: Mireia =?utf-8?q?Mar=C3=ADn?= <pedidos@estructurasmetalicasgarridovega.example>
+To: pedidos@orvalle.example
+Subject: Pedido GV-1190
+Date: Tue, 17 Nov 2026 09:35:00 +0100
+Message-ID: <v2-p32@estructurasmetalicasgarridovega.example>
+Authentication-Results: mx.orvalle.example; spf=pass smtp.mailfrom=estructurasmetalicasgarridovega.example; dkim=pass header.d=estructurasmetalicasgarridovega.example; dmarc=pass
+ header.from=estructurasmetalicasgarridovega.example
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+MIME-Version: 1.0
+
+<html><body style="font-family:Calibri">
+<p>Buenos días:</p>
+<p>Pedido GV-1190:</p>
+<p>VAR-M12-ZN, 50 uds, 2,12 €/ud</p>
+<p>Atentamente,<br>Mireia Marín</p>
+<p>Estructuras Metálicas Garrido Vega, S.L.<br>Domicilio fiscal: Plaça de l&#x27;Església 3, 08150 Parets del Vallès</p>
+</body></html>

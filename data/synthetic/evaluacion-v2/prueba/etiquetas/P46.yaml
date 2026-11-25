@@ -1,0 +1,38 @@
+id: P46
+conjunto: prueba
+origen: generado
+eml:
+- P46.eml
+tipo: modificacion_anulacion
+tipos_aceptables:
+- dudoso
+idioma: mixto
+cliente: C0115
+trampas:
+- cambio_de_fecha
+- mezcla_de_idiomas
+salida:
+  inicial: revision
+  final: revision
+  aceptables:
+  - salida: revision
+    motivos:
+    - M01
+motivos:
+- codigo: R01
+  linea: null
+  momento: inicial
+revision_necesaria: true
+peticion: []
+cabecera:
+  num_pedido_cliente: null
+  direccion: null
+  fecha_prevista: null
+  observaciones_entrega: null
+  condiciones: []
+lineas: []
+depende_de: []
+marcas:
+- 'catalan: la ficha dice «frases» y el correo parece «entero»'
+nota_marcas: 'Catalán con «Mejor el jueves 5» en castellano: mixto.'
+notas: null

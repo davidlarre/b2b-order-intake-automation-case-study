@@ -1,0 +1,13 @@
+From: Marc Popescu <taller@estampacionesroldansur.example>
+To: pedidos@orvalle.example
+Subject: discos
+Date: Tue, 10 Nov 2026 07:55:00 +0100
+Message-ID: <v2-p17a@estampacionesroldansur.example>
+Authentication-Results: mx.orvalle.example; spf=pass smtp.mailfrom=estampacionesroldansur.example; dmarc=none header.from=estampacionesroldansur.example
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+MIME-Version: 1.0
+
+buenas, 100 DIS-COR-125 y 10 DIS-LAM-120
+
+Enviado desde mi móvil

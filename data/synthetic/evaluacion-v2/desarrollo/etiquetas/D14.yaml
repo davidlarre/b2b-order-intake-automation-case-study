@@ -1,0 +1,36 @@
+id: D14
+conjunto: desarrollo
+origen: generado
+eml:
+- D14.eml
+tipo: pedido_nuevo
+tipos_aceptables: []
+idioma: es
+cliente: C0037
+trampas:
+- pdf
+salida:
+  inicial: revision
+  final: revision
+  aceptables: []
+motivos:
+- codigo: M02
+  linea: null
+  momento: inicial
+revision_necesaria: true
+peticion: []
+cabecera:
+  num_pedido_cliente: '5540'
+  direccion:
+    calle: Carrer de la Mecànica
+    numero: '88'
+    nave: null
+    cp: 08755
+  fecha_prevista: '2026-11-11'
+  observaciones_entrega: null
+  condiciones: []
+lineas: []
+depende_de: []
+marcas: []
+nota_marcas: null
+notas: null

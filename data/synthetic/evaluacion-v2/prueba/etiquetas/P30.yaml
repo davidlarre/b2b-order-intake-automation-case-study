@@ -1,0 +1,60 @@
+id: P30
+conjunto: prueba
+origen: generado
+eml:
+- P30.eml
+tipo: pedido_nuevo
+tipos_aceptables: []
+idioma: es
+cliente: C0036
+trampas:
+- solo_descripcion
+- descatalogado_con_sustituto
+- firma_con_direccion_fiscal
+salida:
+  inicial: revision
+  final: revision
+  aceptables: []
+motivos:
+- codigo: R08
+  linea: 1
+  momento: inicial
+- codigo: R09
+  linea: 2
+  momento: inicial
+revision_necesaria: true
+peticion: []
+cabecera:
+  num_pedido_cliente: CM-415
+  direccion:
+    calle: Carrer del Progrés
+    numero: '33'
+    nave: Nave 2
+    cp: 08291
+  fecha_prevista: '2026-11-16'
+  observaciones_entrega: null
+  condiciones: []
+lineas:
+- texto: '| Disco de corte para metal de 230 | 50'
+  producto: DIS-COR-230
+  cantidad: 50
+  unidad: ud
+  cantidad_uv: 50
+  precio_pedido: null
+- texto: DIS-LAM-60 | Disco láminas grano 60 | 20
+  producto: DIS-LAM-60
+  cantidad: 20
+  unidad: ud
+  cantidad_uv: 20
+  precio_pedido: null
+- texto: ELE-RUT-2-5X350 | Electrodo 2,5 | 4
+  producto: ELE-RUT-2-5X350
+  cantidad: 4
+  unidad: paquete
+  cantidad_uv: 4
+  precio_pedido: null
+depende_de:
+- R09
+marcas: []
+nota_marcas: null
+notas: 'Sustituto aprobado de DIS-LAM-60: DIS-LAM-80, solo como sugerencia.'

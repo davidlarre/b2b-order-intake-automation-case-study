@@ -1,0 +1,24 @@
+id: P34
+tipo: pedido_nuevo
+formato: excel
+persona: estructuras, Excel con precios negociados
+cliente: C0041
+trampas: [precio_por_debajo_con_tarifa_mayor_de_3000]
+correos:
+  - eml: P34.eml
+    de: [Ionela Torrent, compras@estructuresmetalliquessunyol.example]
+    asunto: Pedido SY-77
+    fecha: 2026-11-18T08:50:00+01:00
+    cuerpo: |
+      Buenos días,
+
+      Adjunto el pedido SY-77.
+
+      Ionela Torrent
+    excel:
+      nombre: SY-77.xlsx
+      filas:
+        - [Ref., Cant., "P.U."]
+        - [DIS-DIA-230, 140, "19,50"]
+lineas:
+  - {producto: DIS-DIA-230, cantidad: 140, unidad: ud, precio: 19.50, como: codigo}

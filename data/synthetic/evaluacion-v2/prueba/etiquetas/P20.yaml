@@ -1,0 +1,42 @@
+id: P20
+conjunto: prueba
+origen: generado
+eml:
+- P20.eml
+tipo: pedido_nuevo
+tipos_aceptables: []
+idioma: ca
+cliente: C0077
+trampas:
+- adjunto_sin_adjunto
+- mezcla_de_idiomas
+salida:
+  inicial: pedir_datos
+  final: pedir_datos
+  aceptables:
+  - salida: revision
+    motivos:
+    - M01
+motivos: []
+revision_necesaria: null
+peticion:
+- campo: lineas
+  linea: null
+  opciones: []
+cabecera:
+  num_pedido_cliente: null
+  direccion:
+    calle: Carrer dels Serrallers
+    numero: '104'
+    nave: null
+    cp: 08205
+  fecha_prevista: '2026-11-11'
+  observaciones_entrega: null
+  condiciones: []
+lineas: []
+depende_de:
+- D22
+marcas:
+- 'catalan: la ficha dice «frases» y el correo parece «entero»'
+nota_marcas: El correo entero está en catalán.
+notas: 'Pedido nuevo sin líneas: pedir datos (D22). Hoy va a revisión con M01.'

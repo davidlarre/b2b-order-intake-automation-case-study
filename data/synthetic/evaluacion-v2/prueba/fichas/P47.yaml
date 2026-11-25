@@ -1,0 +1,19 @@
+id: P47
+tipo: modificacion_anulacion
+formato: texto
+persona: taller, ambiguo
+cliente: C0012
+trampas: [pedido_ambiguo]
+correos:
+  - eml: P47.eml
+    de: [Sílvia Pérez, oficina@tallersmecanicssolanelles.example]
+    asunto: pedido
+    fecha: 2026-11-03T09:25:00+01:00
+    dmarc: none
+    cuerpo: |
+      Hola,
+
+      Del pedido de la semana pasada quitadme una de las cosas, que ya la hemos encontrado por aquí. La otra dejadla.
+
+      Sílvia
+debe_incluir: ["la semana pasada"]

@@ -1,0 +1,17 @@
+From: Carme Sala <pedidos@serviciostecnicosalarconbru.example>
+To: pedidos@orvalle.example
+Subject: RE: Pedido machos
+Date: Mon, 09 Nov 2026 11:10:00 +0100
+Message-ID: <v2-p15b@serviciostecnicosalarconbru.example>
+In-Reply-To: <v2-p15a@serviciostecnicosalarconbru.example>
+References: <v2-p15a@serviciostecnicosalarconbru.example>
+Authentication-Results: mx.orvalle.example; spf=pass smtp.mailfrom=serviciostecnicosalarconbru.example; dmarc=none header.from=serviciostecnicosalarconbru.example
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+MIME-Version: 1.0
+
+Perdón, es el MAC-M8.
+
+Carme
+
+> No encontramos la referencia «TR-9910». ¿Nos indica el código?

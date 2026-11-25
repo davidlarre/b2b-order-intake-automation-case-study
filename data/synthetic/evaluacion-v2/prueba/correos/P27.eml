@@ -1,0 +1,28 @@
+From: Raquel Navarro <raquel.navarro@orvalle.example>
+To: pedidos@orvalle.example
+Subject: RV: Pedido PC-640
+Date: Mon, 09 Nov 2026 11:30:00 +0100
+Message-ID: <v2-p27@orvalle.example>
+Authentication-Results: mx.orvalle.example; spf=pass smtp.mailfrom=orvalle.example; dkim=pass header.d=orvalle.example; dmarc=pass header.from=orvalle.example
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+MIME-Version: 1.0
+
+Os reenvío el pedido de Cárdenas.
+
+Raquel
+
+________________________________
+De: Óscar Serra <oficina@plasticosinyectadoscardenas.example>
+Enviado: lunes, 9 de noviembre de 2026 9:42
+Para: Raquel Navarro <raquel.navarro@orvalle.example>
+Asunto: Pedido PC-640
+
+Hola Raquel,
+
+Te paso también a ti el PC-640:
+
+DIS-COR-125 30
+TUE-M8-ZN 500
+
+Óscar Serra

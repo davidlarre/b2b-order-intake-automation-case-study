@@ -1,0 +1,40 @@
+From: =?utf-8?q?=C3=93scar?= Delgado <oscar.delgado@orvalle.example>
+To: pedidos@orvalle.example
+Subject: Pedido Sotillo
+Date: Mon, 16 Nov 2026 09:10:00 +0100
+Message-ID: <v2-p28@orvalle.example>
+Authentication-Results: mx.orvalle.example; spf=pass smtp.mailfrom=orvalle.example; dkim=pass header.d=orvalle.example; dmarc=pass header.from=orvalle.example
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="=_p28_orvalle_v2"
+
+--=_p28_orvalle_v2
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+
+Adjunto correo de Sotillo con su pedido.
+
+Óscar
+
+--=_p28_orvalle_v2
+Content-Type: message/rfc822
+Content-Transfer-Encoding: 8bit
+Content-Disposition: attachment; filename="original.eml"
+MIME-Version: 1.0
+
+From: Joan Ruiz <pedidos@mantenimientoymontajessotillo.example>
+To: oscar.delgado@orvalle.example
+Subject: Pedido 2026/311
+Date: Mon, 16 Nov 2026 08:51:00 +0100
+Message-ID: <orig-p28@mantenimientoymontajessotillo.example>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+MIME-Version: 1.0
+
+Hola Óscar, pedido 2026/311:
+
+LIJ-HOJ-120  100
+DIS-LAM-80  20
+
+Joan
+
+--=_p28_orvalle_v2--

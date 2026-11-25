@@ -1,0 +1,20 @@
+id: D19
+tipo: reclamacion
+formato: texto
+persona: jefe de almacén enfadado
+cliente: C0093
+trampas: [material_equivocado]
+otros_codigos: [CAS-AM, CAS-BL]
+correos:
+  - eml: D19.eml
+    de: [Xavier Costa, pedidos@gruasyelevacionmanzanedo.example]
+    asunto: ERROR EN EL PEDIDO GM-77
+    fecha: 2026-11-03T13:15:00+01:00
+    cuerpo: |
+      Hola,
+
+      En el GM-77 pedimos 10 cascos CAS-AM y nos habéis mandado CAS-BL. Es la segunda vez este año. Pasad a recogerlos y decidme cómo lo solucionamos.
+
+      Xavier Costa
+      Grúas y Elevación Manzanedo, S.A.
+debe_incluir: ["GM-77"]

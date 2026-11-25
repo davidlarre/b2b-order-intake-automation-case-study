@@ -1,0 +1,19 @@
+id: P12
+tipo: pedido_nuevo
+formato: texto
+persona: transmisiones, taller
+cliente: C0086
+trampas: [tarifa_caducada_sin_precio]
+correos:
+  - eml: P12.eml
+    de: [Karim Prieto, taller@rodamientosytransmisioneslerma.example]
+    asunto: llaves
+    fecha: 2027-01-29T10:05:00+01:00
+    dmarc: none
+    cuerpo: |
+      Hola, mandadnos 4 LLC-17 y 2 LLC-19.
+
+      Karim
+lineas:
+  - {producto: LLC-17, cantidad: 4, unidad: ud, como: codigo}
+  - {producto: LLC-19, cantidad: 2, unidad: ud, como: codigo}

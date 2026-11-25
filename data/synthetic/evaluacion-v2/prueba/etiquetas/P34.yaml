@@ -1,0 +1,46 @@
+id: P34
+conjunto: prueba
+origen: generado
+eml:
+- P34.eml
+tipo: pedido_nuevo
+tipos_aceptables: []
+idioma: es
+cliente: C0041
+trampas:
+- precio_por_debajo_con_tarifa_mayor_de_3000
+salida:
+  inicial: revision
+  final: revision
+  aceptables: []
+motivos:
+- codigo: R11
+  linea: 1
+  momento: inicial
+- codigo: R13
+  linea: null
+  momento: inicial
+revision_necesaria: true
+peticion: []
+cabecera:
+  num_pedido_cliente: SY-77
+  direccion:
+    calle: Carrer del Vapor
+    numero: '91'
+    nave: Nave 9
+    cp: 08470
+  fecha_prevista: '2026-11-18'
+  observaciones_entrega: null
+  condiciones: []
+lineas:
+- texto: DIS-DIA-230 | 140 | 19,50
+  producto: DIS-DIA-230
+  cantidad: 140
+  unidad: ud
+  cantidad_uv: 140
+  precio_pedido: 19.5
+depende_de:
+- R13
+marcas: []
+nota_marcas: null
+notas: 'Con el precio pedido, 2.730 €; con la tarifa (22,00), 3.080 €: cuenta el mayor.'

@@ -1,0 +1,21 @@
+id: P20
+tipo: pedido_nuevo
+formato: texto
+persona: climatización, mezcla idiomas
+cliente: C0077
+catalan: frases
+trampas: [adjunto_sin_adjunto, mezcla_de_idiomas]
+correos:
+  - eml: P20.eml
+    de: [Marta Navarro, pedidos@climatitzacionsvallroma.example]
+    asunto: comanda novembre
+    fecha: 2026-11-11T09:00:00+01:00
+    dmarc: none
+    cuerpo: |
+      Bon dia,
+
+      us adjunto la comanda d'aquest mes.
+
+      Salutacions,
+      Marta
+no_debe_incluir: ["cantidad"]

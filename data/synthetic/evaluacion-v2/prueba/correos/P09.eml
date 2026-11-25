@@ -1,0 +1,15 @@
+From: Sonia =?utf-8?q?S=C3=A1nchez?= <administracion@embalatgessantvaleria.example>
+To: pedidos@orvalle.example
+Subject: Pedido cinta =?utf-8?q?campa=C3=B1a?=
+Date: Thu, 05 Nov 2026 08:05:00 +0100
+Message-ID: <v2-p09@embalatgessantvaleria.example>
+Authentication-Results: mx.orvalle.example; spf=pass smtp.mailfrom=embalatgessantvaleria.example; dmarc=none header.from=embalatgessantvaleria.example
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+MIME-Version: 1.0
+
+<html><body style="font-family:Calibri">
+<p>Buenos días,</p>
+<p>Para la campaña de Navidad necesitamos 300 rollos de CIN-EMB-66.</p>
+<p>Gracias,<br>Sonia Sánchez</p>
+</body></html>

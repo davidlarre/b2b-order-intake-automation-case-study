@@ -1,0 +1,19 @@
+From: =?utf-8?q?=C3=93scar?= Serra <oficina@plasticosinyectadoscardenas.example>
+To: pedidos@orvalle.example
+Subject: RE: Pedido PC-640
+Date: Mon, 09 Nov 2026 13:20:00 +0100
+Message-ID: <v2-p16b@plasticosinyectadoscardenas.example>
+In-Reply-To: <v2-p16a@plasticosinyectadoscardenas.example>
+References: <v2-p16a@plasticosinyectadoscardenas.example>
+Authentication-Results:
+ mx.orvalle.example; spf=pass smtp.mailfrom=plasticosinyectadoscardenas.example; dkim=pass header.d=plasticosinyectadoscardenas.example; dmarc=pass header.from=plasticosinyectadoscardenas.example
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+MIME-Version: 1.0
+
+Pues 50, y de paso añade 2 cajas de GUA-NIT-M.
+
+Óscar
+
+> El producto DIS-COR-125 se sirve en múltiplos de 25. ¿Qué cantidad prefiere: 25 o 50?
+> Responda con una de las dos, o indíquenos otra.

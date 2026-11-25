@@ -1,0 +1,34 @@
+id: P17
+tipo: pedido_nuevo
+formato: texto
+persona: taller, escribe desde el móvil
+cliente: C0034
+trampas: [sin_direccion, la_de_siempre]
+correos:
+  - eml: P17a.eml
+    de: [Marc Popescu, taller@estampacionesroldansur.example]
+    asunto: discos
+    fecha: 2026-11-10T07:55:00+01:00
+    dmarc: none
+    cuerpo: |
+      buenas, 100 DIS-COR-125 y 10 DIS-LAM-120
+
+      Enviado desde mi móvil
+  - eml: P17b.eml
+    de: [Marc Popescu, taller@estampacionesroldansur.example]
+    asunto: "Re: discos"
+    fecha: 2026-11-10T09:30:00+01:00
+    dmarc: none
+    responde_a: [P17a.eml]
+    cuerpo: |
+      la de siempre
+
+      Enviado desde mi móvil
+
+      > ¿A qué dirección lo enviamos?
+      > 1. Carrer dels Fusters 82, 08430 La Roca del Vallès
+      > 2. Carrer de la Forja 7, Nave 2, 08440 Cardedeu
+lineas:
+  - {producto: DIS-COR-125, cantidad: 100, unidad: ud, como: codigo}
+  - {producto: DIS-LAM-120, cantidad: 10, unidad: ud, como: codigo}
+debe_incluir: ["la de siempre"]

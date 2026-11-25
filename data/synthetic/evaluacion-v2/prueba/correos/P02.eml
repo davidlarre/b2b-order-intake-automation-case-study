@@ -1,0 +1,26 @@
+From: Rafael Puig <pedidos@torneadosalcubierre.example>
+To: pedidos@orvalle.example
+Subject: Pedido =?utf-8?q?n=C2=BA?= 26/0714
+Date: Mon, 02 Nov 2026 09:30:00 +0100
+Message-ID: <v2-p02@torneadosalcubierre.example>
+Authentication-Results: mx.orvalle.example; spf=pass smtp.mailfrom=torneadosalcubierre.example; dkim=pass header.d=torneadosalcubierre.example; dmarc=pass header.from=torneadosalcubierre.example
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+MIME-Version: 1.0
+
+Estimados señores:
+
+Por la presente les solicitamos el siguiente material, según precios vigentes:
+
+Ref. T-0830 INOX, 500 uds, a 0,35 €/ud
+Ref. A-08 INOX, 1000 uds, a 0,06 €/ud
+
+Pedido nº 26/0714.
+
+Atentamente,
+Rafael Puig
+Responsable de Compras
+TORNEADOS ALCUBIERRE, S.L.
+Domicilio fiscal: Carrer de la Creu 31, 08203 Sabadell
+
+Este mensaje y sus adjuntos son confidenciales. Si lo ha recibido por error, bórrelo y avise al remitente.

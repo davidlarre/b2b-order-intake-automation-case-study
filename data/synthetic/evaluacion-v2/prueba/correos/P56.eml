@@ -1,0 +1,33 @@
+From: =?utf-8?q?Administraci=C3=B3n_Electroluz_Marb=C3=A1n?= <administracion@electroluzmarban.example>
+To: pedidos@orvalle.example
+Subject: Factura 2026-4410
+Date: Wed, 04 Nov 2026 07:30:00 +0100
+Message-ID: <v2-p56@electroluzmarban.example>
+Authentication-Results: mx.orvalle.example; spf=pass smtp.mailfrom=electroluzmarban.example; dkim=pass header.d=electroluzmarban.example; dmarc=pass header.from=electroluzmarban.example
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="=_p56_orvalle_v2"
+
+--=_p56_orvalle_v2
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+
+Buenos días,
+
+Adjuntamos la factura 2026-4410 del suministro eléctrico de octubre. Se cargará en cuenta el 15 de noviembre.
+
+Administración
+Electroluz Marbán, S.A.
+
+--=_p56_orvalle_v2
+Content-Type: application/pdf
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="2026-4410.pdf"
+MIME-Version: 1.0
+
+JVBERi0xLjQKMSAwIG9iago8PC9UeXBlL0NhdGFsb2cvUGFnZXMgMiAwIFI+PgplbmRvYmoKMiAwIG9iago8PC9UeXBlL1BhZ2VzL0tpZHNbMyAwIFJdL0NvdW50IDE+PgplbmRvYmoKMyAwIG9iago8PC9UeXBlL1BhZ2UvUGFyZW50IDIgMCBSL01lZGlhQm94WzAg
+MCA1OTUgODQyXS9Db250ZW50cyA0IDAgUi9SZXNvdXJjZXM8PC9Gb250PDwvRjEgNSAwIFI+Pj4+Pj4KZW5kb2JqCjQgMCBvYmoKPDwvTGVuZ3RoIDExNj4+CnN0cmVhbQpCVCAvRjEgMTEgVGYgNjAgNzgwIFRkIDE1IFRMIChFbGVjdHJvbHV6IE1hcmJhbiwgUy5B
+LikgVGogVCogKEZhY3R1cmEgMjAyNi00NDEwKSBUaiBUKiAoVG90YWwgMS45MDMsNzcgRVVSKSBUaiBUKiBFVAplbmRzdHJlYW0KZW5kb2JqCjUgMCBvYmoKPDwvVHlwZS9Gb250L1N1YnR5cGUvVHlwZTEvQmFzZUZvbnQvSGVsdmV0aWNhL0VuY29kaW5nL1dpbkFu
+c2lFbmNvZGluZz4+CmVuZG9iagp4cmVmCjAgNgowMDAwMDAwMDAwIDY1NTM1IGYgCjAwMDAwMDAwMDkgMDAwMDAgbiAKMDAwMDAwMDA1NCAwMDAwMCBuIAowMDAwMDAwMTA1IDAwMDAwIG4gCjAwMDAwMDAyMTcgMDAwMDAgbiAKMDAwMDAwMDM4MiAwMDAwMCBuIAp0
+cmFpbGVyCjw8L1NpemUgNi9Sb290IDEgMCBSPj4Kc3RhcnR4cmVmCjQ3MAolJUVPRgo=
+
+--=_p56_orvalle_v2--

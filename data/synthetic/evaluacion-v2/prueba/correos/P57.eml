@@ -1,0 +1,15 @@
+From: =?utf-8?q?Gr=C3=A0fiques_Moncl=C3=BAs?= <facturas@grafiquesmonclus.example>
+To: pedidos@orvalle.example
+Subject: Recordatorio factura 881 pendiente
+Date: Mon, 09 Nov 2026 07:45:00 +0100
+Message-ID: <v2-p57@grafiquesmonclus.example>
+Authentication-Results: mx.orvalle.example; spf=pass smtp.mailfrom=grafiquesmonclus.example; dmarc=none header.from=grafiquesmonclus.example
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+MIME-Version: 1.0
+
+Buenos días:
+
+Les recordamos que la factura 881, de 312,18 €, por 500 tarjetas y 20 talonarios, venció el 31 de octubre. Si ya la han pagado, no tengan en cuenta este mensaje.
+
+Gràfiques Monclús

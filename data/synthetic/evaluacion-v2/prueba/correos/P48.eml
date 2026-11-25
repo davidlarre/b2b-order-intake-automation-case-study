@@ -1,0 +1,16 @@
+From: =?utf-8?q?=C3=93scar?= Navarro <oficina@obrasyreformasvillarejo.example>
+To: pedidos@orvalle.example
+Subject: Cambio de entrega V-2291
+Date: Mon, 02 Nov 2026 13:30:00 +0100
+Message-ID: <v2-p48@obrasyreformasvillarejo.example>
+Authentication-Results:
+ mx.orvalle.example; spf=pass smtp.mailfrom=obrasyreformasvillarejo.example; dkim=pass header.d=obrasyreformasvillarejo.example; dmarc=pass header.from=obrasyreformasvillarejo.example
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+MIME-Version: 1.0
+
+Buenas tardes,
+
+El pedido V-2291 mandadlo mejor a la obra: Carrer de Dalt 15, 08210 Barberà del Vallès.
+
+Óscar Navarro

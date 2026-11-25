@@ -1,0 +1,22 @@
+id: P56
+tipo: otros
+formato: pdf
+persona: proveedor de suministros
+cliente: null
+trampas: [factura_de_proveedor]
+correos:
+  - eml: P56.eml
+    de: [Administración Electroluz Marbán, administracion@electroluzmarban.example]
+    asunto: Factura 2026-4410
+    fecha: 2026-11-04T07:30:00+01:00
+    cuerpo: |
+      Buenos días,
+
+      Adjuntamos la factura 2026-4410 del suministro eléctrico de octubre. Se cargará en cuenta el 15 de noviembre.
+
+      Administración
+      Electroluz Marbán, S.A.
+    pdf:
+      nombre: 2026-4410.pdf
+      lineas: ["Electroluz Marban, S.A.", "Factura 2026-4410", "Total 1.903,77 EUR"]
+debe_incluir: ["factura"]

@@ -1,0 +1,47 @@
+id: P13
+conjunto: prueba
+origen: generado
+eml:
+- P13.eml
+tipo: pedido_nuevo
+tipos_aceptables: []
+idioma: es
+cliente: C0100
+trampas:
+- tarifa_pendiente
+- cabeceras_desconocidas
+- firma_con_direccion_fiscal
+salida:
+  inicial: automatico
+  final: automatico
+  aceptables: []
+motivos: []
+revision_necesaria: null
+peticion: []
+cabecera:
+  num_pedido_cliente: '771'
+  direccion:
+    calle: Carrer del Vapor
+    numero: '28'
+    nave: null
+    cp: 08227
+  fecha_prevista: '2026-11-06'
+  observaciones_entrega: null
+  condiciones: []
+lineas:
+- texto: SPR-LUB | 24
+  producto: SPR-LUB
+  cantidad: 24
+  unidad: ud
+  cantidad_uv: 24
+  precio_pedido: null
+- texto: SPR-DES | 12
+  producto: SPR-DES
+  cantidad: 12
+  unidad: ud
+  cantidad_uv: 12
+  precio_pedido: null
+depende_de: []
+marcas: []
+nota_marcas: null
+notas: 'La tarifa de SPR-LUB está pendiente: precio general.'

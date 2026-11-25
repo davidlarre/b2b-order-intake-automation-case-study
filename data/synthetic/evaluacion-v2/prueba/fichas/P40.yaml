@@ -1,0 +1,21 @@
+id: P40
+tipo: pedido_nuevo
+formato: pdf
+persona: mecanizados, PDF de su programa
+cliente: C0026
+trampas: [pdf]
+correos:
+  - eml: P40.eml
+    de: [Paco Torrent, administracion@mecanitzatspladebaix.example]
+    asunto: Pedido 1192
+    fecha: 2026-11-20T08:10:00+01:00
+    cuerpo: |
+      Buenos días,
+
+      Adjunto pedido 1192.
+
+      Paco Torrent
+    pdf:
+      nombre: pedido_1192.pdf
+      lineas: ["Mecanitzats Pla de Baix, S.L.", "Pedido 1192", "BRO-COB-8   10", "MAC-M8   5"]
+debe_incluir: ["1192"]

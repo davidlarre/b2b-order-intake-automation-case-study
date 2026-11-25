@@ -1,0 +1,51 @@
+id: P28
+conjunto: prueba
+origen: generado
+eml:
+- P28.eml
+tipo: pedido_nuevo
+tipos_aceptables: []
+idioma: es
+cliente: C0055
+trampas:
+- numero_de_pedido_ya_usado
+- reenvio_como_eml
+salida:
+  inicial: revision
+  final: revision
+  aceptables: []
+motivos:
+- codigo: R07
+  linea: null
+  momento: inicial
+revision_necesaria: true
+peticion: []
+cabecera:
+  num_pedido_cliente: 2026/311
+  direccion:
+    calle: Carrer del Coure
+    numero: '72'
+    nave: null
+    cp: 08290
+  fecha_prevista: '2026-11-16'
+  observaciones_entrega: null
+  condiciones: []
+lineas:
+- texto: LIJ-HOJ-120  100
+  producto: LIJ-HOJ-120
+  cantidad: 100
+  unidad: ud
+  cantidad_uv: 100
+  precio_pedido: null
+- texto: DIS-LAM-80  20
+  producto: DIS-LAM-80
+  cantidad: 20
+  unidad: ud
+  cantidad_uv: 20
+  precio_pedido: null
+depende_de:
+- R03
+- R07
+marcas: []
+nota_marcas: null
+notas: null

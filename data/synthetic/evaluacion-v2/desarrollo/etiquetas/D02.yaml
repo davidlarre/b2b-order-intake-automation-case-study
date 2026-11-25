@@ -1,0 +1,47 @@
+id: D02
+conjunto: desarrollo
+origen: generado
+eml:
+- D02.eml
+tipo: pedido_nuevo
+tipos_aceptables: []
+idioma: mixto
+cliente: C0062
+trampas:
+- equivalencias
+- mezcla_de_idiomas
+salida:
+  inicial: automatico
+  final: automatico
+  aceptables: []
+motivos: []
+revision_necesaria: null
+peticion: []
+cabecera:
+  num_pedido_cliente: null
+  direccion:
+    calle: Carrer de la Creu
+    numero: '100'
+    nave: null
+    cp: 08203
+  fecha_prevista: '2026-11-03'
+  observaciones_entrega: null
+  condiciones: []
+lineas:
+- texto: abr 16 - 50 u.
+  producto: ABR-16-27
+  cantidad: 50
+  unidad: ud
+  cantidad_uv: 50
+  precio_pedido: null
+- texto: tac 8 - 400
+  producto: TAC-NY-8
+  cantidad: 400
+  unidad: ud
+  cantidad_uv: 400
+  precio_pedido: null
+depende_de: []
+marcas:
+- 'catalan: la ficha dice «frases» y el correo parece «entero»'
+nota_marcas: 'El catalán domina, pero «lo de la obra» es castellano: mixto.'
+notas: '«I si pot ser que vingui aquesta setmana» no es una fecha: primera posible.'

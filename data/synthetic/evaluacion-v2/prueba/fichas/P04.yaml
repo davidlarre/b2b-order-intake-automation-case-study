@@ -1,0 +1,35 @@
+id: P04
+tipo: pedido_nuevo
+formato: excel
+persona: tornería, Excel exportado de su programa
+cliente: C0029
+trampas: [equivalencias_en_excel, cabecera_en_la_fila_5]
+correos:
+  - eml: P04.eml
+    de: [Beatriz Chen, pedidos@tornejatspuigdemunt.example]
+    asunto: Orden de compra OC26-390
+    fecha: 2026-11-03T11:15:00+01:00
+    cuerpo: |
+      Buenos días,
+
+      Adjunto orden de compra OC26-390. Gracias.
+
+      Beatriz Chen
+      Tornejats Puigdemunt, S.L.
+    excel:
+      nombre: OC26-390.xlsx
+      hoja: OC
+      filas:
+        - ["TORNEJATS PUIGDEMUNT, S.L."]
+        - ["Orden de compra", "OC26-390"]
+        - ["Proveedor", "Orvalle Suministros Industriales"]
+        - []
+        - ["Su/Ntra. referencia", "Concepto", "Uds. solicitadas"]
+        - ["PUI-1010", "Guante poliuretano 9", 48]
+        - ["PUI-1011", "Guante poliuretano 10", 48]
+        - ["PUI-2003", "Disco corte 115", 100]
+lineas:
+  - {producto: GUA-PU-9, ref: PUI-1010, cantidad: 48, unidad: par, como: equivalencia}
+  - {producto: GUA-PU-10, ref: PUI-1011, cantidad: 48, unidad: par, como: equivalencia}
+  - {producto: DIS-COR-115, ref: PUI-2003, cantidad: 100, unidad: ud, como: equivalencia}
+debe_incluir: ["OC26-390"]

@@ -1,0 +1,31 @@
+id: P13
+tipo: pedido_nuevo
+formato: excel
+persona: fábrica de cauchos
+cliente: C0100
+trampas: [tarifa_pendiente, cabeceras_desconocidas, firma_con_direccion_fiscal]
+correos:
+  - eml: P13.eml
+    de: [Sílvia Iglesias, administracion@cauchosindustrialesalmansa.example]
+    asunto: Pedido sprays 771
+    fecha: 2026-11-06T09:15:00+01:00
+    dmarc: none
+    cuerpo: |
+      Buenos días,
+
+      Va el pedido 771 en Excel.
+
+      Sílvia Iglesias
+      Cauchos Industriales Almansa, S.L.
+      CIF y domicilio fiscal: Carrer Nou 60, 08227 Terrassa
+    excel:
+      nombre: pedido771.xlsx
+      hoja: Compra
+      filas:
+        - ["Material", "Pedir"]
+        - ["SPR-LUB", 24]
+        - ["SPR-DES", 12]
+lineas:
+  - {producto: SPR-LUB, cantidad: 24, unidad: ud, como: codigo}
+  - {producto: SPR-DES, cantidad: 12, unidad: ud, como: codigo}
+debe_incluir: ["771"]

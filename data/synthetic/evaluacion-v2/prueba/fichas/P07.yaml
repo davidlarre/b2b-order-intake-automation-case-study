@@ -1,0 +1,26 @@
+id: P07
+tipo: pedido_nuevo
+formato: excel
+persona: automatismos, Excel con precios
+cliente: C0087
+trampas: [precio_a_un_centimo]
+correos:
+  - eml: P07.eml
+    de: [Sonia Camps, almacen@automatismospedraza.example]
+    asunto: Pedido rodamientos P-5120
+    fecha: 2026-11-04T10:10:00+01:00
+    cuerpo: |
+      Hola,
+
+      Adjunto pedido P-5120.
+
+      Sonia
+    excel:
+      nombre: P-5120.xlsx
+      filas:
+        - [Código, Cantidad, "Precio unitario"]
+        - [ROD-6204-2RS, 30, "4,21"]
+        - [ROD-6001-2RS, 20, "1,99"]
+lineas:
+  - {producto: ROD-6204-2RS, cantidad: 30, unidad: ud, precio: 4.21, como: codigo}
+  - {producto: ROD-6001-2RS, cantidad: 20, unidad: ud, precio: 1.99, como: codigo}

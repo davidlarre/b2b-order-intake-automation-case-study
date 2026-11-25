@@ -1,0 +1,19 @@
+id: P11
+tipo: pedido_nuevo
+formato: texto
+persona: hidráulica, muy breve
+cliente: C0081
+trampas: [repite_el_pedido_con_numero]
+correos:
+  - eml: P11.eml
+    de: [Glòria Prieto, compras@hidraulicasalcedo.example]
+    asunto: Repetir OC-1187
+    fecha: 2026-11-05T11:30:00+01:00
+    cuerpo: |
+      Buenos días,
+
+      Repetidnos el pedido OC-1187, igual que la otra vez. El nuevo número es OC-1204.
+
+      Gracias,
+      Glòria
+debe_incluir: ["OC-1187", "OC-1204"]

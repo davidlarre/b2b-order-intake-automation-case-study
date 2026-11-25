@@ -1,0 +1,16 @@
+From: Andrei =?utf-8?q?Jim=C3=A9nez?= <compras@construccionesmetalicasuceda.example>
+To: pedidos@orvalle.example
+Subject: Respuesta =?utf-8?q?autom=C3=A1tica=3A?= Tacos obra
+Date: Tue, 10 Nov 2026 10:22:00 +0100
+Message-ID: <v2-p18b@construccionesmetalicasuceda.example>
+In-Reply-To: <v2-p18a@construccionesmetalicasuceda.example>
+References: <v2-p18a@construccionesmetalicasuceda.example>
+Auto-Submitted: auto-replied
+X-Autoreply: yes
+Authentication-Results:
+ mx.orvalle.example; spf=pass smtp.mailfrom=construccionesmetalicasuceda.example; dkim=pass header.d=construccionesmetalicasuceda.example; dmarc=pass header.from=construccionesmetalicasuceda.example
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+MIME-Version: 1.0
+
+Estoy fuera de la oficina hasta las 15:00. Contestaré a su mensaje cuanto antes.

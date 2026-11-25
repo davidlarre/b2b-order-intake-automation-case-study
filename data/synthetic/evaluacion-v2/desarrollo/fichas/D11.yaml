@@ -1,0 +1,27 @@
+id: D11
+tipo: pedido_nuevo
+formato: excel
+persona: compras de fábrica, con precios
+cliente: C0099
+trampas: [precio_distinto]
+correos:
+  - eml: D11.eml
+    de: [Eulàlia Garcia, administracion@plasticstecnicsrovellat.example]
+    asunto: Comanda PT-331
+    fecha: 2026-11-09T11:05:00+01:00
+    cuerpo: |
+      Buenos días,
+
+      Os envío el pedido PT-331 en Excel, con los precios acordados.
+
+      Eulàlia Garcia
+      Plàstics Tècnics Rovellat, S.A.
+    excel:
+      nombre: PT-331.xlsx
+      filas:
+        - [Codi, Quantitat, Preu]
+        - [FLE-5, 12, "6,45"]
+        - [SIL-TR, 24, "3,60"]
+lineas:
+  - {producto: FLE-5, cantidad: 12, unidad: ud, precio: 6.45, como: codigo}
+  - {producto: SIL-TR, cantidad: 24, unidad: ud, precio: 3.60, como: codigo}

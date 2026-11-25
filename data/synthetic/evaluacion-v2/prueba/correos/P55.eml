@@ -1,0 +1,16 @@
+From: =?utf-8?q?N=C3=BAria?= Serra <administracion@moblesdoficinatorrello.example>
+To: pedidos@orvalle.example
+Subject: Guantes TOR-61
+Date: Fri, 06 Nov 2026 11:25:00 +0100
+Message-ID: <v2-p55@moblesdoficinatorrello.example>
+Authentication-Results:
+ mx.orvalle.example; spf=pass smtp.mailfrom=moblesdoficinatorrello.example; dkim=pass header.d=moblesdoficinatorrello.example; dmarc=pass header.from=moblesdoficinatorrello.example
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+MIME-Version: 1.0
+
+Hola,
+
+Los guantes del pedido TOR-61 han llegado manchados de aceite y no se pueden usar. Mandadnos 2 cajas de GUA-PU-8 para reponerlos, que los necesitamos el lunes, y decidme qué hacemos con los otros.
+
+Núria

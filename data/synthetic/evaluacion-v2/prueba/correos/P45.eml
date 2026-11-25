@@ -1,0 +1,21 @@
+From: Manuel Prieto <pedidos@talleresnavalon.example>
+To: pedidos@orvalle.example
+Subject: RE: URGENTE pedido
+Date: Mon, 02 Nov 2026 10:05:00 +0100
+Message-ID: <v2-p45@talleresnavalon.example>
+In-Reply-To: <v2-p01@talleresnavalon.example>
+References: <v2-p01@talleresnavalon.example>
+Authentication-Results: mx.orvalle.example; spf=pass smtp.mailfrom=talleresnavalon.example; dkim=pass header.d=talleresnavalon.example; dmarc=pass header.from=talleresnavalon.example
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+MIME-Version: 1.0
+
+Ojo, de las brocas son 10, no 20.
+
+Manuel
+
+> Hemos registrado su pedido:
+> ALL-M8X25-ZN  100 uds
+> TUA-M8-ZN  300 uds
+> BRO-HSS-8  20 uds
+> Si algo no es correcto, responda a este correo.

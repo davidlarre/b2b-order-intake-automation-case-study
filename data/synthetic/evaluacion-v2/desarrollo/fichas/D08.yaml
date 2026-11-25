@@ -1,0 +1,29 @@
+id: D08
+tipo: pedido_nuevo
+formato: excel
+persona: oficina técnica, hoja exportada de su programa
+cliente: C0021
+trampas: [cabeceras_desconocidas, equivalencias, firma_con_direccion_fiscal]
+correos:
+  - eml: D08.eml
+    de: [Marta Roca, compras@mecanizadosvilaro.example]
+    asunto: Necesidades taller semana 46
+    fecha: 2026-11-06T08:45:00+01:00
+    cuerpo: |
+      Hola,
+
+      En el Excel van las necesidades de la semana que viene. ¿Nos lo servís, por favor?
+
+      Marta Roca
+      Mecanizados Vilaró, S.L.
+      Domicilio social: Avinguda de l'Estació 4, 08440 Cardedeu
+    excel:
+      nombre: necesidades_s46.xlsx
+      hoja: S46
+      filas:
+        - [Pos, "Material nuestro", "Texto breve", "A pedir"]
+        - [10, "V-3301", "Broca cobalto 6", 10]
+        - [20, "MAC-M8", "Macho máquina M8", 3]
+lineas:
+  - {producto: BRO-COB-6, ref: V-3301, cantidad: 10, unidad: ud, como: equivalencia}
+  - {producto: MAC-M8, cantidad: 3, unidad: ud, como: codigo}

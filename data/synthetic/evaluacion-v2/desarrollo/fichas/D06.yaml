@@ -1,0 +1,25 @@
+id: D06
+tipo: pedido_nuevo
+formato: texto
+persona: central de compras de varios talleres
+cliente: null
+trampas: [email_compartido_por_3]
+correos:
+  - eml: D06.eml
+    de: [Central de compras, pedidos@centraltalleres.example]
+    asunto: Pedido consumibles
+    fecha: 2026-11-05T09:00:00+01:00
+    cuerpo: |
+      Buenos días,
+
+      Necesitamos para el taller:
+
+      DIS-COR-125 100 uds
+      DIS-DES-125 20 uds
+
+      Un saludo,
+      Central de compras
+lineas:
+  - {producto: DIS-COR-125, cantidad: 100, unidad: ud, como: codigo}
+  - {producto: DIS-DES-125, cantidad: 20, unidad: ud, como: codigo}
+no_debe_incluir: [Quintanar, Orduña, Cebrián]

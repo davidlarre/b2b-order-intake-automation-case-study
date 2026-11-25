@@ -1,0 +1,51 @@
+id: P26
+conjunto: prueba
+origen: generado
+eml:
+- P26.eml
+tipo: pedido_nuevo
+tipos_aceptables: []
+idioma: es
+cliente: C0091
+trampas:
+- otra_nave
+- instruccion_condicional
+salida:
+  inicial: revision
+  final: revision
+  aceptables: []
+motivos:
+- codigo: M04
+  linea: null
+  momento: inicial
+- codigo: R05
+  linea: null
+  momento: inicial
+revision_necesaria: true
+peticion: []
+cabecera:
+  num_pedido_cliente: null
+  direccion: null
+  fecha_prevista: '2026-11-13'
+  observaciones_entrega: null
+  condiciones:
+  - Si no tenéis la 17 mandad la 18, que nos vale igual.
+lineas:
+- texto: 4 LLC-17 y 4 LLC-22. Si no tenéis la 17 mandad la 18, que nos vale igual.
+  producto: LLC-17
+  cantidad: 4
+  unidad: ud
+  cantidad_uv: 4
+  precio_pedido: null
+- texto: 4 LLC-17 y 4 LLC-22. Si no tenéis la 17 mandad la 18, que nos vale igual.
+  producto: LLC-22
+  cantidad: 4
+  unidad: ud
+  cantidad_uv: 4
+  precio_pedido: null
+depende_de:
+- R05
+- M04
+marcas: []
+nota_marcas: null
+notas: La dirección registrada es Nave 9; pide Nave 7.

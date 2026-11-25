@@ -1,0 +1,33 @@
+id: P27
+tipo: pedido_nuevo
+formato: reenvio
+persona: comercial que no sabe que el cliente ya lo mandó
+cliente: C0098
+trampas: [duplicado_de_un_caso_abierto, reenvio_outlook]
+correos:
+  - eml: P27.eml
+    de: [Raquel Navarro, raquel.navarro@orvalle.example]
+    asunto: "RV: Pedido PC-640"
+    fecha: 2026-11-09T11:30:00+01:00
+    cuerpo: |
+      Os reenvío el pedido de Cárdenas.
+
+      Raquel
+    reenvio:
+      estilo: outlook_es
+      de: [Óscar Serra, oficina@plasticosinyectadoscardenas.example]
+      fecha: 2026-11-09T09:42:00+01:00
+      asunto: Pedido PC-640
+      cuerpo: |
+        Hola Raquel,
+
+        Te paso también a ti el PC-640:
+
+        DIS-COR-125 30
+        TUE-M8-ZN 500
+
+        Óscar Serra
+lineas:
+  - {producto: DIS-COR-125, cantidad: 30, unidad: ud, como: codigo}
+  - {producto: TUE-M8-ZN, cantidad: 500, unidad: ud, como: codigo}
+debe_incluir: ["PC-640"]

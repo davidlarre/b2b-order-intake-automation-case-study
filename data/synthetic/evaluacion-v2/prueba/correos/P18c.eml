@@ -1,0 +1,20 @@
+From: Andrei =?utf-8?q?Jim=C3=A9nez?= <compras@construccionesmetalicasuceda.example>
+To: pedidos@orvalle.example
+Subject: RE: Tacos obra
+Date: Tue, 10 Nov 2026 15:40:00 +0100
+Message-ID: <v2-p18c@construccionesmetalicasuceda.example>
+In-Reply-To: <v2-p18a@construccionesmetalicasuceda.example>
+References: <v2-p18a@construccionesmetalicasuceda.example>
+Authentication-Results:
+ mx.orvalle.example; spf=pass smtp.mailfrom=construccionesmetalicasuceda.example; dkim=pass header.d=construccionesmetalicasuceda.example; dmarc=pass header.from=construccionesmetalicasuceda.example
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+MIME-Version: 1.0
+
+Que sean 100.
+
+Andrei
+
+> Para su pedido nos faltan dos datos:
+> - TAM-M10X90 se sirve en múltiplos de 50: ¿50 o 100?
+> - Dirección: 1. Passeig Fluvial 116, 08213 Polinyà  2. Carrer del Vapor 18, Nave 5, 08184 Palau-solità i Plegamans

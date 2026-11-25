@@ -1,0 +1,19 @@
+id: P53
+tipo: reclamacion
+formato: texto
+persona: persianas
+cliente: C0052
+trampas: [material_defectuoso]
+otros_codigos: [BRO-HSS-5]
+correos:
+  - eml: P53.eml
+    de: [Raquel Gómez, compras@persianasolivaresehijos.example]
+    asunto: Brocas defectuosas
+    fecha: 2026-11-04T08:55:00+01:00
+    cuerpo: |
+      Hola,
+
+      Las BRO-HSS-5 del pedido OL-209 se parten al tercer agujero. Llevamos ya ocho rotas. Necesitamos que nos digáis qué ha pasado y quién se hace cargo.
+
+      Raquel Gómez
+debe_incluir: ["OL-209"]

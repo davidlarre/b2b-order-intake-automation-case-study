@@ -1,0 +1,27 @@
+id: D02
+tipo: pedido_nuevo
+formato: texto
+persona: instaladora con prisa, mezcla catalán y castellano
+cliente: C0062
+catalan: frases
+trampas: [equivalencias, mezcla_de_idiomas]
+correos:
+  - eml: D02.eml
+    de: [Cristina Bosch, pedidos@muntatgeselectricsvilardell.example]
+    asunto: material obra Sabadell
+    fecha: 2026-11-03T09:05:00+01:00
+    dmarc: none
+    cuerpo: |
+      Bon dia,
+
+      us passo lo de la obra de Sabadell:
+
+      abr 16 - 50 u.
+      tac 8 - 400
+
+      I si pot ser que vingui aquesta setmana, que anem justos.
+      Gràcies!
+      Cris
+lineas:
+  - {producto: ABR-16-27, ref: abr 16, cantidad: 50, unidad: ud, como: equivalencia}
+  - {producto: TAC-NY-8, ref: tac 8, cantidad: 400, unidad: ud, como: equivalencia}

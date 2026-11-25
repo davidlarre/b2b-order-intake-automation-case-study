@@ -1,0 +1,32 @@
+id: D19
+conjunto: desarrollo
+origen: generado
+eml:
+- D19.eml
+tipo: reclamacion
+tipos_aceptables: []
+idioma: es
+cliente: C0093
+trampas:
+- material_equivocado
+salida:
+  inicial: revision
+  final: revision
+  aceptables: []
+motivos:
+- codigo: R01
+  linea: null
+  momento: inicial
+revision_necesaria: true
+peticion: []
+cabecera:
+  num_pedido_cliente: null
+  direccion: null
+  fecha_prevista: null
+  observaciones_entrega: null
+  condiciones: []
+lineas: []
+depende_de: []
+marcas: []
+nota_marcas: null
+notas: null

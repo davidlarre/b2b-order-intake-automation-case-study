@@ -1,0 +1,49 @@
+id: P24
+conjunto: prueba
+origen: generado
+eml:
+- P24.eml
+tipo: pedido_nuevo
+tipos_aceptables: []
+idioma: es
+cliente: C0101
+trampas:
+- dmarc_fail
+- firma_con_direccion_fiscal
+salida:
+  inicial: revision
+  final: revision
+  aceptables: []
+motivos:
+- codigo: R02
+  linea: null
+  momento: inicial
+revision_necesaria: true
+peticion: []
+cabecera:
+  num_pedido_cliente: QV-2288
+  direccion:
+    calle: Carrer dels Fusters
+    numero: '67'
+    nave: Nave 7
+    cp: 08760
+  fecha_prevista: '2026-11-13'
+  observaciones_entrega: null
+  condiciones: []
+lineas:
+- texto: GUA-NIT-L | 40
+  producto: GUA-NIT-L
+  cantidad: 40
+  unidad: caja
+  cantidad_uv: 40
+  precio_pedido: null
+- texto: MAS-FFP3 | 10
+  producto: MAS-FFP3
+  cantidad: 10
+  unidad: caja
+  cantidad_uv: 10
+  precio_pedido: null
+depende_de: []
+marcas: []
+nota_marcas: null
+notas: null

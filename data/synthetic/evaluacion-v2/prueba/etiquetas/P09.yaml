@@ -1,0 +1,40 @@
+id: P09
+conjunto: prueba
+origen: generado
+eml:
+- P09.eml
+tipo: pedido_nuevo
+tipos_aceptables: []
+idioma: es
+cliente: C0095
+trampas:
+- cantidad_alta_con_2_pedidos_previos
+- solo_html
+salida:
+  inicial: automatico
+  final: automatico
+  aceptables: []
+motivos: []
+revision_necesaria: null
+peticion: []
+cabecera:
+  num_pedido_cliente: null
+  direccion:
+    calle: Carrer de la Ciència
+    numero: '82'
+    nave: null
+    cp: 08223
+  fecha_prevista: '2026-11-05'
+  observaciones_entrega: null
+  condiciones: []
+lineas:
+- texto: Para la campaña de Navidad necesitamos 300 rollos de CIN-EMB-66.
+  producto: CIN-EMB-66
+  cantidad: 300
+  unidad: rollo
+  cantidad_uv: 300
+  precio_pedido: null
+depende_de: []
+marcas: []
+nota_marcas: null
+notas: 'Solo 2 pedidos previos de CIN-EMB-66: R14 no se aplica. 300 × 4,80 = 1.440 €.'

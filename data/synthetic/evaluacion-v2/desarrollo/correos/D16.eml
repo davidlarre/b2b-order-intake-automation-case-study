@@ -1,0 +1,13 @@
+From: Wei Font <pedidos@serralleriagermansbonastre.example>
+To: pedidos@orvalle.example
+Subject: anular
+Date: Mon, 02 Nov 2026 08:35:00 +0100
+Message-ID: <v2-d16@serralleriagermansbonastre.example>
+Authentication-Results: mx.orvalle.example; spf=pass smtp.mailfrom=serralleriagermansbonastre.example; dmarc=none header.from=serralleriagermansbonastre.example
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+MIME-Version: 1.0
+
+Anulad el pedido B-74 del viernes, que al final no lo necesitamos.
+
+Wei

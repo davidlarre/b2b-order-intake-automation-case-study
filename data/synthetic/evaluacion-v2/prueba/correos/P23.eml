@@ -1,0 +1,21 @@
+From: Manuel Prieto <pedidos@talleres-navalon.example>
+To: pedidos@orvalle.example
+Subject: Pedido botas
+Date: Thu, 12 Nov 2026 11:20:00 +0100
+Message-ID: <v2-p23@talleres-navalon.example>
+Authentication-Results: mx.orvalle.example; spf=pass smtp.mailfrom=talleres-navalon.example; dkim=pass header.d=talleres-navalon.example; dmarc=pass header.from=talleres-navalon.example
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+MIME-Version: 1.0
+
+Buenos días,
+
+Os paso un pedido, la cuenta es la de siempre:
+
+BOT-S3-42  20
+BOT-S3-44  20
+
+Esta vez lo recogemos nosotros en vuestro almacén.
+
+Manuel Prieto
+Talleres Navalón

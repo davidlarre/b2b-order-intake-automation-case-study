@@ -1,0 +1,28 @@
+id: P08
+tipo: pedido_nuevo
+formato: excel
+persona: instaladora solar, vestuario para la cuadrilla
+cliente: C0120
+trampas: [importe_exacto_3000]
+correos:
+  - eml: P08.eml
+    de: [Marta Navarro, pedidos@energiasolarmirasierravalles.example]
+    asunto: Calzado de seguridad
+    fecha: 2026-11-04T12:40:00+01:00
+    dmarc: none
+    cuerpo: |
+      Buenos días,
+
+      Adjunto el pedido de calzado para la campaña.
+
+      Marta Navarro
+      Energía Solar Mirasierra Vallès, S.L.
+    excel:
+      nombre: calzado.xlsx
+      filas:
+        - [Ref., Cant.]
+        - [BOT-S3-43, 50]
+        - [ZAP-S1P-42, 32]
+lineas:
+  - {producto: BOT-S3-43, cantidad: 50, unidad: par, como: codigo}
+  - {producto: ZAP-S1P-42, cantidad: 32, unidad: par, como: codigo}

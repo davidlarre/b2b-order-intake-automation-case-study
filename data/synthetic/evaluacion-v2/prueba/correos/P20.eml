@@ -1,0 +1,16 @@
+From: Marta Navarro <pedidos@climatitzacionsvallroma.example>
+To: pedidos@orvalle.example
+Subject: comanda novembre
+Date: Wed, 11 Nov 2026 09:00:00 +0100
+Message-ID: <v2-p20@climatitzacionsvallroma.example>
+Authentication-Results: mx.orvalle.example; spf=pass smtp.mailfrom=climatitzacionsvallroma.example; dmarc=none header.from=climatitzacionsvallroma.example
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+MIME-Version: 1.0
+
+Bon dia,
+
+us adjunto la comanda d'aquest mes.
+
+Salutacions,
+Marta

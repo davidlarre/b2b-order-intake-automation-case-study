@@ -1,0 +1,21 @@
+From: =?utf-8?q?Rub=C3=A9n?= Soler <taller@electricitatpujolar.example>
+To: pedidos@orvalle.example
+Subject: Comanda 12
+Date: Mon, 16 Nov 2026 10:25:00 +0100
+Message-ID: <v2-p29@electricitatpujolar.example>
+Authentication-Results: mx.orvalle.example; spf=pass smtp.mailfrom=electricitatpujolar.example; dmarc=none header.from=electricitatpujolar.example
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+MIME-Version: 1.0
+
+Bon dia,
+
+Comanda 12. Necessitem:
+
+- CIN-AIS-NG, 20 rotlles
+- BRI-4-8X200-NG, 6 bosses
+
+Si podeu fer-ho arribar abans de dijous, millor.
+
+Gràcies i salutacions,
+Rubén

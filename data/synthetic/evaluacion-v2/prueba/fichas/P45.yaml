@@ -1,0 +1,25 @@
+id: P45
+tipo: modificacion_anulacion
+formato: texto
+persona: taller, responde a la confirmación de su pedido P01
+cliente: C0009
+catalan: "no"
+trampas: [respuesta_a_la_confirmacion, hilo_citado]
+otros_codigos: [ALL-M8X25-ZN, TUA-M8-ZN, BRO-HSS-8]
+correos:
+  - eml: P45.eml
+    de: [Manuel Prieto, pedidos@talleresnavalon.example]
+    asunto: "RE: URGENTE pedido"
+    fecha: 2026-11-02T10:05:00+01:00
+    responde_a: ["<v2-p01@talleresnavalon.example>"]
+    cuerpo: |
+      Ojo, de las brocas son 10, no 20.
+
+      Manuel
+
+      > Hemos registrado su pedido:
+      > ALL-M8X25-ZN  100 uds
+      > TUA-M8-ZN  300 uds
+      > BRO-HSS-8  20 uds
+      > Si algo no es correcto, responda a este correo.
+debe_incluir: ["son 10, no 20"]

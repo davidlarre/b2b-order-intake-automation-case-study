@@ -1,0 +1,45 @@
+id: P18
+tipo: pedido_nuevo
+formato: texto
+persona: construcción metálica
+cliente: C0111
+trampas: [faltan_dos_datos, respuesta_automatica, respuesta_incompleta]
+correos:
+  - eml: P18a.eml
+    de: [Andrei Jiménez, compras@construccionesmetalicasuceda.example]
+    asunto: Tacos obra
+    fecha: 2026-11-10T10:20:00+01:00
+    cuerpo: |
+      Buenos días,
+
+      Para la obra necesitamos:
+      TAM-M10X90   70 uds
+      BRO-SDS-12X160   4
+
+      Saludos,
+      Andrei
+  - eml: P18b.eml
+    de: [Andrei Jiménez, compras@construccionesmetalicasuceda.example]
+    asunto: "Respuesta automática: Tacos obra"
+    fecha: 2026-11-10T10:22:00+01:00
+    responde_a: [P18a.eml]
+    automatico: true
+    cuerpo: |
+      Estoy fuera de la oficina hasta las 15:00. Contestaré a su mensaje cuanto antes.
+  - eml: P18c.eml
+    de: [Andrei Jiménez, compras@construccionesmetalicasuceda.example]
+    asunto: "RE: Tacos obra"
+    fecha: 2026-11-10T15:40:00+01:00
+    responde_a: [P18a.eml]
+    cuerpo: |
+      Que sean 100.
+
+      Andrei
+
+      > Para su pedido nos faltan dos datos:
+      > - TAM-M10X90 se sirve en múltiplos de 50: ¿50 o 100?
+      > - Dirección: 1. Passeig Fluvial 116, 08213 Polinyà  2. Carrer del Vapor 18, Nave 5, 08184 Palau-solità i Plegamans
+lineas:
+  - {producto: TAM-M10X90, cantidad: 70, unidad: ud, como: codigo}
+  - {producto: BRO-SDS-12X160, cantidad: 4, unidad: ud, como: codigo}
+debe_incluir: ["Que sean 100"]

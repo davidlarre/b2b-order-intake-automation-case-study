@@ -1,0 +1,32 @@
+id: P05
+tipo: pedido_nuevo
+formato: reenvio
+persona: cerrajería que escribe a su comercial
+cliente: C0044
+trampas: [reenvio_gmail]
+correos:
+  - eml: P05.eml
+    de: [Albert Casals, albert.casals@orvalle.example]
+    asunto: "Fwd: material"
+    fecha: 2026-11-03T12:05:00+01:00
+    cuerpo: |
+      Pedido de Puigcerver, gracias.
+      Albert
+    reenvio:
+      estilo: gmail
+      de: [Elena Serra, administracion@serralleriapuigcerver.example]
+      fecha: 2026-11-03T11:48:00+01:00
+      asunto: material
+      cuerpo: |
+        Hola Albert,
+
+        ¿Nos mandas esto?
+
+        TIR-8X80-ZN  100
+        BRO-SDS-10X210  5
+
+        Gracias,
+        Elena
+lineas:
+  - {producto: TIR-8X80-ZN, cantidad: 100, unidad: ud, como: codigo}
+  - {producto: BRO-SDS-10X210, cantidad: 5, unidad: ud, como: codigo}

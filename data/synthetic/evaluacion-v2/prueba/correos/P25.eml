@@ -1,0 +1,16 @@
+From: =?utf-8?q?=C3=93scar?= Sala <compras@carroceriasaltamirano.example>
+To: pedidos@orvalle.example
+Subject: Lijas
+Date: Fri, 13 Nov 2026 09:05:00 +0100
+Message-ID: <v2-p25@carroceriasaltamirano.example>
+Authentication-Results: mx.orvalle.example; spf=pass smtp.mailfrom=carroceriasaltamirano.example; dkim=pass header.d=carroceriasaltamirano.example; dmarc=pass header.from=carroceriasaltamirano.example
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+MIME-Version: 1.0
+
+<html><body style="font-family:Calibri">
+<p>Hola,</p>
+<p>Pedido de lijas:</p>
+<p>LIJ-HOJ-180 200<br>LIJ-HOJ-240 200</p>
+<p>Óscar</p>
+</body></html>

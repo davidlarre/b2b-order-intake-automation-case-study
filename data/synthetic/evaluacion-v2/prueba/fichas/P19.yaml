@@ -1,0 +1,30 @@
+id: P19
+tipo: pedido_nuevo
+formato: reenvio
+persona: aluminios, con prisa
+cliente: C0048
+trampas: [reenvio_outlook, entrega_hoy_despues_del_corte]
+correos:
+  - eml: P19.eml
+    de: [Raquel Navarro, raquel.navarro@orvalle.example]
+    asunto: "RV: Pedido urgente"
+    fecha: 2026-11-11T14:00:00+01:00
+    cuerpo: |
+      Por favor, gestionad este pedido.
+
+      Raquel
+    reenvio:
+      estilo: outlook_es
+      de: [Pilar Molina, compras@aluminioscarrascal.example]
+      fecha: 2026-11-11T13:52:00+01:00
+      asunto: Pedido urgente
+      cuerpo: |
+        Hola Raquel,
+
+        Necesito para hoy mismo 12 de SIL-GR y 50 de TIR-6X60-ZN.
+
+        Pilar
+lineas:
+  - {producto: SIL-GR, cantidad: 12, unidad: ud, como: codigo}
+  - {producto: TIR-6X60-ZN, cantidad: 50, unidad: ud, como: codigo}
+debe_incluir: ["para hoy mismo"]

@@ -1,0 +1,50 @@
+id: P25
+conjunto: prueba
+origen: generado
+eml:
+- P25.eml
+tipo: pedido_nuevo
+tipos_aceptables: []
+idioma: es
+cliente: C0019
+trampas:
+- cliente_bloqueado
+- solo_html
+salida:
+  inicial: revision
+  final: revision
+  aceptables: []
+motivos:
+- codigo: R04
+  linea: null
+  momento: inicial
+revision_necesaria: true
+peticion: []
+cabecera:
+  num_pedido_cliente: null
+  direccion:
+    calle: Carrer dels Serrallers
+    numero: '97'
+    nave: null
+    cp: 08140
+  fecha_prevista: '2026-11-13'
+  observaciones_entrega: null
+  condiciones: []
+lineas:
+- texto: LIJ-HOJ-180 200
+  producto: LIJ-HOJ-180
+  cantidad: 200
+  unidad: ud
+  cantidad_uv: 200
+  precio_pedido: null
+- texto: LIJ-HOJ-240 200
+  producto: LIJ-HOJ-240
+  cantidad: 200
+  unidad: ud
+  cantidad_uv: 200
+  precio_pedido: null
+depende_de:
+- R04
+marcas: []
+nota_marcas: null
+notas: null

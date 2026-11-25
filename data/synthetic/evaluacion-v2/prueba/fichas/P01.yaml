@@ -1,0 +1,25 @@
+id: P01
+tipo: pedido_nuevo
+formato: texto
+persona: encargado de taller, directo
+cliente: C0009
+trampas: [urgente_en_el_asunto]
+correos:
+  - eml: P01.eml
+    de: [Manuel Prieto, pedidos@talleresnavalon.example]
+    asunto: URGENTE pedido
+    fecha: 2026-11-02T08:12:00+01:00
+    cuerpo: |
+      Buenos días,
+
+      Necesito cuanto antes:
+
+      ALL-M8X25-ZN   100
+      TUA-M8-ZN   300
+      BRO-HSS-8   20
+
+      Manuel
+lineas:
+  - {producto: ALL-M8X25-ZN, cantidad: 100, unidad: ud, como: codigo}
+  - {producto: TUA-M8-ZN, cantidad: 300, unidad: ud, como: codigo}
+  - {producto: BRO-HSS-8, cantidad: 20, unidad: ud, como: codigo}

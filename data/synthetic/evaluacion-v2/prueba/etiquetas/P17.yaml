@@ -1,0 +1,56 @@
+id: P17
+conjunto: prueba
+origen: generado
+eml:
+- P17a.eml
+- P17b.eml
+tipo: pedido_nuevo
+tipos_aceptables: []
+idioma: es
+cliente: C0034
+trampas:
+- sin_direccion
+- la_de_siempre
+salida:
+  inicial: pedir_datos
+  final: revision
+  aceptables: []
+motivos:
+- codigo: R05
+  linea: null
+  momento: inicial
+- codigo: R05
+  linea: null
+  momento: final
+revision_necesaria: true
+peticion:
+- campo: direccion
+  linea: null
+  opciones:
+  - 1
+  - 2
+cabecera:
+  num_pedido_cliente: null
+  direccion: null
+  fecha_prevista: '2026-11-10'
+  observaciones_entrega: null
+  condiciones: []
+lineas:
+- texto: buenas, 100 DIS-COR-125 y 10 DIS-LAM-120
+  producto: DIS-COR-125
+  cantidad: 100
+  unidad: ud
+  cantidad_uv: 100
+  precio_pedido: null
+- texto: buenas, 100 DIS-COR-125 y 10 DIS-LAM-120
+  producto: DIS-LAM-120
+  cantidad: 10
+  unidad: ud
+  cantidad_uv: 10
+  precio_pedido: null
+depende_de:
+- R05
+- RESPUESTA
+marcas: []
+nota_marcas: null
+notas: «La de siempre» va a revisión con la dirección del último pedido (Carrer de la Forja 7) como sugerencia.

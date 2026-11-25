@@ -1,0 +1,45 @@
+id: P08
+conjunto: prueba
+origen: generado
+eml:
+- P08.eml
+tipo: pedido_nuevo
+tipos_aceptables: []
+idioma: es
+cliente: C0120
+trampas:
+- importe_exacto_3000
+salida:
+  inicial: automatico
+  final: automatico
+  aceptables: []
+motivos: []
+revision_necesaria: null
+peticion: []
+cabecera:
+  num_pedido_cliente: null
+  direccion:
+    calle: Carrer de la Font
+    numero: '40'
+    nave: null
+    cp: 08203
+  fecha_prevista: '2026-11-04'
+  observaciones_entrega: null
+  condiciones: []
+lineas:
+- texto: BOT-S3-43 | 50
+  producto: BOT-S3-43
+  cantidad: 50
+  unidad: par
+  cantidad_uv: 50
+  precio_pedido: null
+- texto: ZAP-S1P-42 | 32
+  producto: ZAP-S1P-42
+  cantidad: 32
+  unidad: par
+  cantidad_uv: 32
+  precio_pedido: null
+depende_de: []
+marcas: []
+nota_marcas: null
+notas: 'Base imponible: 50 × 40,00 + 32 × 31,25 = 3.000,00 €, que no supera el límite.'

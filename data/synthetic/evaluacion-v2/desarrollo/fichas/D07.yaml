@@ -1,0 +1,34 @@
+id: D07
+tipo: pedido_nuevo
+formato: excel
+persona: plantilla propia con título y total
+cliente: C0016
+trampas: [fila_de_total, cabecera_tras_titulo]
+correos:
+  - eml: D07.eml
+    de: [Xavier Amrani, compras@tallersdelbesosnord.example]
+    asunto: Pedido 2026-118
+    fecha: 2026-11-05T10:30:00+01:00
+    cuerpo: |
+      Buenos días,
+
+      Adjunto pedido 2026-118.
+
+      Xavier
+    excel:
+      nombre: pedido_2026-118.xlsx
+      hoja: Pedido
+      filas:
+        - ["Tallers del Besòs Nord, S.L."]
+        - ["Pedido 2026-118"]
+        - []
+        - [Referencia, Descripción, Cantidad]
+        - [LLC-10, "Llave combinada 10", 4]
+        - [LLC-13, "Llave combinada 13", 4]
+        - [VAS-12-17, "Vaso 17", 2]
+        - [Total, null, 10]
+lineas:
+  - {producto: LLC-10, cantidad: 4, unidad: ud, como: codigo}
+  - {producto: LLC-13, cantidad: 4, unidad: ud, como: codigo}
+  - {producto: VAS-12-17, cantidad: 2, unidad: ud, como: codigo}
+debe_incluir: ["2026-118"]

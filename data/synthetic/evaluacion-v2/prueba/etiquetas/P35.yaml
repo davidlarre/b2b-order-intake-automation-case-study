@@ -1,0 +1,43 @@
+id: P35
+conjunto: prueba
+origen: generado
+eml:
+- P35.eml
+tipo: pedido_nuevo
+tipos_aceptables: []
+idioma: es
+cliente: C0096
+trampas:
+- cantidad_anomala_por_unidad
+salida:
+  inicial: revision
+  final: revision
+  aceptables: []
+motivos:
+- codigo: R14
+  linea: 1
+  momento: inicial
+revision_necesaria: true
+peticion: []
+cabecera:
+  num_pedido_cliente: null
+  direccion:
+    calle: Carrer dels Fusters
+    numero: '40'
+    nave: Nave 9
+    cp: 08184
+  fecha_prevista: '2026-11-18'
+  observaciones_entrega: null
+  condiciones: []
+lineas:
+- texto: SIE-HOJ-24 | 10
+  producto: SIE-HOJ-24
+  cantidad: 10
+  unidad: ud
+  cantidad_uv: 10
+  precio_pedido: null
+depende_de:
+- R14
+marcas: []
+nota_marcas: null
+notas: Mediana 100 en 5 pedidos; 10 es menos de una quinta parte. Quería 10 cajas de 10.

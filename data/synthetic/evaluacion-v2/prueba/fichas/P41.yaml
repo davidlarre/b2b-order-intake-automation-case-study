@@ -1,0 +1,16 @@
+id: P41
+tipo: pedido_nuevo
+formato: pdf
+persona: matricería, sin texto apenas
+cliente: C0031
+trampas: [pdf, cuerpo_minimo]
+correos:
+  - eml: P41.eml
+    de: [Carme Marín, pedidos@matriceriaescuderovalles.example]
+    asunto: OC 26-201
+    fecha: 2026-11-20T09:20:00+01:00
+    cuerpo: |
+      Ver adjunto.
+    pdf:
+      nombre: OC_26-201.pdf
+      lineas: ["Matriceria Escudero Valles, S.L.", "OC 26-201", "PRI-M8X10-NG   200"]

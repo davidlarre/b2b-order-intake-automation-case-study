@@ -1,0 +1,25 @@
+From: =?utf-8?q?S=C3=ADlvia?= Castro <oficina@talleresmecanicosorduna.example>
+To: pedidos@orvalle.example
+Subject: pedido =?utf-8?q?torniller=C3=ADa?=
+Date: Tue, 03 Nov 2026 08:20:00 +0100
+Message-ID: <v2-d01@talleresmecanicosorduna.example>
+Authentication-Results:
+ mx.orvalle.example; spf=pass smtp.mailfrom=talleresmecanicosorduna.example; dkim=pass header.d=talleresmecanicosorduna.example; dmarc=pass header.from=talleresmecanicosorduna.example
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+MIME-Version: 1.0
+
+Buenos días,
+
+Pedido para esta semana:
+
+TOR-M6X20-ZN   1.500 uds
+TUE-M6-ZN   1.500 uds
+ARA-M6-ZN   2000
+
+Nuestro nº de pedido: 8812
+
+Gracias
+Sílvia Castro
+Talleres Mecánicos Orduña, S.L.
+Dom. fiscal: Carrer Major 2, 08227 Terrassa

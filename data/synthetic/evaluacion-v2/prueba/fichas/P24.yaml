@@ -1,0 +1,29 @@
+id: P24
+tipo: pedido_nuevo
+formato: excel
+persona: suplantador de una química
+cliente: C0101
+trampas: [dmarc_fail, firma_con_direccion_fiscal]
+correos:
+  - eml: P24.eml
+    de: [Lucía Popescu, compras@quimicasvaldeolmos.example]
+    asunto: Pedido QV-2288
+    fecha: 2026-11-13T08:15:00+01:00
+    dmarc: fail
+    cuerpo: |
+      Buenos días,
+
+      Adjunto pedido QV-2288.
+
+      Lucía Popescu
+      Químicas Valdeolmos, S.A.
+      Domicilio fiscal: Carrer de Sant Josep 5, 08760 Martorell
+    excel:
+      nombre: QV-2288.xlsx
+      filas:
+        - [Referencia, Cantidad]
+        - [GUA-NIT-L, 40]
+        - [MAS-FFP3, 10]
+lineas:
+  - {producto: GUA-NIT-L, cantidad: 40, unidad: caja, como: codigo}
+  - {producto: MAS-FFP3, cantidad: 10, unidad: caja, como: codigo}

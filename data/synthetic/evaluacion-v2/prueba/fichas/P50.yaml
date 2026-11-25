@@ -1,0 +1,21 @@
+id: P50
+tipo: consulta
+formato: texto
+persona: instalador
+cliente: C0067
+trampas: [precio_con_codigo_y_cantidad, solo_html]
+otros_codigos: [TRA-ALG-10]
+correos:
+  - eml: P50.eml
+    de: [Anna Chen, pedidos@instalacionesbaquero.example]
+    asunto: precio trapos
+    fecha: 2026-11-04T09:10:00+01:00
+    dmarc: none
+    html: true
+    cuerpo: |
+      Buenos días,
+
+      ¿A cuánto nos saldrían 10 sacos de TRA-ALG-10? Estoy comparando con otro proveedor.
+
+      Anna Chen
+debe_incluir: ["10 sacos"]

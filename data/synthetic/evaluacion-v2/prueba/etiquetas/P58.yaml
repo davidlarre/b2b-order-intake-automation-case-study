@@ -1,0 +1,34 @@
+id: P58
+conjunto: prueba
+origen: generado
+eml:
+- P58.eml
+tipo: otros
+tipos_aceptables:
+- dudoso
+destino: archivo
+idioma: es
+cliente: null
+trampas:
+- spam
+salida:
+  inicial: derivado
+  final: derivado
+  aceptables:
+  - salida: revision
+    motivos:
+    - M01
+motivos: []
+revision_necesaria: null
+peticion: []
+cabecera:
+  num_pedido_cliente: null
+  direccion: null
+  fecha_prevista: null
+  observaciones_entrega: null
+  condiciones: []
+lineas: []
+depende_de: []
+marcas: []
+nota_marcas: null
+notas: null

@@ -1,0 +1,29 @@
+id: P29
+tipo: pedido_nuevo
+formato: texto
+persona: electricista, todo en catalán
+cliente: C0080
+catalan: entero
+trampas: [numeracion_ciclica, catalan_entero]
+correos:
+  - eml: P29.eml
+    de: [Rubén Soler, taller@electricitatpujolar.example]
+    asunto: Comanda 12
+    fecha: 2026-11-16T10:25:00+01:00
+    dmarc: none
+    cuerpo: |
+      Bon dia,
+
+      Comanda 12. Necessitem:
+
+      - CIN-AIS-NG, 20 rotlles
+      - BRI-4-8X200-NG, 6 bosses
+
+      Si podeu fer-ho arribar abans de dijous, millor.
+
+      Gràcies i salutacions,
+      Rubén
+lineas:
+  - {producto: CIN-AIS-NG, cantidad: 20, unidad: rollo, como: codigo}
+  - {producto: BRI-4-8X200-NG, cantidad: 6, unidad: bolsa, como: codigo}
+debe_incluir: ["Comanda 12"]

@@ -1,0 +1,48 @@
+id: P38
+conjunto: prueba
+origen: generado
+eml:
+- P38.eml
+tipo: pedido_nuevo
+tipos_aceptables: []
+idioma: es
+cliente: C0116
+trampas:
+- discrepancia_excel_cuerpo
+salida:
+  inicial: revision
+  final: revision
+  aceptables: []
+motivos:
+- codigo: R12
+  linea: 1
+  momento: inicial
+revision_necesaria: true
+peticion: []
+cabecera:
+  num_pedido_cliente: null
+  direccion:
+    calle: Carrer del Coure
+    numero: '20'
+    nave: null
+    cp: 08400
+  fecha_prevista: '2026-11-19'
+  observaciones_entrega: null
+  condiciones: []
+lineas:
+- texto: Va el pedido en el Excel. De las TUE-M12-ZN me parece que al final eran 400, confirmadlo vosotros con lo de la otra vez si podéis.
+  producto: TUE-M12-ZN
+  cantidad: 200
+  unidad: ud
+  cantidad_uv: 200
+  precio_pedido: null
+- texto: ARA-M12-ZN | 200
+  producto: ARA-M12-ZN
+  cantidad: 200
+  unidad: ud
+  cantidad_uv: 200
+  precio_pedido: null
+depende_de: []
+marcas: []
+nota_marcas: null
+notas: 'El Excel dice 200 y el correo cree que 400, sin estar seguro: decide una persona. Si las dos lecturas dicen 200, R12 no salta y el automático es indebido.'

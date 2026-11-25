@@ -1,0 +1,15 @@
+From: =?utf-8?q?S=C3=ADlvia_P=C3=A9rez?= <oficina@tallersmecanicssolanelles.example>
+To: pedidos@orvalle.example
+Subject: pedido
+Date: Tue, 03 Nov 2026 09:25:00 +0100
+Message-ID: <v2-p47@tallersmecanicssolanelles.example>
+Authentication-Results: mx.orvalle.example; spf=pass smtp.mailfrom=tallersmecanicssolanelles.example; dmarc=none header.from=tallersmecanicssolanelles.example
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+MIME-Version: 1.0
+
+Hola,
+
+Del pedido de la semana pasada quitadme una de las cosas, que ya la hemos encontrado por aquí. La otra dejadla.
+
+Sílvia

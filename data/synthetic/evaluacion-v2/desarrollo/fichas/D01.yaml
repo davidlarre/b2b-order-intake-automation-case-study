@@ -1,0 +1,31 @@
+id: D01
+tipo: pedido_nuevo
+formato: texto
+persona: encargado de taller, escribe corto
+cliente: C0010
+trampas: [punto_de_miles, firma_con_direccion_fiscal]
+correos:
+  - eml: D01.eml
+    de: [Sílvia Castro, oficina@talleresmecanicosorduna.example]
+    asunto: pedido tornillería
+    fecha: 2026-11-03T08:20:00+01:00
+    cuerpo: |
+      Buenos días,
+
+      Pedido para esta semana:
+
+      TOR-M6X20-ZN   1.500 uds
+      TUE-M6-ZN   1.500 uds
+      ARA-M6-ZN   2000
+
+      Nuestro nº de pedido: 8812
+
+      Gracias
+      Sílvia Castro
+      Talleres Mecánicos Orduña, S.L.
+      Dom. fiscal: Carrer Major 2, 08227 Terrassa
+lineas:
+  - {producto: TOR-M6X20-ZN, cantidad: 1500, unidad: ud, como: codigo}
+  - {producto: TUE-M6-ZN, cantidad: 1500, unidad: ud, como: codigo}
+  - {producto: ARA-M6-ZN, cantidad: 2000, unidad: ud, como: codigo}
+debe_incluir: ["8812"]

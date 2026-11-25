@@ -1,0 +1,16 @@
+id: P39
+tipo: pedido_nuevo
+formato: texto
+persona: mantenimiento, vago
+cliente: C0054
+trampas: [repite_sin_numero]
+correos:
+  - eml: P39.eml
+    de: [Raquel Prieto, administracion@mantenimientosintegraleszamarreno.example]
+    asunto: pedido
+    fecha: 2026-11-19T11:05:00+01:00
+    dmarc: none
+    cuerpo: |
+      Hola, ¿nos repetís el de la otra vez? Lo mismo, gracias.
+
+      Raquel

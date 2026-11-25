@@ -1,0 +1,21 @@
+id: P60
+tipo: otros
+formato: texto
+persona: newsletter de un proveedor
+cliente: null
+trampas: [newsletter_con_productos]
+correos:
+  - eml: P60.eml
+    de: [Abrasivos Cantalejo, newsletter@abrasivoscantalejo.example]
+    asunto: Novedades de noviembre en abrasivos
+    fecha: 2026-11-12T07:00:00+01:00
+    cuerpo: |
+      Novedades de noviembre
+
+      - Nueva gama de discos de láminas, grano 40 a 120. Pedido mínimo: 50 unidades.
+      - 15 % de descuento en discos de corte de 125 mm hasta fin de mes.
+
+      Si no quiere recibir más boletines, dese de baja en nuestra web.
+
+      Abrasivos Cantalejo, S.L.
+debe_incluir: ["Novedades"]

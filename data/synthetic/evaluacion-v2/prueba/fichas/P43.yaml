@@ -1,0 +1,20 @@
+id: P43
+tipo: modificacion_anulacion
+formato: texto
+persona: cerrajero
+cliente: C0042
+trampas: [cambio_de_cantidad]
+otros_codigos: [TIR-8X60-ZN]
+correos:
+  - eml: P43.eml
+    de: [Paco Pujol, pedidos@cerrajeriahermosilla.example]
+    asunto: cambio en el 1045
+    fecha: 2026-11-02T08:40:00+01:00
+    dmarc: none
+    cuerpo: |
+      Buenas,
+
+      Del pedido 1045, los TIR-8X60-ZN que sean 400 y no 200. Lo demás igual.
+
+      Paco
+debe_incluir: ["1045", "400 y no 200"]

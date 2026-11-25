@@ -1,0 +1,27 @@
+id: P21
+tipo: pedido_nuevo
+formato: excel
+persona: central de compras de dos empresas
+cliente: null
+trampas: [email_compartido_por_2]
+correos:
+  - eml: P21.eml
+    de: [Compres Grup Tècnic, compras@gruptecnicvalles.example]
+    asunto: Pedido EPIs
+    fecha: 2026-11-12T08:30:00+01:00
+    cuerpo: |
+      Buenos días,
+
+      Adjuntamos pedido de EPIs.
+
+      Compres Grup Tècnic
+    excel:
+      nombre: epis.xlsx
+      filas:
+        - [Código, Cantidad]
+        - [CHA-AM-XL, 10]
+        - [ORE-SNR31, 5]
+lineas:
+  - {producto: CHA-AM-XL, cantidad: 10, unidad: ud, como: codigo}
+  - {producto: ORE-SNR31, cantidad: 5, unidad: ud, como: codigo}
+no_debe_incluir: [Gallifa, Bertí]

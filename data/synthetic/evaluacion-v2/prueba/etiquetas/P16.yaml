@@ -1,0 +1,60 @@
+id: P16
+conjunto: prueba
+origen: generado
+eml:
+- P16a.eml
+- P16b.eml
+tipo: pedido_nuevo
+tipos_aceptables: []
+idioma: es
+cliente: C0098
+trampas:
+- no_multiplo_del_embalaje
+- respuesta_con_algo_mas
+salida:
+  inicial: pedir_datos
+  final: revision
+  aceptables: []
+motivos:
+- codigo: R10-EMBALAJE
+  linea: 1
+  momento: inicial
+- codigo: M07
+  linea: null
+  momento: final
+revision_necesaria: true
+peticion:
+- campo: cantidad
+  linea: 1
+  opciones:
+  - 25
+  - 50
+cabecera:
+  num_pedido_cliente: PC-640
+  direccion:
+    calle: Carrer del Coure
+    numero: '107'
+    nave: Nave 10
+    cp: 08100
+  fecha_prevista: '2026-11-09'
+  observaciones_entrega: null
+  condiciones: []
+lineas:
+- texto: DIS-COR-125 | 30
+  producto: DIS-COR-125
+  cantidad: 30
+  unidad: ud
+  cantidad_uv: 30
+  precio_pedido: null
+- texto: TUE-M8-ZN | 500
+  producto: TUE-M8-ZN
+  cantidad: 500
+  unidad: ud
+  cantidad_uv: 500
+  precio_pedido: null
+depende_de:
+- R10
+- RESPUESTA
+marcas: []
+nota_marcas: null
+notas: La respuesta da la cantidad (50) y añade 2 cajas de GUA-NIT-M, que no se pidieron.

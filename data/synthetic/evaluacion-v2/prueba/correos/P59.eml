@@ -1,0 +1,15 @@
+From: Purchasing Dept <orders@global-trading-desk.example>
+To: pedidos@orvalle.example
+Subject: Nuevo pedido
+Date: Wed, 11 Nov 2026 05:40:00 +0100
+Message-ID: <v2-p59@global-trading-desk.example>
+Authentication-Results: mx.orvalle.example; spf=fail smtp.mailfrom=global-trading-desk.example; dkim=none; dmarc=fail header.from=global-trading-desk.example
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+MIME-Version: 1.0
+
+Estimado proveedor:
+
+Adjuntamos nuevo pedido urgente. Descargue el documento seguro aquí: http://documentos-seguros.example/pedido y acceda con su usuario y contraseña de correo para verlo.
+
+Departamento de compras

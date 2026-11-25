@@ -1,0 +1,33 @@
+From: =?utf-8?q?Facturaci=C3=B3n?= Transportes Olmedilla <facturacion@transportesolmedilla.example>
+To: pedidos@orvalle.example
+Subject: Factura F26-10877
+Date: Wed, 04 Nov 2026 07:50:00 +0100
+Message-ID: <v2-d20@transportesolmedilla.example>
+Authentication-Results: mx.orvalle.example; spf=pass smtp.mailfrom=transportesolmedilla.example; dkim=pass header.d=transportesolmedilla.example; dmarc=pass header.from=transportesolmedilla.example
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="=_d20_orvalle_v2"
+
+--=_d20_orvalle_v2
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+
+Estimado cliente:
+
+Le adjuntamos la factura F26-10877, correspondiente a los portes de octubre. Vencimiento: 4 de diciembre de 2026.
+
+Departamento de facturación
+Transportes Olmedilla, S.L.
+
+--=_d20_orvalle_v2
+Content-Type: application/pdf
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="F26-10877.pdf"
+MIME-Version: 1.0
+
+JVBERi0xLjQKMSAwIG9iago8PC9UeXBlL0NhdGFsb2cvUGFnZXMgMiAwIFI+PgplbmRvYmoKMiAwIG9iago8PC9UeXBlL1BhZ2VzL0tpZHNbMyAwIFJdL0NvdW50IDE+PgplbmRvYmoKMyAwIG9iago8PC9UeXBlL1BhZ2UvUGFyZW50IDIgMCBSL01lZGlhQm94WzAg
+MCA1OTUgODQyXS9Db250ZW50cyA0IDAgUi9SZXNvdXJjZXM8PC9Gb250PDwvRjEgNSAwIFI+Pj4+Pj4KZW5kb2JqCjQgMCBvYmoKPDwvTGVuZ3RoIDE4ND4+CnN0cmVhbQpCVCAvRjEgMTEgVGYgNjAgNzgwIFRkIDE1IFRMIChUcmFuc3BvcnRlcyBPbG1lZGlsbGEs
+IFMuTC4pIFRqIFQqIChGYWN0dXJhIEYyNi0xMDg3NykgVGogVCogKEJhc2UgaW1wb25pYmxlIDEuMjQwLDAwIEVVUikgVGogVCogKElWQSAyMSAlIDI2MCw0MCBFVVIpIFRqIFQqIChUb3RhbCAxLjUwMCw0MCBFVVIpIFRqIFQqIEVUCmVuZHN0cmVhbQplbmRvYmoK
+NSAwIG9iago8PC9UeXBlL0ZvbnQvU3VidHlwZS9UeXBlMS9CYXNlRm9udC9IZWx2ZXRpY2EvRW5jb2RpbmcvV2luQW5zaUVuY29kaW5nPj4KZW5kb2JqCnhyZWYKMCA2CjAwMDAwMDAwMDAgNjU1MzUgZiAKMDAwMDAwMDAwOSAwMDAwMCBuIAowMDAwMDAwMDU0IDAw
+MDAwIG4gCjAwMDAwMDAxMDUgMDAwMDAgbiAKMDAwMDAwMDIxNyAwMDAwMCBuIAowMDAwMDAwNDUwIDAwMDAwIG4gCnRyYWlsZXIKPDwvU2l6ZSA2L1Jvb3QgMSAwIFI+PgpzdGFydHhyZWYKNTM4CiUlRU9GCg==
+
+--=_d20_orvalle_v2--

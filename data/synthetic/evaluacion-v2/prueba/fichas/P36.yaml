@@ -1,0 +1,27 @@
+id: P36
+tipo: pedido_nuevo
+formato: excel
+persona: hilaturas, compra grande justificada
+cliente: C0103
+trampas: [pedido_grande_legitimo, firma_con_direccion_fiscal]
+correos:
+  - eml: P36.eml
+    de: [Andrei Pujol, oficina@hilaturasrosellonvega.example]
+    asunto: Pedido guantes nueva nave
+    fecha: 2026-11-18T12:15:00+01:00
+    dmarc: none
+    cuerpo: |
+      Buenos días,
+
+      Abrimos turno nuevo y entran 20 personas, así que este mes pedimos bastante más. Va en el Excel.
+
+      Andrei Pujol
+      Hilaturas Rosellón Vega, S.L.
+      Domicilio social: Carrer Major 88, 08186 Lliçà d'Amunt
+    excel:
+      nombre: guantes.xlsx
+      filas:
+        - [Referencia, Cantidad]
+        - [GUA-PU-9, 240]
+lineas:
+  - {producto: GUA-PU-9, cantidad: 240, unidad: par, como: codigo}

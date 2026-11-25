@@ -1,0 +1,57 @@
+id: P14
+conjunto: prueba
+origen: generado
+eml:
+- P14a.eml
+- P14b.eml
+tipo: pedido_nuevo
+tipos_aceptables: []
+idioma: es
+cliente: C0023
+trampas:
+- varias_direcciones_sin_indicar
+- respuesta_completa
+salida:
+  inicial: pedir_datos
+  final: automatico
+  aceptables: []
+motivos:
+- codigo: R05
+  linea: null
+  momento: inicial
+revision_necesaria: null
+peticion:
+- campo: direccion
+  linea: null
+  opciones:
+  - 1
+  - 2
+cabecera:
+  num_pedido_cliente: 2026-88
+  direccion:
+    calle: Carrer del Progrés
+    numero: '42'
+    nave: null
+    cp: 08191
+  fecha_prevista: '2026-11-06'
+  observaciones_entrega: null
+  condiciones: []
+lineas:
+- texto: DIS-DES-125  20
+  producto: DIS-DES-125
+  cantidad: 20
+  unidad: ud
+  cantidad_uv: 20
+  precio_pedido: null
+- texto: DIS-COR-125  50
+  producto: DIS-COR-125
+  cantidad: 50
+  unidad: ud
+  cantidad_uv: 50
+  precio_pedido: null
+depende_de:
+- R05
+- RESPUESTA
+marcas: []
+nota_marcas: null
+notas: null
