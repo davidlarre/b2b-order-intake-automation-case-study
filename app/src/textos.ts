@@ -49,7 +49,7 @@ const corto = (razon: string) => razon.replace(/,?\s+(S\.L\.|S\.A\.|S\.C\.P\.|S\
 // ---------------------------------------------------------------- la cola
 
 // "Por qué está en revisión": una frase concreta por pedido, a partir de su motivo principal.
-const ORDEN = ['R02', 'R11', 'M02', 'M01', 'R08', 'R12'];
+const ORDEN = ['R02', 'R11', 'M02', 'M03', 'M01', 'R08', 'R12'];
 const principal = <T extends MotivoCola>(motivos: T[]) =>
   [...motivos].sort((a, b) => ORDEN.indexOf(a.codigo) - ORDEN.indexOf(b.codigo))[0];
 
@@ -70,6 +70,8 @@ export function porQueEnRevision(f: FilaCola): string {
       const xls = (d.formatos ?? []).includes('xls');
       return `${xls ? 'Pedido en un Excel antiguo' : 'Pedido en un adjunto'} (${formatos}) que no se puede leer${otros}`;
     }
+    case 'M03':
+      return `El sistema no ha podido leer el correo por un fallo técnico${otros}`;
     case 'M01':
       return f.adjuntos.length === 0
         ? 'El correo no incluye ningún producto y no trae adjuntos'
@@ -103,14 +105,18 @@ export function etiquetaEstado(det: Detalle): string | null {
 
 export type Cliente =
   | { confirmado: true; nombre: string; nota: string | null }
-  | { confirmado: false; nota: string };
+  | { confirmado: false; titulo?: string; nota: string };
 
 export function clienteDe(det: Detalle): Cliente {
   const n = det.nombres;
   if (det.cliente) return { confirmado: true, nombre: nombreCliente(n, det.cliente), nota: null };
-  if (det.cliente_por_remitente && det.cliente_propuesto) {
-    return { confirmado: true, nombre: nombreCliente(n, det.cliente_propuesto),
-             nota: 'Identificado por el remitente, que es un contacto registrado del cliente.' };
+  // Con el cliente sin asignar y ningún R02 abierto, las reglas no han corrido (M01, M02, M03): nada está comprobado.
+  if (det.cliente_por_remitente) {
+    return {
+      confirmado: false,
+      titulo: 'Sin comprobar: el pedido no ha pasado por las reglas',
+      nota: det.cliente_propuesto ? `Propuesto: ${nombreCliente(n, det.cliente_propuesto)} (por el remitente del correo).` : '',
+    };
   }
   const r02 = det.motivos.find((m) => m.estado === 'abierto' && m.codigo === 'R02');
   const d = (r02?.detalle ?? {}) as D;
@@ -156,6 +162,7 @@ function frase(m: Motivo, det: Detalle): string {
       : `en ${prod} no está clara la cantidad: ${numero(d.determinista?.cantidad)} o ${numero(d.ia?.cantidad)}`;
     case 'M01': return 'no hay productos en el correo';
     case 'M02': return 'el pedido está en un adjunto que no se puede leer';
+    case 'M03': return 'el correo no se ha leído por un fallo técnico';
     default: return 'hay algo que revisar';
   }
 }
@@ -211,6 +218,10 @@ export function situacion(det: Detalle): Situacion | null {
         'Descárgalo, teclea el pedido en el ERP y márcalo como hecho. Si no es un pedido, descártalo.',
         [...(adjunto && det.correo?.ruta_eml ? [{ tipo: 'descargar' as const, etiqueta: `Descargar ${adjunto}`, adjunto }] : []), A_MANO, DESCARTAR]);
     }
+    case 'M03':
+      return s('El sistema no ha podido leer el correo por un fallo técnico.',
+        'Abre el correo. Si es un pedido, tecléalo en el ERP y márcalo como hecho; si no lo es, descártalo.',
+        [A_MANO, DESCARTAR]);
     case 'M01':
       return s((det.correo?.adjuntos.length ?? 0) === 0
           ? 'El correo no incluye ningún producto y no trae adjuntos.'
@@ -251,6 +262,7 @@ export function sinProductos(det: Detalle): string {
     const adjuntos = ((m02.detalle as D).adjuntos ?? []).join(', ');
     return `No hemos podido leer los productos: están en ${adjuntos ? `el adjunto ${adjuntos}` : 'un adjunto'}, que no se puede leer.`;
   }
+  if (det.motivos.some((m) => m.codigo === 'M03')) return 'No se han leído los productos: hubo un fallo técnico al leer el correo.';
   return 'No hemos encontrado productos en el texto del correo ni en adjuntos que se puedan leer.';
 }
 
@@ -284,7 +296,7 @@ export function filaProducto(l: Linea, det: Detalle): FilaProducto {
 }
 
 export function notaPrecios(det: Detalle): string | null {
-  if (det.cliente || det.cliente_por_remitente || !det.cliente_propuesto) {
+  if (det.cliente || !det.cliente_propuesto) {
     return !det.cliente && !det.cliente_propuesto && det.lineas.length > 0
       ? 'Los precios se calcularán al confirmar el cliente.'
       : null;

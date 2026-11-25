@@ -149,11 +149,12 @@
           "id": "4e6CGP87FzOHxuya",
           "name": "Gemini · AI Studio (nivel gratuito)"
         }
-      }
+      },
+      "onError": "continueErrorOutput"
     },
     {
       "parameters": {
-        "jsCode": "const correo = $('Leer .eml').first().json;\nconst configuracion = correo.configuracion;\n\n// Los nombres son los parámetros de api.registrar_extraccion.\nconst cuerpo = {\n  caso: $('Registrar correo').first().json.caso,\n  configuracion,\n};\n\n// Interruptor de la IA: en \"solo reglas\" Gemini no se ha ejecutado y no hay nada que leer.\nif (configuracion !== 'solo_reglas') {\n  const respuesta = $('Extraer con Gemini').first().json;\n  // Busca la respuesta del modelo por su tipo: antes puede venir un \"thought\" (el razonamiento).\n  const salida = (respuesta.steps ?? []).find(s => s.type === 'model_output');\n  const texto = salida?.content?.find(c => c.type === 'text')?.text;\n  if (!texto) {\n    throw new Error('Gemini no devolvió un model_output con texto');\n  }\n  let extraccion;\n  try {\n    extraccion = JSON.parse(texto);\n  } catch (e) {\n    throw new Error('La respuesta de Gemini no es JSON válido: ' + e.message);\n  }\n  const uso = respuesta.usage ?? {};\n  Object.assign(cuerpo, {\n    extraccion_ia: extraccion,\n    prompt_hash: $('Leer prompt activo').first().json.hash,\n    modelo: respuesta.model,\n    tokens_entrada: uso.total_input_tokens ?? null,\n    // El razonamiento también se factura como salida.\n    tokens_salida: (uso.total_output_tokens ?? 0) + (uso.total_thought_tokens ?? 0),\n  });\n}\n\n// Interruptor del determinista: en \"solo IA\" su lectura no se envía.\nif (configuracion !== 'solo_ia') {\n  const determinista = $('Extractor determinista').first().json;\n  Object.assign(cuerpo, {\n    extraccion_determinista: { lineas: determinista.lineas },\n    version_determinista: determinista.version,\n  });\n}\n\nreturn [{ json: cuerpo }];"
+        "jsCode": "const correo = $('Leer .eml').first().json;\nconst configuracion = correo.configuracion;\n\nfunction cumple(valor, esquema) {\n  const tipo = valor === null ? 'null' : Array.isArray(valor) ? 'array' : typeof valor;\n  if (![].concat(esquema.type).includes(tipo)) return false;\n  if (tipo === 'array') return valor.every(v => cumple(v, esquema.items));\n  if (tipo !== 'object') return true;\n  return esquema.required.every(k => k in valor)\n    && Object.entries(esquema.properties).every(([k, e]) => !(k in valor) || cumple(valor[k], e));\n}\n\n// Los nombres son los parámetros de api.registrar_extraccion.\nconst cuerpo = {\n  caso: $('Registrar correo').first().json.caso,\n  configuracion,\n};\n\n// Interruptor de la IA: en \"solo reglas\" Gemini no se ha ejecutado y no hay nada que leer.\nif (configuracion !== 'solo_reglas') {\n  const respuesta = $('Extraer con Gemini').first().json;\n  // Busca la respuesta del modelo por su tipo: antes puede venir un \"thought\" (el razonamiento).\n  const salida = (respuesta.steps ?? []).find(s => s.type === 'model_output');\n  const texto = salida?.content?.find(c => c.type === 'text')?.text;\n  if (!texto) {\n    throw new Error('Gemini no devolvió un model_output con texto');\n  }\n  let extraccion;\n  try {\n    extraccion = JSON.parse(texto);\n  } catch (e) {\n    throw new Error('La respuesta de Gemini no es JSON válido');\n  }\n  // El esquema es el del prompt activo (ADR 0002). Aquí solo se mira la forma: la base de datos lo valida entero.\n  if (!cumple(extraccion, $('Leer prompt activo').first().json.esquema)) {\n    throw new Error('La respuesta de Gemini no cumple el esquema');\n  }\n  const uso = respuesta.usage ?? {};\n  Object.assign(cuerpo, {\n    extraccion_ia: extraccion,\n    prompt_hash: $('Leer prompt activo').first().json.hash,\n    modelo: respuesta.model,\n    tokens_entrada: uso.total_input_tokens ?? null,\n    // El razonamiento también se factura como salida.\n    tokens_salida: (uso.total_output_tokens ?? 0) + (uso.total_thought_tokens ?? 0),\n  });\n}\n\n// Interruptor del determinista: en \"solo IA\" su lectura no se envía.\nif (configuracion !== 'solo_ia') {\n  const determinista = $('Extractor determinista').first().json;\n  Object.assign(cuerpo, {\n    extraccion_determinista: { lineas: determinista.lineas },\n    version_determinista: determinista.version,\n  });\n}\n\nreturn [{ json: cuerpo }];"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -162,7 +163,8 @@
         -336
       ],
       "id": "4bb48d33-1661-4029-9f05-a2e7cf5eb755",
-      "name": "Preparar extracción"
+      "name": "Preparar extracción",
+      "onError": "continueErrorOutput"
     },
     {
       "parameters": {
@@ -448,6 +450,41 @@
         }
       },
       "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://host.docker.internal:54321/rest/v1/rpc/enviar_a_revision",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Profile",
+              "value": "api"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({\n  caso: $('Registrar correo').first().json.caso,\n  codigo: 'M03',\n  detalle: {\n    paso: 'extraccion_ia',\n    error: String($json.error?.message ?? $json.error ?? 'sin detalle').slice(0, 200)\n  }\n}) }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.5,
+      "position": [
+        2224,
+        -560
+      ],
+      "id": "cbfd6176-11b1-444d-a662-790b6838ae18",
+      "name": "Enviar a revisión (M03)",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "pPeI6Dvh8SeDo88k",
+          "name": "Supabase local · automatización"
+        }
+      }
     }
   ],
   "connections": {
@@ -510,6 +547,13 @@
             "type": "main",
             "index": 0
           }
+        ],
+        [
+          {
+            "node": "Enviar a revisión (M03)",
+            "type": "main",
+            "index": 0
+          }
         ]
       ]
     },
@@ -518,6 +562,13 @@
         [
           {
             "node": "Registrar extracción y evaluar",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Enviar a revisión (M03)",
             "type": "main",
             "index": 0
           }
@@ -620,6 +671,17 @@
         [
           {
             "node": "Registrar correo",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Enviar a revisión (M03)": {
+      "main": [
+        [
+          {
+            "node": "Responder: resultado",
             "type": "main",
             "index": 0
           }

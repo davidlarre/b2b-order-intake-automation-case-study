@@ -30,23 +30,26 @@ Un distribuidor recibe unos 1.800 pedidos al mes por correo, en texto libre, Exc
 
 ![Flujo de n8n: del correo a la extracción, las reglas y la respuesta](docs/img/flujo-n8n.png)
 
-## Resultados
+## Resultados (v1.1)
 
 20 correos de desarrollo, en las tres configuraciones del sistema:
 
 | Configuración | OK | ACEPTABLE | FALLO | Pedidos automáticos erróneos o indebidos |
 |---|---|---|---|---|
 | Solo reglas | 7 | 5 | 8 | 8 de 11 |
-| Solo IA | 18 | 1 | 1 | 0 de 11 |
-| Híbrido | 16 | 3 | 1 | 0 de 9 |
+| Solo IA | 19 | 1 | 0 | 0 de 12 |
+| Híbrido | 16 | 4 | 0 | 0 de 9 |
+
+**Qué cambió en la v1.1:** una regla del prompt para las correcciones del cliente, y un fallo de la IA manda el caso a la cola (M03); el vídeo no se ha tocado y muestra la [v1](eval/resultados-v1.md).
 
 ACEPTABLE es una salida segura que no era la esperada: el caso llega a una persona.
 
 - **Sin IA no basta:** un lector de reglas deja líneas fuera y crea el pedido igualmente.
-- **En estos casos, "solo IA" sale algo mejor que el híbrido.** El híbrido paga dos revisiones innecesarias por tener una segunda lectura. Esa red existe para cuando la IA lea mal, y en 20 casos no llegó a hacer falta.
+- **En estos casos, "solo IA" sale algo mejor que el híbrido.** El híbrido paga tres revisiones innecesarias por tener una segunda lectura. Esa red existe para cuando la IA lea mal, y en 20 casos no llegó a hacer falta.
+- **Con Gemini caído, los casos llegan a la cola.** En dos pasadas anteriores, con el servicio saturado, 15 casos acabaron en la cola con M03 y ninguno creó un pedido ([detalle](eval/resultados-v1-1.md#comportamiento-con-gemini-caído)).
 - **Son pocos casos, y de desarrollo.** Sin prueba congelada ni revisión humana de las etiquetas. Con 0 errores en 9 pedidos automáticos, el error real puede llegar a 3/9, un 33 %.
 
-Los fallos, uno a uno, y las limitaciones: **[eval/resultados-v1.md](eval/resultados-v1.md)**.
+Caso a caso, frente a la v1, y las limitaciones: **[eval/resultados-v1-1.md](eval/resultados-v1-1.md)**. Los fallos, uno a uno, en los [resultados v1](eval/resultados-v1.md).
 
 ## Arquitectura
 
@@ -109,7 +112,7 @@ Tests: `uv run pytest`, y `node --test` en `n8n/modulos/extractor` (tras `npx pn
 - **Faltan reglas:** R02, R08, R11 y parte de R12 están hechas. Faltan, entre otras, duplicados (R07), unidades y embalajes (R10) e importe máximo (R13).
 - **No lee Gmail ni envía correos.** Entra por un webhook de pruebas, y "pedir datos" queda registrado, pero no sale ningún correo.
 - **No aprueba precios por correo** y **no lee PDF** (van a revisión).
-- **Si falla la IA, el flujo se para** en lugar de dejar el caso en la cola.
+- **Si falla la IA, no reintenta más tarde:** tras tres intentos seguidos, el caso se queda en la cola (M03) para una persona, y una caída general de Gemini no se distingue de un caso raro.
 - **No hay migración de datos maestros** (la Parte A): se arranca con 3 clientes y 10 productos limpios.
 
 ## Qué viene después
@@ -131,4 +134,4 @@ El proyecto se ha desarrollado con Claude, y la solución usa Gemini para leer l
 | [02 Caso de negocio](docs/02-business-case.md) · [03 Discovery](docs/03-discovery-workshop.md) | El problema y su valor (supuestos declarados) |
 | [04 Diseño](docs/04-solution-design.md) · [ADR](docs/decisions/) | La solución |
 | [05 Datos y evaluación](docs/05-synthetic-data-and-evaluation-set.md) | La evaluación completa, diseñada y aplazada |
-| [Resultados v1](eval/resultados-v1.md) · [Registro de cambios](eval/registro-de-cambios.md) | Lo que se ha medido |
+| [Resultados v1.1](eval/resultados-v1-1.md) · [Resultados v1](eval/resultados-v1.md) · [Registro de cambios](eval/registro-de-cambios.md) | Lo que se ha medido |
