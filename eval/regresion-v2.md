@@ -102,3 +102,55 @@ Configuración: hibrido
 ```
 
 </details>
+
+## 2. Con la clasificación puesta
+
+26-11-2026, solo el híbrido (la clasificación no se usa en solo reglas, y solo IA clasifica igual), con 10 s de pausa: `uv run scripts/regresion_v1_1.py --pausa 10 --configuracion hibrido`. Una pasada entera, **sin ningún M03 ni 429**. Mismos datos maestros, prompt de extracción y reglas que en la sección 1; lo nuevo es la clasificación (prompt v2, `gemini-3.5-flash-lite`).
+
+**17 de 20 iguales; 3 distintos.**
+
+| Correo | v1.1 | Con la clasificación | Qué pasa |
+|---|---|---|---|
+| 20-consulta-sin-cantidad | revisión M01 · OK | revisión R01 (consulta) | **Esperado.** Misma salida; ahora se sabe por qué. La etiqueta de la v1 dice M01 porque entonces no había clasificación |
+| 15-discrepancia-excel-cuerpo | revisión R12 · ACEPTABLE | revisión R01 (modificacion_anulacion) | **Error de clasificación.** Es un pedido nuevo en el que el cliente corrige una cantidad del Excel en el cuerpo |
+| 16-discrepancia-codigo | revisión R12 · ACEPTABLE | revisión R01 (modificacion_anulacion) | **Error de clasificación.** Pedido nuevo que corrige un código en el propio correo ("perdón, es…") |
+
+- **15 y 16 no crean nada indebido:** van a revisión, como ya iban, pero sin líneas leídas y con un motivo que dice "cambia un pedido ya hecho". La gestora tiene que teclearlos a mano. Son pedidos, y la etiqueta sigue diciendo automático: cuentan como revisiones innecesarias, ahora peor explicadas.
+- **Es un patrón, no ruido:** una corrección dentro del propio pedido se lee como una modificación. En desarrollo v2 no hay ningún caso así, y ninguno de los 20 de desarrollo se clasificó mal ([desarrollo](desarrollo-v2.md)).
+- **No se ha ajustado nada.** Cambiar el prompt de clasificación a partir de estos dos correos es un ajuste ([registro de cambios](registro-de-cambios.md)): queda como decisión pendiente, antes de ejecutar la prueba.
+
+<details>
+<summary>Salida completa</summary>
+
+```
+Configuración: hibrido
+01-automatico.eml                caso  433  automatico  pedido 1525  motivos -  OK
+02-remitente-desconocido.eml     caso  434  revision    pedido    -  motivos R02  OK
+03-precio-distinto.eml           caso  435  revision    pedido    -  motivos R11  OK
+Configuración: hibrido
+04-excel-xlsx.eml                caso  436  automatico  pedido 1526  motivos -  OK
+05-excel-xls.eml                 caso  437  revision    pedido    -  motivos M02  OK
+06-discrepancia.eml              caso  438  revision    pedido    -  motivos R12  ACEPTABLE (salida segura; esperado automatico)
+07-adjunto-sin-adjunto.eml       caso  439  revision    pedido    -  motivos M01  ACEPTABLE (salida segura; esperado pedir_datos)
+Configuración: hibrido
+08-texto-catalan.eml             caso  440  automatico  pedido 1527  motivos -  OK
+09-equivalencias.eml             caso  441  automatico  pedido 1528  motivos -  OK
+10-punto-de-miles.eml            caso  442  automatico  pedido 1529  motivos -  OK
+11-multiplicacion.eml            caso  443  automatico  pedido 1530  motivos -  OK
+12-excel-con-precios.eml         caso  444  automatico  pedido 1531  motivos -  OK
+13-excel-cabeceras-raras.eml     caso  445  automatico  pedido 1532  motivos -  OK
+14-excel-unidad-en-celda.eml     caso  446  automatico  pedido 1533  motivos -  OK
+15-discrepancia-excel-cuerpo.eml caso  447  revision    pedido    -  motivos R01  FALLO: salida revision, esperada automatico; motivos R01, esperados -
+16-discrepancia-codigo.eml       caso  448  revision    pedido    -  motivos R01  FALLO: salida revision, esperada automatico; motivos R01, esperados -
+17-solo-descripcion.eml          caso  449  revision    pedido    -  motivos R08  OK
+18-codigo-inexistente.eml        caso  450  pedir_datos pedido    -  motivos R08  OK
+19-pdf.eml                       caso  451  revision    pedido    -  motivos M02  OK
+20-consulta-sin-cantidad.eml     caso  452  revision    pedido    -  motivos R01  FALLO: motivos R01, esperados M01
+
+20 resultados comparados, 3 distintos de la v1.1
+  hibrido      15-discrepancia-excel-cuerpo.eml   ('revision', 'R12', 'ACEPTABLE (salida segura; esperado automatico)')  ->  ('revision', 'R01', 'FALLO: salida revision, esperada automatico; motivos R01, esperados -')
+  hibrido      16-discrepancia-codigo.eml         ('revision', 'R12', 'ACEPTABLE (salida segura; esperado automatico)')  ->  ('revision', 'R01', 'FALLO: salida revision, esperada automatico; motivos R01, esperados -')
+  hibrido      20-consulta-sin-cantidad.eml       ('revision', 'M01', 'OK')  ->  ('revision', 'R01', 'FALLO: motivos R01, esperados M01')
+```
+
+</details>
