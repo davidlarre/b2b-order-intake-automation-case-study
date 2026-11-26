@@ -1,6 +1,6 @@
 # Desarrollo v2: clasificación
 
-**Los 20 correos de [desarrollo](../data/synthetic/evaluacion-v2/README.md), en el híbrido, con la clasificación integrada en el flujo. Pasada 1 el 25-11-2026; pasada 3, la limpia, el 26-11-2026. La prueba (60 casos, tag `prueba-v2.1`) no se ha ejecutado.**
+**Los 20 correos de [desarrollo](../data/synthetic/evaluacion-v2/README.md), en el híbrido, con la clasificación integrada en el flujo. Pasada 1 el 25-11-2026; pasada 3, la limpia, el 26-11-2026. La prueba (60 casos, tag `prueba-v2.1`) se ejecutó después: [informe](../docs/06-evaluation-report.md).**
 
 ## Resumen
 

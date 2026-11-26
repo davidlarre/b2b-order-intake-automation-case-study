@@ -24,26 +24,26 @@ Además, un segundo lector, más simple y sin IA, lee lo que puede. **Si los dos
 
 ## Los resultados
 
-Se probó con 20 correos, de tres maneras (v1.1):
+Se probó con **60 correos guardados aparte**, que no se usaron para ajustar el sistema y se pasaron una sola vez (v2). Los escribió una IA que conocía el sistema, así que no es un examen a ciegas. De ellos, 38 son casos que el sistema ya sabe resolver; los otros 22 necesitan reglas que todavía no existen, y se cuentan aparte.
 
-| | Bien | Seguro, pero no lo esperado | Mal | Pedidos automáticos erróneos |
-|---|---|---|---|---|
-| Solo reglas | 7 | 5 | 8 | 8 de 11 |
-| Solo IA | 19 | 1 | 0 | 0 de 12 |
-| **Las dos juntas** | 16 | 4 | 0 | 0 de 9 |
+| En los 38 casos | Pedidos creados solos | De ellos, mal |
+|---|---|---|
+| **Las dos juntas (IA y reglas)** | 10 | **1** |
+| Solo reglas | 6 | 1 |
+| Solo IA | Pendiente: se pasa otro día | |
 
-- **Las reglas solas no valen:** dejan líneas fuera sin avisar.
-- **La IA leyó muy bien,** tanto que en estos 20 casos el segundo lector no llegó a evitar ningún error y costó tres revisiones de más. Es el precio de un seguro, y con tan pocos casos no se sabe todavía si compensa.
-- **El caso que salió mal en la v1** fue un cliente que corrige el *código* de un producto a mitad de línea: la IA no se aclaró. Con una regla nueva, la IA lo lee bien; con las dos juntas, el segundo lector no, y lo decide una persona.
-- **Si la IA no responde,** el pedido llega a una persona con el motivo. Pasó con 15 casos en dos pruebas con el servicio saturado, y ninguno creó un pedido. El sistema todavía no lo reintenta solo más tarde.
+- **El que salió mal** fue una pregunta con condición: "¿Tenéis 100 hojas de lija y 3 adhesivos? Si es que sí, mandadlos". El sistema lo tomó por un pedido y lo creó sin comprobar nada. Es justo el tipo de correo que más cuesta distinguir.
+- **Distinguir qué es cada correo** (pedido, cambio, consulta, queja, factura) salió bien en 59 de 60.
+- **Las reglas que faltan se notan mucho:** con los 22 correos que las necesitan, el sistema crea hoy 12 pedidos que no debería, por ejemplo a un cliente bloqueado o confundiendo cajas con unidades.
+- **Si la IA no responde,** el pedido llega a una persona con el motivo. En esta prueba no pasó.
 
-El detalle está en los [resultados v1.1](../eval/resultados-v1-1.md), y los fallos de la primera versión, en los [resultados v1](../eval/resultados-v1.md). El vídeo muestra la v1.
+El detalle está en el [informe de evaluación](06-evaluation-report.md). Las versiones anteriores, con 20 correos de desarrollo, en los [resultados v1.1](../eval/resultados-v1-1.md) y [v1](../eval/resultados-v1.md). **El vídeo muestra la v1:** no se ha regrabado.
 
 ## Los límites
 
-- **Son 20 correos de desarrollo:** 7 sirvieron para construir el sistema y 13 se escribieron conociéndolo. No hay un examen guardado aparte. Las 13 respuestas correctas nuevas las revisó una segunda instancia de Claude que no las escribió, sin cambios; todavía no hay revisión humana. Con 0 errores en 9 pedidos automáticos, **el error real podría llegar a 1 de cada 3**. Para confiar harían falta cientos, en un piloto con el equipo.
-- **Los 13 correos nuevos los escribió una IA,** y ninguno es de un cliente de verdad.
-- **Faltan piezas:** distinguir un pedido de una consulta, detectar duplicados, comprobar cajas y unidades, leer PDF y enviar respuestas al cliente.
+- **Son pocos casos:** con 1 error en 10 pedidos creados solos, el error real podría llegar a 4 de cada 10. Para confiar harían falta cientos, en un piloto con el equipo y correos de verdad.
+- **Los correos y las respuestas correctas los escribió una IA,** y los revisó otra IA. Todavía no los ha revisado una persona. El catálogo de productos también es generado.
+- **Faltan piezas:** detectar duplicados y clientes bloqueados, comprobar cajas y unidades, saber a qué dirección enviar, enlazar la respuesta del cliente con su pedido, leer PDF y enviar respuestas.
 - **El ahorro no está demostrado.** Depende de cuánto se tarde en revisar cada pedido dudoso, y eso solo lo dice un piloto ([caso de negocio](02-business-case.md)).
 
 **Lo que sí demuestra:** un sistema que sabe cuándo no sabe, y que dice con números hasta dónde llega.

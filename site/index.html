@@ -166,7 +166,7 @@ footer li span { display: block; color: #DCE8E9; font-size: 1rem; }
   <div class="barra">
     <p>Caso de David Larré · automatización de procesos con IA</p>
     <div class="botones">
-      <a class="boton boton-video" href="https://davidlarre.github.io/b2b-order-intake-automation-case-study/video/demo-v1.mp4">Ver la demo (3 min)</a>
+      <a class="boton boton-video" href="https://davidlarre.github.io/b2b-order-intake-automation-case-study/video/demo-v1.mp4">Ver la demo de la v1 (3 min)</a>
       <a class="boton boton-borde" href="https://github.com/davidlarre/b2b-order-intake-automation-case-study">Repositorio</a>
     </div>
   </div>
@@ -326,45 +326,44 @@ footer li span { display: block; color: #DCE8E9; font-size: 1rem; }
 
 <section>
   <div class="caja">
-    <h2>Resultados (v1.1)</h2>
+    <h2>Resultados (v2: prueba congelada)</h2>
     <div class="texto">
-      <p>20 correos de desarrollo, una pasada por configuración: solo reglas, solo IA y las dos juntas (híbrido).</p>
-      <p class="nota">Qué cambió en la v1.1: una regla para las correcciones del cliente, y si falla la IA el pedido va a la cola. El vídeo no se ha tocado y muestra la <a href="https://github.com/davidlarre/b2b-order-intake-automation-case-study/blob/main/eval/resultados-v1.md">v1</a>.</p>
+      <p>60 correos guardados aparte y pasados una sola vez por configuración. La medida principal son los 38 casos que el sistema construido puede resolver; los otros 22 necesitan reglas que todavía no existen y se cuentan aparte.</p>
+      <p class="nota">Solo IA se ejecuta otro día: la cuota gratuita de Gemini no daba para las dos pasadas con IA el mismo día. El vídeo no se ha regrabado y muestra la <a href="https://github.com/davidlarre/b2b-order-intake-automation-case-study/blob/main/eval/resultados-v1.md">v1</a>.</p>
       <ul class="leyenda" aria-hidden="true">
         <li><i style="background:var(--ok)"></i>OK</li><li><i style="background:var(--aceptable)"></i>ACEPTABLE</li><li><i style="background:var(--fallo)"></i>FALLO</li>
       </ul>
-      <svg class="grafico" height="246" role="img" aria-labelledby="gt gd">
-        <title id="gt">Resultados de los 20 correos por configuración</title>
-        <desc id="gd">Solo reglas: 7 OK, 5 ACEPTABLE, 8 FALLO. Solo IA: 19 OK, 1 ACEPTABLE, 0 FALLO. Híbrido: 16 OK, 4 ACEPTABLE, 0 FALLO.</desc>
-        <g font-size="17" font-weight="700" fill="#14272E"><text x="0" y="18" class="rotulo">Solo reglas</text><text x="0" y="102" class="rotulo">Solo IA</text><text x="0" y="186" class="rotulo">Híbrido</text></g>
+      <svg class="grafico" height="162" role="img" aria-labelledby="gt gd">
+        <title id="gt">Resultados de los 38 casos en alcance por configuración</title>
+        <desc id="gd">Solo reglas: 13 OK, 14 ACEPTABLE, 11 FALLO. Híbrido: 36 OK, 0 ACEPTABLE, 2 FALLO.</desc>
+        <g font-size="17" font-weight="700" fill="#14272E"><text x="0" y="18" class="rotulo">Solo reglas</text><text x="0" y="102" class="rotulo">Híbrido</text></g>
         <g stroke="#E7ECEB" stroke-width="2">
-          <rect x="0" y="28" width="35%" height="36" fill="#0E74A8"/><rect x="35%" y="28" width="25%" height="36" fill="#C98315"/><rect x="60%" y="28" width="40%" height="36" fill="#B3261E"/>
-          <rect x="0" y="112" width="95%" height="36" fill="#0E74A8"/><rect x="95%" y="112" width="5%" height="36" fill="#C98315"/>
-          <rect x="0" y="196" width="80%" height="36" fill="#0E74A8"/><rect x="80%" y="196" width="20%" height="36" fill="#C98315"/>
+          <rect x="0" y="28" width="34.2%" height="36" fill="#0E74A8"/><rect x="34.2%" y="28" width="36.8%" height="36" fill="#C98315"/><rect x="71%" y="28" width="29%" height="36" fill="#B3261E"/>
+          <rect x="0" y="112" width="94.7%" height="36" fill="#0E74A8"/><rect x="94.7%" y="112" width="5.3%" height="36" fill="#B3261E"/>
         </g>
         <g font-size="17" font-weight="700" text-anchor="middle">
-          <g fill="#fff"><text x="17.5%" y="52">7</text><text x="80%" y="52">8</text><text x="47.5%" y="136">19</text><text x="40%" y="220">16</text></g>
-          <g fill="#14272E"><text x="47.5%" y="52">5</text><text x="97.5%" y="136">1</text><text x="90%" y="220">4</text></g>
+          <g fill="#fff"><text x="17.1%" y="52">13</text><text x="85.5%" y="52">11</text><text x="47.4%" y="136">36</text><text x="97.35%" y="136">2</text></g>
+          <g fill="#14272E"><text x="52.6%" y="52">14</text></g>
         </g>
       </svg>
       <div class="desliza" tabindex="0" role="region" aria-label="Tabla de resultados">
       <table class="resultados">
         <thead><tr><th scope="col">Configuración</th><th scope="col" class="num">OK</th><th scope="col" class="num">ACEPTABLE</th><th scope="col" class="num">FALLO</th><th scope="col" class="num">Automáticos erróneos o indebidos</th></tr></thead>
         <tbody>
-          <tr><th scope="row">Solo reglas</th><td class="num">7</td><td class="num">5</td><td class="num">8</td><td class="num">8 de 11</td></tr>
-          <tr><th scope="row">Solo IA</th><td class="num">19</td><td class="num">1</td><td class="num">0</td><td class="num">0 de 12</td></tr>
-          <tr><th scope="row">Híbrido</th><td class="num">16</td><td class="num">4</td><td class="num">0</td><td class="num">0 de 9</td></tr>
+          <tr><th scope="row">Solo reglas</th><td class="num">13</td><td class="num">14</td><td class="num">11</td><td class="num">1 de 6</td></tr>
+          <tr><th scope="row">Híbrido</th><td class="num">36</td><td class="num">0</td><td class="num">2</td><td class="num">1 de 10</td></tr>
+          <tr><th scope="row">Solo IA</th><td colspan="4">Pendiente</td></tr>
         </tbody>
       </table>
       </div>
       <p class="nota">ACEPTABLE es una salida segura que no era la esperada: el caso llega a una persona. La última columna son pedidos creados sin intervención con algún error, o que tenían que ir a revisión.</p>
       <ul>
-        <li><strong>Las reglas solas no valen.</strong> Dejan líneas fuera y crean el pedido sin avisar.</li>
-        <li><strong>En estos casos, solo IA sale algo mejor que el híbrido.</strong> El segundo lector no evitó ningún pedido equivocado y costó tres revisiones de más. Es el precio de un seguro, y con tan pocos casos no se sabe si compensa.</li>
-        <li><strong>El caso que fallaba en la v1 ya no falla:</strong> un cliente que corrige el código de un producto a mitad de línea. Solo IA crea el pedido correcto; el híbrido lo manda a una persona.</li>
-        <li><strong>Con Gemini caído, los pedidos llegan a la cola.</strong> En dos pasadas anteriores, con el servicio saturado, 15 casos acabaron así y ninguno creó un pedido.</li>
+        <li><strong>El error del híbrido es una consulta convertida en pedido.</strong> "¿Tenéis 100 hojas de lija y 3 adhesivos? Si es que sí, mandadlos": se creó el pedido sin comprobar nada. La clasificación acertó el tipo en los otros 59 correos.</li>
+        <li><strong>Con 1 error en 10 pedidos automáticos, el error real podría llegar al 39 %.</strong> Son pocos casos.</li>
+        <li><strong>Las reglas solas no valen.</strong> No distinguen una consulta de un pedido, así que mandan a revisión sin decir por qué (los 14 ACEPTABLE), y no leen lo que no es un código exacto: 11 fallos, uno de ellos un pedido automático indebido.</li>
+        <li><strong>Las reglas que faltan se notan.</strong> En los 22 casos que las necesitan, el híbrido crea 12 pedidos automáticos, y los 12 son erróneos o indebidos: un cliente bloqueado, cajas tomadas como unidades, una cantidad anómala.</li>
       </ul>
-      <p><a href="https://github.com/davidlarre/b2b-order-intake-automation-case-study/blob/main/eval/resultados-v1-1.md">Resultados v1.1, caso a caso</a> · <a href="https://github.com/davidlarre/b2b-order-intake-automation-case-study/blob/main/eval/resultados-v1.md">Resultados v1, con los fallos uno a uno</a></p>
+      <p><a href="https://github.com/davidlarre/b2b-order-intake-automation-case-study/blob/main/docs/06-evaluation-report.md">Informe de evaluación, con los fallos uno a uno</a> · Versiones anteriores, de desarrollo: <a href="https://github.com/davidlarre/b2b-order-intake-automation-case-study/blob/main/eval/resultados-v1-1.md">v1.1</a> y <a href="https://github.com/davidlarre/b2b-order-intake-automation-case-study/blob/main/eval/resultados-v1.md">v1</a></p>
     </div>
   </div>
 </section>
@@ -374,9 +373,9 @@ footer li span { display: block; color: #DCE8E9; font-size: 1rem; }
     <h2>Los límites</h2>
     <div class="texto">
       <ul>
-        <li><strong>Son 20 correos de desarrollo.</strong> 7 sirvieron para construir el sistema y 13 se escribieron conociéndolo. No hay un conjunto de prueba guardado aparte. Con 0 errores en 9 pedidos automáticos, el error real podría llegar a 1 de cada 3.</li>
-        <li><strong>Los 13 correos nuevos y sus etiquetas los escribió una IA (Claude).</strong> Una segunda instancia de Claude, que no las escribió, revisó las 13 etiquetas, sin cambios. Todavía no hay revisión humana.</li>
-        <li><strong>Faltan piezas.</strong> Distinguir un pedido de una consulta, detectar duplicados, comprobar cajas y unidades, leer PDF y enviar respuestas al cliente. Hoy, una consulta con código y cantidad podría acabar en pedido. Y si la IA no responde, el sistema no lo reintenta más tarde: el pedido se queda en la cola.</li>
+        <li><strong>Son pocos casos.</strong> 38 en alcance y 10 pedidos automáticos. Para confiar harían falta cientos, en un piloto con el equipo y correos reales.</li>
+        <li><strong>Los correos y sus etiquetas los escribió una IA (Claude), que conocía el sistema.</strong> Otra instancia de Claude revisó las etiquetas antes de ejecutar. Todavía no hay revisión humana, y el catálogo de productos es generado: nadie ha comprobado sus equivalencias a mano.</li>
+        <li><strong>Faltan piezas.</strong> Detectar duplicados y clientes bloqueados, comprobar cajas y unidades, elegir la dirección de entrega, enlazar la respuesta del cliente con su pedido, leer PDF y enviar correos. Y si la IA no responde, el sistema no lo reintenta más tarde: el pedido se queda en la cola.</li>
         <li><strong>El ahorro no está demostrado.</strong> Depende de cuánto se tarde en revisar cada pedido dudoso, y eso solo lo dice un piloto con el equipo.</li>
       </ul>
     </div>
@@ -388,9 +387,9 @@ footer li span { display: block; color: #DCE8E9; font-size: 1rem; }
     <h2>Qué viene después</h2>
     <div class="texto">
       <ul>
-        <li><strong>Una prueba seria:</strong> 80 correos, etiquetados por una persona, con 60 guardados aparte y ejecutados una sola vez.</li>
-        <li><strong>Las reglas que faltan:</strong> duplicados, unidades y embalajes, e importe máximo, entre otras.</li>
-        <li><strong>La migración de datos maestros:</strong> tarifas pactadas y equivalencias que hoy viven fuera del ERP.</li>
+        <li><strong>La frontera entre consulta y pedido:</strong> una consulta condicional no debe crear un pedido.</li>
+        <li><strong>Las reglas que más cuestan hoy:</strong> cliente bloqueado, dirección de entrega, duplicados, cajas y unidades, y cantidades anómalas.</li>
+        <li><strong>Revisión humana de las etiquetas</strong> y la migración de datos maestros: tarifas pactadas y equivalencias que hoy viven fuera del ERP.</li>
       </ul>
     </div>
   </div>
@@ -402,7 +401,7 @@ footer li span { display: block; color: #DCE8E9; font-size: 1rem; }
     <h2>Para seguir</h2>
     <ul>
       <li><a href="https://github.com/davidlarre/b2b-order-intake-automation-case-study">Repositorio en GitHub</a><span>Código, diseño y decisiones</span></li>
-      <li><a href="https://github.com/davidlarre/b2b-order-intake-automation-case-study/blob/main/eval/resultados-v1-1.md">Resultados de la evaluación v1.1</a><span>Caso a caso, frente a la v1</span></li>
+      <li><a href="https://github.com/davidlarre/b2b-order-intake-automation-case-study/blob/main/docs/06-evaluation-report.md">Informe de evaluación (v2)</a><span>La prueba congelada, caso a caso</span></li>
       <li><a href="https://github.com/davidlarre/b2b-order-intake-automation-case-study/blob/main/AI_USAGE.md">Uso de IA</a><span>Qué hizo la IA y qué no</span></li>
       <li><a href="https://www.linkedin.com/in/davidlarre">David Larré en LinkedIn</a><span>Para hablar del caso</span></li>
     </ul>

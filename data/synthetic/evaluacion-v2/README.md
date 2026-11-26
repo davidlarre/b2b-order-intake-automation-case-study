@@ -13,9 +13,9 @@
 | [manifiesto-prueba.json](manifiesto-prueba.json) | SHA-256 de la prueba congelada (tag `prueba-v2.1`; `prueba-v2` antes de la fe de erratas) |
 | [Alcance](../../../eval/alcance-prueba-v2.md) | Qué casos de la prueba cuentan hoy, fijado antes de congelar |
 
-## La prueba no se ejecuta todavía
+## La prueba se ejecuta una sola vez
 
-La prueba se ejecuta **una sola vez**. Hasta entonces, `enviar_eml.py` se niega a enviar nada de `prueba/`.
+Solo desde [ejecutar_prueba.py](../../../scripts/ejecutar_prueba.py), una pasada por configuración, que comprueba el manifiesto antes de enviar nada; `enviar_eml.py` se niega a enviar nada de `prueba/`. Solo reglas y el híbrido se ejecutaron el 26-11-2026; solo IA, otro día por la cuota de Gemini. Resultados: [06 · Informe de evaluación](../../../docs/06-evaluation-report.md).
 
 ## Cómo se generaron
 

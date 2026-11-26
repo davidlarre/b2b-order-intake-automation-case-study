@@ -1,6 +1,6 @@
 # Entrada automatizada de pedidos B2B
 
-### [Ver la página del caso](https://davidlarre.github.io/b2b-order-intake-automation-case-study/) · [Ver la demo (3 min)](https://davidlarre.github.io/b2b-order-intake-automation-case-study/video/demo-v1.mp4)
+### [Ver la página del caso](https://davidlarre.github.io/b2b-order-intake-automation-case-study/) · [Ver la demo de la v1 (3 min)](https://davidlarre.github.io/b2b-order-intake-automation-case-study/video/demo-v1.mp4)
 
 > **In English.** A portfolio case study that turns B2B customer emails (free text, Excel) into validated ERP orders.<br>
 > It shows how AI extraction, SQL business rules and human review work together, with a small evaluation and its limits stated openly.<br>
@@ -30,26 +30,24 @@ Un distribuidor recibe unos 1.800 pedidos al mes por correo, en texto libre, Exc
 
 ![Flujo de n8n: del correo a la extracción, las reglas y la respuesta](docs/img/flujo-n8n.png)
 
-## Resultados (v1.1)
+## Resultados (v2: prueba congelada)
 
-20 correos de desarrollo, en las tres configuraciones del sistema:
+60 correos guardados aparte (tag `prueba-v2.1`) y ejecutados una sola vez por configuración. La métrica principal se mide en los 38 casos que el sistema construido puede resolver; los otros 22 necesitan reglas que aún no existen y se cuentan aparte ([alcance](eval/alcance-prueba-v2.md), fijado antes de congelar).
 
-| Configuración | OK | ACEPTABLE | FALLO | Pedidos automáticos erróneos o indebidos |
+| Configuración | Automáticos erróneos o indebidos, 38 en alcance | OK | ACEPTABLE | FALLO |
 |---|---|---|---|---|
-| Solo reglas | 7 | 5 | 8 | 8 de 11 |
-| Solo IA | 19 | 1 | 0 | 0 de 12 |
-| Híbrido | 16 | 4 | 0 | 0 de 9 |
+| **Híbrido** | **1 de 10** | 36 | 0 | 2 |
+| Solo reglas | 1 de 6 | 13 | 14 | 11 |
+| Solo IA | Pendiente: se ejecuta otro día por la cuota de Gemini | | | |
 
-**Qué cambió en la v1.1:** una regla del prompt para las correcciones del cliente, y un fallo de la IA manda el caso a la cola (M03); el vídeo no se ha tocado y muestra la [v1](eval/resultados-v1.md).
+- **El error del híbrido es una consulta convertida en pedido** (P52: "¿tenéis…? Si es que sí, mandadlos"). La clasificación acertó el tipo en 59 de los 60 correos; falló ahí.
+- **Con 1 error en 10 automáticos,** el error real podría llegar al 39 % (límite superior al 95 %). Son pocos casos.
+- **Las reglas que faltan se notan:** en los 22 casos fuera de alcance, el híbrido crea 12 pedidos automáticos, y los 12 son erróneos o indebidos (un cliente bloqueado, cajas tomadas como unidades, una cantidad anómala…).
+- **Sin revisión humana:** los correos y las etiquetas los hizo una IA, con segunda lectura de otra IA; el catálogo es generado.
 
-ACEPTABLE es una salida segura que no era la esperada: el caso llega a una persona.
+Informe completo, con los fallos uno a uno y los límites: **[06 · Informe de evaluación](docs/06-evaluation-report.md)**.
 
-- **Sin IA no basta:** un lector de reglas deja líneas fuera y crea el pedido igualmente.
-- **En estos casos, "solo IA" sale algo mejor que el híbrido.** El híbrido paga tres revisiones innecesarias por tener una segunda lectura. Esa red existe para cuando la IA lea mal, y en 20 casos no llegó a hacer falta.
-- **Con Gemini caído, los casos llegan a la cola.** En dos pasadas anteriores, con el servicio saturado, 15 casos acabaron en la cola con M03 y ninguno creó un pedido ([detalle](eval/resultados-v1-1.md#comportamiento-con-gemini-caído)).
-- **Son pocos casos, y de desarrollo.** Sin prueba congelada ni revisión humana de las etiquetas. Con 0 errores en 9 pedidos automáticos, el error real puede llegar a 3/9, un 33 %.
-
-Caso a caso, frente a la v1, y las limitaciones: **[eval/resultados-v1-1.md](eval/resultados-v1-1.md)**. Los fallos, uno a uno, en los [resultados v1](eval/resultados-v1.md).
+**Versiones anteriores, de desarrollo:** [resultados v1.1](eval/resultados-v1-1.md) y [v1](eval/resultados-v1.md), con 20 correos que se conocían al construir. **El vídeo muestra la v1:** no se ha regrabado, y no enseña la clasificación ni la lista "No son pedidos".
 
 ## Arquitectura
 
@@ -108,7 +106,7 @@ Tests: `uv run pytest`, y `node --test` en `n8n/modulos/extractor` (tras `npx pn
 
 ## Qué no hace todavía
 
-- **Clasifica el correo, pero no busca el pedido original** de una modificación ni reenvía las facturas. Un pedido clasificado como "otros" no llegaría a la cola. La medida es de [desarrollo](eval/desarrollo-v2.md), no de prueba.
+- **Clasifica el correo, pero no busca el pedido original** de una modificación ni reenvía las facturas. Un correo clasificado como "otros" sale de la cola y se ve en la lista "No son pedidos". En la prueba, una consulta condicional se tomó por pedido ([informe](docs/06-evaluation-report.md)).
 - **Faltan reglas:** R01, R02, R08, R11 y parte de R12 están hechas. Faltan, entre otras, duplicados (R07), unidades y embalajes (R10) e importe máximo (R13).
 - **No lee Gmail ni envía correos.** Entra por un webhook de pruebas, y "pedir datos" queda registrado, pero no sale ningún correo.
 - **No aprueba precios por correo** y **no lee PDF** (van a revisión).
@@ -117,7 +115,7 @@ Tests: `uv run pytest`, y `node --test` en `n8n/modulos/extractor` (tras `npx pn
 
 ## Qué viene después
 
-Los [80 correos](data/synthetic/evaluacion-v2/README.md) ya están generados y etiquetados, y la prueba está congelada sin ejecutar ([alcance](eval/alcance-prueba-v2.md)). Faltan la revisión humana de las etiquetas, las reglas pendientes, ejecutar la prueba y la migración de datos maestros. Detalle en el [plan](docs/00-project-plan.md#siguiente-fase).
+La prueba de los [80 correos](data/synthetic/evaluacion-v2/README.md) está [ejecutada](docs/06-evaluation-report.md) (solo IA, pendiente). Faltan la revisión humana de las etiquetas, las reglas pendientes (las que más cuestan hoy: R04, R05, R07, R10 y R14), enlazar las respuestas del cliente y la migración de datos maestros. Detalle en el [plan](docs/00-project-plan.md#siguiente-fase).
 
 ## Uso de IA
 
@@ -134,4 +132,5 @@ El proyecto se ha desarrollado con Claude, y la solución usa Gemini para leer l
 | [02 Caso de negocio](docs/02-business-case.md) · [03 Discovery](docs/03-discovery-workshop.md) | El problema y su valor (supuestos declarados) |
 | [04 Diseño](docs/04-solution-design.md) · [ADR](docs/decisions/) | La solución |
 | [05 Datos y evaluación](docs/05-synthetic-data-and-evaluation-set.md) | La evaluación completa, diseñada y aplazada |
-| [Resultados v1.1](eval/resultados-v1-1.md) · [Resultados v1](eval/resultados-v1.md) · [Registro de cambios](eval/registro-de-cambios.md) | Lo que se ha medido |
+| [06 Informe de evaluación](docs/06-evaluation-report.md) | La prueba v2, ejecutada una vez |
+| [Resultados v1.1](eval/resultados-v1-1.md) · [Resultados v1](eval/resultados-v1.md) · [Registro de cambios](eval/registro-de-cambios.md) | Versiones anteriores, de desarrollo, y cada cambio del sistema |
