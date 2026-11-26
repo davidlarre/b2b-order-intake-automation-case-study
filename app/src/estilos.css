@@ -73,7 +73,7 @@ code { font-size: 13px; }
 .vacio { padding: 32px; background: var(--superficie); border: 1px solid var(--linea); border-radius: 8px; }
 .vacio p + p { margin-top: 4px; }
 
-.tabla-caja { overflow-x: auto; background: var(--superficie); border: 1px solid var(--linea); border-radius: 8px; margin-bottom: 12px; }
+.tabla-caja { position: relative; overflow-x: auto; background: var(--superficie); border: 1px solid var(--linea); border-radius: 8px; margin-bottom: 12px; }
 .tabla { width: 100%; border-collapse: collapse; font-size: 15px; }
 .tabla th { text-align: left; color: var(--secundario); font-size: 13px; font-weight: 600; padding: 12px 16px; border-bottom: 1px solid var(--linea); }
 .tabla th.derecha { text-align: right; }
