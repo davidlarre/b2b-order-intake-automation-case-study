@@ -3,6 +3,7 @@
 Uso:
     uv run scripts/congelar_prueba.py              # comprueba que nada ha cambiado
     uv run scripts/congelar_prueba.py --congelar   # escribe el manifiesto (solo si no existe)
+    uv run scripts/congelar_prueba.py --corregir prueba-v2.1 --motivo "..."   # fe de erratas, solo antes de ejecutar
 
 Cubre los correos, fichas y etiquetas de la prueba, la guía y el esquema, el alcance fijado antes de congelar y los
 datos maestros con los que se evalúa. Un fichero cambiado, añadido o borrado es una diferencia.
@@ -51,8 +52,30 @@ def diferencias(manifiesto, hashes):
 def main():
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--congelar", action="store_true")
+    parser.add_argument("--corregir", metavar="TAG", help="tag nuevo; conserva el anterior en el manifiesto")
+    parser.add_argument("--motivo")
     args = parser.parse_args()
     hashes = ficheros()
+    if args.corregir:
+        if not args.motivo:
+            sys.exit("Una corrección necesita --motivo")
+        if any((RAIZ / "eval" / "ejecuciones").glob("prueba*")):
+            sys.exit("La prueba ya se ha ejecutado: un cambio es una prueba nueva, no una corrección")
+        anterior = json.loads(MANIFIESTO.read_text())
+        if args.corregir == anterior["tag"]:
+            sys.exit(f"La corrección necesita un tag nuevo, no {anterior['tag']}")
+        cambios = diferencias(anterior, hashes)
+        if not cambios:
+            sys.exit("No hay nada que corregir: la prueba es la congelada")
+        commit = subprocess.run(["git", "rev-parse", "HEAD"], capture_output=True, text=True, cwd=RAIZ).stdout.strip()
+        correcciones = [*anterior.get("correcciones", []), {
+            "fecha": date.today().isoformat(), "de": anterior["tag"], "a": args.corregir, "commit_previo": commit,
+            "hash_total_anterior": anterior["hash_total"], "cambios": cambios, "motivo": args.motivo}]
+        MANIFIESTO.write_text(json.dumps({
+            **anterior, "tag": args.corregir, "hash_total": hash_total(hashes), "correcciones": correcciones, "ficheros": hashes},
+            indent=2, ensure_ascii=False) + "\n")
+        print(f"{args.corregir}: {len(hashes)} ficheros, hash total {hash_total(hashes)}\n  " + "\n  ".join(cambios))
+        return
     if args.congelar:
         if MANIFIESTO.exists():
             sys.exit("La prueba ya está congelada: un cambio es una prueba nueva, con otro manifiesto y otro tag")

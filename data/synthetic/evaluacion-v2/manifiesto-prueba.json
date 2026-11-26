@@ -1,9 +1,9 @@
 {
-  "tag": "prueba-v2",
+  "tag": "prueba-v2.1",
   "congelada": "2026-11-25",
   "version_del_sistema": "a87063f0a591b0dcca6288ff9f5094f177084a53",
   "generador": "claude-opus-5-5 (Claude Code); montaje con scripts/generar_correos.py",
-  "hash_total": "f0f85b70cb82d151b04a59e4e9521e839f721e35e375a35e4d1f32186b2b7bff",
+  "hash_total": "1626198049105fcb3996f4160a6cfa56a9b23351db953470760d2c1e3f386ca4",
   "ficheros": {
     "data/synthetic/evaluacion-v2/esquema-etiqueta.json": "7fe487e3251fb47d75df2b3240cc736d167bdd589a2163315ed58ac31398c0a9",
     "data/synthetic/evaluacion-v2/guia-etiquetado.md": "1eda0ab3206e7dcdd2246db528e02914ef5bf8ca0bd916fe63739a9da52186a6",
@@ -95,7 +95,7 @@
     "data/synthetic/evaluacion-v2/prueba/etiquetas/P20.yaml": "32798c2c7bc42bbf68a03e5247609c4bcb14122d5fe1679fca9cb9f4b5802251",
     "data/synthetic/evaluacion-v2/prueba/etiquetas/P21.yaml": "7015dc8ae59c754597f28ed29dca4e64b1e8a884957c715a03ffb593ce745288",
     "data/synthetic/evaluacion-v2/prueba/etiquetas/P22.yaml": "a24f4b0c9d9a17854697e976f0536e7fdbb6276ed22e2a78ca34bd3af2790573",
-    "data/synthetic/evaluacion-v2/prueba/etiquetas/P23.yaml": "dfa54374eb7de791c441411cad4f247a89ef4a7469ee480a14ab7c229f1f80f4",
+    "data/synthetic/evaluacion-v2/prueba/etiquetas/P23.yaml": "7627923457966aee5f597418298332e7ac618b4b8e72febe2c5bcd69aebef279",
     "data/synthetic/evaluacion-v2/prueba/etiquetas/P24.yaml": "e80c11823188cbd028e0f25cf18324b0e945d1e740926f7d3fc336bd3c4f4a79",
     "data/synthetic/evaluacion-v2/prueba/etiquetas/P25.yaml": "41a64d01d46c22af9f629363ec002992525213f23a09511a982c34286b9fbfe8",
     "data/synthetic/evaluacion-v2/prueba/etiquetas/P26.yaml": "e2499d303f8854736b4686745e37dfbd1c47eb78d880d64524f5e819165af682",
@@ -196,5 +196,18 @@
     "eval/alcance-prueba-v2.md": "754ed8472ad7804810027316157d332fb0d014c5851564de4a9f126391af9396",
     "supabase/seed.sql": "d89d5804330da9d99f71e9827ab9835dfa86a3cc1078bdd0dcc03e9519c2d66b",
     "supabase/seeds/maestros.sql": "1f28e6ce34eb7317fc47d0d489cacba8a9ea84747d648cfd2101784b2d9f07a6"
-  }
+  },
+  "correcciones": [
+    {
+      "fecha": "2026-11-26",
+      "de": "prueba-v2",
+      "a": "prueba-v2.1",
+      "commit_previo": "f158419bd1e068792f46fd33235b3810b81e55d8",
+      "hash_total_anterior": "f0f85b70cb82d151b04a59e4e9521e839f721e35e375a35e4d1f32186b2b7bff",
+      "cambios": [
+        "cambiado data/synthetic/evaluacion-v2/prueba/etiquetas/P23.yaml"
+      ],
+      "motivo": "Fe de erratas antes de ejecutar, por la revisión de etiquetas (eval/revision-etiquetas-v2.md): en P23, la recogida en almacén va en observaciones_entrega"
+    }
+  ]
 }

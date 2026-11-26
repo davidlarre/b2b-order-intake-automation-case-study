@@ -41,7 +41,7 @@ En la v1, el incremento de datos y evaluación completa quedó aparcado entero. 
 3. **Etiquetado** de todos los casos, por David.
 4. **Migración de la Parte A**, con su informe de errores y el histórico.
 5. **Reglas que faltan:** R01, R03–R07, R09, R10, R13, R14 y el resto de las señales de R12.
-6. **Prueba congelada** (manifiesto y tag `prueba-v2`), ejecutada una sola vez cuando existan las reglas.
+6. **Prueba congelada** (manifiesto y tag `prueba-v2.1`, tras una fe de erratas previa a ejecutar), ejecutada una sola vez cuando existan las reglas.
 
 Quedan también para después, porque no están en la v1: la entrada por Gmail y los envíos, las aprobaciones por correo, el PDF, las consultas SQL y la fase 6 (adopción y gobierno).
 

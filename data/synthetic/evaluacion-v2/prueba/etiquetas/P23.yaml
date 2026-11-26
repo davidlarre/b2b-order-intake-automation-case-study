@@ -23,7 +23,7 @@ cabecera:
   num_pedido_cliente: null
   direccion: null
   fecha_prevista: '2026-11-12'
-  observaciones_entrega: null
+  observaciones_entrega: Recogen ellos en el almacén de Orvalle
   condiciones: []
 lineas:
 - texto: BOT-S3-42  20

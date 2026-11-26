@@ -1,4 +1,4 @@
-"""La prueba congelada (tag prueba-v2) no cambia, y nadie la ejecuta por descuido."""
+"""La prueba congelada (tag prueba-v2.1) no cambia, y nadie la ejecuta por descuido."""
 
 import json
 import shutil
@@ -12,6 +12,13 @@ import congelar_prueba as c
 
 def test_la_prueba_es_la_del_manifiesto():
     assert c.diferencias(json.loads(c.MANIFIESTO.read_text()), c.ficheros()) == []
+
+
+def test_la_correccion_de_p23_queda_en_el_manifiesto():
+    m = json.loads(c.MANIFIESTO.read_text())
+    assert m["tag"] == "prueba-v2.1"
+    assert [(x["de"], x["a"], x["cambios"]) for x in m["correcciones"]] == [
+        ("prueba-v2", "prueba-v2.1", ["cambiado data/synthetic/evaluacion-v2/prueba/etiquetas/P23.yaml"])]
 
 
 def test_el_manifiesto_cubre_los_60_casos():
