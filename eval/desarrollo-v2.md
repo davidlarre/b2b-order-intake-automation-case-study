@@ -4,7 +4,9 @@
 
 ## Resumen
 
-**Pasada 3 (26-11-2026), limpia:** los 20 casos, sin ningún M03, con el mismo prompt, flujo y reglas que la pasada 1. Es la que se publica.
+**Pasada 3 (26-11-2026), limpia:** los 20 casos, sin ningún M03, con el mismo prompt, flujo y reglas que la pasada 1. Es la que se publica con el texto v1 del prompt de clasificación.
+
+**Con el texto v2 (26-11-2026, el que se usa en la prueba), el mismo resultado caso a caso:** 20 de 20 tipos bien y 14 de 14 en alcance OK, sin M03 ([sección](#texto-v2-del-prompt-de-clasificación)).
 
 | Qué | Pasada 3 | Pasada 1 (25-11) |
 |---|---|---|
@@ -21,12 +23,34 @@
 
 ## Qué se ajustó
 
-**Nada.** El prompt de clasificación se escribió desde [04](../docs/04-solution-design.md), y en los 20 casos no hubo ningún error que motivara un cambio. La versión 2 es el mismo texto con otro modelo:
+**Con los 20 de desarrollo v2, nada.** El prompt de clasificación se escribió desde [04](../docs/04-solution-design.md), y en esos 20 casos no hubo ningún error que motivara un cambio. **Con los 20 de la v1, que también son desarrollo, un ajuste:** el texto v2 (abajo), por 15 y 16. La versión 2 es el mismo texto que la 1 con otro modelo:
 
-| Versión | Hash | Modelo | Por qué |
-|---|---|---|---|
-| 1 | `c761b231b9f4` | `gemini-3.1-flash-lite` | El del [ADR 0005](../docs/decisions/0005-modelo-de-ia.md) |
-| 2, activa | `be628fae8dfd` | `gemini-3.5-flash-lite` | El 3.1 respondió 503 en 20 de 20 casos y en 12 sondas a lo largo de 35 min. Lo motivó la disponibilidad, no un resultado |
+| Versión | Texto | Hash | Modelo | Por qué |
+|---|---|---|---|---|
+| 1 | v1 | `c761b231b9f4` | `gemini-3.1-flash-lite` | El del [ADR 0005](../docs/decisions/0005-modelo-de-ia.md) |
+| 2 | v1 | `be628fae8dfd` | `gemini-3.5-flash-lite` | El 3.1 respondió 503 en 20 de 20 casos y en 12 sondas a lo largo de 35 min. Lo motivó la disponibilidad, no un resultado |
+| 3 | v2, borrador | `7f955db97971` | `gemini-3.5-flash-lite` | La regla de abajo, metida dentro de la lista de tipos. Descartado tras el code review: la lista quedaba partida |
+| 4, activa | v2 | `3fb185e49636` | `gemini-3.5-flash-lite` | 15 y 16 de la v1 ([regresión](regresion-v2.md#2-con-la-clasificación-puesta)) |
+
+## Texto v2 del prompt de clasificación
+
+**26-11-2026, antes de ejecutar la prueba, ajustado solo con desarrollo** (los 20 de aquí y los 20 de la v1). En la regresión, 15 y 16, dos pedidos que se corrigen a sí mismos, salían como `modificacion_anulacion`. Es una regla general, no una lista de casos:
+
+- `modificacion_anulacion`: cambia o anula un pedido enviado antes, en otro correo, y se refiere a él por su número, su fecha o una cita de su confirmación.
+- Un correo que pide material y corrige un dato de ese mismo pedido dentro del propio correo es `pedido_nuevo`. Los ejemplos del prompt ("perdón, es…", "en el adjunto pone 500, pero son 800") son frases genéricas, no las de 15 y 16.
+
+**Se comprobó en los dos sentidos:**
+
+| Qué | Texto v1 (pasada 3 y regresión, sección 2) | Texto v2 |
+|---|---|---|
+| 15 y 16 de la v1 | `modificacion_anulacion` en el híbrido | **`pedido_nuevo`** en solo IA y en el híbrido |
+| D15 y D16, las dos modificaciones de desarrollo | `modificacion_anulacion` | **`modificacion_anulacion`**: ninguna pasa a pedido |
+| Los 20 de desarrollo | 20 de 20 tipos bien | **20 de 20 tipos bien**; salidas idénticas a la pasada 3 |
+| Los 20 de la v1, iguales a la v1.1 | 17 de 20 (solo el híbrido) | **58 de 60, en las tres configuraciones**: solo cambia el 20, esperado ([regresión, sección 3](regresion-v2.md#3-con-el-texto-v2-de-la-clasificación)) |
+
+Pasada de desarrollo con el texto v2: entera, sin M03 ni 429, 10 s de pausa; 540 tokens de entrada de media por clasificación (453 con el v1) y 22 de salida. Guardada en [desarrollo-v2-prompt-v4.jsonl](ejecuciones/desarrollo-v2-prompt-v4.jsonl). La del borrador, con el mismo resultado caso a caso, en [desarrollo-v2-prompt-v3-borrador.jsonl](ejecuciones/desarrollo-v2-prompt-v3-borrador.jsonl); su regresión dio lo mismo que la del texto v2 (58 de 60, solo el 20).
+
+**Lo que no se sabe:** desarrollo solo tiene dos modificaciones, y las dos citan el pedido (número o "B-74 del viernes"). Una modificación que no lo identifica ("anulad lo último que os pedí") no está en desarrollo; con el texto v2 debería ir a `dudoso` o a `modificacion_anulacion`, y no se ha medido.
 
 **Que los 20 salgan bien no demuestra que la clasificación sea buena.** Son correos cortos y claros; el prompt y los correos los escribió el mismo modelo, que ya conocía los 80; y solo hay una reclamación y un "otros". Los casos difíciles (la reclamación con pedido, la consulta que casi es un pedido, el phishing) están solo en la prueba.
 
