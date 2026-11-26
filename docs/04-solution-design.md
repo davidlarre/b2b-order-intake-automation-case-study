@@ -178,7 +178,7 @@ Cada correo que inicia algo crea un caso. Las respuestas del cliente, las aproba
 | `pendiente_cliente` | Espera | Se ha enviado la petición de datos |
 | `en_revision` | Espera | Tiene algún motivo o aprobación abiertos |
 | `pedido_creado` | Final | El pedido está en el ERP y se ha enviado la confirmación |
-| `derivado` | Final | Encaminado automáticamente: factura a contabilidad o spam archivado |
+| `derivado` | Final | Encaminado automáticamente: factura a contabilidad o spam archivado. Se ve en la lista "No son pedidos" de la app, y ADV puede devolverlo a revisión (sección 6.5) |
 | `cerrado` | Final | Cerrado por una persona sin crear pedido. Resultado: descartado, consulta atendida, reclamación atendida, modificación aplicada, anulación aplicada o procesado a mano |
 
 El detalle va en entidades hijas con su propio estado:
@@ -568,7 +568,7 @@ Las tres configuraciones de la evaluación (D25) son dos interruptores sobre las
 - **Qué hace cada tipo:** `pedido_nuevo` sigue; consulta, reclamación y modificación van a revisión con R01, que corta antes que R02; `otros` con destino pasa a `derivado`; `dudoso` y `otros` sin destino, a M01. Nunca se archiva una duda (D13).
 - **R01 todavía no se puede forzar** desde la revisión, aunque la sección 3.1 lo permite: forzarlo exige extraer las líneas, y sin ellas se crearía un pedido vacío. Solo se cierra, con los resultados de la sección 2.5.
 - **No está construido:** buscar el pedido original de una modificación y preparar el cambio, reenviar las facturas a contabilidad (no hay envíos), detectar las respuestas automáticas y enlazar la respuesta de un cliente con su caso.
-- **El riesgo que abre:** un pedido clasificado como `otros` no llega a nadie. Hasta la v1.1, todo lo que no era un pedido automático acababa en la cola.
+- **El riesgo que abre:** un pedido clasificado como `otros` sale de la cola. Hasta la v1.1, todo lo que no era un pedido automático acababa en ella. **Mitigación (26-11-2026):** ningún derivado desaparece. La app tiene una lista aparte, "No son pedidos", con el motivo de la clasificación (tipo y destino, modelo y versión del prompt; el clasificador no da una explicación en texto) y el botón "Es un pedido: pasar a revisión", que lo lleva a la cola con M01. Las líneas no se extraen desde ahí: se teclea a mano o se descarta. Lo que queda: alguien tiene que mirar esa lista.
 
 ## 7. Cómo se evalúa este diseño
 
@@ -766,7 +766,7 @@ SN08 sigue siendo un supuesto declarado.
 | Sin dominio propio, las aprobaciones desde el móvil solo funcionan mientras dure el túnel rápido | [ADR 0004](decisions/0004-n8n-local-o-nube.md) |
 | Sin precios por tramos de cantidad: una tarifa con condición queda pendiente | [05](05-synthetic-data-and-evaluation-set.md) |
 | La Parte B se evalúa sobre el estado correcto de los datos maestros, no sobre lo que carga la migración de la Parte A: no hay prueba de punta a punta | [05](05-synthetic-data-and-evaluation-set.md), sección 10 |
-| Un pedido clasificado como `otros` pasa a `derivado` y no llega a la cola | 6.5 |
+| Un pedido clasificado como `otros` pasa a `derivado` y no llega a la cola: solo se ve si alguien mira la lista "No son pedidos" | 6.5 |
 | Una respuesta automática sin cabeceras estándar se trata como respuesta del cliente y acaba en revisión | 2.2 |
 | R07 por número sin límite de tiempo manda a revisión un pedido nuevo de un cliente que reinicia su numeración | 3.2, [05](05-synthetic-data-and-evaluation-set.md) |
 | Entorno local: en la imagen de Supabase 17.6.1.106, ejecutar una función sin permiso con un rol reservado (`anon`, `service_role`) tumba Postgres en lugar de dar "permission denied" ([supabase/postgres#2124](https://github.com/supabase/postgres/issues/2124), atribuido a `supautils`). La API solo expone funciones con permiso, así que no se da en el uso normal. Reproducción en `tests/test_entorno_supautils.py`; se revisa en la fase 7 | 5.2 |

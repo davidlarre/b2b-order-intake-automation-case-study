@@ -58,6 +58,12 @@ code { font-size: 13px; }
 .etiqueta { font-size: 14px; padding: 3px 10px; border-radius: 999px; background: var(--duda-fondo); color: var(--duda); font-weight: 600; }
 .prioridad-1 { background: #FDE4E2; color: #8A1F18; }
 
+/* Pestañas entre listas */
+.pestanas { display: flex; gap: 4px; padding: 0 32px; background: var(--superficie); border-bottom: 1px solid var(--linea); }
+.pestana { font: inherit; background: none; border: none; border-bottom: 3px solid transparent; padding: 12px 14px 10px; min-height: 44px; color: var(--tinta-suave); cursor: pointer; }
+.pestana:hover { color: var(--accion); }
+.pestana[aria-current='page'] { color: var(--accion); border-bottom-color: var(--accion); font-weight: 600; }
+
 /* Cola */
 .titulo-cola { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 16px; margin-bottom: 20px; }
 .titulo-cola > div { flex: 1 1 480px; }
@@ -77,6 +83,9 @@ code { font-size: 13px; }
 .tabla-cola tbody tr:hover { background: #F0F5FA; }
 .tabla-cola tbody tr:focus-visible { outline-offset: -3px; }
 .numero { font-weight: 700; }
+.acciones-fila { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px; }
+.confirmacion .boton-enlace { margin-left: auto; font-weight: 600; }
+.oculto { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
 /* Detalle */
 .volver { font-size: 14px; }
@@ -135,7 +144,7 @@ input { font: inherit; padding: 9px 12px; border: 1px solid var(--linea); border
 .acceso button { margin-top: 12px; }
 
 @media (max-width: 640px) {
-  .cabecera, .contenido, .contenido.ancho { padding-left: 16px; padding-right: 16px; }
+  .cabecera, .pestanas, .contenido, .contenido.ancho { padding-left: 16px; padding-right: 16px; }
   .recuadro { padding: 16px; }
 }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }

@@ -164,3 +164,54 @@ def test_cierre_segun_el_tipo(automatizacion, cur, hash_clasificacion):
     cur.execute("rollback to savepoint s")
     cur.execute("select adv.cerrar_caso(%s, 'consulta atendida')", (caso,))
     assert cur.fetchone()[0]["resultado"] == "consulta atendida"
+
+
+# ---------------------------------------------------------------- no son pedidos: ningún "otros" desaparece
+
+def test_los_derivados_se_ven_con_el_motivo_de_la_clasificacion(automatizacion, cur, hash_clasificacion):
+    caso = recibir(automatizacion, "<c13@pruebas.example>")
+    clasificar(automatizacion, caso, hash_clasificacion, "otros", "contabilidad")
+    como_adv(cur)
+    cur.execute("select adv.no_son_pedidos()")
+    fila = next(f for f in cur.fetchone()[0] if f["caso"] == caso)
+    assert fila["asunto"] == "Asunto" and fila["remitente"] == "compras@talleresferran.example"
+    assert {k: fila["clasificacion"][k] for k in ("tipo", "destino", "modelo")} == {
+        "tipo": "otros", "destino": "contabilidad", "modelo": "modelo-prueba"}
+    cur.execute("select adv.cola()")
+    assert caso not in [f["caso"] for f in cur.fetchone()[0]]
+
+
+def test_es_un_pedido_lo_pasa_a_revision_con_m01(automatizacion, cur, hash_clasificacion):
+    caso = recibir(automatizacion, "<c14@pruebas.example>")
+    clasificar(automatizacion, caso, hash_clasificacion, "otros", "archivo")
+    como_adv(cur)
+    cur.execute("select adv.pasar_a_revision(%s)", (caso,))
+    assert cur.fetchone()[0] == {"caso": caso, "estado": "en_revision"}
+    cur.execute("select adv.no_son_pedidos()")
+    assert caso not in [f["caso"] for f in cur.fetchone()[0]]
+    cur.execute("select adv.cola()")
+    assert caso in [f["caso"] for f in cur.fetchone()[0]]
+    cur.execute("select adv.detalle_caso(%s)", (caso,))
+    m = cur.fetchone()[0]["motivos"]
+    assert [(x["codigo"], x["detalle"], x["accion"]) for x in m] == [
+        ("M01", {"tipo": "reclasificado_por_adv", "clasificacion": {"tipo": "otros", "destino": "archivo"}}, "solo_cerrar")]
+    assert estado(cur, caso)[:2] == ("en_revision", "pedido_nuevo")
+    cur.execute("select tipo, actor, carga from intake.eventos where caso = %s order by id desc limit 1", (caso,))
+    assert cur.fetchone() == ("pasado_a_revision", ADV["sub"], {"codigo": "M01", "de": "derivado"})
+
+
+def test_solo_se_pasa_a_revision_un_derivado(automatizacion, cur, hash_clasificacion):
+    caso = recibir(automatizacion, "<c15@pruebas.example>")
+    clasificar(automatizacion, caso, hash_clasificacion, "consulta")
+    como_adv(cur)
+    with pytest.raises(psycopg.errors.RaiseException, match="no está entre los que no son pedidos"):
+        cur.execute("select adv.pasar_a_revision(%s)", (caso,))
+
+
+@pytest.mark.parametrize("funcion", ["no_son_pedidos()", "pasar_a_revision(1)"])
+def test_no_son_pedidos_es_solo_para_adv(cur, funcion):
+    cur.execute("select set_config('request.jwt.claims', %s, true)",
+                (json.dumps({**ADV, "app_metadata": {}}),))
+    cur.execute("set local role authenticated")
+    with pytest.raises(psycopg.errors.RaiseException, match="Solo administración de ventas"):
+        cur.execute(f"select adv.{funcion}")
