@@ -1,0 +1,31 @@
+id: P28
+tipo: pedido_nuevo
+formato: reenvio
+persona: montajes, reenviado como adjunto .eml
+cliente: C0055
+trampas: [numero_de_pedido_ya_usado, reenvio_como_eml]
+correos:
+  - eml: P28.eml
+    de: [Óscar Delgado, oscar.delgado@orvalle.example]
+    asunto: "Pedido Sotillo"
+    fecha: 2026-11-16T09:10:00+01:00
+    cuerpo: |
+      Adjunto correo de Sotillo con su pedido.
+
+      Óscar
+    reenvio:
+      estilo: eml
+      de: [Joan Ruiz, pedidos@mantenimientoymontajessotillo.example]
+      fecha: 2026-11-16T08:51:00+01:00
+      asunto: Pedido 2026/311
+      cuerpo: |
+        Hola Óscar, pedido 2026/311:
+
+        LIJ-HOJ-120  100
+        DIS-LAM-80  20
+
+        Joan
+lineas:
+  - {producto: LIJ-HOJ-120, cantidad: 100, unidad: ud, como: codigo}
+  - {producto: DIS-LAM-80, cantidad: 20, unidad: ud, como: codigo}
+debe_incluir: ["2026/311"]

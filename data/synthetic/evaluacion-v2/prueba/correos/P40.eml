@@ -1,0 +1,32 @@
+From: Paco Torrent <administracion@mecanitzatspladebaix.example>
+To: pedidos@orvalle.example
+Subject: Pedido 1192
+Date: Fri, 20 Nov 2026 08:10:00 +0100
+Message-ID: <v2-p40@mecanitzatspladebaix.example>
+Authentication-Results: mx.orvalle.example; spf=pass smtp.mailfrom=mecanitzatspladebaix.example; dkim=pass header.d=mecanitzatspladebaix.example; dmarc=pass header.from=mecanitzatspladebaix.example
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="=_p40_orvalle_v2"
+
+--=_p40_orvalle_v2
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+
+Buenos días,
+
+Adjunto pedido 1192.
+
+Paco Torrent
+
+--=_p40_orvalle_v2
+Content-Type: application/pdf
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="pedido_1192.pdf"
+MIME-Version: 1.0
+
+JVBERi0xLjQKMSAwIG9iago8PC9UeXBlL0NhdGFsb2cvUGFnZXMgMiAwIFI+PgplbmRvYmoKMiAwIG9iago8PC9UeXBlL1BhZ2VzL0tpZHNbMyAwIFJdL0NvdW50IDE+PgplbmRvYmoKMyAwIG9iago8PC9UeXBlL1BhZ2UvUGFyZW50IDIgMCBSL01lZGlhQm94WzAg
+MCA1OTUgODQyXS9Db250ZW50cyA0IDAgUi9SZXNvdXJjZXM8PC9Gb250PDwvRjEgNSAwIFI+Pj4+Pj4KZW5kb2JqCjQgMCBvYmoKPDwvTGVuZ3RoIDEzMT4+CnN0cmVhbQpCVCAvRjEgMTEgVGYgNjAgNzgwIFRkIDE1IFRMIChNZWNhbml0emF0cyBQbGEgZGUgQmFp
+eCwgUy5MLikgVGogVCogKFBlZGlkbyAxMTkyKSBUaiBUKiAoQlJPLUNPQi04ICAgMTApIFRqIFQqIChNQUMtTTggICA1KSBUaiBUKiBFVAplbmRzdHJlYW0KZW5kb2JqCjUgMCBvYmoKPDwvVHlwZS9Gb250L1N1YnR5cGUvVHlwZTEvQmFzZUZvbnQvSGVsdmV0aWNh
+L0VuY29kaW5nL1dpbkFuc2lFbmNvZGluZz4+CmVuZG9iagp4cmVmCjAgNgowMDAwMDAwMDAwIDY1NTM1IGYgCjAwMDAwMDAwMDkgMDAwMDAgbiAKMDAwMDAwMDA1NCAwMDAwMCBuIAowMDAwMDAwMTA1IDAwMDAwIG4gCjAwMDAwMDAyMTcgMDAwMDAgbiAKMDAwMDAw
+MDM5NyAwMDAwMCBuIAp0cmFpbGVyCjw8L1NpemUgNi9Sb290IDEgMCBSPj4Kc3RhcnR4cmVmCjQ4NQolJUVPRgo=
+
+--=_p40_orvalle_v2--

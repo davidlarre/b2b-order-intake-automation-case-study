@@ -1,0 +1,44 @@
+id: P36
+conjunto: prueba
+origen: generado
+eml:
+- P36.eml
+tipo: pedido_nuevo
+tipos_aceptables: []
+idioma: es
+cliente: C0103
+trampas:
+- pedido_grande_legitimo
+- firma_con_direccion_fiscal
+salida:
+  inicial: revision
+  final: revision
+  aceptables: []
+motivos:
+- codigo: R14
+  linea: 1
+  momento: inicial
+revision_necesaria: false
+peticion: []
+cabecera:
+  num_pedido_cliente: null
+  direccion:
+    calle: Carrer de la Forja
+    numero: '10'
+    nave: null
+    cp: 08186
+  fecha_prevista: '2026-11-18'
+  observaciones_entrega: null
+  condiciones: []
+lineas:
+- texto: GUA-PU-9 | 240
+  producto: GUA-PU-9
+  cantidad: 240
+  unidad: par
+  cantidad_uv: 240
+  precio_pedido: null
+depende_de:
+- R14
+marcas: []
+nota_marcas: null
+notas: 'Mediana 24; 240 es más de 5 veces. Es legítimo: revisión innecesaria.'

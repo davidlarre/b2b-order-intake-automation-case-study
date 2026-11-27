@@ -1,0 +1,27 @@
+id: D03
+tipo: pedido_nuevo
+formato: texto
+persona: compras, formal
+cliente: C0076
+trampas: [fecha_festiva]
+correos:
+  - eml: D03.eml
+    de: [Raquel Ortega, pedidos@climatizacionarevalo.example]
+    asunto: Pedido CA-2210
+    fecha: 2026-12-03T10:15:00+01:00
+    cuerpo: |
+      Buenos días:
+
+      Adjuntamos a continuación el pedido CA-2210, con entrega el martes 8 de diciembre en nuestras instalaciones:
+
+      - RAC-LAT-1-2, 30 unidades
+      - CIN-PTF-12, 20 rollos
+
+      Atentamente,
+      Raquel Ortega
+      Dpto. de Compras
+      Climatización Arévalo, S.L.
+lineas:
+  - {producto: RAC-LAT-1-2, cantidad: 30, unidad: ud, como: codigo}
+  - {producto: CIN-PTF-12, cantidad: 20, unidad: rollo, como: codigo}
+debe_incluir: ["CA-2210", "8 de diciembre"]

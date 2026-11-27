@@ -1,0 +1,20 @@
+id: D17
+tipo: consulta
+formato: texto
+persona: carpintero de aluminio, pregunta con código y cantidad
+cliente: C0050
+trampas: [consulta_con_codigo_y_cantidad]
+otros_codigos: [REM-AL-4X10]
+correos:
+  - eml: D17.eml
+    de: [Montse Gómez, pedidos@tancamentscantallops.example]
+    asunto: remaches
+    fecha: 2026-11-11T12:20:00+01:00
+    dmarc: none
+    cuerpo: |
+      Hola,
+
+      ¿Tenéis 5000 uds de REM-AL-4X10 para la semana que viene? Si me decís que sí y a qué precio, os hago el pedido.
+
+      Montse
+debe_incluir: ["5000 uds"]

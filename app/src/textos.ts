@@ -1,7 +1,7 @@
 // Todo lo que lee la gestora: frases con nombres de cliente y de producto, nunca códigos internos.
 // Las decisiones las comprueba la base de datos; aquí solo se explican y se proponen.
 
-import type { Adjunto, Detalle, FilaCola, Linea, Motivo, MotivoCola, Nombres, Razon } from './tipos';
+import type { Adjunto, Clasificacion, Detalle, FilaCola, Linea, Motivo, MotivoCola, Nombres, Razon } from './tipos';
 
 type D = Record<string, any>;
 
@@ -49,7 +49,7 @@ const corto = (razon: string) => razon.replace(/,?\s+(S\.L\.|S\.A\.|S\.C\.P\.|S\
 // ---------------------------------------------------------------- la cola
 
 // "Por qué está en revisión": una frase concreta por pedido, a partir de su motivo principal.
-const ORDEN = ['R02', 'R11', 'M02', 'M03', 'M01', 'R08', 'R12'];
+const ORDEN = ['R01', 'R02', 'R11', 'M02', 'M03', 'M01', 'R08', 'R12'];
 const principal = <T extends MotivoCola>(motivos: T[]) =>
   [...motivos].sort((a, b) => ORDEN.indexOf(a.codigo) - ORDEN.indexOf(b.codigo))[0];
 
@@ -59,6 +59,10 @@ export function porQueEnRevision(f: FilaCola): string {
   const d = m.detalle as D;
   const otros = f.motivos.length > 1 ? ` (y ${f.motivos.length - 1} cosa${f.motivos.length > 2 ? 's' : ''} más)` : '';
   switch (m.codigo) {
+    case 'R01':
+      return d.tipo === 'reclamacion' ? 'Reclamación de un cliente'
+        : d.tipo === 'consulta' ? 'Consulta de un cliente: no es un pedido'
+        : 'Cambio o anulación de un pedido ya hecho';
     case 'R02':
       if (d.tipo === 'remitente_no_verificado') return `Remitente sin verificar: podría no ser quien dice${otros}`;
       if (d.tipo === 'email_compartido') return `El remitente es contacto de varios clientes${otros}`;
@@ -73,6 +77,8 @@ export function porQueEnRevision(f: FilaCola): string {
     case 'M03':
       return `El sistema no ha podido leer el correo por un fallo técnico${otros}`;
     case 'M01':
+      if (d.tipo === 'clasificacion_dudosa') return 'No está claro si el correo es un pedido';
+      if (d.tipo === 'reclasificado_por_adv') return 'Marcado como pedido desde «No son pedidos»';
       return f.adjuntos.length === 0
         ? 'El correo no incluye ningún producto y no trae adjuntos'
         : 'No hemos encontrado ningún producto en el correo ni en sus adjuntos';
@@ -93,11 +99,24 @@ export const PRIORIDAD: Record<number, string | null> = {
   3: null,
 };
 
+// ---------------------------------------------------------------- no son pedidos
+
+// Lo que devolvió la clasificación, en palabras: el clasificador no da una explicación en texto.
+export function motivoClasificacion(c: Pick<Clasificacion, 'tipo' | 'destino'> | null | undefined): string {
+  if (c?.destino === 'contabilidad') return 'Parece una factura o un documento para contabilidad';
+  if (c?.destino === 'archivo') return 'Parece publicidad o un correo sin nada que hacer: se archiva';
+  return 'Clasificado como «otros»';
+}
+
 // ---------------------------------------------------------------- el detalle
 
 export function etiquetaEstado(det: Detalle): string | null {
   if (det.estado === 'pedido_creado') return 'Pedido creado';
-  if (det.estado === 'cerrado') return det.resultado_cierre === 'descartado' ? 'Descartado' : 'Tecleado a mano';
+  if (det.estado === 'cerrado') {
+    if (det.resultado_cierre === 'descartado') return 'Descartado';
+    if (det.resultado_cierre === 'procesado a mano') return 'Tecleado a mano';
+    return det.resultado_cierre ? det.resultado_cierre[0].toUpperCase() + det.resultado_cierre.slice(1) : 'Cerrado';
+  }
   if (det.estado === 'pendiente_cliente') return 'Esperando al cliente';
   if (det.motivos.some((m) => m.estado === 'abierto' && m.codigo === 'R11')) return 'Esperando al comercial';
   return null;
@@ -110,7 +129,7 @@ export type Cliente =
 export function clienteDe(det: Detalle): Cliente {
   const n = det.nombres;
   if (det.cliente) return { confirmado: true, nombre: nombreCliente(n, det.cliente), nota: null };
-  // Con el cliente sin asignar y ningún R02 abierto, las reglas no han corrido (M01, M02, M03): nada está comprobado.
+  // Con el cliente sin asignar y ningún R02 abierto, las reglas no han corrido (R01, M01, M02, M03): nada está comprobado.
   if (det.cliente_por_remitente) {
     return {
       confirmado: false,
@@ -138,6 +157,7 @@ export type Accion =
   | { tipo: 'buscar_cliente'; etiqueta: string }
   | { tipo: 'descargar'; etiqueta: string; adjunto: string }
   | { tipo: 'a_mano'; etiqueta: string }
+  | { tipo: 'atendido'; etiqueta: string; resultado: string }
   | { tipo: 'descartar'; etiqueta: string };
 
 export type Situacion = { problema: string; queHacer: string; acciones: Accion[]; ademas: string[] };
@@ -160,7 +180,11 @@ function frase(m: Motivo, det: Detalle): string {
     case 'R12': return d.tipo === 'omision_ia'
       ? `la línea «${l?.texto ?? ''}» podría faltar en el pedido`
       : `en ${prod} no está clara la cantidad: ${numero(d.determinista?.cantidad)} o ${numero(d.ia?.cantidad)}`;
-    case 'M01': return 'no hay productos en el correo';
+    case 'R01': return 'el correo no es un pedido nuevo';
+    case 'M01':
+      if (d.tipo === 'clasificacion_dudosa') return 'no está claro si el correo es un pedido';
+      if (d.tipo === 'reclasificado_por_adv') return 'el sistema no lo trató como pedido';
+      return 'no hay productos en el correo';
     case 'M02': return 'el pedido está en un adjunto que no se puede leer';
     case 'M03': return 'el correo no se ha leído por un fallo técnico';
     default: return 'hay algo que revisar';
@@ -183,6 +207,20 @@ export function situacion(det: Detalle): Situacion | null {
   const crear = (a: Accion[]) => (todosConfirmables ? a : [A_MANO]);
 
   switch (m.codigo) {
+    case 'R01':
+      if (d.tipo === 'reclamacion') {
+        return s('Es una reclamación. Si además pide material, no se crea ningún pedido solo.',
+          'Abre el correo, atiende al cliente y márcala como atendida.',
+          [{ tipo: 'atendido', etiqueta: 'Reclamación atendida', resultado: 'reclamación atendida' }, A_MANO]);
+      }
+      if (d.tipo === 'consulta') {
+        return s('Es una consulta, no un pedido.', 'Abre el correo, responde al cliente y márcala como atendida.',
+          [{ tipo: 'atendido', etiqueta: 'Consulta atendida', resultado: 'consulta atendida' }, A_MANO]);
+      }
+      return s('Cambia o anula un pedido ya hecho.',
+        'Busca el pedido en el ERP, aplica el cambio si todavía se puede y márcalo.',
+        [{ tipo: 'atendido', etiqueta: 'Modificación aplicada', resultado: 'modificación aplicada' },
+         { tipo: 'atendido', etiqueta: 'Anulación aplicada', resultado: 'anulación aplicada' }, A_MANO]);
     case 'R02': {
       if (d.tipo === 'remitente_no_verificado') {
         const c = det.cliente_propuesto;
@@ -223,6 +261,16 @@ export function situacion(det: Detalle): Situacion | null {
         'Abre el correo. Si es un pedido, tecléalo en el ERP y márcalo como hecho; si no lo es, descártalo.',
         [A_MANO, DESCARTAR]);
     case 'M01':
+      if (d.tipo === 'clasificacion_dudosa') {
+        return s('No está claro si el correo es un pedido.',
+          'Abre el correo. Si es un pedido, tecléalo en el ERP y márcalo como hecho; si no lo es, descártalo.',
+          [A_MANO, DESCARTAR]);
+      }
+      if (d.tipo === 'reclasificado_por_adv') {
+        return s(`El sistema no lo trató como pedido (${motivoClasificacion(d.clasificacion).toLowerCase()}), y se ha marcado como pedido.`,
+          'Leer los productos desde aquí todavía no está en la app. Abre el correo, teclea el pedido en el ERP y márcalo como hecho; si al final no es un pedido, descártalo.',
+          [A_MANO, DESCARTAR]);
+      }
       return s((det.correo?.adjuntos.length ?? 0) === 0
           ? 'El correo no incluye ningún producto y no trae adjuntos.'
           : 'No hemos encontrado ningún producto en el correo ni en sus adjuntos.',
@@ -263,6 +311,10 @@ export function sinProductos(det: Detalle): string {
     return `No hemos podido leer los productos: están en ${adjuntos ? `el adjunto ${adjuntos}` : 'un adjunto'}, que no se puede leer.`;
   }
   if (det.motivos.some((m) => m.codigo === 'M03')) return 'No se han leído los productos: hubo un fallo técnico al leer el correo.';
+  if (det.motivos.some((m) => m.codigo === 'R01'
+      || ['clasificacion_dudosa', 'reclasificado_por_adv'].includes((m.detalle as D).tipo))) {
+    return 'No se han leído los productos: el correo no se ha tratado como un pedido.';
+  }
   return 'No hemos encontrado productos en el texto del correo ni en adjuntos que se puedan leer.';
 }
 
@@ -309,11 +361,14 @@ export function notaPrecios(det: Detalle): string | null {
 
 export const NOMBRE_EVENTO: Record<string, string> = {
   recibido: 'Correo recibido',
+  clasificado: 'Correo clasificado',
+  derivado: 'Derivado',
   extraido: 'Productos leídos',
   reglas_evaluadas: 'Reglas evaluadas',
   enviado_a_revision: 'Enviado a revisión',
   motivo_forzado: 'Confirmado por ADV',
   pedido_creado_en_revision: 'Pedido creado desde la revisión',
+  pasado_a_revision: 'Pasado a revisión por ADV: es un pedido',
   cerrado: 'Cerrado',
   reevaluado: 'Vuelto a evaluar',
 };

@@ -1,0 +1,29 @@
+id: P10
+tipo: pedido_nuevo
+formato: texto
+persona: carpintero, mezcla idiomas
+cliente: C0105
+catalan: frases
+trampas: [observaciones_de_entrega, mezcla_de_idiomas]
+correos:
+  - eml: P10.eml
+    de: [Albert Ortega, compras@fusteriamasbaga.example]
+    asunto: comanda tirafons
+    fecha: 2026-11-05T09:50:00+01:00
+    dmarc: none
+    cuerpo: |
+      Bon dia,
+
+      us passo comanda:
+
+      TAG-4X40-BI 1000
+      TAG-5X60-BI 600
+
+      El transportista que entri pel moll 2, i només de 8 a 13 h, que a la tarda no hi ha ningú. Preguntar por Andrei.
+
+      Gràcies,
+      Albert
+lineas:
+  - {producto: TAG-4X40-BI, cantidad: 1000, unidad: ud, como: codigo}
+  - {producto: TAG-5X60-BI, cantidad: 600, unidad: ud, como: codigo}
+debe_incluir: ["moll 2", "de 8 a 13 h"]

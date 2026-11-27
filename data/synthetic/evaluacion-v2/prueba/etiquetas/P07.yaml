@@ -1,0 +1,45 @@
+id: P07
+conjunto: prueba
+origen: generado
+eml:
+- P07.eml
+tipo: pedido_nuevo
+tipos_aceptables: []
+idioma: es
+cliente: C0087
+trampas:
+- precio_a_un_centimo
+salida:
+  inicial: automatico
+  final: automatico
+  aceptables: []
+motivos: []
+revision_necesaria: null
+peticion: []
+cabecera:
+  num_pedido_cliente: P-5120
+  direccion:
+    calle: Carrer dels Torners
+    numero: '94'
+    nave: null
+    cp: 08120
+  fecha_prevista: '2026-11-04'
+  observaciones_entrega: null
+  condiciones: []
+lineas:
+- texto: ROD-6204-2RS | 30 | 4,21
+  producto: ROD-6204-2RS
+  cantidad: 30
+  unidad: ud
+  cantidad_uv: 30
+  precio_pedido: 4.21
+- texto: ROD-6001-2RS | 20 | 1,99
+  producto: ROD-6001-2RS
+  cantidad: 20
+  unidad: ud
+  cantidad_uv: 20
+  precio_pedido: 1.99
+depende_de: []
+marcas: []
+nota_marcas: null
+notas: Tarifa 4,20; 0,01 € es redondeo.

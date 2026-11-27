@@ -1,0 +1,18 @@
+From: Cristina Bosch <compras@montajesindustrialesrebollo.example>
+To: pedidos@orvalle.example
+Subject: Pedido P-882
+Date: Mon, 02 Nov 2026 10:20:00 +0100
+Message-ID: <v2-p44@montajesindustrialesrebollo.example>
+Authentication-Results:
+ mx.orvalle.example; spf=pass smtp.mailfrom=montajesindustrialesrebollo.example; dkim=pass header.d=montajesindustrialesrebollo.example; dmarc=pass header.from=montajesindustrialesrebollo.example
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+MIME-Version: 1.0
+
+Buenos días,
+
+Nos han parado la obra. ¿Podéis cancelar el P-882? Ya os diremos algo más adelante.
+
+Cristina Bosch
+Montajes Industriales Rebollo, S.L.
+Oficinas: Carrer de Catalunya 14, 08520 Les Franqueses del Vallès

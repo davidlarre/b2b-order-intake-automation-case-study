@@ -1,0 +1,44 @@
+id: P32
+conjunto: prueba
+origen: generado
+eml:
+- P32.eml
+tipo: pedido_nuevo
+tipos_aceptables: []
+idioma: es
+cliente: C0040
+trampas:
+- precio_a_dos_centimos
+- solo_html
+- firma_con_direccion_fiscal
+salida:
+  inicial: revision
+  final: revision
+  aceptables: []
+motivos:
+- codigo: R11
+  linea: 1
+  momento: inicial
+revision_necesaria: true
+peticion: []
+cabecera:
+  num_pedido_cliente: GV-1190
+  direccion:
+    calle: Carrer dels Torners
+    numero: '16'
+    nave: null
+    cp: 08150
+  fecha_prevista: '2026-11-17'
+  observaciones_entrega: null
+  condiciones: []
+lineas:
+- texto: VAR-M12-ZN, 50 uds, 2,12 €/ud
+  producto: VAR-M12-ZN
+  cantidad: 50
+  unidad: ud
+  cantidad_uv: 50
+  precio_pedido: 2.12
+depende_de: []
+marcas: []
+nota_marcas: null
+notas: Tarifa 2,10; pide 2,12.

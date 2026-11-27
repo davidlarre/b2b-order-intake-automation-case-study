@@ -1,0 +1,44 @@
+id: P21
+conjunto: prueba
+origen: generado
+eml:
+- P21.eml
+tipo: pedido_nuevo
+tipos_aceptables: []
+idioma: es
+cliente: null
+trampas:
+- email_compartido_por_2
+salida:
+  inicial: revision
+  final: revision
+  aceptables: []
+motivos:
+- codigo: R02
+  linea: null
+  momento: inicial
+revision_necesaria: true
+peticion: []
+cabecera:
+  num_pedido_cliente: null
+  direccion: null
+  fecha_prevista: '2026-11-12'
+  observaciones_entrega: null
+  condiciones: []
+lineas:
+- texto: CHA-AM-XL | 10
+  producto: CHA-AM-XL
+  cantidad: 10
+  unidad: ud
+  cantidad_uv: 10
+  precio_pedido: null
+- texto: ORE-SNR31 | 5
+  producto: ORE-SNR31
+  cantidad: 5
+  unidad: ud
+  cantidad_uv: 5
+  precio_pedido: null
+depende_de: []
+marcas: []
+nota_marcas: null
+notas: null

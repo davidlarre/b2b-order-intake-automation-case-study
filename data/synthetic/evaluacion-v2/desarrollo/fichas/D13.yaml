@@ -1,0 +1,35 @@
+id: D13
+tipo: pedido_nuevo
+formato: reenvio
+persona: taller, hilo largo con el pedido anterior citado sin ">"
+cliente: C0004
+trampas: [reenvio_outlook, pedido_anterior_citado]
+otros_codigos: [GUA-COR-10, DIS-COR-115]
+correos:
+  - eml: D13.eml
+    de: [Albert Casals, albert.casals@orvalle.example]
+    asunto: "RV: Pedido Talleres Pérez"
+    fecha: 2026-11-10T16:20:00+01:00
+    cuerpo: |
+      Buenas, meted esto por favor. Lo de abajo del todo es el del mes pasado, ese ya está servido.
+    reenvio:
+      estilo: outlook_es
+      de: [Joan Chen, almacen@talleresperez.example]
+      fecha: 2026-11-10T15:55:00+01:00
+      asunto: Pedido
+      cuerpo: |
+        Hola Albert, este mes necesitamos:
+
+        BUZ-AZ-52  3
+        GAF-PROT-INC  10
+
+        Joan
+
+        El 8 de octubre de 2026, Joan Chen escribió:
+        Hola Albert, pedido de octubre:
+        GUA-COR-10  12
+        DIS-COR-115  50
+        Gracias, Joan
+lineas:
+  - {producto: BUZ-AZ-52, cantidad: 3, unidad: ud, como: codigo}
+  - {producto: GAF-PROT-INC, cantidad: 10, unidad: ud, como: codigo}

@@ -1,0 +1,26 @@
+id: D09
+tipo: pedido_nuevo
+formato: excel
+persona: mantenimiento, Excel mínimo
+cliente: C0060
+trampas: [descatalogado_sin_sustituto]
+correos:
+  - eml: D09.eml
+    de: [Raquel Prat, taller@serveistecnicsmontbrull.example]
+    asunto: eines
+    fecha: 2026-11-06T12:10:00+01:00
+    dmarc: none
+    cuerpo: |
+      Hola, pedido en el Excel.
+      Raquel
+    excel:
+      nombre: eines.xlsx
+      filas:
+        - [Ref, Cant]
+        - [MAR-300, 3]
+        - [MAR-500, 3]
+        - [FLE-5, 4]
+lineas:
+  - {producto: MAR-300, cantidad: 3, unidad: ud, como: codigo}
+  - {producto: MAR-500, cantidad: 3, unidad: ud, como: codigo}
+  - {producto: FLE-5, cantidad: 4, unidad: ud, como: codigo}

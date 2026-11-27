@@ -1,0 +1,25 @@
+id: P22
+tipo: pedido_nuevo
+formato: texto
+persona: jefe de taller nuevo
+cliente: C0084
+trampas: [remitente_desconocido_con_dominio_exacto, solo_html]
+correos:
+  - eml: P22.eml
+    de: [Héctor Molina, jefe.taller@bombasymotorescifuentes.example]
+    asunto: Pedido rodamientos
+    fecha: 2026-11-12T09:45:00+01:00
+    dmarc: none
+    html: true
+    cuerpo: |
+      Buenos días,
+
+      Soy Héctor, llevo ahora los pedidos del taller. Necesitamos:
+
+      ROD-6203-2RS 10 uds
+      ROD-6205-2RS 10 uds
+
+      Gracias
+lineas:
+  - {producto: ROD-6203-2RS, cantidad: 10, unidad: ud, como: codigo}
+  - {producto: ROD-6205-2RS, cantidad: 10, unidad: ud, como: codigo}

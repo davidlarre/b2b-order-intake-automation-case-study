@@ -1,0 +1,17 @@
+id: D16
+tipo: modificacion_anulacion
+formato: texto
+persona: cerrajería, dos líneas
+cliente: C0045
+trampas: [anulacion]
+correos:
+  - eml: D16.eml
+    de: [Wei Font, pedidos@serralleriagermansbonastre.example]
+    asunto: anular
+    fecha: 2026-11-02T08:35:00+01:00
+    dmarc: none
+    cuerpo: |
+      Anulad el pedido B-74 del viernes, que al final no lo necesitamos.
+
+      Wei
+debe_incluir: ["B-74"]

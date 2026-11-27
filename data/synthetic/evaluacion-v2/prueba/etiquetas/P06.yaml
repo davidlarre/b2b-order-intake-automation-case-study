@@ -1,0 +1,46 @@
+id: P06
+conjunto: prueba
+origen: generado
+eml:
+- P06.eml
+tipo: pedido_nuevo
+tipos_aceptables: []
+idioma: es
+cliente: C0043
+trampas:
+- unidad_convertible
+salida:
+  inicial: automatico
+  final: automatico
+  aceptables: []
+motivos: []
+revision_necesaria: null
+peticion: []
+cabecera:
+  num_pedido_cliente: null
+  direccion:
+    calle: Carrer dels Serrallers
+    numero: '33'
+    nave: null
+    cp: 08130
+  fecha_prevista: '2026-11-04'
+  observaciones_entrega: null
+  condiciones: []
+lineas:
+- texto: Necesitamos 3 cajas de 100 de TUE-M10-A2 y 2 cajas de 100 de ARA-M10-A2.
+  producto: TUE-M10-A2
+  cantidad: 3
+  unidad: caja
+  cantidad_uv: 300
+  precio_pedido: null
+- texto: Necesitamos 3 cajas de 100 de TUE-M10-A2 y 2 cajas de 100 de ARA-M10-A2.
+  producto: ARA-M10-A2
+  cantidad: 2
+  unidad: caja
+  cantidad_uv: 200
+  precio_pedido: null
+depende_de:
+- R10
+marcas: []
+nota_marcas: null
+notas: 3 cajas de 100 = 300; 2 cajas de 100 = 200 (conversión registrada).

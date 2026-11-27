@@ -1,0 +1,16 @@
+From: Manuel Cano <pedidos@carrosseriessantmarti.example>
+To: pedidos@orvalle.example
+Subject: pedido 3310
+Date: Mon, 02 Nov 2026 08:10:00 +0100
+Message-ID: <v2-d15@carrosseriessantmarti.example>
+Authentication-Results: mx.orvalle.example; spf=pass smtp.mailfrom=carrosseriessantmarti.example; dmarc=none header.from=carrosseriessantmarti.example
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+MIME-Version: 1.0
+
+Hola,
+
+En el pedido 3310 que os pasamos el miércoles, de LIJ-HOJ-240 poned 300 en lugar de 200, si todavía no ha salido.
+
+Gracias,
+Manuel

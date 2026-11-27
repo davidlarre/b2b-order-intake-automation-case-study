@@ -1,0 +1,20 @@
+From: Youssef Riera <compras@mecanizadostorrubia.example>
+To: pedidos@orvalle.example
+Subject: RE: Pedido discos 2026-88
+Date: Fri, 06 Nov 2026 12:30:00 +0100
+Message-ID: <v2-p14b@mecanizadostorrubia.example>
+In-Reply-To: <v2-p14a@mecanizadostorrubia.example>
+References: <v2-p14a@mecanizadostorrubia.example>
+Authentication-Results: mx.orvalle.example; spf=pass smtp.mailfrom=mecanizadostorrubia.example; dkim=pass header.d=mecanizadostorrubia.example; dmarc=pass header.from=mecanizadostorrubia.example
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+MIME-Version: 1.0
+
+La 2, gracias.
+
+Youssef
+
+> Para completar su pedido 2026-88 necesitamos la dirección de entrega:
+> 1. Avinguda de la Riera 110, Nave 8, 08755 Castellbisbal
+> 2. Carrer del Progrés 42, 08191 Rubí
+> Responda 1 o 2, o indíquenos otra.

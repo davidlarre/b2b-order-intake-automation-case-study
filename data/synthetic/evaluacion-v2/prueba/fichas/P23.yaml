@@ -1,0 +1,26 @@
+id: P23
+tipo: pedido_nuevo
+formato: texto
+persona: suplantador
+cliente: null
+trampas: [dominio_parecido]
+correos:
+  - eml: P23.eml
+    de: [Manuel Prieto, pedidos@talleres-navalon.example]
+    asunto: Pedido botas
+    fecha: 2026-11-12T11:20:00+01:00
+    cuerpo: |
+      Buenos días,
+
+      Os paso un pedido, la cuenta es la de siempre:
+
+      BOT-S3-42  20
+      BOT-S3-44  20
+
+      Esta vez lo recogemos nosotros en vuestro almacén.
+
+      Manuel Prieto
+      Talleres Navalón
+lineas:
+  - {producto: BOT-S3-42, cantidad: 20, unidad: par, como: codigo}
+  - {producto: BOT-S3-44, cantidad: 20, unidad: par, como: codigo}

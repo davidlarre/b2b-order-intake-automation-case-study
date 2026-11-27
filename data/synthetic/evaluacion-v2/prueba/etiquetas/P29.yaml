@@ -1,0 +1,50 @@
+id: P29
+conjunto: prueba
+origen: generado
+eml:
+- P29.eml
+tipo: pedido_nuevo
+tipos_aceptables: []
+idioma: ca
+cliente: C0080
+trampas:
+- numeracion_ciclica
+- catalan_entero
+salida:
+  inicial: revision
+  final: revision
+  aceptables: []
+motivos:
+- codigo: R07
+  linea: null
+  momento: inicial
+revision_necesaria: false
+peticion: []
+cabecera:
+  num_pedido_cliente: '12'
+  direccion:
+    calle: Carrer de Catalunya
+    numero: '91'
+    nave: null
+    cp: 08185
+  fecha_prevista: '2026-11-16'
+  observaciones_entrega: null
+  condiciones: []
+lineas:
+- texto: '- CIN-AIS-NG, 20 rotlles'
+  producto: CIN-AIS-NG
+  cantidad: 20
+  unidad: rollo
+  cantidad_uv: 20
+  precio_pedido: null
+- texto: '- BRI-4-8X200-NG, 6 bosses'
+  producto: BRI-4-8X200-NG
+  cantidad: 6
+  unidad: bolsa
+  cantidad_uv: 6
+  precio_pedido: null
+depende_de:
+- R07
+marcas: []
+nota_marcas: null
+notas: 'El cliente reinicia su numeración: revisión innecesaria, pero es lo que dice R07.'

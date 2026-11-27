@@ -1,0 +1,22 @@
+From: Rafael Puig <pedidos@torneadosalcubierre.example>
+To: pedidos@orvalle.example
+Subject: RE: Pedido =?utf-8?q?n=C2=BA?= 26/0714
+Date: Thu, 05 Nov 2026 08:30:00 +0100
+Message-ID: <v2-p54@torneadosalcubierre.example>
+In-Reply-To: <v2-p02@torneadosalcubierre.example>
+References: <v2-p02@torneadosalcubierre.example>
+Authentication-Results: mx.orvalle.example; spf=pass smtp.mailfrom=torneadosalcubierre.example; dkim=pass header.d=torneadosalcubierre.example; dmarc=pass header.from=torneadosalcubierre.example
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+MIME-Version: 1.0
+
+Estimados señores:
+
+El material nos ha llegado hoy con la caja abierta y faltan unos doscientos tornillos. Además, es el tercer envío que llega mal embalado. Esperamos una explicación y una solución.
+
+Rafael Puig
+TORNEADOS ALCUBIERRE, S.L.
+
+> Hemos registrado su pedido 26/0714.
+> T-0830 INOX  500 uds
+> A-08 INOX  1000 uds

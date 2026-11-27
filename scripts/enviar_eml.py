@@ -13,6 +13,7 @@ Uso:
   ACEPTABLE, que cuenta como revisión innecesaria y no como fallo.
 - --nuevos añade un sufijo al Message-ID para que n8n los trate como correos nuevos
   (sin él, un segundo envío devuelve "duplicado").
+- --pausa espera esos segundos entre correos (límite por minuto del nivel gratuito de Gemini).
 - --hoy cambia la fecha de cada correo a hoy, con la misma hora (para la demo: una cola de hoy).
 """
 
@@ -33,6 +34,7 @@ from entorno import leer_env
 
 RAIZ = Path(__file__).resolve().parent.parent
 URL_POR_DEFECTO = "http://localhost:5678/webhook/pruebas/eml"
+PRUEBA_CONGELADA = RAIZ / "data" / "synthetic" / "evaluacion-v2" / "prueba"
 CONFIGURACIONES = ("solo_reglas", "solo_ia", "hibrido")
 
 
@@ -137,8 +139,12 @@ def main():
     parser.add_argument("--url", default=URL_POR_DEFECTO)
     parser.add_argument("--configuracion", choices=CONFIGURACIONES, help="por defecto, la de n8n (hibrido)")
     parser.add_argument("--nuevos", action="store_true", help="Message-ID nuevo en cada envío")
+    parser.add_argument("--pausa", type=float, default=0, help="segundos entre correos")
     parser.add_argument("--hoy", action="store_true", help="fecha de hoy, con la misma hora")
     args = parser.parse_args()
+
+    if PRUEBA_CONGELADA in args.ruta.resolve().parents:
+        sys.exit("Es la prueba congelada: no se ejecuta desde aquí (eval/alcance-prueba-v2.md)")
 
     token = leer_env().get("PRUEBAS_WEBHOOK_TOKEN")
     if not token:
@@ -158,7 +164,9 @@ def main():
 
     print(f"Configuración: {configuracion}")
     fallos = 0
-    for _, ruta in correos:
+    for i, (_, ruta) in enumerate(correos):
+        if i and args.pausa:
+            time.sleep(args.pausa)
         eml = ruta.read_bytes()
         if args.nuevos:
             eml = con_message_id_nuevo(eml, sufijo)

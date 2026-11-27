@@ -1,0 +1,50 @@
+id: D13
+conjunto: desarrollo
+origen: generado
+eml:
+- D13.eml
+tipo: pedido_nuevo
+tipos_aceptables: []
+idioma: es
+cliente: C0004
+trampas:
+- reenvio_outlook
+- pedido_anterior_citado
+salida:
+  inicial: automatico
+  final: automatico
+  aceptables:
+  - salida: revision
+    motivos:
+    - R12
+motivos: []
+revision_necesaria: null
+peticion: []
+cabecera:
+  num_pedido_cliente: null
+  direccion:
+    calle: Passeig Fluvial
+    numero: '111'
+    nave: null
+    cp: 08232
+  fecha_prevista: '2026-11-11'
+  observaciones_entrega: null
+  condiciones: []
+lineas:
+- texto: BUZ-AZ-52  3
+  producto: BUZ-AZ-52
+  cantidad: 3
+  unidad: ud
+  cantidad_uv: 3
+  precio_pedido: null
+- texto: GAF-PROT-INC  10
+  producto: GAF-PROT-INC
+  cantidad: 10
+  unidad: ud
+  cantidad_uv: 10
+  precio_pedido: null
+depende_de:
+- R03
+marcas: []
+nota_marcas: null
+notas: 'Lo del 8 de octubre es el pedido anterior, ya servido: no se pide.'

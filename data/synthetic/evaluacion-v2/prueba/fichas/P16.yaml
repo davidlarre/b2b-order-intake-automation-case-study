@@ -1,0 +1,40 @@
+id: P16
+tipo: pedido_nuevo
+formato: excel
+persona: fábrica de plásticos
+cliente: C0098
+trampas: [no_multiplo_del_embalaje, respuesta_con_algo_mas]
+otros_codigos: [GUA-NIT-M]
+correos:
+  - eml: P16a.eml
+    de: [Óscar Serra, oficina@plasticosinyectadoscardenas.example]
+    asunto: Pedido PC-640
+    fecha: 2026-11-09T09:40:00+01:00
+    cuerpo: |
+      Buenos días,
+
+      Adjunto el pedido PC-640.
+
+      Óscar Serra
+    excel:
+      nombre: PC-640.xlsx
+      filas:
+        - [Referencia, Cantidad]
+        - [DIS-COR-125, 30]
+        - [TUE-M8-ZN, 500]
+  - eml: P16b.eml
+    de: [Óscar Serra, oficina@plasticosinyectadoscardenas.example]
+    asunto: "RE: Pedido PC-640"
+    fecha: 2026-11-09T13:20:00+01:00
+    responde_a: [P16a.eml]
+    cuerpo: |
+      Pues 50, y de paso añade 2 cajas de GUA-NIT-M.
+
+      Óscar
+
+      > El producto DIS-COR-125 se sirve en múltiplos de 25. ¿Qué cantidad prefiere: 25 o 50?
+      > Responda con una de las dos, o indíquenos otra.
+lineas:
+  - {producto: DIS-COR-125, cantidad: 30, unidad: ud, como: codigo}
+  - {producto: TUE-M8-ZN, cantidad: 500, unidad: ud, como: codigo}
+debe_incluir: ["PC-640", "añade 2 cajas"]

@@ -1,0 +1,19 @@
+From: Manuel Prieto <pedidos@talleresnavalon.example>
+To: pedidos@orvalle.example
+Subject: URGENTE pedido
+Date: Mon, 02 Nov 2026 08:12:00 +0100
+Message-ID: <v2-p01@talleresnavalon.example>
+Authentication-Results: mx.orvalle.example; spf=pass smtp.mailfrom=talleresnavalon.example; dkim=pass header.d=talleresnavalon.example; dmarc=pass header.from=talleresnavalon.example
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+MIME-Version: 1.0
+
+Buenos días,
+
+Necesito cuanto antes:
+
+ALL-M8X25-ZN   100
+TUA-M8-ZN   300
+BRO-HSS-8   20
+
+Manuel

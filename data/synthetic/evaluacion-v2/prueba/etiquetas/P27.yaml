@@ -1,0 +1,54 @@
+id: P27
+conjunto: prueba
+origen: generado
+eml:
+- P27.eml
+tipo: pedido_nuevo
+tipos_aceptables: []
+idioma: es
+cliente: C0098
+trampas:
+- duplicado_de_un_caso_abierto
+- reenvio_outlook
+salida:
+  inicial: revision
+  final: revision
+  aceptables: []
+motivos:
+- codigo: R07
+  linea: null
+  momento: inicial
+- codigo: R10-EMBALAJE
+  linea: 1
+  momento: inicial
+revision_necesaria: true
+peticion: []
+cabecera:
+  num_pedido_cliente: PC-640
+  direccion:
+    calle: Carrer del Coure
+    numero: '107'
+    nave: Nave 10
+    cp: 08100
+  fecha_prevista: '2026-11-09'
+  observaciones_entrega: null
+  condiciones: []
+lineas:
+- texto: DIS-COR-125 30
+  producto: DIS-COR-125
+  cantidad: 30
+  unidad: ud
+  cantidad_uv: 30
+  precio_pedido: null
+- texto: TUE-M8-ZN 500
+  producto: TUE-M8-ZN
+  cantidad: 500
+  unidad: ud
+  cantidad_uv: 500
+  precio_pedido: null
+depende_de:
+- R03
+- R07
+marcas: []
+nota_marcas: null
+notas: Duplicado de P16, que sigue abierto. R10 también se incumple, pero lo acumula el mismo caso.

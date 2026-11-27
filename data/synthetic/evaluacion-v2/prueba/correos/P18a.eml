@@ -1,0 +1,19 @@
+From: Andrei =?utf-8?q?Jim=C3=A9nez?= <compras@construccionesmetalicasuceda.example>
+To: pedidos@orvalle.example
+Subject: Tacos obra
+Date: Tue, 10 Nov 2026 10:20:00 +0100
+Message-ID: <v2-p18a@construccionesmetalicasuceda.example>
+Authentication-Results:
+ mx.orvalle.example; spf=pass smtp.mailfrom=construccionesmetalicasuceda.example; dkim=pass header.d=construccionesmetalicasuceda.example; dmarc=pass header.from=construccionesmetalicasuceda.example
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+MIME-Version: 1.0
+
+Buenos días,
+
+Para la obra necesitamos:
+TAM-M10X90   70 uds
+BRO-SDS-12X160   4
+
+Saludos,
+Andrei

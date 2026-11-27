@@ -1,0 +1,37 @@
+id: P50
+conjunto: prueba
+origen: generado
+eml:
+- P50.eml
+tipo: consulta
+tipos_aceptables:
+- dudoso
+idioma: es
+cliente: C0067
+trampas:
+- precio_con_codigo_y_cantidad
+- solo_html
+salida:
+  inicial: revision
+  final: revision
+  aceptables:
+  - salida: revision
+    motivos:
+    - M01
+motivos:
+- codigo: R01
+  linea: null
+  momento: inicial
+revision_necesaria: true
+peticion: []
+cabecera:
+  num_pedido_cliente: null
+  direccion: null
+  fecha_prevista: null
+  observaciones_entrega: null
+  condiciones: []
+lineas: []
+depende_de: []
+marcas: []
+nota_marcas: null
+notas: null

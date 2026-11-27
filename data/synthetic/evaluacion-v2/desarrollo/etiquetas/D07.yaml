@@ -1,0 +1,52 @@
+id: D07
+conjunto: desarrollo
+origen: generado
+eml:
+- D07.eml
+tipo: pedido_nuevo
+tipos_aceptables: []
+idioma: es
+cliente: C0016
+trampas:
+- fila_de_total
+- cabecera_tras_titulo
+salida:
+  inicial: automatico
+  final: automatico
+  aceptables: []
+motivos: []
+revision_necesaria: null
+peticion: []
+cabecera:
+  num_pedido_cliente: 2026-118
+  direccion:
+    calle: Carrer del Treball
+    numero: '13'
+    nave: Nave 3
+    cp: 08205
+  fecha_prevista: '2026-11-05'
+  observaciones_entrega: null
+  condiciones: []
+lineas:
+- texto: LLC-10 | Llave combinada 10 | 4
+  producto: LLC-10
+  cantidad: 4
+  unidad: ud
+  cantidad_uv: 4
+  precio_pedido: null
+- texto: LLC-13 | Llave combinada 13 | 4
+  producto: LLC-13
+  cantidad: 4
+  unidad: ud
+  cantidad_uv: 4
+  precio_pedido: null
+- texto: VAS-12-17 | Vaso 17 | 2
+  producto: VAS-12-17
+  cantidad: 2
+  unidad: ud
+  cantidad_uv: 2
+  precio_pedido: null
+depende_de: []
+marcas: []
+nota_marcas: null
+notas: null

@@ -1,0 +1,47 @@
+id: P02
+conjunto: prueba
+origen: generado
+eml:
+- P02.eml
+tipo: pedido_nuevo
+tipos_aceptables: []
+idioma: es
+cliente: C0028
+trampas:
+- equivalencias
+- precio_igual_a_tarifa
+- firma_con_direccion_fiscal
+salida:
+  inicial: automatico
+  final: automatico
+  aceptables: []
+motivos: []
+revision_necesaria: null
+peticion: []
+cabecera:
+  num_pedido_cliente: 26/0714
+  direccion:
+    calle: Carrer del Coure
+    numero: '46'
+    nave: Nave 5
+    cp: 08232
+  fecha_prevista: '2026-11-02'
+  observaciones_entrega: null
+  condiciones: []
+lineas:
+- texto: Ref. T-0830 INOX, 500 uds, a 0,35 €/ud
+  producto: TOR-M8X30-A2
+  cantidad: 500
+  unidad: ud
+  cantidad_uv: 500
+  precio_pedido: 0.35
+- texto: Ref. A-08 INOX, 1000 uds, a 0,06 €/ud
+  producto: ARA-M8-A2
+  cantidad: 1000
+  unidad: ud
+  cantidad_uv: 1000
+  precio_pedido: 0.06
+depende_de: []
+marcas: []
+nota_marcas: null
+notas: null

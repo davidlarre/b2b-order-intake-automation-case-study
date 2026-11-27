@@ -1,0 +1,17 @@
+id: P49
+tipo: consulta
+formato: texto
+persona: forja
+cliente: C0047
+trampas: [donde_esta_mi_pedido]
+correos:
+  - eml: P49.eml
+    de: [Nerea Popescu, compras@forjaiferrotagamanent.example]
+    asunto: FT-118
+    fecha: 2026-11-03T10:50:00+01:00
+    dmarc: none
+    cuerpo: |
+      Hola, ¿cómo está el FT-118? Tenía que haber llegado el viernes.
+
+      Nerea
+debe_incluir: ["FT-118"]

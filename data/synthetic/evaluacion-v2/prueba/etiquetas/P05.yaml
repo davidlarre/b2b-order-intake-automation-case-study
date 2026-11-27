@@ -1,0 +1,46 @@
+id: P05
+conjunto: prueba
+origen: generado
+eml:
+- P05.eml
+tipo: pedido_nuevo
+tipos_aceptables: []
+idioma: es
+cliente: C0044
+trampas:
+- reenvio_gmail
+salida:
+  inicial: automatico
+  final: automatico
+  aceptables: []
+motivos: []
+revision_necesaria: null
+peticion: []
+cabecera:
+  num_pedido_cliente: null
+  direccion:
+    calle: Carrer del Vapor
+    numero: '20'
+    nave: null
+    cp: 08184
+  fecha_prevista: '2026-11-03'
+  observaciones_entrega: null
+  condiciones: []
+lineas:
+- texto: TIR-8X80-ZN  100
+  producto: TIR-8X80-ZN
+  cantidad: 100
+  unidad: ud
+  cantidad_uv: 100
+  precio_pedido: null
+- texto: BRO-SDS-10X210  5
+  producto: BRO-SDS-10X210
+  cantidad: 5
+  unidad: ud
+  cantidad_uv: 5
+  precio_pedido: null
+depende_de:
+- R03
+marcas: []
+nota_marcas: null
+notas: null

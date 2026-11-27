@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "conjunto", "origen", "eml", "tipo", "tipos_aceptables", "idioma", "cliente", "trampas", "salida",
+               "motivos", "revision_necesaria", "peticion", "cabecera", "lineas", "depende_de", "marcas", "nota_marcas", "notas"],
+  "properties": {
+    "id": {"type": "string", "pattern": "^[DP][0-9]{2}$"},
+    "conjunto": {"enum": ["desarrollo", "prueba"]},
+    "origen": {"enum": ["generado", "editado_a_mano", "a_mano"]},
+    "eml": {"type": "array", "minItems": 1, "items": {"type": "string", "pattern": "^[DP][0-9]{2}[a-c]?\\.eml$"}},
+    "tipo": {"enum": ["pedido_nuevo", "modificacion_anulacion", "consulta", "reclamacion", "otros"]},
+    "tipos_aceptables": {"type": "array", "items": {"enum": ["dudoso", "pedido_nuevo", "modificacion_anulacion", "consulta", "reclamacion", "otros"]}},
+    "destino": {"enum": ["contabilidad", "archivo"]},
+    "idioma": {"enum": ["es", "ca", "mixto"]},
+    "cliente": {"type": ["string", "null"], "pattern": "^C[0-9]{4}$"},
+    "trampas": {"type": "array", "items": {"type": "string"}},
+    "salida": {
+      "type": "object", "additionalProperties": false, "required": ["inicial", "final", "aceptables"],
+      "properties": {
+        "inicial": {"$ref": "#/$defs/salida"},
+        "final": {"$ref": "#/$defs/salida"},
+        "aceptables": {"type": "array", "items": {
+          "type": "object", "additionalProperties": false, "required": ["salida", "motivos"],
+          "properties": {"salida": {"const": "revision"}, "motivos": {"type": "array", "items": {"$ref": "#/$defs/motivo"}}}}}
+      }
+    },
+    "motivos": {"type": "array", "items": {
+      "type": "object", "additionalProperties": false, "required": ["codigo", "linea", "momento"],
+      "properties": {"codigo": {"$ref": "#/$defs/motivo"}, "linea": {"type": ["integer", "null"], "minimum": 1},
+                     "momento": {"enum": ["inicial", "final"]}}}},
+    "motivos_sin_codigo": {"const": true},
+    "revision_necesaria": {"type": ["boolean", "null"]},
+    "peticion": {"type": "array", "items": {
+      "type": "object", "additionalProperties": false, "required": ["campo", "linea", "opciones"],
+      "properties": {"campo": {"enum": ["direccion", "fecha", "referencia", "cantidad", "lineas"]},
+                     "linea": {"type": ["integer", "null"]}, "opciones": {"type": "array"}}}},
+    "cabecera": {
+      "type": "object", "additionalProperties": false,
+      "required": ["num_pedido_cliente", "direccion", "fecha_prevista", "observaciones_entrega", "condiciones"],
+      "properties": {
+        "num_pedido_cliente": {"type": ["string", "null"]},
+        "direccion": {"type": ["object", "null"], "required": ["calle", "numero", "nave", "cp"]},
+        "fecha_prevista": {"type": ["string", "null"], "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"},
+        "observaciones_entrega": {"type": ["string", "null"]},
+        "condiciones": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "lineas": {"type": "array", "items": {
+      "type": "object", "additionalProperties": false,
+      "required": ["texto", "producto", "cantidad", "unidad", "cantidad_uv", "precio_pedido"],
+      "properties": {
+        "texto": {"type": ["string", "null"]}, "producto": {"type": ["string", "null"]},
+        "cantidad": {"type": "integer", "minimum": 1}, "unidad": {"type": "string"},
+        "cantidad_uv": {"type": ["integer", "null"], "minimum": 1}, "precio_pedido": {"type": ["number", "null"]}}}},
+    "lineas_finales": {"type": "array", "items": {
+      "type": "object", "required": ["producto", "cantidad_uv"],
+      "properties": {"producto": {"type": "string"}, "cantidad_uv": {"type": "integer"}}}},
+    "depende_de": {"type": "array", "items": {"enum": ["R03", "R04", "R05", "R06", "R07", "R09", "R10", "R13", "R14", "M04", "D16", "D22", "RESPUESTA"]}},
+    "marcas": {"type": "array", "items": {"type": "string"}},
+    "nota_marcas": {"type": ["string", "null"]},
+    "notas": {"type": ["string", "null"]}
+  },
+  "$defs": {
+    "salida": {"enum": ["automatico", "pedir_datos", "revision", "derivado"]},
+    "motivo": {"enum": ["R01", "R02", "R03", "R04", "R05", "R06", "R07", "R08", "R09", "R10-EMBALAJE", "R10-UNIDAD", "R11", "R12", "R13", "R14", "M01", "M02", "M03", "M04", "M06", "M07"]}
+  }
+}

@@ -1,0 +1,44 @@
+id: P33
+conjunto: prueba
+origen: generado
+eml:
+- P33.eml
+tipo: pedido_nuevo
+tipos_aceptables: []
+idioma: es
+cliente: C0108
+trampas:
+- precio_pactado_por_telefono
+- reenvio_gmail
+salida:
+  inicial: revision
+  final: revision
+  aceptables: []
+motivos:
+- codigo: R11
+  linea: 1
+  momento: inicial
+revision_necesaria: true
+peticion: []
+cabecera:
+  num_pedido_cliente: null
+  direccion:
+    calle: Ronda Industrial
+    numero: '12'
+    nave: null
+    cp: 08213
+  fecha_prevista: '2026-11-17'
+  observaciones_entrega: null
+  condiciones: []
+lineas:
+- texto: 24 pares de GUA-COR-9 a 4,50, lo que hablamos por teléfono.
+  producto: GUA-COR-9
+  cantidad: 24
+  unidad: par
+  cantidad_uv: 24
+  precio_pedido: 4.5
+depende_de:
+- R03
+marcas: []
+nota_marcas: null
+notas: 'El 4,50 se facturó en el histórico, pero no está en ninguna tarifa; rige la general, 5,40. Comercial: COM-3.'

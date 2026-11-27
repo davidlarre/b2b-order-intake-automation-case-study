@@ -1,0 +1,25 @@
+From: Raquel Navarro <raquel.navarro@orvalle.example>
+To: pedidos@orvalle.example
+Subject: RV: Pedido urgente
+Date: Wed, 11 Nov 2026 14:00:00 +0100
+Message-ID: <v2-p19@orvalle.example>
+Authentication-Results: mx.orvalle.example; spf=pass smtp.mailfrom=orvalle.example; dkim=pass header.d=orvalle.example; dmarc=pass header.from=orvalle.example
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+MIME-Version: 1.0
+
+Por favor, gestionad este pedido.
+
+Raquel
+
+________________________________
+De: Pilar Molina <compras@aluminioscarrascal.example>
+Enviado: miércoles, 11 de noviembre de 2026 13:52
+Para: Raquel Navarro <raquel.navarro@orvalle.example>
+Asunto: Pedido urgente
+
+Hola Raquel,
+
+Necesito para hoy mismo 12 de SIL-GR y 50 de TIR-6X60-ZN.
+
+Pilar

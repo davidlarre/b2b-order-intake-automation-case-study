@@ -1,0 +1,19 @@
+id: D18
+tipo: consulta
+formato: texto
+persona: instalador
+cliente: C0068
+trampas: [donde_esta_mi_pedido]
+correos:
+  - eml: D18.eml
+    de: [Pere Iglesias, pedidos@instalacionestermicasvillalbaros.example]
+    asunto: pedido 4471
+    fecha: 2026-11-02T16:05:00+01:00
+    dmarc: none
+    cuerpo: |
+      Buenas tardes,
+
+      El pedido 4471 del lunes pasado todavía no nos ha llegado. ¿Sabéis cuándo sale?
+
+      Pere Iglesias
+debe_incluir: ["4471"]

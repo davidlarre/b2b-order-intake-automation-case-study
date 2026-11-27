@@ -1,0 +1,24 @@
+id: P54
+tipo: reclamacion
+formato: texto
+persona: compras formal, responde a la confirmación de P02
+cliente: C0028
+trampas: [queja_en_el_hilo_de_una_confirmacion, hilo_citado]
+correos:
+  - eml: P54.eml
+    de: [Rafael Puig, pedidos@torneadosalcubierre.example]
+    asunto: "RE: Pedido nº 26/0714"
+    fecha: 2026-11-05T08:30:00+01:00
+    responde_a: ["<v2-p02@torneadosalcubierre.example>"]
+    cuerpo: |
+      Estimados señores:
+
+      El material nos ha llegado hoy con la caja abierta y faltan unos doscientos tornillos. Además, es el tercer envío que llega mal embalado. Esperamos una explicación y una solución.
+
+      Rafael Puig
+      TORNEADOS ALCUBIERRE, S.L.
+
+      > Hemos registrado su pedido 26/0714.
+      > T-0830 INOX  500 uds
+      > A-08 INOX  1000 uds
+debe_incluir: ["mal embalado"]

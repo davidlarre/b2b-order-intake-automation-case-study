@@ -1,0 +1,24 @@
+id: P42
+tipo: pedido_nuevo
+formato: pdf
+persona: envasados, PDF escaneado
+cliente: C0117
+trampas: [pdf, lineas_tambien_en_el_cuerpo]
+correos:
+  - eml: P42.eml
+    de: [Andrei Chen, oficina@envasadosalimentariosnajera.example]
+    asunto: Pedido guantes y mascarillas
+    fecha: 2026-11-20T10:30:00+01:00
+    cuerpo: |
+      Buenos días,
+
+      Adjunto el pedido firmado. Son 20 cajas de GUA-NIT-L y 10 de MAS-FFP2, pero manda el PDF, que lleva alguna cosa más.
+
+      Andrei
+    pdf:
+      nombre: pedido_firmado.pdf
+      lineas: ["Envasados Alimentarios Najera, S.L.", "GUA-NIT-L   20", "MAS-FFP2   10", "TAP-OID   2"]
+lineas:
+  - {producto: GUA-NIT-L, cantidad: 20, unidad: caja, como: codigo}
+  - {producto: MAS-FFP2, cantidad: 10, unidad: caja, como: codigo}
+debe_incluir: ["manda el PDF"]

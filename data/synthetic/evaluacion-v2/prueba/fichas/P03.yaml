@@ -1,0 +1,27 @@
+id: P03
+tipo: pedido_nuevo
+formato: excel
+persona: taller pequeño con correo gratuito
+cliente: C0013
+trampas: [dominio_publico_registrado]
+correos:
+  - eml: P03.eml
+    de: [Ramon Ortega, tallersvilabruna@correopublico.example]
+    asunto: pedido
+    fecha: 2026-11-03T08:40:00+01:00
+    dmarc: none
+    cuerpo: |
+      Hola, os paso el pedido en el excel
+
+      Ramon
+    excel:
+      nombre: pedido.xlsx
+      filas:
+        - [Referencia, Cantidad]
+        - [DIS-COR-115, 50]
+        - [GUA-PU-9, 24]
+        - [SPR-LUB, 12]
+lineas:
+  - {producto: DIS-COR-115, cantidad: 50, unidad: ud, como: codigo}
+  - {producto: GUA-PU-9, cantidad: 24, unidad: par, como: codigo}
+  - {producto: SPR-LUB, cantidad: 12, unidad: ud, como: codigo}

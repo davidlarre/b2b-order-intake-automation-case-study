@@ -1,0 +1,44 @@
+id: P23
+conjunto: prueba
+origen: generado
+eml:
+- P23.eml
+tipo: pedido_nuevo
+tipos_aceptables: []
+idioma: es
+cliente: null
+trampas:
+- dominio_parecido
+salida:
+  inicial: revision
+  final: revision
+  aceptables: []
+motivos:
+- codigo: R02
+  linea: null
+  momento: inicial
+revision_necesaria: true
+peticion: []
+cabecera:
+  num_pedido_cliente: null
+  direccion: null
+  fecha_prevista: '2026-11-12'
+  observaciones_entrega: Recogen ellos en el almacén de Orvalle
+  condiciones: []
+lineas:
+- texto: BOT-S3-42  20
+  producto: BOT-S3-42
+  cantidad: 20
+  unidad: par
+  cantidad_uv: 20
+  precio_pedido: null
+- texto: BOT-S3-44  20
+  producto: BOT-S3-44
+  cantidad: 20
+  unidad: par
+  cantidad_uv: 20
+  precio_pedido: null
+depende_de: []
+marcas: []
+nota_marcas: null
+notas: 'Dominio parecido al de C0009: sin sugerencia.'

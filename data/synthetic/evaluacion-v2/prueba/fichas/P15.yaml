@@ -1,0 +1,41 @@
+id: P15
+tipo: pedido_nuevo
+formato: excel
+persona: servicio técnico
+cliente: C0059
+trampas: [referencia_no_encontrada, respuesta_completa]
+otros_codigos: [MAC-M8]
+correos:
+  - eml: P15a.eml
+    de: [Carme Sala, pedidos@serviciostecnicosalarconbru.example]
+    asunto: Pedido machos
+    fecha: 2026-11-09T08:30:00+01:00
+    dmarc: none
+    cuerpo: |
+      Buenos días,
+
+      Adjunto pedido.
+
+      Carme
+    excel:
+      nombre: machos.xlsx
+      filas:
+        - [Código, Uds]
+        - [TR-9910, 4]
+        - [MAC-M10, 4]
+  - eml: P15b.eml
+    de: [Carme Sala, pedidos@serviciostecnicosalarconbru.example]
+    asunto: "RE: Pedido machos"
+    fecha: 2026-11-09T11:10:00+01:00
+    dmarc: none
+    responde_a: [P15a.eml]
+    cuerpo: |
+      Perdón, es el MAC-M8.
+
+      Carme
+
+      > No encontramos la referencia «TR-9910». ¿Nos indica el código?
+lineas:
+  - {producto: null, ref: TR-9910, cantidad: 4, unidad: ud, como: desconocida}
+  - {producto: MAC-M10, cantidad: 4, unidad: ud, como: codigo}
+debe_incluir: ["es el MAC-M8"]

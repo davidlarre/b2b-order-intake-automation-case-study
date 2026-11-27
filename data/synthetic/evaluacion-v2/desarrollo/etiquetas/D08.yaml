@@ -1,0 +1,47 @@
+id: D08
+conjunto: desarrollo
+origen: generado
+eml:
+- D08.eml
+tipo: pedido_nuevo
+tipos_aceptables: []
+idioma: es
+cliente: C0021
+trampas:
+- cabeceras_desconocidas
+- equivalencias
+- firma_con_direccion_fiscal
+salida:
+  inicial: automatico
+  final: automatico
+  aceptables: []
+motivos: []
+revision_necesaria: null
+peticion: []
+cabecera:
+  num_pedido_cliente: null
+  direccion:
+    calle: Carrer del Coure
+    numero: '91'
+    nave: null
+    cp: 08440
+  fecha_prevista: '2026-11-06'
+  observaciones_entrega: null
+  condiciones: []
+lineas:
+- texto: 10 | V-3301 | Broca cobalto 6 | 10
+  producto: BRO-COB-6
+  cantidad: 10
+  unidad: ud
+  cantidad_uv: 10
+  precio_pedido: null
+- texto: 20 | MAC-M8 | Macho máquina M8 | 3
+  producto: MAC-M8
+  cantidad: 3
+  unidad: ud
+  cantidad_uv: 3
+  precio_pedido: null
+depende_de: []
+marcas: []
+nota_marcas: null
+notas: null

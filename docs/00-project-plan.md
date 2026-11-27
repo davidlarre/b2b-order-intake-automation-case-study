@@ -34,16 +34,16 @@ La evaluación de la v1 **no sustituye** a la diseñada en [05](05-synthetic-dat
 
 ## Siguiente fase
 
-El incremento de datos y evaluación completa queda **aparcado entero**. Su trabajo empezado (las listas de partida y el ajuste de alcance de 04 y 05) está en la rama `datos-evaluacion`, sin mergear. Incluye:
+En la v1, el incremento de datos y evaluación completa quedó aparcado entero. **En la v2 (25-11-2026, rama `v2-evaluacion-clasificacion`) están hechos el punto 1 sin plan de errores, el 2, el 3 (por Claude Code, sin revisión humana) y la congelación del 6, además de la clasificación del correo.** La prueba se ejecutó el 26-11-2026 en solo reglas y en el híbrido, y el 27-11-2026 en solo IA, por la cuota de Gemini ([informe](06-evaluation-report.md)). Incluye:
 
 1. **Generador** de datos sintéticos, con semilla fija y plan de errores.
 2. **80 correos:** 60 de prueba y 20 de desarrollo, con la mezcla de D23.
 3. **Etiquetado** de todos los casos, por David.
 4. **Migración de la Parte A**, con su informe de errores y el histórico.
 5. **Reglas que faltan:** R01, R03–R07, R09, R10, R13, R14 y el resto de las señales de R12.
-6. **Prueba congelada** (manifiesto y tag `prueba-v1`), ejecutada una sola vez cuando existan las reglas.
+6. **Prueba congelada** (manifiesto y tag `prueba-v2.1`, tras una fe de erratas previa a ejecutar), ejecutada una sola vez cuando existan las reglas.
 
-Quedan también para después, porque no están en la v1: la clasificación del correo, la entrada por Gmail y los envíos, las aprobaciones por correo, el PDF, las consultas SQL y la fase 6 (adopción y gobierno).
+Quedan también para después, porque no están en la v1: la entrada por Gmail y los envíos, las aprobaciones por correo, el PDF, las consultas SQL y la fase 6 (adopción y gobierno).
 
 ## Fases
 

@@ -1,0 +1,29 @@
+id: P33
+tipo: pedido_nuevo
+formato: reenvio
+persona: cocinas industriales, precio hablado por teléfono
+cliente: C0108
+trampas: [precio_pactado_por_telefono, reenvio_gmail]
+correos:
+  - eml: P33.eml
+    de: [Raquel Navarro, raquel.navarro@orvalle.example]
+    asunto: "Fwd: guantes anticorte"
+    fecha: 2026-11-17T11:15:00+01:00
+    cuerpo: |
+      Os paso esto de Peral, ya lo hablamos.
+
+      Raquel
+    reenvio:
+      estilo: gmail
+      de: [Mireia Iglesias, pedidos@cocinasindustrialesperal.example]
+      fecha: 2026-11-17T10:58:00+01:00
+      asunto: guantes anticorte
+      cuerpo: |
+        Hola Raquel,
+
+        24 pares de GUA-COR-9 a 4,50, lo que hablamos por teléfono.
+
+        Mireia
+lineas:
+  - {producto: GUA-COR-9, cantidad: 24, unidad: par, precio: 4.50, como: codigo}
+debe_incluir: ["lo que hablamos por teléfono"]

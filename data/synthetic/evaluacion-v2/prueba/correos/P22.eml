@@ -1,0 +1,16 @@
+From: =?utf-8?q?H=C3=A9ctor?= Molina <jefe.taller@bombasymotorescifuentes.example>
+To: pedidos@orvalle.example
+Subject: Pedido rodamientos
+Date: Thu, 12 Nov 2026 09:45:00 +0100
+Message-ID: <v2-p22@bombasymotorescifuentes.example>
+Authentication-Results: mx.orvalle.example; spf=pass smtp.mailfrom=bombasymotorescifuentes.example; dmarc=none header.from=bombasymotorescifuentes.example
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+MIME-Version: 1.0
+
+<html><body style="font-family:Calibri">
+<p>Buenos días,</p>
+<p>Soy Héctor, llevo ahora los pedidos del taller. Necesitamos:</p>
+<p>ROD-6203-2RS 10 uds<br>ROD-6205-2RS 10 uds</p>
+<p>Gracias</p>
+</body></html>

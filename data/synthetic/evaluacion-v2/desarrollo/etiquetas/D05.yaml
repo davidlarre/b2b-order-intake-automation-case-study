@@ -1,0 +1,59 @@
+id: D05
+conjunto: desarrollo
+origen: generado
+eml:
+- D05.eml
+tipo: pedido_nuevo
+tipos_aceptables: []
+idioma: es
+cliente: C0018
+trampas:
+- varios_pedidos_en_un_correo
+salida:
+  inicial: revision
+  final: revision
+  aceptables: []
+motivos: []
+motivos_sin_codigo: true
+revision_necesaria: true
+peticion: []
+cabecera:
+  num_pedido_cliente: null
+  direccion:
+    calle: Ronda Industrial
+    numero: '6'
+    nave: null
+    cp: 08211
+  fecha_prevista: '2026-11-04'
+  observaciones_entrega: null
+  condiciones: []
+lineas:
+- texto: LIJ-HOJ-400  100
+  producto: LIJ-HOJ-400
+  cantidad: 100
+  unidad: ud
+  cantidad_uv: 100
+  precio_pedido: null
+- texto: LIJ-HOJ-600  100
+  producto: LIJ-HOJ-600
+  cantidad: 100
+  unidad: ud
+  cantidad_uv: 100
+  precio_pedido: null
+- texto: DIS-LAM-80  20
+  producto: DIS-LAM-80
+  cantidad: 20
+  unidad: ud
+  cantidad_uv: 20
+  precio_pedido: null
+- texto: GUA-COR-9  12 pares
+  producto: GUA-COR-9
+  cantidad: 12
+  unidad: par
+  cantidad_uv: 12
+  precio_pedido: null
+depende_de:
+- D16
+marcas: []
+nota_marcas: null
+notas: Dos pedidos en un correo van a revisión (D16). 04 no le da código.

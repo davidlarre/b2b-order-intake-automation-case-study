@@ -1,0 +1,23 @@
+From: Jordi Font <almacen@autotallerllorentevalles.example>
+To: pedidos@orvalle.example
+Subject: 2 pedidos
+Date: Wed, 04 Nov 2026 11:40:00 +0100
+Message-ID: <v2-d05@autotallerllorentevalles.example>
+Authentication-Results:
+ mx.orvalle.example; spf=pass smtp.mailfrom=autotallerllorentevalles.example; dkim=pass header.d=autotallerllorentevalles.example; dmarc=pass header.from=autotallerllorentevalles.example
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+MIME-Version: 1.0
+
+Buenas, te paso dos pedidos, hacedlos por separado que van a dos partes de trabajo distintos:
+
+PEDIDO 1 (parte 5501)
+LIJ-HOJ-400  100
+LIJ-HOJ-600  100
+
+PEDIDO 2 (parte 5502)
+DIS-LAM-80  20
+GUA-COR-9  12 pares
+
+Saludos
+Jordi

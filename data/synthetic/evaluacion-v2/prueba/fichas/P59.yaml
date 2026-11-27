@@ -1,0 +1,18 @@
+id: P59
+tipo: otros
+formato: texto
+persona: phishing
+cliente: null
+trampas: [phishing_nuevo_pedido]
+correos:
+  - eml: P59.eml
+    de: [Purchasing Dept, orders@global-trading-desk.example]
+    asunto: Nuevo pedido
+    fecha: 2026-11-11T05:40:00+01:00
+    dmarc: fail
+    cuerpo: |
+      Estimado proveedor:
+
+      Adjuntamos nuevo pedido urgente. Descargue el documento seguro aquí: http://documentos-seguros.example/pedido y acceda con su usuario y contraseña de correo para verlo.
+
+      Departamento de compras

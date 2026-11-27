@@ -1,0 +1,13 @@
+From: Paco Camps <almacen@carpinteriazurita.example>
+To: pedidos@orvalle.example
+Subject: =?utf-8?q?=C2=BFten=C3=A9is=3F?=
+Date: Fri, 06 Nov 2026 09:40:00 +0100
+Message-ID: <v2-p52@carpinteriazurita.example>
+Authentication-Results: mx.orvalle.example; spf=pass smtp.mailfrom=carpinteriazurita.example; dmarc=none header.from=carpinteriazurita.example
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+MIME-Version: 1.0
+
+¿Tenéis en stock LIJ-HOJ-80 (necesito 100) y ADH-EPO-25 (3)? Si es que sí, mandadlos. Si no, no hagáis nada y ya miraré.
+
+Paco

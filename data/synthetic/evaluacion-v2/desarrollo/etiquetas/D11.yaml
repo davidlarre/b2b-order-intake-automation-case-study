@@ -1,0 +1,48 @@
+id: D11
+conjunto: desarrollo
+origen: generado
+eml:
+- D11.eml
+tipo: pedido_nuevo
+tipos_aceptables: []
+idioma: es
+cliente: C0099
+trampas:
+- precio_distinto
+salida:
+  inicial: revision
+  final: revision
+  aceptables: []
+motivos:
+- codigo: R11
+  linea: 1
+  momento: inicial
+revision_necesaria: true
+peticion: []
+cabecera:
+  num_pedido_cliente: PT-331
+  direccion:
+    calle: Carrer de la Ciència
+    numero: '80'
+    nave: null
+    cp: 08291
+  fecha_prevista: '2026-11-09'
+  observaciones_entrega: null
+  condiciones: []
+lineas:
+- texto: FLE-5 | 12 | 6,45
+  producto: FLE-5
+  cantidad: 12
+  unidad: ud
+  cantidad_uv: 12
+  precio_pedido: 6.45
+- texto: SIL-TR | 24 | 3,60
+  producto: SIL-TR
+  cantidad: 24
+  unidad: ud
+  cantidad_uv: 24
+  precio_pedido: 3.6
+depende_de: []
+marcas: []
+nota_marcas: null
+notas: Tarifa 6,80; pide 6,45.

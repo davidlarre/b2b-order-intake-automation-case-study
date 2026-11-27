@@ -1,0 +1,32 @@
+id: P02
+tipo: pedido_nuevo
+formato: texto
+persona: compras con plantilla formal y aviso legal
+cliente: C0028
+trampas: [equivalencias, precio_igual_a_tarifa, firma_con_direccion_fiscal]
+correos:
+  - eml: P02.eml
+    de: [Rafael Puig, pedidos@torneadosalcubierre.example]
+    asunto: "Pedido nº 26/0714"
+    fecha: 2026-11-02T09:30:00+01:00
+    cuerpo: |
+      Estimados señores:
+
+      Por la presente les solicitamos el siguiente material, según precios vigentes:
+
+      Ref. T-0830 INOX, 500 uds, a 0,35 €/ud
+      Ref. A-08 INOX, 1000 uds, a 0,06 €/ud
+
+      Pedido nº 26/0714.
+
+      Atentamente,
+      Rafael Puig
+      Responsable de Compras
+      TORNEADOS ALCUBIERRE, S.L.
+      Domicilio fiscal: Carrer de la Creu 31, 08203 Sabadell
+
+      Este mensaje y sus adjuntos son confidenciales. Si lo ha recibido por error, bórrelo y avise al remitente.
+lineas:
+  - {producto: TOR-M8X30-A2, ref: T-0830 INOX, cantidad: 500, unidad: ud, precio: 0.35, como: equivalencia}
+  - {producto: ARA-M8-A2, ref: A-08 INOX, cantidad: 1000, unidad: ud, precio: 0.06, como: equivalencia}
+debe_incluir: ["26/0714"]

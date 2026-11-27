@@ -1,0 +1,41 @@
+id: P41
+conjunto: prueba
+origen: generado
+eml:
+- P41.eml
+tipo: pedido_nuevo
+tipos_aceptables:
+- dudoso
+idioma: es
+cliente: C0031
+trampas:
+- pdf
+- cuerpo_minimo
+salida:
+  inicial: revision
+  final: revision
+  aceptables:
+  - salida: revision
+    motivos:
+    - M01
+motivos:
+- codigo: M02
+  linea: null
+  momento: inicial
+revision_necesaria: true
+peticion: []
+cabecera:
+  num_pedido_cliente: 26-201
+  direccion:
+    calle: Carrer dels Serrallers
+    numero: '5'
+    nave: Nave 2
+    cp: 08100
+  fecha_prevista: '2026-11-20'
+  observaciones_entrega: null
+  condiciones: []
+lineas: []
+depende_de: []
+marcas: []
+nota_marcas: null
+notas: '«Ver adjunto»: por el texto no se sabe qué es; dudoso es una lectura razonable.'

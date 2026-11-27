@@ -1,0 +1,24 @@
+id: P26
+tipo: pedido_nuevo
+formato: texto
+persona: taller de carretillas
+cliente: C0091
+trampas: [otra_nave, instruccion_condicional]
+otros_codigos: [LLC-18]
+correos:
+  - eml: P26.eml
+    de: [Andrei Torrent, almacen@carretillasvillanuevaruano.example]
+    asunto: pedido llaves
+    fecha: 2026-11-13T10:30:00+01:00
+    cuerpo: |
+      Buenas,
+
+      4 LLC-17 y 4 LLC-22. Si no tenéis la 17 mandad la 18, que nos vale igual.
+
+      Entregad en Carrer del Ferro 11, Nave 7.
+
+      Andrei
+lineas:
+  - {producto: LLC-17, cantidad: 4, unidad: ud, como: codigo}
+  - {producto: LLC-22, cantidad: 4, unidad: ud, como: codigo}
+debe_incluir: ["Nave 7", "mandad la 18"]

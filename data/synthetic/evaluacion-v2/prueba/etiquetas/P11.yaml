@@ -1,0 +1,46 @@
+id: P11
+conjunto: prueba
+origen: generado
+eml:
+- P11.eml
+tipo: pedido_nuevo
+tipos_aceptables: []
+idioma: es
+cliente: C0081
+trampas:
+- repite_el_pedido_con_numero
+salida:
+  inicial: automatico
+  final: automatico
+  aceptables: []
+motivos: []
+revision_necesaria: null
+peticion: []
+cabecera:
+  num_pedido_cliente: OC-1204
+  direccion:
+    calle: Carrer dels Fusters
+    numero: '20'
+    nave: null
+    cp: 08130
+  fecha_prevista: '2026-11-05'
+  observaciones_entrega: null
+  condiciones: []
+lineas:
+- texto: null
+  producto: JUN-TOR-20X2
+  cantidad: 100
+  unidad: ud
+  cantidad_uv: 100
+  precio_pedido: null
+- texto: null
+  producto: RAC-LAT-1-2
+  cantidad: 20
+  unidad: ud
+  cantidad_uv: 20
+  precio_pedido: null
+depende_de:
+- D16
+marcas: []
+nota_marcas: null
+notas: Las líneas son las del pedido OC-1187 del histórico.

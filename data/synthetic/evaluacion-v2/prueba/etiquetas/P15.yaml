@@ -1,0 +1,59 @@
+id: P15
+conjunto: prueba
+origen: generado
+eml:
+- P15a.eml
+- P15b.eml
+tipo: pedido_nuevo
+tipos_aceptables: []
+idioma: es
+cliente: C0059
+trampas:
+- referencia_no_encontrada
+- respuesta_completa
+salida:
+  inicial: pedir_datos
+  final: automatico
+  aceptables: []
+motivos:
+- codigo: R08
+  linea: 1
+  momento: inicial
+revision_necesaria: null
+peticion:
+- campo: referencia
+  linea: 1
+  opciones: []
+cabecera:
+  num_pedido_cliente: null
+  direccion:
+    calle: Carrer de la Mecànica
+    numero: '32'
+    nave: null
+    cp: 08186
+  fecha_prevista: '2026-11-09'
+  observaciones_entrega: null
+  condiciones: []
+lineas:
+- texto: TR-9910 | 4
+  producto: null
+  cantidad: 4
+  unidad: ud
+  cantidad_uv: null
+  precio_pedido: null
+- texto: MAC-M10 | 4
+  producto: MAC-M10
+  cantidad: 4
+  unidad: ud
+  cantidad_uv: 4
+  precio_pedido: null
+lineas_finales:
+- producto: MAC-M8
+  cantidad_uv: 4
+- producto: MAC-M10
+  cantidad_uv: 4
+depende_de:
+- RESPUESTA
+marcas: []
+nota_marcas: null
+notas: null

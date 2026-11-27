@@ -1,0 +1,21 @@
+id: D15
+tipo: modificacion_anulacion
+formato: texto
+persona: carrocero
+cliente: C0020
+trampas: [cambio_de_cantidad]
+otros_codigos: [LIJ-HOJ-240]
+correos:
+  - eml: D15.eml
+    de: [Manuel Cano, pedidos@carrosseriessantmarti.example]
+    asunto: pedido 3310
+    fecha: 2026-11-02T08:10:00+01:00
+    dmarc: none
+    cuerpo: |
+      Hola,
+
+      En el pedido 3310 que os pasamos el miércoles, de LIJ-HOJ-240 poned 300 en lugar de 200, si todavía no ha salido.
+
+      Gracias,
+      Manuel
+debe_incluir: ["3310", "300 en lugar de 200"]

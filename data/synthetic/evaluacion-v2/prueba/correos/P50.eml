@@ -1,0 +1,15 @@
+From: Anna Chen <pedidos@instalacionesbaquero.example>
+To: pedidos@orvalle.example
+Subject: precio trapos
+Date: Wed, 04 Nov 2026 09:10:00 +0100
+Message-ID: <v2-p50@instalacionesbaquero.example>
+Authentication-Results: mx.orvalle.example; spf=pass smtp.mailfrom=instalacionesbaquero.example; dmarc=none header.from=instalacionesbaquero.example
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+MIME-Version: 1.0
+
+<html><body style="font-family:Calibri">
+<p>Buenos días,</p>
+<p>¿A cuánto nos saldrían 10 sacos de TRA-ALG-10? Estoy comparando con otro proveedor.</p>
+<p>Anna Chen</p>
+</body></html>

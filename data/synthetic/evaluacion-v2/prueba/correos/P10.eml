@@ -1,0 +1,21 @@
+From: Albert Ortega <compras@fusteriamasbaga.example>
+To: pedidos@orvalle.example
+Subject: comanda tirafons
+Date: Thu, 05 Nov 2026 09:50:00 +0100
+Message-ID: <v2-p10@fusteriamasbaga.example>
+Authentication-Results: mx.orvalle.example; spf=pass smtp.mailfrom=fusteriamasbaga.example; dmarc=none header.from=fusteriamasbaga.example
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+MIME-Version: 1.0
+
+Bon dia,
+
+us passo comanda:
+
+TAG-4X40-BI 1000
+TAG-5X60-BI 600
+
+El transportista que entri pel moll 2, i només de 8 a 13 h, que a la tarda no hi ha ningú. Preguntar por Andrei.
+
+Gràcies,
+Albert

@@ -1,0 +1,20 @@
+id: P46
+tipo: modificacion_anulacion
+formato: texto
+persona: panificadora, compras, frases en catalán
+cliente: C0115
+catalan: frases
+trampas: [cambio_de_fecha, mezcla_de_idiomas]
+correos:
+  - eml: P46.eml
+    de: [Joan López, pedidos@panificadoramoraguesvalles.example]
+    asunto: pedido 26-0557
+    fecha: 2026-11-02T12:15:00+01:00
+    cuerpo: |
+      Bon dia,
+
+      el 26-0557 no ens el porteu demà, que tenim inventari i el magatzem està tancat. Mejor el jueves 5.
+
+      Gràcies,
+      Joan
+debe_incluir: ["26-0557", "jueves 5"]

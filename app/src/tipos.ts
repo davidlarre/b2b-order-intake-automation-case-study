@@ -1,4 +1,5 @@
-// La forma de lo que devuelven las funciones de adv (supabase/migrations/2026112000000{9,10,11}_*.sql).
+// La forma de lo que devuelven las funciones de adv (supabase/migrations/2026112000000{9,10,11}_*.sql y
+// 20261126000001_no_son_pedidos.sql).
 
 export type Adjunto = { nombre: string | null; tipo: string | null; tamano: number | null };
 
@@ -17,6 +18,25 @@ export type FilaCola = {
   adjuntos: Adjunto[];
   configuracion: string | null;
   motivos: MotivoCola[];
+};
+
+export type Clasificacion = {
+  tipo: string | null;
+  destino: 'contabilidad' | 'archivo' | 'ninguno' | null;
+  modelo: string | null;
+  version: string | null;
+  fecha: string | null;
+};
+
+export type FilaNoPedido = {
+  caso: number;
+  recibido: string;
+  remitente: string | null;
+  remitente_nombre: string | null;
+  asunto: string | null;
+  adjuntos: Adjunto[];
+  ruta_eml: string | null;
+  clasificacion: Clasificacion;
 };
 
 export type Accion = 'forzar' | 'forzar_con_telefono' | 'bloqueado_otro_dueno' | 'corregir_linea' | 'solo_cerrar';

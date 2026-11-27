@@ -293,9 +293,11 @@ def test_la_cola_trae_los_motivos_con_su_detalle_y_el_cliente_propuesto(cur, pro
 
 def test_buscar_clientes_por_nombre_o_codigo(cur):
     como_adv(cur)
-    assert [c["codigo"] for c in llamar(cur, "select adv.buscar_clientes('vallès')")] == ["C0002"]
-    # Ordenados por razón social: Instal·lacions Puig, Manteniments Vallès, Talleres Ferran.
-    assert [c["codigo"] for c in llamar(cur, "select adv.buscar_clientes('C000')")] == ["C0003", "C0002", "C0001"]
+    assert [c["codigo"] for c in llamar(cur, "select adv.buscar_clientes('manteniments vallès')")] == ["C0002"]
+    # Ordenados por razón social, como mucho 20.
+    encontrados = llamar(cur, "select adv.buscar_clientes('C000')")
+    assert {c["codigo"] for c in encontrados} == {f"C000{i}" for i in range(1, 10)}
+    assert [c["codigo"] for c in encontrados if c["codigo"] in ("C0001", "C0002", "C0003")] == ["C0003", "C0002", "C0001"]
     como(cur)
     with pytest.raises(psycopg.errors.RaiseException, match="Solo administración de ventas"):
         llamar(cur, "select adv.buscar_clientes('a')")

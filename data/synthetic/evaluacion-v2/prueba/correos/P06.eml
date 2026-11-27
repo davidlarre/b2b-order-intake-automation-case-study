@@ -1,0 +1,16 @@
+From: Youssef Costa <compras@cerrajeriaindustrialvaldes.example>
+To: pedidos@orvalle.example
+Subject: Pedido inox
+Date: Wed, 04 Nov 2026 08:25:00 +0100
+Message-ID: <v2-p06@cerrajeriaindustrialvaldes.example>
+Authentication-Results: mx.orvalle.example; spf=pass smtp.mailfrom=cerrajeriaindustrialvaldes.example; dmarc=none header.from=cerrajeriaindustrialvaldes.example
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+MIME-Version: 1.0
+
+Buenos días,
+
+Necesitamos 3 cajas de 100 de TUE-M10-A2 y 2 cajas de 100 de ARA-M10-A2.
+
+Un saludo,
+Youssef

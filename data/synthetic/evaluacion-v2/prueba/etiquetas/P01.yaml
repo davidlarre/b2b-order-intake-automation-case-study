@@ -1,0 +1,51 @@
+id: P01
+conjunto: prueba
+origen: generado
+eml:
+- P01.eml
+tipo: pedido_nuevo
+tipos_aceptables: []
+idioma: es
+cliente: C0009
+trampas:
+- urgente_en_el_asunto
+salida:
+  inicial: automatico
+  final: automatico
+  aceptables: []
+motivos: []
+revision_necesaria: null
+peticion: []
+cabecera:
+  num_pedido_cliente: null
+  direccion:
+    calle: Carrer dels Torners
+    numero: '10'
+    nave: null
+    cp: 08291
+  fecha_prevista: '2026-11-02'
+  observaciones_entrega: null
+  condiciones: []
+lineas:
+- texto: ALL-M8X25-ZN   100
+  producto: ALL-M8X25-ZN
+  cantidad: 100
+  unidad: ud
+  cantidad_uv: 100
+  precio_pedido: null
+- texto: TUA-M8-ZN   300
+  producto: TUA-M8-ZN
+  cantidad: 300
+  unidad: ud
+  cantidad_uv: 300
+  precio_pedido: null
+- texto: BRO-HSS-8   20
+  producto: BRO-HSS-8
+  cantidad: 20
+  unidad: ud
+  cantidad_uv: 20
+  precio_pedido: null
+depende_de: []
+marcas: []
+nota_marcas: null
+notas: null

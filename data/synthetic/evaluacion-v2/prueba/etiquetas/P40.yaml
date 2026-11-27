@@ -1,0 +1,36 @@
+id: P40
+conjunto: prueba
+origen: generado
+eml:
+- P40.eml
+tipo: pedido_nuevo
+tipos_aceptables: []
+idioma: es
+cliente: C0026
+trampas:
+- pdf
+salida:
+  inicial: revision
+  final: revision
+  aceptables: []
+motivos:
+- codigo: M02
+  linea: null
+  momento: inicial
+revision_necesaria: true
+peticion: []
+cabecera:
+  num_pedido_cliente: '1192'
+  direccion:
+    calle: Carrer del Treball
+    numero: '26'
+    nave: Nave 4
+    cp: 08430
+  fecha_prevista: '2026-11-20'
+  observaciones_entrega: null
+  condiciones: []
+lineas: []
+depende_de: []
+marcas: []
+nota_marcas: null
+notas: null

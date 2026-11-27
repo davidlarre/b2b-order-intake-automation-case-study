@@ -1,0 +1,21 @@
+From: Raquel Ortega <pedidos@climatizacionarevalo.example>
+To: pedidos@orvalle.example
+Subject: Pedido CA-2210
+Date: Thu, 03 Dec 2026 10:15:00 +0100
+Message-ID: <v2-d03@climatizacionarevalo.example>
+Authentication-Results: mx.orvalle.example; spf=pass smtp.mailfrom=climatizacionarevalo.example; dkim=pass header.d=climatizacionarevalo.example; dmarc=pass header.from=climatizacionarevalo.example
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+MIME-Version: 1.0
+
+Buenos días:
+
+Adjuntamos a continuación el pedido CA-2210, con entrega el martes 8 de diciembre en nuestras instalaciones:
+
+- RAC-LAT-1-2, 30 unidades
+- CIN-PTF-12, 20 rollos
+
+Atentamente,
+Raquel Ortega
+Dpto. de Compras
+Climatización Arévalo, S.L.

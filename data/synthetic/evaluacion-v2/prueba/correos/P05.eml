@@ -1,0 +1,28 @@
+From: Albert Casals <albert.casals@orvalle.example>
+To: pedidos@orvalle.example
+Subject: Fwd: material
+Date: Tue, 03 Nov 2026 12:05:00 +0100
+Message-ID: <v2-p05@orvalle.example>
+Authentication-Results: mx.orvalle.example; spf=pass smtp.mailfrom=orvalle.example; dkim=pass header.d=orvalle.example; dmarc=pass header.from=orvalle.example
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+MIME-Version: 1.0
+
+Pedido de Puigcerver, gracias.
+Albert
+
+---------- Forwarded message ---------
+De: Elena Serra <administracion@serralleriapuigcerver.example>
+Date: mar, 3 nov 2026 a las 11:48
+Subject: material
+To: <albert.casals@orvalle.example>
+
+Hola Albert,
+
+¿Nos mandas esto?
+
+TIR-8X80-ZN  100
+BRO-SDS-10X210  5
+
+Gracias,
+Elena

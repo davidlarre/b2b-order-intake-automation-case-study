@@ -1,0 +1,47 @@
+id: P10
+conjunto: prueba
+origen: generado
+eml:
+- P10.eml
+tipo: pedido_nuevo
+tipos_aceptables: []
+idioma: ca
+cliente: C0105
+trampas:
+- observaciones_de_entrega
+- mezcla_de_idiomas
+salida:
+  inicial: automatico
+  final: automatico
+  aceptables: []
+motivos: []
+revision_necesaria: null
+peticion: []
+cabecera:
+  num_pedido_cliente: null
+  direccion:
+    calle: Carrer de la Mecànica
+    numero: '41'
+    nave: Nave 12
+    cp: 08211
+  fecha_prevista: '2026-11-05'
+  observaciones_entrega: Entrada por el muelle 2, de 8 a 13 h. Preguntar por Andrei.
+  condiciones: []
+lineas:
+- texto: TAG-4X40-BI 1000
+  producto: TAG-4X40-BI
+  cantidad: 1000
+  unidad: ud
+  cantidad_uv: 1000
+  precio_pedido: null
+- texto: TAG-5X60-BI 600
+  producto: TAG-5X60-BI
+  cantidad: 600
+  unidad: ud
+  cantidad_uv: 600
+  precio_pedido: null
+depende_de: []
+marcas:
+- 'catalan: la ficha dice «frases» y el correo parece «entero»'
+nota_marcas: El correo entero está en catalán.
+notas: null

@@ -1,0 +1,33 @@
+From: Andrei Chen <oficina@envasadosalimentariosnajera.example>
+To: pedidos@orvalle.example
+Subject: Pedido guantes y mascarillas
+Date: Fri, 20 Nov 2026 10:30:00 +0100
+Message-ID: <v2-p42@envasadosalimentariosnajera.example>
+Authentication-Results:
+ mx.orvalle.example; spf=pass smtp.mailfrom=envasadosalimentariosnajera.example; dkim=pass header.d=envasadosalimentariosnajera.example; dmarc=pass header.from=envasadosalimentariosnajera.example
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="=_p42_orvalle_v2"
+
+--=_p42_orvalle_v2
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+
+Buenos días,
+
+Adjunto el pedido firmado. Son 20 cajas de GUA-NIT-L y 10 de MAS-FFP2, pero manda el PDF, que lleva alguna cosa más.
+
+Andrei
+
+--=_p42_orvalle_v2
+Content-Type: application/pdf
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="pedido_firmado.pdf"
+MIME-Version: 1.0
+
+JVBERi0xLjQKMSAwIG9iago8PC9UeXBlL0NhdGFsb2cvUGFnZXMgMiAwIFI+PgplbmRvYmoKMiAwIG9iago8PC9UeXBlL1BhZ2VzL0tpZHNbMyAwIFJdL0NvdW50IDE+PgplbmRvYmoKMyAwIG9iago8PC9UeXBlL1BhZ2UvUGFyZW50IDIgMCBSL01lZGlhQm94WzAg
+MCA1OTUgODQyXS9Db250ZW50cyA0IDAgUi9SZXNvdXJjZXM8PC9Gb250PDwvRjEgNSAwIFI+Pj4+Pj4KZW5kb2JqCjQgMCBvYmoKPDwvTGVuZ3RoIDE0MD4+CnN0cmVhbQpCVCAvRjEgMTEgVGYgNjAgNzgwIFRkIDE1IFRMIChFbnZhc2Fkb3MgQWxpbWVudGFyaW9z
+IE5hamVyYSwgUy5MLikgVGogVCogKEdVQS1OSVQtTCAgIDIwKSBUaiBUKiAoTUFTLUZGUDIgICAxMCkgVGogVCogKFRBUC1PSUQgICAyKSBUaiBUKiBFVAplbmRzdHJlYW0KZW5kb2JqCjUgMCBvYmoKPDwvVHlwZS9Gb250L1N1YnR5cGUvVHlwZTEvQmFzZUZvbnQv
+SGVsdmV0aWNhL0VuY29kaW5nL1dpbkFuc2lFbmNvZGluZz4+CmVuZG9iagp4cmVmCjAgNgowMDAwMDAwMDAwIDY1NTM1IGYgCjAwMDAwMDAwMDkgMDAwMDAgbiAKMDAwMDAwMDA1NCAwMDAwMCBuIAowMDAwMDAwMTA1IDAwMDAwIG4gCjAwMDAwMDAyMTcgMDAwMDAg
+biAKMDAwMDAwMDQwNiAwMDAwMCBuIAp0cmFpbGVyCjw8L1NpemUgNi9Sb290IDEgMCBSPj4Kc3RhcnR4cmVmCjQ5NAolJUVPRgo=
+
+--=_p42_orvalle_v2--

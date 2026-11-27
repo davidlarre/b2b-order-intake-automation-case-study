@@ -1,0 +1,22 @@
+id: P31
+tipo: pedido_nuevo
+formato: texto
+persona: constructora
+cliente: C0110
+trampas: [unidad_sin_conversion]
+correos:
+  - eml: P31.eml
+    de: [Laia Navarro, pedidos@construccionssallentpous.example]
+    asunto: arandelas
+    fecha: 2026-11-17T08:20:00+01:00
+    dmarc: none
+    cuerpo: |
+      Hola,
+
+      Ponednos 5 kg de ARA-M10-ZN y 100 uds de TUE-M10-ZN.
+
+      Laia
+lineas:
+  - {producto: ARA-M10-ZN, cantidad: 5, unidad: kg, como: codigo}
+  - {producto: TUE-M10-ZN, cantidad: 100, unidad: ud, como: codigo}
+debe_incluir: ["5 kg"]

@@ -1,0 +1,55 @@
+id: P19
+conjunto: prueba
+origen: generado
+eml:
+- P19.eml
+tipo: pedido_nuevo
+tipos_aceptables: []
+idioma: es
+cliente: C0048
+trampas:
+- reenvio_outlook
+- entrega_hoy_despues_del_corte
+salida:
+  inicial: pedir_datos
+  final: pedir_datos
+  aceptables: []
+motivos:
+- codigo: R06
+  linea: null
+  momento: inicial
+revision_necesaria: null
+peticion:
+- campo: fecha
+  linea: null
+  opciones:
+  - '2026-11-12'
+cabecera:
+  num_pedido_cliente: null
+  direccion:
+    calle: Carrer de la Ciència
+    numero: '81'
+    nave: null
+    cp: 08211
+  fecha_prevista: null
+  observaciones_entrega: null
+  condiciones: []
+lineas:
+- texto: Necesito para hoy mismo 12 de SIL-GR y 50 de TIR-6X60-ZN.
+  producto: SIL-GR
+  cantidad: 12
+  unidad: ud
+  cantidad_uv: 12
+  precio_pedido: null
+- texto: Necesito para hoy mismo 12 de SIL-GR y 50 de TIR-6X60-ZN.
+  producto: TIR-6X60-ZN
+  cantidad: 50
+  unidad: ud
+  cantidad_uv: 50
+  precio_pedido: null
+depende_de:
+- R03
+- R06
+marcas: []
+nota_marcas: null
+notas: Recibido a las 14:00, después del corte.

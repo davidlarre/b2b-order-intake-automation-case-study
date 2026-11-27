@@ -1,0 +1,19 @@
+id: P55
+tipo: reclamacion
+formato: texto
+persona: muebles de oficina
+cliente: C0107
+trampas: [reclamacion_con_pedido]
+otros_codigos: [GUA-PU-8]
+correos:
+  - eml: P55.eml
+    de: [Núria Serra, administracion@moblesdoficinatorrello.example]
+    asunto: Guantes TOR-61
+    fecha: 2026-11-06T11:25:00+01:00
+    cuerpo: |
+      Hola,
+
+      Los guantes del pedido TOR-61 han llegado manchados de aceite y no se pueden usar. Mandadnos 2 cajas de GUA-PU-8 para reponerlos, que los necesitamos el lunes, y decidme qué hacemos con los otros.
+
+      Núria
+debe_incluir: ["2 cajas", "manchados"]

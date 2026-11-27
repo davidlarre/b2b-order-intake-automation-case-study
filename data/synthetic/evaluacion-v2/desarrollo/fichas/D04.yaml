@@ -1,0 +1,21 @@
+id: D04
+tipo: pedido_nuevo
+formato: texto
+persona: administrativo de imprenta
+cliente: C0097
+trampas: [tarifa_caducada_con_precio_viejo]
+correos:
+  - eml: D04.eml
+    de: [Rafael Soler, oficina@artesgraficasbelmontesala.example]
+    asunto: guantes
+    fecha: 2027-01-29T09:30:00+01:00
+    dmarc: none
+    cuerpo: |
+      Hola,
+
+      ¿Nos enviáis 15 cajas de GUA-NIT-M, al precio de siempre (6,10)?
+
+      Gracias,
+      Rafa
+lineas:
+  - {producto: GUA-NIT-M, cantidad: 15, unidad: caja, precio: 6.10, como: codigo}

@@ -1,0 +1,32 @@
+From: Marta Soler <compras@caldereriavallmajor.example>
+To: pedidos@orvalle.example
+Subject: Pedido 5540
+Date: Wed, 11 Nov 2026 08:30:00 +0100
+Message-ID: <v2-d14@caldereriavallmajor.example>
+Authentication-Results: mx.orvalle.example; spf=pass smtp.mailfrom=caldereriavallmajor.example; dkim=pass header.d=caldereriavallmajor.example; dmarc=pass header.from=caldereriavallmajor.example
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="=_d14_orvalle_v2"
+
+--=_d14_orvalle_v2
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+
+Buenos días,
+
+Adjunto nuestro pedido nº 5540.
+
+Marta Soler
+
+--=_d14_orvalle_v2
+Content-Type: application/pdf
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="pedido_5540.pdf"
+MIME-Version: 1.0
+
+JVBERi0xLjQKMSAwIG9iago8PC9UeXBlL0NhdGFsb2cvUGFnZXMgMiAwIFI+PgplbmRvYmoKMiAwIG9iago8PC9UeXBlL1BhZ2VzL0tpZHNbMyAwIFJdL0NvdW50IDE+PgplbmRvYmoKMyAwIG9iago8PC9UeXBlL1BhZ2UvUGFyZW50IDIgMCBSL01lZGlhQm94WzAg
+MCA1OTUgODQyXS9Db250ZW50cyA0IDAgUi9SZXNvdXJjZXM8PC9Gb250PDwvRjEgNSAwIFI+Pj4+Pj4KZW5kb2JqCjQgMCBvYmoKPDwvTGVuZ3RoIDE0MD4+CnN0cmVhbQpCVCAvRjEgMTEgVGYgNjAgNzgwIFRkIDE1IFRMIChDYWxkZXJlcmlhIFZhbGxtYWpvciwg
+Uy5MLikgVGogVCogKFBlZGlkbyA1NTQwKSBUaiBUKiAoRUxFLVJVVC0zLTJYMzUwICAgMTApIFRqIFQqIChESVMtREVTLTIzMCAgIDIwKSBUaiBUKiBFVAplbmRzdHJlYW0KZW5kb2JqCjUgMCBvYmoKPDwvVHlwZS9Gb250L1N1YnR5cGUvVHlwZTEvQmFzZUZvbnQv
+SGVsdmV0aWNhL0VuY29kaW5nL1dpbkFuc2lFbmNvZGluZz4+CmVuZG9iagp4cmVmCjAgNgowMDAwMDAwMDAwIDY1NTM1IGYgCjAwMDAwMDAwMDkgMDAwMDAgbiAKMDAwMDAwMDA1NCAwMDAwMCBuIAowMDAwMDAwMTA1IDAwMDAwIG4gCjAwMDAwMDAyMTcgMDAwMDAg
+biAKMDAwMDAwMDQwNiAwMDAwMCBuIAp0cmFpbGVyCjw8L1NpemUgNi9Sb290IDEgMCBSPj4Kc3RhcnR4cmVmCjQ5NAolJUVPRgo=
+
+--=_d14_orvalle_v2--

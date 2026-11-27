@@ -1,0 +1,33 @@
+id: P54
+conjunto: prueba
+origen: generado
+eml:
+- P54.eml
+tipo: reclamacion
+tipos_aceptables: []
+idioma: es
+cliente: C0028
+trampas:
+- queja_en_el_hilo_de_una_confirmacion
+- hilo_citado
+salida:
+  inicial: revision
+  final: revision
+  aceptables: []
+motivos:
+- codigo: R01
+  linea: null
+  momento: inicial
+revision_necesaria: true
+peticion: []
+cabecera:
+  num_pedido_cliente: null
+  direccion: null
+  fecha_prevista: null
+  observaciones_entrega: null
+  condiciones: []
+lineas: []
+depende_de: []
+marcas: []
+nota_marcas: null
+notas: null

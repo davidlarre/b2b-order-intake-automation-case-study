@@ -1,0 +1,29 @@
+From: Carme =?utf-8?q?Mar=C3=ADn?= <pedidos@matriceriaescuderovalles.example>
+To: pedidos@orvalle.example
+Subject: OC 26-201
+Date: Fri, 20 Nov 2026 09:20:00 +0100
+Message-ID: <v2-p41@matriceriaescuderovalles.example>
+Authentication-Results:
+ mx.orvalle.example; spf=pass smtp.mailfrom=matriceriaescuderovalles.example; dkim=pass header.d=matriceriaescuderovalles.example; dmarc=pass header.from=matriceriaescuderovalles.example
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="=_p41_orvalle_v2"
+
+--=_p41_orvalle_v2
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+
+Ver adjunto.
+
+--=_p41_orvalle_v2
+Content-Type: application/pdf
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="OC_26-201.pdf"
+MIME-Version: 1.0
+
+JVBERi0xLjQKMSAwIG9iago8PC9UeXBlL0NhdGFsb2cvUGFnZXMgMiAwIFI+PgplbmRvYmoKMiAwIG9iago8PC9UeXBlL1BhZ2VzL0tpZHNbMyAwIFJdL0NvdW50IDE+PgplbmRvYmoKMyAwIG9iago8PC9UeXBlL1BhZ2UvUGFyZW50IDIgMCBSL01lZGlhQm94WzAg
+MCA1OTUgODQyXS9Db250ZW50cyA0IDAgUi9SZXNvdXJjZXM8PC9Gb250PDwvRjEgNSAwIFI+Pj4+Pj4KZW5kb2JqCjQgMCBvYmoKPDwvTGVuZ3RoIDExNz4+CnN0cmVhbQpCVCAvRjEgMTEgVGYgNjAgNzgwIFRkIDE1IFRMIChNYXRyaWNlcmlhIEVzY3VkZXJvIFZh
+bGxlcywgUy5MLikgVGogVCogKE9DIDI2LTIwMSkgVGogVCogKFBSSS1NOFgxMC1ORyAgIDIwMCkgVGogVCogRVQKZW5kc3RyZWFtCmVuZG9iago1IDAgb2JqCjw8L1R5cGUvRm9udC9TdWJ0eXBlL1R5cGUxL0Jhc2VGb250L0hlbHZldGljYS9FbmNvZGluZy9XaW5B
+bnNpRW5jb2Rpbmc+PgplbmRvYmoKeHJlZgowIDYKMDAwMDAwMDAwMCA2NTUzNSBmIAowMDAwMDAwMDA5IDAwMDAwIG4gCjAwMDAwMDAwNTQgMDAwMDAgbiAKMDAwMDAwMDEwNSAwMDAwMCBuIAowMDAwMDAwMjE3IDAwMDAwIG4gCjAwMDAwMDAzODMgMDAwMDAgbiAK
+dHJhaWxlcgo8PC9TaXplIDYvUm9vdCAxIDAgUj4+CnN0YXJ0eHJlZgo0NzEKJSVFT0YK
+
+--=_p41_orvalle_v2--

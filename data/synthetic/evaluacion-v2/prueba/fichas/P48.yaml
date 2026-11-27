@@ -1,0 +1,18 @@
+id: P48
+tipo: modificacion_anulacion
+formato: texto
+persona: reformas
+cliente: C0109
+trampas: [cambio_de_direccion]
+correos:
+  - eml: P48.eml
+    de: [Óscar Navarro, oficina@obrasyreformasvillarejo.example]
+    asunto: Cambio de entrega V-2291
+    fecha: 2026-11-02T13:30:00+01:00
+    cuerpo: |
+      Buenas tardes,
+
+      El pedido V-2291 mandadlo mejor a la obra: Carrer de Dalt 15, 08210 Barberà del Vallès.
+
+      Óscar Navarro
+debe_incluir: ["V-2291", "Carrer de Dalt 15"]

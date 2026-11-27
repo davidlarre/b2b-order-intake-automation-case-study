@@ -1,0 +1,30 @@
+id: P30
+tipo: pedido_nuevo
+formato: excel
+persona: calderería, Excel a medias
+cliente: C0036
+trampas: [solo_descripcion, descatalogado_con_sustituto, firma_con_direccion_fiscal]
+correos:
+  - eml: P30.eml
+    de: [Glòria Navarro, oficina@caldereriamonteagudo.example]
+    asunto: Pedido discos CM-415
+    fecha: 2026-11-16T12:00:00+01:00
+    cuerpo: |
+      Buenos días,
+
+      Adjunto pedido CM-415. El primero no tengo el código a mano.
+
+      Glòria Navarro
+      Calderería Monteagudo, S.L.
+      Razón social y domicilio: Carrer de Barcelona 70, 08291 Ripollet
+    excel:
+      nombre: CM-415.xlsx
+      filas:
+        - [Código, Descripción, Cantidad]
+        - ["", "Disco de corte para metal de 230", 50]
+        - [DIS-LAM-60, "Disco láminas grano 60", 20]
+        - [ELE-RUT-2-5X350, "Electrodo 2,5", 4]
+lineas:
+  - {producto: DIS-COR-230, ref: Disco de corte para metal de 230, cantidad: 50, unidad: ud, como: descripcion}
+  - {producto: DIS-LAM-60, cantidad: 20, unidad: ud, como: codigo}
+  - {producto: ELE-RUT-2-5X350, cantidad: 4, unidad: paquete, como: codigo}

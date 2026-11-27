@@ -1,0 +1,27 @@
+id: P38
+tipo: pedido_nuevo
+formato: excel
+persona: cárnica, el Excel y el correo no dicen lo mismo
+cliente: C0116
+trampas: [discrepancia_excel_cuerpo]
+correos:
+  - eml: P38.eml
+    de: [Youssef Pujol, pedidos@carniespladellerona.example]
+    asunto: Pedido mantenimiento
+    fecha: 2026-11-19T09:55:00+01:00
+    cuerpo: |
+      Hola,
+
+      Va el pedido en el Excel. De las TUE-M12-ZN me parece que al final eran 400, confirmadlo vosotros con lo de la otra vez si podéis.
+
+      Youssef
+    excel:
+      nombre: mantenimiento.xlsx
+      filas:
+        - [Código, Cantidad]
+        - [TUE-M12-ZN, 200]
+        - [ARA-M12-ZN, 200]
+lineas:
+  - {producto: TUE-M12-ZN, cantidad: 200, unidad: ud, como: codigo}
+  - {producto: ARA-M12-ZN, cantidad: 200, unidad: ud, como: codigo}
+debe_incluir: ["eran 400"]

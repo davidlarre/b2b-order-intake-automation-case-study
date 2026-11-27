@@ -1,0 +1,54 @@
+id: D01
+conjunto: desarrollo
+origen: generado
+eml:
+- D01.eml
+tipo: pedido_nuevo
+tipos_aceptables: []
+idioma: es
+cliente: C0010
+trampas:
+- punto_de_miles
+- firma_con_direccion_fiscal
+salida:
+  inicial: automatico
+  final: automatico
+  aceptables: []
+motivos: []
+revision_necesaria: null
+peticion: []
+cabecera:
+  num_pedido_cliente: '8812'
+  direccion:
+    calle: Carrer de la Forja
+    numero: '13'
+    nave: null
+    cp: 08227
+  fecha_prevista: '2026-11-03'
+  observaciones_entrega: null
+  condiciones: []
+lineas:
+- texto: TOR-M6X20-ZN   1.500 uds
+  producto: TOR-M6X20-ZN
+  cantidad: 1500
+  unidad: ud
+  cantidad_uv: 1500
+  precio_pedido: null
+- texto: TUE-M6-ZN   1.500 uds
+  producto: TUE-M6-ZN
+  cantidad: 1500
+  unidad: ud
+  cantidad_uv: 1500
+  precio_pedido: null
+- texto: ARA-M6-ZN   2000
+  producto: ARA-M6-ZN
+  cantidad: 2000
+  unidad: ud
+  cantidad_uv: 2000
+  precio_pedido: null
+depende_de: []
+marcas:
+- 'cantidad: 1500 no aparece como número junto a TOR-M6X20-ZN'
+- 'cantidad: 1500 no aparece como número junto a TUE-M6-ZN'
+nota_marcas: 'Los miles con punto (1.500) son 1500: en España no hay otra lectura.'
+notas: null

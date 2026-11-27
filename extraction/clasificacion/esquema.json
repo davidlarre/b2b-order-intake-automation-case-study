@@ -1,0 +1,8 @@
+{
+  "type": "object",
+  "properties": {
+    "tipo": {"type": "string", "enum": ["pedido_nuevo", "consulta", "reclamacion", "modificacion_anulacion", "otros", "dudoso"]},
+    "destino": {"type": "string", "enum": ["contabilidad", "archivo", "ninguno"]}
+  },
+  "required": ["tipo", "destino"]
+}

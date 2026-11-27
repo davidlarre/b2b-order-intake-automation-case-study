@@ -1,0 +1,49 @@
+id: P31
+conjunto: prueba
+origen: generado
+eml:
+- P31.eml
+tipo: pedido_nuevo
+tipos_aceptables: []
+idioma: es
+cliente: C0110
+trampas:
+- unidad_sin_conversion
+salida:
+  inicial: revision
+  final: revision
+  aceptables: []
+motivos:
+- codigo: R10-UNIDAD
+  linea: 1
+  momento: inicial
+revision_necesaria: true
+peticion: []
+cabecera:
+  num_pedido_cliente: null
+  direccion:
+    calle: Carrer de la Creu
+    numero: '27'
+    nave: null
+    cp: 08181
+  fecha_prevista: '2026-11-17'
+  observaciones_entrega: null
+  condiciones: []
+lineas:
+- texto: Ponednos 5 kg de ARA-M10-ZN y 100 uds de TUE-M10-ZN.
+  producto: ARA-M10-ZN
+  cantidad: 5
+  unidad: kg
+  cantidad_uv: null
+  precio_pedido: null
+- texto: Ponednos 5 kg de ARA-M10-ZN y 100 uds de TUE-M10-ZN.
+  producto: TUE-M10-ZN
+  cantidad: 100
+  unidad: ud
+  cantidad_uv: 100
+  precio_pedido: null
+depende_de:
+- R10
+marcas: []
+nota_marcas: null
+notas: null

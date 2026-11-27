@@ -1,0 +1,32 @@
+id: D12
+tipo: pedido_nuevo
+formato: reenvio
+persona: taller que escribe a su comercial
+cliente: C0014
+trampas: [reenvio_gmail]
+correos:
+  - eml: D12.eml
+    de: [Albert Casals, albert.casals@orvalle.example]
+    asunto: "Fwd: pedido"
+    fecha: 2026-11-10T10:02:00+01:00
+    cuerpo: |
+      Os paso pedido de Roqueta.
+
+      Albert
+    reenvio:
+      estilo: gmail
+      de: [Núria Molina, oficina@tallersroquetaifills.example]
+      fecha: 2026-11-10T09:41:00+01:00
+      asunto: pedido
+      cuerpo: |
+        Hola Albert,
+
+        Nos hacen falta:
+        CAS-AZ 6
+        CHA-AM-L 6
+
+        Gracias,
+        Núria
+lineas:
+  - {producto: CAS-AZ, cantidad: 6, unidad: ud, como: codigo}
+  - {producto: CHA-AM-L, cantidad: 6, unidad: ud, como: codigo}

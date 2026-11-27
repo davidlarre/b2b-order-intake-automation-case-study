@@ -1,0 +1,49 @@
+id: P22
+conjunto: prueba
+origen: generado
+eml:
+- P22.eml
+tipo: pedido_nuevo
+tipos_aceptables: []
+idioma: es
+cliente: C0084
+trampas:
+- remitente_desconocido_con_dominio_exacto
+- solo_html
+salida:
+  inicial: revision
+  final: revision
+  aceptables: []
+motivos:
+- codigo: R02
+  linea: null
+  momento: inicial
+revision_necesaria: true
+peticion: []
+cabecera:
+  num_pedido_cliente: null
+  direccion:
+    calle: Carrer dels Serrallers
+    numero: '17'
+    nave: null
+    cp: 08160
+  fecha_prevista: '2026-11-12'
+  observaciones_entrega: null
+  condiciones: []
+lineas:
+- texto: ROD-6203-2RS 10 uds
+  producto: ROD-6203-2RS
+  cantidad: 10
+  unidad: ud
+  cantidad_uv: 10
+  precio_pedido: null
+- texto: ROD-6205-2RS 10 uds
+  producto: ROD-6205-2RS
+  cantidad: 10
+  unidad: ud
+  cantidad_uv: 10
+  precio_pedido: null
+depende_de: []
+marcas: []
+nota_marcas: null
+notas: 'Sugerencia: C0084, por el dominio exacto.'

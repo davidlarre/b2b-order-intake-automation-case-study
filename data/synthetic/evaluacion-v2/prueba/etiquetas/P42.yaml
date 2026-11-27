@@ -1,0 +1,37 @@
+id: P42
+conjunto: prueba
+origen: generado
+eml:
+- P42.eml
+tipo: pedido_nuevo
+tipos_aceptables: []
+idioma: es
+cliente: C0117
+trampas:
+- pdf
+- lineas_tambien_en_el_cuerpo
+salida:
+  inicial: revision
+  final: revision
+  aceptables: []
+motivos:
+- codigo: M02
+  linea: null
+  momento: inicial
+revision_necesaria: true
+peticion: []
+cabecera:
+  num_pedido_cliente: null
+  direccion:
+    calle: Carrer del Progrés
+    numero: '49'
+    nave: null
+    cp: 08100
+  fecha_prevista: '2026-11-20'
+  observaciones_entrega: null
+  condiciones: []
+lineas: []
+depende_de: []
+marcas: []
+nota_marcas: null
+notas: 'El cuerpo cita dos líneas, pero manda el PDF: lo que no se lee no se da por bueno.'

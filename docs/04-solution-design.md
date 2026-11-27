@@ -178,7 +178,7 @@ Cada correo que inicia algo crea un caso. Las respuestas del cliente, las aproba
 | `pendiente_cliente` | Espera | Se ha enviado la petición de datos |
 | `en_revision` | Espera | Tiene algún motivo o aprobación abiertos |
 | `pedido_creado` | Final | El pedido está en el ERP y se ha enviado la confirmación |
-| `derivado` | Final | Encaminado automáticamente: factura a contabilidad o spam archivado |
+| `derivado` | Final | Encaminado automáticamente: factura a contabilidad o spam archivado. Se ve en la lista "No son pedidos" de la app, y ADV puede devolverlo a revisión (sección 6.5) |
 | `cerrado` | Final | Cerrado por una persona sin crear pedido. Resultado: descartado, consulta atendida, reclamación atendida, modificación aplicada, anulación aplicada o procesado a mano |
 
 El detalle va en entidades hijas con su propio estado:
@@ -194,6 +194,8 @@ Lo que ve la gestora ("esperando al comercial", "bloqueado por Finanzas") es una
 |---|---|---|
 | **Fallo de un caso** | El servicio responde, pero el resultado no vale (por ejemplo, JSON inválido) | 2 reintentos. Si sigue fallando → `en_revision` con el motivo "fallo técnico" (M03), visible en la cola |
 | **Caída general** | 3 errores seguidos del servicio (timeout, 5xx o 429) de la IA o de la API | Los casos se quedan en `recibido` y se avisa a ADV y a IT. El temporizador reintenta el más antiguo; cuando funciona, se retoman los demás |
+
+**Construido en la v2 (25-11-2026):** lo mismo con la clasificación (M03, paso `clasificacion_ia`).
 
 **Construido en la v1.1:** si falla la extracción con IA (error HTTP, tiempo agotado o respuesta no válida), el caso va a `en_revision` con M03. No distingue todavía la caída general: no hay reintento posterior ni aviso.
 
@@ -514,7 +516,7 @@ Lo que se obtiene con consultas sobre el registro, sin tablas aparte:
 
 | Prompt | Para qué correos | Qué devuelve | Modelo inicial |
 |---|---|---|---|
-| Clasificación | Todos, salvo las respuestas automáticas | Tipo de correo, o dudoso | `gemini-3.1-flash-lite` |
+| Clasificación | Todos, salvo las respuestas automáticas | Tipo de correo, o dudoso | `gemini-3.5-flash-lite` (era el 3.1; [ADR 0005](decisions/0005-modelo-de-ia.md)) |
 | Extracción | Pedidos nuevos y modificaciones | Cabecera, líneas y observaciones separadas en entrega y condiciones | `gemini-3.5-flash-lite` |
 | Respuesta | Respuestas a una petición de datos | Solo los campos pedidos, y si trae algo que no se pidió | `gemini-3.5-flash-lite` |
 
@@ -527,6 +529,7 @@ El modelo de cada prompt se justifica en el [ADR 0005](decisions/0005-modelo-de-
 Solo lo necesario:
 
 - el cuerpo del correo y el contenido del adjunto pasado a texto;
+- **solo para clasificar** (25-11-2026), también el asunto y el nombre de los adjuntos: un pedido en PDF o una factura solo se reconocen por ellos. La extracción no los recibe;
 - en un reenvío, solo el mensaje original reenviado, que es el pedido.
 
 No se envían el remitente (al cliente lo identifica una regla), las cabeceras de autenticación, las direcciones en copia ni el resto del hilo.
@@ -550,13 +553,22 @@ Las tres configuraciones de la evaluación (D25) son dos interruptores sobre las
 
 "Solo reglas" no cuesta nada extra: el híbrido ya necesita el extractor determinista.
 
-**Sin ninguna línea** (prompt de extracción v2, 19-11-2026): en las tres configuraciones, un caso sin líneas va a revisión con M01. En el híbrido, si la IA no lee nada pero el determinista sí, son omisiones de la IA (R12). D22 dice "pedir datos", pero sin clasificación un correo sin líneas puede ser un pedido incompleto o un correo que no es un pedido, y pedirle líneas a quien hacía una consulta sería un error de cara al cliente. **Declarado:** cuando exista la clasificación, un pedido nuevo sin líneas pasará a pedir datos.
+**Sin ninguna línea** (prompt de extracción v2, 19-11-2026): en las tres configuraciones, un caso sin líneas va a revisión con M01. En el híbrido, si la IA no lee nada pero el determinista sí, son omisiones de la IA (R12). D22 dice "pedir datos", pero sin clasificación un correo sin líneas puede ser un pedido incompleto o un correo que no es un pedido, y pedirle líneas a quien hacía una consulta sería un error de cara al cliente. **Declarado:** cuando exista la clasificación, un pedido nuevo sin líneas pasará a pedir datos. **Aplazado el 25-11-2026, con la clasificación ya construida:** todavía no se envían peticiones ni corre el plazo de 24 h, así que un caso en `pendiente_cliente` sin líneas saldría de la cola y nadie lo vería. Sigue en M01 hasta que existan los envíos.
 
 ### 6.4 Esquema y versiones
 
 - **Validación en dos capas:** la salida estructurada del proveedor obliga a cumplir el esquema en la propia llamada, y la base de datos lo vuelve a comprobar con `pg_jsonschema` y el mismo archivo de esquema. Si `pg_jsonschema` no está disponible en Supabase local, queda solo la primera capa (sección 12).
 - **Fuente única:** el prompt, el esquema y los ejemplos viven en `extraction/` en el repositorio. Un script los carga en `prompt_versiones` con su versión y su hash. n8n lee la versión activa, y cada extracción guarda con qué versión se hizo. El script de evaluación compara el hash del archivo con el de la versión activa y se para si no coinciden ([ADR 0002](decisions/0002-prompt-y-esquema-fuente-unica.md)).
 - Cambiar un ejemplo cambia la versión. Si se cambia algo después de ejecutar la prueba, la versión deja constancia (D23).
+
+### 6.5 Clasificación construida (25-11-2026)
+
+- **Salida del prompt:** `pedido_nuevo`, `consulta`, `reclamacion`, `modificacion_anulacion`, `otros` o `dudoso`, y un `destino` (contabilidad o archivo) para `otros`. Versionado como el de extracción ([ADR 0002](decisions/0002-prompt-y-esquema-fuente-unica.md)).
+- **Dónde va en el flujo:** antes de mirar el formato, para que una factura en PDF no acabe en M02. Solo en solo IA e híbrido: solo reglas no clasifica (sección 6.3).
+- **Qué hace cada tipo:** `pedido_nuevo` sigue; consulta, reclamación y modificación van a revisión con R01, que corta antes que R02; `otros` con destino pasa a `derivado`; `dudoso` y `otros` sin destino, a M01. Nunca se archiva una duda (D13).
+- **R01 todavía no se puede forzar** desde la revisión, aunque la sección 3.1 lo permite: forzarlo exige extraer las líneas, y sin ellas se crearía un pedido vacío. Solo se cierra, con los resultados de la sección 2.5.
+- **No está construido:** buscar el pedido original de una modificación y preparar el cambio, reenviar las facturas a contabilidad (no hay envíos), detectar las respuestas automáticas y enlazar la respuesta de un cliente con su caso.
+- **El riesgo que abre:** un pedido clasificado como `otros` sale de la cola. Hasta la v1.1, todo lo que no era un pedido automático acababa en ella. **Mitigación (26-11-2026):** ningún derivado desaparece. La app tiene una lista aparte, "No son pedidos", con el motivo de la clasificación (tipo y destino, modelo y versión del prompt; el clasificador no da una explicación en texto) y el botón "Es un pedido: pasar a revisión", que lo lleva a la cola con M01. Las líneas no se extraen desde ahí: se teclea a mano o se descarta. Lo que queda: alguien tiene que mirar esa lista.
 
 ## 7. Cómo se evalúa este diseño
 
@@ -753,6 +765,8 @@ SN08 sigue siendo un supuesto declarado.
 | La demo usa Gemini Flash-Lite por la cuota gratuita, no por calidad; los límites no están garantizados. En producción se repite la evaluación con el modelo elegido | [ADR 0005](decisions/0005-modelo-de-ia.md) |
 | Sin dominio propio, las aprobaciones desde el móvil solo funcionan mientras dure el túnel rápido | [ADR 0004](decisions/0004-n8n-local-o-nube.md) |
 | Sin precios por tramos de cantidad: una tarifa con condición queda pendiente | [05](05-synthetic-data-and-evaluation-set.md) |
+| La Parte B se evalúa sobre el estado correcto de los datos maestros, no sobre lo que carga la migración de la Parte A: no hay prueba de punta a punta | [05](05-synthetic-data-and-evaluation-set.md), sección 10 |
+| Un pedido clasificado como `otros` pasa a `derivado` y no llega a la cola: solo se ve si alguien mira la lista "No son pedidos" | 6.5 |
 | Una respuesta automática sin cabeceras estándar se trata como respuesta del cliente y acaba en revisión | 2.2 |
 | R07 por número sin límite de tiempo manda a revisión un pedido nuevo de un cliente que reinicia su numeración | 3.2, [05](05-synthetic-data-and-evaluation-set.md) |
 | Entorno local: en la imagen de Supabase 17.6.1.106, ejecutar una función sin permiso con un rol reservado (`anon`, `service_role`) tumba Postgres en lugar de dar "permission denied" ([supabase/postgres#2124](https://github.com/supabase/postgres/issues/2124), atribuido a `supautils`). La API solo expone funciones con permiso, así que no se da en el uso normal. Reproducción en `tests/test_entorno_supautils.py`; se revisa en la fase 7 | 5.2 |

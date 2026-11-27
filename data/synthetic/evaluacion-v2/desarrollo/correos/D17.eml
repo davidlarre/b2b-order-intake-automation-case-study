@@ -1,0 +1,15 @@
+From: Montse =?utf-8?q?G=C3=B3mez?= <pedidos@tancamentscantallops.example>
+To: pedidos@orvalle.example
+Subject: remaches
+Date: Wed, 11 Nov 2026 12:20:00 +0100
+Message-ID: <v2-d17@tancamentscantallops.example>
+Authentication-Results: mx.orvalle.example; spf=pass smtp.mailfrom=tancamentscantallops.example; dmarc=none header.from=tancamentscantallops.example
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+MIME-Version: 1.0
+
+Hola,
+
+¿Tenéis 5000 uds de REM-AL-4X10 para la semana que viene? Si me decís que sí y a qué precio, os hago el pedido.
+
+Montse

@@ -1,0 +1,46 @@
+id: D12
+conjunto: desarrollo
+origen: generado
+eml:
+- D12.eml
+tipo: pedido_nuevo
+tipos_aceptables: []
+idioma: es
+cliente: C0014
+trampas:
+- reenvio_gmail
+salida:
+  inicial: automatico
+  final: automatico
+  aceptables: []
+motivos: []
+revision_necesaria: null
+peticion: []
+cabecera:
+  num_pedido_cliente: null
+  direccion:
+    calle: Carrer del Treball
+    numero: '112'
+    nave: Nave 3
+    cp: 08213
+  fecha_prevista: '2026-11-10'
+  observaciones_entrega: null
+  condiciones: []
+lineas:
+- texto: CAS-AZ 6
+  producto: CAS-AZ
+  cantidad: 6
+  unidad: ud
+  cantidad_uv: 6
+  precio_pedido: null
+- texto: CHA-AM-L 6
+  producto: CHA-AM-L
+  cantidad: 6
+  unidad: ud
+  cantidad_uv: 6
+  precio_pedido: null
+depende_de:
+- R03
+marcas: []
+nota_marcas: null
+notas: null

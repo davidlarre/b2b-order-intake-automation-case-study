@@ -1,0 +1,21 @@
+id: D14
+tipo: pedido_nuevo
+formato: pdf
+persona: calderería, pedido de su programa en PDF
+cliente: C0037
+trampas: [pdf]
+correos:
+  - eml: D14.eml
+    de: [Marta Soler, compras@caldereriavallmajor.example]
+    asunto: Pedido 5540
+    fecha: 2026-11-11T08:30:00+01:00
+    cuerpo: |
+      Buenos días,
+
+      Adjunto nuestro pedido nº 5540.
+
+      Marta Soler
+    pdf:
+      nombre: pedido_5540.pdf
+      lineas: ["Caldereria Vallmajor, S.L.", "Pedido 5540", "ELE-RUT-3-2X350   10", "DIS-DES-230   20"]
+debe_incluir: ["5540"]

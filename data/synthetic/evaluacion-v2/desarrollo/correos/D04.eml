@@ -1,0 +1,16 @@
+From: Rafael Soler <oficina@artesgraficasbelmontesala.example>
+To: pedidos@orvalle.example
+Subject: guantes
+Date: Fri, 29 Jan 2027 09:30:00 +0100
+Message-ID: <v2-d04@artesgraficasbelmontesala.example>
+Authentication-Results: mx.orvalle.example; spf=pass smtp.mailfrom=artesgraficasbelmontesala.example; dmarc=none header.from=artesgraficasbelmontesala.example
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+MIME-Version: 1.0
+
+Hola,
+
+¿Nos enviáis 15 cajas de GUA-NIT-M, al precio de siempre (6,10)?
+
+Gracias,
+Rafa

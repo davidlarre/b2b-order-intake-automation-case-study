@@ -1,0 +1,17 @@
+From: Joan =?utf-8?q?L=C3=B3pez?= <pedidos@panificadoramoraguesvalles.example>
+To: pedidos@orvalle.example
+Subject: pedido 26-0557
+Date: Mon, 02 Nov 2026 12:15:00 +0100
+Message-ID: <v2-p46@panificadoramoraguesvalles.example>
+Authentication-Results:
+ mx.orvalle.example; spf=pass smtp.mailfrom=panificadoramoraguesvalles.example; dkim=pass header.d=panificadoramoraguesvalles.example; dmarc=pass header.from=panificadoramoraguesvalles.example
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+MIME-Version: 1.0
+
+Bon dia,
+
+el 26-0557 no ens el porteu demà, que tenim inventari i el magatzem està tancat. Mejor el jueves 5.
+
+Gràcies,
+Joan

@@ -1,0 +1,30 @@
+id: D05
+tipo: pedido_nuevo
+formato: texto
+persona: taller, dos obras en un correo
+cliente: C0018
+trampas: [varios_pedidos_en_un_correo]
+correos:
+  - eml: D05.eml
+    de: [Jordi Font, almacen@autotallerllorentevalles.example]
+    asunto: 2 pedidos
+    fecha: 2026-11-04T11:40:00+01:00
+    cuerpo: |
+      Buenas, te paso dos pedidos, hacedlos por separado que van a dos partes de trabajo distintos:
+
+      PEDIDO 1 (parte 5501)
+      LIJ-HOJ-400  100
+      LIJ-HOJ-600  100
+
+      PEDIDO 2 (parte 5502)
+      DIS-LAM-80  20
+      GUA-COR-9  12 pares
+
+      Saludos
+      Jordi
+lineas:
+  - {producto: LIJ-HOJ-400, cantidad: 100, unidad: ud, como: codigo}
+  - {producto: LIJ-HOJ-600, cantidad: 100, unidad: ud, como: codigo}
+  - {producto: DIS-LAM-80, cantidad: 20, unidad: ud, como: codigo}
+  - {producto: GUA-COR-9, cantidad: 12, unidad: par, como: codigo}
+debe_incluir: ["5501", "5502"]

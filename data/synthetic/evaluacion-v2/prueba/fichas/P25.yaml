@@ -1,0 +1,24 @@
+id: P25
+tipo: pedido_nuevo
+formato: texto
+persona: carrocería
+cliente: C0019
+trampas: [cliente_bloqueado, solo_html]
+correos:
+  - eml: P25.eml
+    de: [Óscar Sala, compras@carroceriasaltamirano.example]
+    asunto: Lijas
+    fecha: 2026-11-13T09:05:00+01:00
+    html: true
+    cuerpo: |
+      Hola,
+
+      Pedido de lijas:
+
+      LIJ-HOJ-180 200
+      LIJ-HOJ-240 200
+
+      Óscar
+lineas:
+  - {producto: LIJ-HOJ-180, cantidad: 200, unidad: ud, como: codigo}
+  - {producto: LIJ-HOJ-240, cantidad: 200, unidad: ud, como: codigo}

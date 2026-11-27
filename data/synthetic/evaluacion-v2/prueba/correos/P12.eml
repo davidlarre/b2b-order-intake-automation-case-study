@@ -1,0 +1,13 @@
+From: Karim Prieto <taller@rodamientosytransmisioneslerma.example>
+To: pedidos@orvalle.example
+Subject: llaves
+Date: Fri, 29 Jan 2027 10:05:00 +0100
+Message-ID: <v2-p12@rodamientosytransmisioneslerma.example>
+Authentication-Results: mx.orvalle.example; spf=pass smtp.mailfrom=rodamientosytransmisioneslerma.example; dmarc=none header.from=rodamientosytransmisioneslerma.example
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+MIME-Version: 1.0
+
+Hola, mandadnos 4 LLC-17 y 2 LLC-19.
+
+Karim

@@ -1,0 +1,30 @@
+From: Albert Casals <albert.casals@orvalle.example>
+To: pedidos@orvalle.example
+Subject: RV: Pedido Talleres =?utf-8?q?P=C3=A9rez?=
+Date: Tue, 10 Nov 2026 16:20:00 +0100
+Message-ID: <v2-d13@orvalle.example>
+Authentication-Results: mx.orvalle.example; spf=pass smtp.mailfrom=orvalle.example; dkim=pass header.d=orvalle.example; dmarc=pass header.from=orvalle.example
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+MIME-Version: 1.0
+
+Buenas, meted esto por favor. Lo de abajo del todo es el del mes pasado, ese ya está servido.
+
+________________________________
+De: Joan Chen <almacen@talleresperez.example>
+Enviado: martes, 10 de noviembre de 2026 15:55
+Para: Albert Casals <albert.casals@orvalle.example>
+Asunto: Pedido
+
+Hola Albert, este mes necesitamos:
+
+BUZ-AZ-52  3
+GAF-PROT-INC  10
+
+Joan
+
+El 8 de octubre de 2026, Joan Chen escribió:
+Hola Albert, pedido de octubre:
+GUA-COR-10  12
+DIS-COR-115  50
+Gracias, Joan

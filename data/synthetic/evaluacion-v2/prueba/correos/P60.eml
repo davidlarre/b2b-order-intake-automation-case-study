@@ -1,0 +1,18 @@
+From: Abrasivos Cantalejo <newsletter@abrasivoscantalejo.example>
+To: pedidos@orvalle.example
+Subject: Novedades de noviembre en abrasivos
+Date: Thu, 12 Nov 2026 07:00:00 +0100
+Message-ID: <v2-p60@abrasivoscantalejo.example>
+Authentication-Results: mx.orvalle.example; spf=pass smtp.mailfrom=abrasivoscantalejo.example; dkim=pass header.d=abrasivoscantalejo.example; dmarc=pass header.from=abrasivoscantalejo.example
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+MIME-Version: 1.0
+
+Novedades de noviembre
+
+- Nueva gama de discos de láminas, grano 40 a 120. Pedido mínimo: 50 unidades.
+- 15 % de descuento en discos de corte de 125 mm hasta fin de mes.
+
+Si no quiere recibir más boletines, dese de baja en nuestra web.
+
+Abrasivos Cantalejo, S.L.

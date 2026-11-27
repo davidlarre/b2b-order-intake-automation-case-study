@@ -1,0 +1,18 @@
+From: Andrei Torrent <almacen@carretillasvillanuevaruano.example>
+To: pedidos@orvalle.example
+Subject: pedido llaves
+Date: Fri, 13 Nov 2026 10:30:00 +0100
+Message-ID: <v2-p26@carretillasvillanuevaruano.example>
+Authentication-Results:
+ mx.orvalle.example; spf=pass smtp.mailfrom=carretillasvillanuevaruano.example; dkim=pass header.d=carretillasvillanuevaruano.example; dmarc=pass header.from=carretillasvillanuevaruano.example
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+MIME-Version: 1.0
+
+Buenas,
+
+4 LLC-17 y 4 LLC-22. Si no tenéis la 17 mandad la 18, que nos vale igual.
+
+Entregad en Carrer del Ferro 11, Nave 7.
+
+Andrei

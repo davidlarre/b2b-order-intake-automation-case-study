@@ -1,0 +1,53 @@
+id: D03
+conjunto: desarrollo
+origen: generado
+eml:
+- D03.eml
+tipo: pedido_nuevo
+tipos_aceptables: []
+idioma: es
+cliente: C0076
+trampas:
+- fecha_festiva
+salida:
+  inicial: pedir_datos
+  final: pedir_datos
+  aceptables: []
+motivos:
+- codigo: R06
+  linea: null
+  momento: inicial
+revision_necesaria: null
+peticion:
+- campo: fecha
+  linea: null
+  opciones:
+  - '2026-12-03'
+cabecera:
+  num_pedido_cliente: CA-2210
+  direccion:
+    calle: Carrer dels Serrallers
+    numero: '96'
+    nave: Nave 1
+    cp: 08223
+  fecha_prevista: null
+  observaciones_entrega: null
+  condiciones: []
+lineas:
+- texto: '- RAC-LAT-1-2, 30 unidades'
+  producto: RAC-LAT-1-2
+  cantidad: 30
+  unidad: ud
+  cantidad_uv: 30
+  precio_pedido: null
+- texto: '- CIN-PTF-12, 20 rollos'
+  producto: CIN-PTF-12
+  cantidad: 20
+  unidad: rollo
+  cantidad_uv: 20
+  precio_pedido: null
+depende_de:
+- R06
+marcas: []
+nota_marcas: null
+notas: El 8 de diciembre es festivo.

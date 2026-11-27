@@ -1,0 +1,52 @@
+id: P04
+conjunto: prueba
+origen: generado
+eml:
+- P04.eml
+tipo: pedido_nuevo
+tipos_aceptables: []
+idioma: es
+cliente: C0029
+trampas:
+- equivalencias_en_excel
+- cabecera_en_la_fila_5
+salida:
+  inicial: automatico
+  final: automatico
+  aceptables: []
+motivos: []
+revision_necesaria: null
+peticion: []
+cabecera:
+  num_pedido_cliente: OC26-390
+  direccion:
+    calle: Carrer dels Fusters
+    numero: '79'
+    nave: Nave 4
+    cp: 08440
+  fecha_prevista: '2026-11-03'
+  observaciones_entrega: null
+  condiciones: []
+lineas:
+- texto: PUI-1010 | Guante poliuretano 9 | 48
+  producto: GUA-PU-9
+  cantidad: 48
+  unidad: par
+  cantidad_uv: 48
+  precio_pedido: null
+- texto: PUI-1011 | Guante poliuretano 10 | 48
+  producto: GUA-PU-10
+  cantidad: 48
+  unidad: par
+  cantidad_uv: 48
+  precio_pedido: null
+- texto: PUI-2003 | Disco corte 115 | 100
+  producto: DIS-COR-115
+  cantidad: 100
+  unidad: ud
+  cantidad_uv: 100
+  precio_pedido: null
+depende_de: []
+marcas: []
+nota_marcas: null
+notas: null

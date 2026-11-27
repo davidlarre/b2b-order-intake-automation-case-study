@@ -1,0 +1,26 @@
+id: P32
+tipo: pedido_nuevo
+formato: texto
+persona: estructuras, compras formal
+cliente: C0040
+trampas: [precio_a_dos_centimos, solo_html, firma_con_direccion_fiscal]
+correos:
+  - eml: P32.eml
+    de: [Mireia Marín, pedidos@estructurasmetalicasgarridovega.example]
+    asunto: Pedido GV-1190
+    fecha: 2026-11-17T09:35:00+01:00
+    html: true
+    cuerpo: |
+      Buenos días:
+
+      Pedido GV-1190:
+
+      VAR-M12-ZN, 50 uds, 2,12 €/ud
+
+      Atentamente,
+      Mireia Marín
+
+      Estructuras Metálicas Garrido Vega, S.L.
+      Domicilio fiscal: Plaça de l'Església 3, 08150 Parets del Vallès
+lineas:
+  - {producto: VAR-M12-ZN, cantidad: 50, unidad: ud, precio: 2.12, como: codigo}

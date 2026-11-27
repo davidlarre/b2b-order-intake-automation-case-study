@@ -1,0 +1,24 @@
+id: P35
+tipo: pedido_nuevo
+formato: excel
+persona: cartonajes, cantidad en cajas sin decirlo
+cliente: C0096
+trampas: [cantidad_anomala_por_unidad]
+correos:
+  - eml: P35.eml
+    de: [Glòria Amrani, administracion@cartonatgescanfabregues.example]
+    asunto: Hojas de sierra
+    fecha: 2026-11-18T10:40:00+01:00
+    cuerpo: |
+      Hola,
+
+      Adjunto el pedido de hojas de sierra de noviembre.
+
+      Glòria
+    excel:
+      nombre: sierra_nov.xlsx
+      filas:
+        - [Código, Cantidad]
+        - [SIE-HOJ-24, 10]
+lineas:
+  - {producto: SIE-HOJ-24, cantidad: 10, unidad: ud, como: codigo}

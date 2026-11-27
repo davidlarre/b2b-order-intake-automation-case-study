@@ -1,0 +1,19 @@
+id: P57
+tipo: otros
+formato: texto
+persona: imprenta, factura por enlace interno
+cliente: null
+trampas: [factura_sin_adjunto]
+correos:
+  - eml: P57.eml
+    de: [Gràfiques Monclús, facturas@grafiquesmonclus.example]
+    asunto: Recordatorio factura 881 pendiente
+    fecha: 2026-11-09T07:45:00+01:00
+    dmarc: none
+    cuerpo: |
+      Buenos días:
+
+      Les recordamos que la factura 881, de 312,18 €, por 500 tarjetas y 20 talonarios, venció el 31 de octubre. Si ya la han pagado, no tengan en cuenta este mensaje.
+
+      Gràfiques Monclús
+debe_incluir: ["factura 881"]
