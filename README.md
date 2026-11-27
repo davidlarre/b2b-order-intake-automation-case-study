@@ -37,12 +37,13 @@ Un distribuidor recibe unos 1.800 pedidos al mes por correo, en texto libre, Exc
 | Configuración | Automáticos erróneos o indebidos, 38 en alcance | OK | ACEPTABLE | FALLO |
 |---|---|---|---|---|
 | **Híbrido** | **1 de 10** | 36 | 0 | 2 |
+| Solo IA | 1 de 10 | 36 | 0 | 2 |
 | Solo reglas | 1 de 6 | 13 | 14 | 11 |
-| Solo IA | Pendiente: se ejecuta otro día por la cuota de Gemini | | | |
 
-- **El error del híbrido es una consulta convertida en pedido** (P52: "¿tenéis…? Si es que sí, mandadlos"). La clasificación acertó el tipo en 59 de los 60 correos; falló ahí.
-- **Con 1 error en 10 automáticos,** el error real podría llegar al 39 % (límite superior al 95 %). Son pocos casos.
-- **Las reglas que faltan se notan:** en los 22 casos fuera de alcance, el híbrido crea 12 pedidos automáticos, y los 12 son erróneos o indebidos (un cliente bloqueado, cajas tomadas como unidades, una cantidad anómala…).
+- **El error del híbrido es una consulta convertida en pedido** (P52: "¿tenéis…? Si es que sí, mandadlos"). En la pasada de solo IA, el mismo prompt la clasificó bien: es variación del modelo entre ejecuciones, no efecto de la configuración.
+- **El error de solo IA lo evitó el híbrido** (P38): la IA leyó 400 donde el Excel decía 200 y el cliente dudaba. En el híbrido, el lector de reglas leyó 200, las lecturas no coincidieron y decidió una persona. Es la primera vez que la segunda lectura evita un pedido equivocado.
+- **Con 1 error en 10 automáticos,** el error real podría llegar al 39 % (límite superior al 95 %). Son pocos casos, y una pasada por configuración.
+- **Las reglas que faltan se notan:** en los 22 casos fuera de alcance, el híbrido y solo IA crean 12 pedidos automáticos, y los 12 son erróneos o indebidos (un cliente bloqueado, cajas tomadas como unidades, una cantidad anómala…).
 - **Sin revisión humana:** los correos y las etiquetas los hizo una IA, con segunda lectura de otra IA; el catálogo es generado.
 
 Informe completo, con los fallos uno a uno y los límites: **[06 · Informe de evaluación](docs/06-evaluation-report.md)**.
@@ -115,7 +116,7 @@ Tests: `uv run pytest`, y `node --test` en `n8n/modulos/extractor` (tras `npx pn
 
 ## Qué viene después
 
-La prueba de los [80 correos](data/synthetic/evaluacion-v2/README.md) está [ejecutada](docs/06-evaluation-report.md) (solo IA, pendiente). Faltan la revisión humana de las etiquetas, las reglas pendientes (las que más cuestan hoy: R04, R05, R07, R10 y R14), enlazar las respuestas del cliente y la migración de datos maestros. Detalle en el [plan](docs/00-project-plan.md#siguiente-fase).
+La prueba de los [80 correos](data/synthetic/evaluacion-v2/README.md) está [ejecutada](docs/06-evaluation-report.md). Faltan la revisión humana de las etiquetas, las reglas pendientes (las que más cuestan hoy: R04, R05, R07, R10 y R14), enlazar las respuestas del cliente y la migración de datos maestros. Detalle en el [plan](docs/00-project-plan.md#siguiente-fase).
 
 ## Uso de IA
 

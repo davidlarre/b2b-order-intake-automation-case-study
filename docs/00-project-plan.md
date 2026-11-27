@@ -34,7 +34,7 @@ La evaluación de la v1 **no sustituye** a la diseñada en [05](05-synthetic-dat
 
 ## Siguiente fase
 
-En la v1, el incremento de datos y evaluación completa quedó aparcado entero. **En la v2 (25-11-2026, rama `v2-evaluacion-clasificacion`) están hechos el punto 1 sin plan de errores, el 2, el 3 (por Claude Code, sin revisión humana) y la congelación del 6, además de la clasificación del correo.** La prueba se ejecutó el 26-11-2026 en solo reglas y en el híbrido; solo IA, otro día por la cuota de Gemini ([informe](06-evaluation-report.md)). Incluye:
+En la v1, el incremento de datos y evaluación completa quedó aparcado entero. **En la v2 (25-11-2026, rama `v2-evaluacion-clasificacion`) están hechos el punto 1 sin plan de errores, el 2, el 3 (por Claude Code, sin revisión humana) y la congelación del 6, además de la clasificación del correo.** La prueba se ejecutó el 26-11-2026 en solo reglas y en el híbrido, y el 27-11-2026 en solo IA, por la cuota de Gemini ([informe](06-evaluation-report.md)). Incluye:
 
 1. **Generador** de datos sintéticos, con semilla fija y plan de errores.
 2. **80 correos:** 60 de prueba y 20 de desarrollo, con la mezcla de D23.

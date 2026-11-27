@@ -15,7 +15,7 @@
 
 ## La prueba se ejecuta una sola vez
 
-Solo desde [ejecutar_prueba.py](../../../scripts/ejecutar_prueba.py), una pasada por configuración, que comprueba el manifiesto antes de enviar nada; `enviar_eml.py` se niega a enviar nada de `prueba/`. Solo reglas y el híbrido se ejecutaron el 26-11-2026; solo IA, otro día por la cuota de Gemini. Resultados: [06 · Informe de evaluación](../../../docs/06-evaluation-report.md).
+Solo desde [ejecutar_prueba.py](../../../scripts/ejecutar_prueba.py), una pasada por configuración, que comprueba el manifiesto antes de enviar nada; `enviar_eml.py` se niega a enviar nada de `prueba/`. Solo reglas y el híbrido se ejecutaron el 26-11-2026; solo IA, el 27-11-2026, por la cuota de Gemini. Resultados: [06 · Informe de evaluación](../../../docs/06-evaluation-report.md).
 
 ## Cómo se generaron
 

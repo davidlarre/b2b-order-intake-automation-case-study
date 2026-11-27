@@ -329,20 +329,21 @@ footer li span { display: block; color: #DCE8E9; font-size: 1rem; }
     <h2>Resultados (v2: prueba congelada)</h2>
     <div class="texto">
       <p>60 correos guardados aparte y pasados una sola vez por configuración. La medida principal son los 38 casos que el sistema construido puede resolver; los otros 22 necesitan reglas que todavía no existen y se cuentan aparte.</p>
-      <p class="nota">Solo IA se ejecuta otro día: la cuota gratuita de Gemini no daba para las dos pasadas con IA el mismo día. El vídeo no se ha regrabado y muestra la <a href="https://github.com/davidlarre/b2b-order-intake-automation-case-study/blob/main/eval/resultados-v1.md">v1</a>.</p>
+      <p class="nota">Solo IA se ejecutó al día siguiente: la cuota gratuita de Gemini no daba para las dos pasadas con IA el mismo día. El vídeo no se ha regrabado y muestra la <a href="https://github.com/davidlarre/b2b-order-intake-automation-case-study/blob/main/eval/resultados-v1.md">v1</a>.</p>
       <ul class="leyenda" aria-hidden="true">
         <li><i style="background:var(--ok)"></i>OK</li><li><i style="background:var(--aceptable)"></i>ACEPTABLE</li><li><i style="background:var(--fallo)"></i>FALLO</li>
       </ul>
-      <svg class="grafico" height="162" role="img" aria-labelledby="gt gd">
+      <svg class="grafico" height="246" role="img" aria-labelledby="gt gd">
         <title id="gt">Resultados de los 38 casos en alcance por configuración</title>
-        <desc id="gd">Solo reglas: 13 OK, 14 ACEPTABLE, 11 FALLO. Híbrido: 36 OK, 0 ACEPTABLE, 2 FALLO.</desc>
-        <g font-size="17" font-weight="700" fill="#14272E"><text x="0" y="18" class="rotulo">Solo reglas</text><text x="0" y="102" class="rotulo">Híbrido</text></g>
+        <desc id="gd">Solo reglas: 13 OK, 14 ACEPTABLE, 11 FALLO. Solo IA: 36 OK, 0 ACEPTABLE, 2 FALLO. Híbrido: 36 OK, 0 ACEPTABLE, 2 FALLO.</desc>
+        <g font-size="17" font-weight="700" fill="#14272E"><text x="0" y="18" class="rotulo">Solo reglas</text><text x="0" y="102" class="rotulo">Solo IA</text><text x="0" y="186" class="rotulo">Híbrido</text></g>
         <g stroke="#E7ECEB" stroke-width="2">
           <rect x="0" y="28" width="34.2%" height="36" fill="#0E74A8"/><rect x="34.2%" y="28" width="36.8%" height="36" fill="#C98315"/><rect x="71%" y="28" width="29%" height="36" fill="#B3261E"/>
           <rect x="0" y="112" width="94.7%" height="36" fill="#0E74A8"/><rect x="94.7%" y="112" width="5.3%" height="36" fill="#B3261E"/>
+          <rect x="0" y="196" width="94.7%" height="36" fill="#0E74A8"/><rect x="94.7%" y="196" width="5.3%" height="36" fill="#B3261E"/>
         </g>
         <g font-size="17" font-weight="700" text-anchor="middle">
-          <g fill="#fff"><text x="17.1%" y="52">13</text><text x="85.5%" y="52">11</text><text x="47.4%" y="136">36</text><text x="97.35%" y="136">2</text></g>
+          <g fill="#fff"><text x="17.1%" y="52">13</text><text x="85.5%" y="52">11</text><text x="47.4%" y="136">36</text><text x="97.35%" y="136">2</text><text x="47.4%" y="220">36</text><text x="97.35%" y="220">2</text></g>
           <g fill="#14272E"><text x="52.6%" y="52">14</text></g>
         </g>
       </svg>
@@ -351,17 +352,18 @@ footer li span { display: block; color: #DCE8E9; font-size: 1rem; }
         <thead><tr><th scope="col">Configuración</th><th scope="col" class="num">OK</th><th scope="col" class="num">ACEPTABLE</th><th scope="col" class="num">FALLO</th><th scope="col" class="num">Automáticos erróneos o indebidos</th></tr></thead>
         <tbody>
           <tr><th scope="row">Solo reglas</th><td class="num">13</td><td class="num">14</td><td class="num">11</td><td class="num">1 de 6</td></tr>
+          <tr><th scope="row">Solo IA</th><td class="num">36</td><td class="num">0</td><td class="num">2</td><td class="num">1 de 10</td></tr>
           <tr><th scope="row">Híbrido</th><td class="num">36</td><td class="num">0</td><td class="num">2</td><td class="num">1 de 10</td></tr>
-          <tr><th scope="row">Solo IA</th><td colspan="4">Pendiente</td></tr>
         </tbody>
       </table>
       </div>
       <p class="nota">ACEPTABLE es una salida segura que no era la esperada: el caso llega a una persona. La última columna son pedidos creados sin intervención con algún error, o que tenían que ir a revisión.</p>
       <ul>
-        <li><strong>El error del híbrido es una consulta convertida en pedido.</strong> "¿Tenéis 100 hojas de lija y 3 adhesivos? Si es que sí, mandadlos": se creó el pedido sin comprobar nada. La clasificación acertó el tipo en los otros 59 correos.</li>
+        <li><strong>El error del híbrido es una consulta convertida en pedido.</strong> "¿Tenéis 100 hojas de lija y 3 adhesivos? Si es que sí, mandadlos": se creó el pedido sin comprobar nada. En la pasada de solo IA, el mismo prompt la clasificó bien: la IA no siempre responde igual.</li>
+        <li><strong>El error de solo IA lo paró el híbrido.</strong> El Excel decía 200 tuercas y el cliente dudaba si eran 400. La IA leyó 400 y el lector de reglas 200: en el híbrido no coincidieron y decidió una persona; con la IA sola se creó el pedido con 400. Es la primera vez que la segunda lectura evita un pedido equivocado.</li>
         <li><strong>Con 1 error en 10 pedidos automáticos, el error real podría llegar al 39 %.</strong> Son pocos casos.</li>
         <li><strong>Las reglas solas no valen.</strong> No distinguen una consulta de un pedido, así que mandan a revisión sin decir por qué (los 14 ACEPTABLE), y no leen lo que no es un código exacto: 11 fallos, uno de ellos un pedido automático indebido.</li>
-        <li><strong>Las reglas que faltan se notan.</strong> En los 22 casos que las necesitan, el híbrido crea 12 pedidos automáticos, y los 12 son erróneos o indebidos: un cliente bloqueado, cajas tomadas como unidades, una cantidad anómala.</li>
+        <li><strong>Las reglas que faltan se notan.</strong> En los 22 casos que las necesitan, el híbrido y solo IA crean 12 pedidos automáticos, y los 12 son erróneos o indebidos: un cliente bloqueado, cajas tomadas como unidades, una cantidad anómala.</li>
       </ul>
       <p><a href="https://github.com/davidlarre/b2b-order-intake-automation-case-study/blob/main/docs/06-evaluation-report.md">Informe de evaluación, con los fallos uno a uno</a> · Versiones anteriores, de desarrollo: <a href="https://github.com/davidlarre/b2b-order-intake-automation-case-study/blob/main/eval/resultados-v1-1.md">v1.1</a> y <a href="https://github.com/davidlarre/b2b-order-intake-automation-case-study/blob/main/eval/resultados-v1.md">v1</a></p>
     </div>

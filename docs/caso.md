@@ -29,11 +29,12 @@ Se probó con **60 correos guardados aparte**, que no se usaron para ajustar el 
 | En los 38 casos | Pedidos creados solos | De ellos, mal |
 |---|---|---|
 | **Las dos juntas (IA y reglas)** | 10 | **1** |
+| Solo IA | 10 | 1 |
 | Solo reglas | 6 | 1 |
-| Solo IA | Pendiente: se pasa otro día | |
 
-- **El que salió mal** fue una pregunta con condición: "¿Tenéis 100 hojas de lija y 3 adhesivos? Si es que sí, mandadlos". El sistema lo tomó por un pedido y lo creó sin comprobar nada. Es justo el tipo de correo que más cuesta distinguir.
-- **Distinguir qué es cada correo** (pedido, cambio, consulta, queja, factura) salió bien en 59 de 60.
+- **El que salió mal con las dos juntas** fue una pregunta con condición: "¿Tenéis 100 hojas de lija y 3 adhesivos? Si es que sí, mandadlos". El sistema lo tomó por un pedido y lo creó sin comprobar nada. En otra pasada, la misma IA lo leyó bien: no siempre responde igual.
+- **El que salió mal con la IA sola, lo paró el segundo lector.** El Excel decía 200 tuercas y el cliente escribía "me parece que eran 400, confirmadlo". La IA leyó 400; el lector de reglas, 200. Con las dos juntas no coincidieron y lo decidió una persona; con la IA sola se creó el pedido con 400.
+- **Distinguir qué es cada correo** (pedido, cambio, consulta, queja, factura) salió bien en 59 de 60 y en 60 de 60, según la pasada.
 - **Las reglas que faltan se notan mucho:** con los 22 correos que las necesitan, el sistema crea hoy 12 pedidos que no debería, por ejemplo a un cliente bloqueado o confundiendo cajas con unidades.
 - **Si la IA no responde,** el pedido llega a una persona con el motivo. En esta prueba no pasó.
 
